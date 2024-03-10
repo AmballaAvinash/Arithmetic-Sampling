@@ -89,6 +89,16 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
                 )
         return generation_mode
     
+    def _make_default_codes(self, batch_size, num_decodes, seed):
+        # Generate random offset
+        torch.manual_seed(seed)
+        offset = torch.rand(batch_size, 1)
+        # Generate evenly spaced codes
+        codes = torch.arange(1, num_decodes + 1, dtype=torch.float32) / (num_decodes + 1)
+        codes = codes.unsqueeze(0).repeat(batch_size, 1)
+        # Tile the offset and add it to the codes
+        codes = (codes + offset) % 1.0
+    
     @torch.no_grad()
     def generate(
         self,
@@ -712,10 +722,11 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
         output_attentions: Optional[bool] = None,
         output_hidden_states: Optional[bool] = None,
         output_scores: Optional[bool] = None,
-        output_logits: Optional[bool] = None,
         return_dict_in_generate: Optional[bool] = None,
         synced_gpus: bool = False,
         streamer: Optional["BaseStreamer"] = None,
+        batch_size: Optional[int] = 1,
+        num_return_sequences: Optional[int] = 1,
         **model_kwargs,
     ) -> Union[GenerateNonBeamOutput, torch.LongTensor]:
         r"""
@@ -758,9 +769,6 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
                 for more details.
             output_scores (`bool`, *optional*, defaults to `False`):
                 Whether or not to return the prediction scores. See `scores` under returned tensors for more details.
-            output_logits (`bool`, *optional*, defaults to `False`):
-                Whether or not to return the raw prediction logit scores. See `logits` under returned tensors for
-                more details.
             return_dict_in_generate (`bool`, *optional*, defaults to `False`):
                 Whether or not to return a [`~utils.ModelOutput`] instead of a plain tuple.
             synced_gpus (`bool`, *optional*, defaults to `False`):
@@ -848,7 +856,6 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
             eos_token_id = [eos_token_id]
         eos_token_id_tensor = torch.tensor(eos_token_id).to(input_ids.device) if eos_token_id is not None else None
         output_scores = output_scores if output_scores is not None else self.generation_config.output_scores
-        output_logits = output_logits if output_logits is not None else self.generation_config.output_logits
         output_attentions = (
             output_attentions if output_attentions is not None else self.generation_config.output_attentions
         )
@@ -863,7 +870,6 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
 
         # init attention / hidden states / scores tuples
         scores = () if (return_dict_in_generate and output_scores) else None
-        raw_logits = () if (return_dict_in_generate and output_logits) else None
         decoder_attentions = () if (return_dict_in_generate and output_attentions) else None
         cross_attentions = () if (return_dict_in_generate and output_attentions) else None
         decoder_hidden_states = () if (return_dict_in_generate and output_hidden_states) else None
@@ -880,6 +886,11 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
 
         this_peer_finished = False  # used by synced_gpus only
         # auto-regressive generation
+        seed = 0
+        # [START] Arithmetic Sampling Logic
+        codes = torch.flatten(self._make_default_codes(batch_size,num_return_sequences,seed))
+        # [END] Arithmetic Sampling Logic
+
         while True:
             if synced_gpus:
                 # Under synced_gpus the `forward` call must continue until all gpus complete their sequence.
@@ -910,13 +921,11 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
             # pre-process distribution
             next_token_scores = logits_processor(input_ids, next_token_logits)
             next_token_scores = logits_warper(input_ids, next_token_scores)
-
+            
             # Store scores, attentions and hidden_states when required
             if return_dict_in_generate:
                 if output_scores:
                     scores += (next_token_scores,)
-                if output_logits:
-                    raw_logits += (next_token_logits,)
                 if output_attentions:
                     decoder_attentions += (
                         (outputs.decoder_attentions,) if self.config.is_encoder_decoder else (outputs.attentions,)
@@ -930,10 +939,42 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
                         if self.config.is_encoder_decoder
                         else (outputs.hidden_states,)
                     )
-
-            # sample
+                    
+            # [START] Arithmetic Sampling Logic
+            _, vocab_size = next_token_scores.shape
+            perm = torch.randperm(next_token_scores.shape[1])
+            invperm = torch.argsort(perm)
+            next_token_scores = next_token_scores[:, perm]
             probs = nn.functional.softmax(next_token_scores, dim=-1)
-            next_tokens = torch.multinomial(probs, num_samples=1).squeeze(1)
+            transposed_probs = probs.transpose(0, 1)
+            cumprobs = torch.cumsum(transposed_probs, dim=0).transpose(0, 1)
+            
+            # Because of precision, make sure the max value (and everything with that
+            # value, to not change bucket widths) is at least 1.0.
+            max_probs = cumprobs.max(dim=1, keepdim=True)[0].expand_as(cumprobs)
+            all_bucket_maxes = torch.where((cumprobs == max_probs) & (cumprobs < 1.0), 1.0, cumprobs)
+            
+            # Calculate code bucket mins and maxes.
+            expanded_codes = codes.unsqueeze(1).to('cuda')
+            bucket_maxes_lte_codes = all_bucket_maxes <= expanded_codes  #less than equal to 
+            bucket_maxes_gt_codes = all_bucket_maxes > expanded_codes  # greater than
+            code_bucket_mins = (all_bucket_maxes * bucket_maxes_lte_codes).max(dim=1)[0]
+            code_bucket_maxes = ((all_bucket_maxes * bucket_maxes_gt_codes + bucket_maxes_lte_codes.squeeze(0).float() * 1.1).min(dim=1)[0])
+
+            # Compute sampled indices.
+            sampled_indices_permed = (
+                (all_bucket_maxes * bucket_maxes_gt_codes.squeeze(0) + bucket_maxes_lte_codes.squeeze(0).float() * 1.1).argmin(dim=1)
+            ).to('cuda')
+
+            next_tokens = torch.argmax(torch.nn.functional.one_hot(sampled_indices_permed, num_classes=vocab_size)[:, invperm], dim=1)
+
+            codes = codes.to('cuda')
+            code_bucket_mins = code_bucket_mins.to('cuda')
+            code_bucket_maxes = code_bucket_maxes.to('cuda')
+
+            # Compute new codes for remaining suffix.
+            codes = ((codes - code_bucket_mins) / (code_bucket_maxes - code_bucket_mins)).to('cuda')
+            # [END] Arithmetic Sampling Logic
 
             # finished sentences should have their next token be a padding token
             if eos_token_id is not None:
@@ -974,7 +1015,6 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
                 return GenerateEncoderDecoderOutput(
                     sequences=input_ids,
                     scores=scores,
-                    logits=raw_logits,
                     encoder_attentions=encoder_attentions,
                     encoder_hidden_states=encoder_hidden_states,
                     decoder_attentions=decoder_attentions,
@@ -986,7 +1026,6 @@ class ArithmeticSamplingGenerationMixin(GenerationMixin):
                 return GenerateDecoderOnlyOutput(
                     sequences=input_ids,
                     scores=scores,
-                    logits=raw_logits,
                     attentions=decoder_attentions,
                     hidden_states=decoder_hidden_states,
                     past_key_values=model_kwargs.get("past_key_values"),
