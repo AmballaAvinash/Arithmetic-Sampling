@@ -190,10 +190,7 @@ class LLMWrapper:
             scores["sacrebleu"] = self.compute_sacrebleu(predictions,references)
         if metric["name"] == "meteor":
             scores["meteor"] = self.compute_meteor(predictions,references)
-        # self.load_metrics([metric["name"]])
-        # scores = self.metrics[metric["name"]].compute(
-        #     predictions=convert_empty_strings(predictions) if metric["name"] == "bleu" else
-        #     predictions, references=references, **metric["args"])
+        
         return scores
     
     def compute_accuracy(self,predictions,references):

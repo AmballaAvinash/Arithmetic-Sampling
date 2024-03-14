@@ -10,6 +10,8 @@ from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
+default_input_prefix = "Input: "
+default_output_prefix = "Output: "
 default_decoding_args = {
     "max_new_tokens": 100,
     "do_sample": False,  # enable sampling
@@ -31,7 +33,32 @@ default_metrics = [
     {"name": "bertscore", 'score_keys': ['f1'], 'args': {'model_type': 'distilbert-base-uncased'}},
     {"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},
 ]
-
+class TruncateLogitsProcessor(LogitsProcessor):
+    def __init__(self,token_id: Union[int, List[int]],eos_token_id: Union[int, List[int]],tokenizer):
+        if isinstance(token_id, int):
+            token_id = [token_id]
+        if isinstance(eos_token_id, int):
+            eos_token_id = [eos_token_id]
+        if not all(isinstance(i,int) for i in token_id) or any(i < 0 for i in token_id):
+            logger.warning(f"`token_id` has to be a list of positive integers, but is {token_id}")
+        self.token_id = token_id
+        
+        self.eos_token_id = eos_token_id
+        self.tokenizer = tokenizer
+    def __call__(self,input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
+        cur_len = input_ids.shape[-1]
+        max_score_ids = torch.argmax(scores, dim=1)
+        for i in range(len(max_score_ids)):
+            if (max_score_ids[i] in self.token_id) or (self.tokenizer.decode(max_score_ids[i]).find(':') != -1) :
+                scores[i][:] = -float('inf')
+                scores[i][self.eos_token_id[0]] = 0
+        scores.to(input_ids.device)
+        if torch.argmax(scores[:,]) in self.token_id:
+            print('yes')
+            scores = torch.zeros(scores.shape)
+            scores[:, self.eos_token_id] = 1
+                
+        return scores
 
 def construct_prompt_from_args(input, input_prefix):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"

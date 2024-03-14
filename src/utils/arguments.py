@@ -61,7 +61,15 @@ class Arguments(argparse.ArgumentParser):
                 self.add_argument(
                     "--eval_output_sampling_strategy", type=str
                 )
-                
+                self.add_argument(
+                    "--eval_output_temperature", type=str
+                )
+                self.add_argument(
+                    "--eval_output_top_k", type=str
+                )
+                self.add_argument(
+                    "--eval_output_top_p", type=str
+                )
             
             pass
             # Examples:
