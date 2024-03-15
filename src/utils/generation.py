@@ -12,6 +12,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
 logger = logging.getLogger(__name__)
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
+default_answer_prefix = "Answer: "
+default_question_prefix = "Question: "
 default_decoding_args = {
     "max_new_tokens": 100,
     "do_sample": False,  # enable sampling
@@ -59,7 +61,19 @@ class TruncateLogitsProcessor(LogitsProcessor):
             scores[:, self.eos_token_id] = 1
                 
         return scores
-
+def construct_qa_prompt_from_args( answer, answer_prefix,
+                                     question=None, question_prefix=None):
+    prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
+    # The test or demonstration question
+    if question_prefix is None:
+        question_prefix = copy.copy(default_question_prefix)
+    question_text = f"{question_prefix}{question}"
+    prompt_arr.append(question_text)
+    if answer is not None and answer_prefix is not None:
+        answer_text = f"{answer_prefix}{answer}"
+        if answer_text != "":
+            prompt_arr.append(answer_text)
+    return prompt_arr
 def construct_prompt_from_args(input, input_prefix):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     
@@ -75,8 +89,6 @@ def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
     else:
         if output_prefix != "":
             prompt_arr.append(output_prefix)
-        # if is_beluga and is_chat:
-        #     prompt = f"{beluga_DEFAULT_SYSTEM_PROMPT}### User:\n{(prompt_sep.join(prompt_arr))}"
     prompt = prompt_sep.join(prompt_arr)
     return prompt
 

@@ -15,14 +15,10 @@ from tqdm import tqdm
 import numpy as np
 from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel
 
-from src.llm_wrapper import LLMWrapper
+from src.utils.llm_wrapper import LLMWrapper
 from src.utils.generation import default_metrics,fix_posthoc, \
-    default_instructions, default_instructions_answer, default_fwd_question_prefix, default_inv_answer_prefix, \
-    default_answer_prefix, default_fwd_instruction, default_output_prefix, default_output_prefix_chat, \
-        construct_args_from_example,default_fwd_target_token,default_inv_target_token, \
-    default_inv_instructions, default_inv_question_prefix, \
-        default_fwd_target_prefix,default_inv_target_prefix,default_mt_fwd_target_prefix, \
- get_logprob_score, get_logprob_score_encoder, get_logprob_score_from_gen, to_tokens_and_logprobs, to_tokens_and_logprobs_pmi,get_inverse_masked_scores
+    default_answer_prefix, default_output_prefix,\
+        construct_args_from_example
 import torch
 from src.utils.helpers import setup_logger
 from src.utils.arguments import Arguments
@@ -48,7 +44,7 @@ class SelfConsistency(LLMWrapper):
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
              output_sampling_strategy='max',
-             use_gen_norm_seq_scores=False, use_alt_seq_scores=False, verbose=False, out_dir=None, n_shots=None,
+              verbose=False, out_dir=None, n_shots=None,
              retrieval_strategy=None, run_id=str(int(time.time())), **inf_fn_kwargs):
 
         #breakpoint()
@@ -87,13 +83,52 @@ class SelfConsistency(LLMWrapper):
                 logger.info('Exiting...')
                 exit()
             # Make LLM call
-            llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-            # breakpoint()
-            llm_seq_scores = llm_outputs.sequences_scores.tolist() if not use_gen_norm_seq_scores \
-                else get_logprob_score_from_gen(llm_outputs, llm_prompt, self.model, self.tokenizer,
-                                                llm_decoding_args.get('length_penalty', 1.),
-                                                use_alt=use_alt_seq_scores)
-            #breakpoint()
+
+        end_time = time.time()
+        generation_time = end_time - start_time
+
+        _strats = ['eta', 'epsilon','arithmetic','temperature','topk','nucleus'] if output_sampling_strategy == 'all' else [
+            output_sampling_strategy]
+        predictions, examples = defaultdict(list), defaultdict(list)
+        metric_results, results = defaultdict(dict), defaultdict(dict)
+        
+        # Select prediction from generations
+        
+        for _strat in _strats:
+            logger.info(f"Sampling generations (strategy={_strat}):")
+            start_time = time.time()
+            for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
+                ex = copy.deepcopy(_ex)
+                pred_cands, pred_seq_scores = zip(*ex["prediction_candidates_max"])
+                if _strat == 'max':
+                    pred_selected = pred_cands[0]  # the decoded list is sorted
+                elif _strat == 'random':
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = random.choice(pred_cands)
+                elif _strat=='eta':
+                    #prepare kwargs for the sampling strategy
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    
+                elif _strat=='epsilon':
+                    #prepare kwargs for the sampling strategy
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                elif 'arithmetic' in _strat:
+                    #prepare kwargs for the sampling strategy
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                elif 'temperature' in _strat:  
+                    #prepare kwargs for the sampling strategy
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                elif 'topk' in _strat:
+                    #prepare kwargs for the sampling strategy
+                    inf_fn(**inf_args, **inf_fn_kwargs)
+                elif 'nucleus' in _strat:  
+                    #prepare kwargs for the sampling strategy
+                    inf_fn(**inf_args, **inf_fn_kwargs)
+                else:
+                    raise ValueError()
+                ex["prediction"] = pred_selected
+                predictions[_strat].append(pred_selected)
+                examples[_strat].append(ex)
+            end_time = time.time()
             llm_decoded = fix_posthoc(llm_decoded)
             if verbose:
                 logger.info(f"Example #{idx + 1}:")
@@ -111,78 +146,18 @@ class SelfConsistency(LLMWrapper):
                 "input": inf_args['input'],
                 "reference": references[-1] if len(references) > 0 else None,
                 "prediction": None,
-                "prediction_candidates_max": sorted(list(zip(llm_decoded, llm_seq_scores)), key=lambda x: x[1],
-                                                    reverse=True),
-                # "inverse_masked" : {"ts_strat1":ts_strat1,"ts_strat2":ts_strat2,"ts_strat3":ts_strat3,"ts_strat4":ts_strat4,"ts_strat5":ts_strat5}
-                
+                "prediction_candidates": llm_decoded,
             })
-
-        end_time = time.time()
-        generation_time = end_time - start_time
-
-        _strats = ['eta', 'epsilon','arithmetic','temperature','topk','nucleus'] if output_sampling_strategy == 'all' else [
-            output_sampling_strategy]
-        predictions, examples = defaultdict(list), defaultdict(list)
-        metric_results, results = defaultdict(dict), defaultdict(dict)
-        # Optionally evaluate all intermediate ([0,1] in steps of 0.1) values of inverse-consistency alpha
-        
-        
-        # Select prediction from generations
-        
-        for _strat in _strats:
-            logger.info(f"Sampling generations (strategy={_strat}):")
-            start_time = time.time()
-            for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
-                ex = copy.deepcopy(_ex)
-                pred_cands, pred_seq_scores = zip(*ex["prediction_candidates_max"])
-                if _strat == 'max':
-                    pred_selected = pred_cands[0]  # the decoded list is sorted
-                elif _strat == 'random':
-                    pred_selected = random.choice(pred_cands)
-                elif _strat=='eta':
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                    
-                elif _strat=='epsilon':
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                elif 'arithmetic' in _strat:
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                elif 'temperature' in _strat:  
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                elif 'topk' in _strat:
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                elif 'nucleus' in _strat:  
-                    #prepare kwargs for the sampling strategy
-                    inf_fn(**inf_args, **inf_fn_kwargs)
-                else:
-                    raise ValueError()
-                ex["prediction"] = pred_selected
-                predictions[_strat].append(pred_selected)
-                examples[_strat].append(ex)
-            end_time = time.time()
-
             # Compute metrics
             if len(references) > 0:
                 for metric in metrics:
-                    #breakpoint()
-                    #if metric['name'] == "coverage":
                     scores = self.get_metric_scores(metric, predictions[_strat], references)
-                    #breakpoint()
-                    #else:
-                    #    scores = self.get_metric_scores(metric, res[_strat], gts[_strat])
+            
                     for k in metric["score_keys"]:
                         #breakpoint()
                         metric_results[_strat][f"{metric['name']}.{k}"] = round(np.mean(scores[k]), 4)
-                    #breakpoint()
-                #breakpoint()
-                
                 if verbose:
                     logger.info(metric_results[_strat])
-            # breakpoint()
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
@@ -206,8 +181,6 @@ class SelfConsistency(LLMWrapper):
                 },
                 "examples": examples[_strat]
             }
-            # check_type(results)
-            # breakpoint()
             if out_dir is not None:
                 res_dir_fpath = os.path.join(out_dir, res_dir)
                 os.makedirs(res_dir_fpath, exist_ok=True)
@@ -243,13 +216,11 @@ if __name__ == '__main__':
     metrics =[{"name": "sacrebleu", 'score_keys': ['sacrebleu'], 'args': {}},{"name": "meteor", 'score_keys': ['meteor'], 'args': {}}]
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
                        split=args.eval_split, 
-                       metrics = metrics,
+                       metrics = [k for k in default_metrics if k['name'] == 'accuracy'],
                        n_samples=args.eval_n_samples,
                        task_name="machinetranslation",
                        dataset_name  = dataset_name,
                        dataset_subname = dataset_subname,
-                       src_lang = src_lang,
-                       tgt_lang = tgt_lang,
                        out_dir = out_dir,
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
