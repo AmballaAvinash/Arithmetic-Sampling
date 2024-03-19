@@ -15,7 +15,7 @@ from tqdm import tqdm
 import numpy as np
 from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel
 
-from src.utils.llm_wrapper import LLMWrapper
+from llm_wrapper import LLMWrapper
 from src.utils.generation import default_metrics,fix_posthoc, \
     default_answer_prefix, default_output_prefix,\
         construct_args_from_example
