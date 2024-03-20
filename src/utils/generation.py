@@ -10,6 +10,10 @@ from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
+default_input_prefix = "Input: "
+default_output_prefix = "Output: "
+default_answer_prefix = "Answer: "
+default_question_prefix = "Question: "
 default_decoding_args = {
     "max_new_tokens": 100,
     "do_sample": False,  # enable sampling
@@ -31,8 +35,45 @@ default_metrics = [
     {"name": "bertscore", 'score_keys': ['f1'], 'args': {'model_type': 'distilbert-base-uncased'}},
     {"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},
 ]
-
-
+class TruncateLogitsProcessor(LogitsProcessor):
+    def __init__(self,token_id: Union[int, List[int]],eos_token_id: Union[int, List[int]],tokenizer):
+        if isinstance(token_id, int):
+            token_id = [token_id]
+        if isinstance(eos_token_id, int):
+            eos_token_id = [eos_token_id]
+        if not all(isinstance(i,int) for i in token_id) or any(i < 0 for i in token_id):
+            logger.warning(f"`token_id` has to be a list of positive integers, but is {token_id}")
+        self.token_id = token_id
+        
+        self.eos_token_id = eos_token_id
+        self.tokenizer = tokenizer
+    def __call__(self,input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
+        cur_len = input_ids.shape[-1]
+        max_score_ids = torch.argmax(scores, dim=1)
+        for i in range(len(max_score_ids)):
+            if (max_score_ids[i] in self.token_id) or (self.tokenizer.decode(max_score_ids[i]).find(':') != -1) :
+                scores[i][:] = -float('inf')
+                scores[i][self.eos_token_id[0]] = 0
+        scores.to(input_ids.device)
+        if torch.argmax(scores[:,]) in self.token_id:
+            print('yes')
+            scores = torch.zeros(scores.shape)
+            scores[:, self.eos_token_id] = 1
+                
+        return scores
+def construct_qa_prompt_from_args( answer, answer_prefix,
+                                     question=None, question_prefix=None):
+    prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
+    # The test or demonstration question
+    if question_prefix is None:
+        question_prefix = copy.copy(default_question_prefix)
+    question_text = f"{question_prefix}{question}"
+    prompt_arr.append(question_text)
+    if answer is not None and answer_prefix is not None:
+        answer_text = f"{answer_prefix}{answer}"
+        if answer_text != "":
+            prompt_arr.append(answer_text)
+    return prompt_arr
 def construct_prompt_from_args(input, input_prefix):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     
@@ -48,8 +89,6 @@ def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
     else:
         if output_prefix != "":
             prompt_arr.append(output_prefix)
-        # if is_beluga and is_chat:
-        #     prompt = f"{beluga_DEFAULT_SYSTEM_PROMPT}### User:\n{(prompt_sep.join(prompt_arr))}"
     prompt = prompt_sep.join(prompt_arr)
     return prompt
 
