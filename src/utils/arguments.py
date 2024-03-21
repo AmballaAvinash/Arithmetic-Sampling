@@ -62,6 +62,9 @@ class Arguments(argparse.ArgumentParser):
                     "--eval_output_sampling_strategy", type=str
                 )
                 self.add_argument(
+                    "--dataset_sample_strategy", type=str
+                )
+                self.add_argument(
                     "--eval_output_temperature", type=str
                 )
                 self.add_argument(
