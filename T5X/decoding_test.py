@@ -23,9 +23,9 @@ import jax
 from jax.experimental import host_callback as hcb
 import jax.numpy as jnp
 import numpy as np
-from t5x import decoding
+from  t5x import decoding
 
-from arithmetic_sampling.t5x import decoding as sampling
+from T5X import decoding as sampling
 
 EOS_ID = 1
 NEG_INF = decoding.NEG_INF

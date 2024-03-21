@@ -67,6 +67,7 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
             top_k=5,
             num_beams = 1,
             max_new_tokens = 100,
+            use_arithmetic = True
             )
         
         output_dict[idx] = {}

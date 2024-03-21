@@ -90,38 +90,3 @@ sampled_indices, remainder_codes = _arithmetic_categorical(logits,codes)
 
 print(sampled_indices)
 print(remainder_codes)
-
-
-
-
-def _make_default_codes(batch_size, num_decodes,
-                        rng):
-  """Make default codebook for a batch of `num_decodes` samples.
-
-  The codes are initialized evenly spaced in the unit interval, with a random
-  offset applied. This lets them evenly cover the sample space while also
-  providing an unbiased estimate of any sample average.
-
-  Args:
-    batch_size: size of input batch.
-    num_decodes: number of samples per batch element.
-    rng: random seed.
-
-  Returns:
-    [batch_size, num_decodes] array of codes.
-  """
-  offset = torch.rand(batch_size, 1)
-  codes = torch.tile(
-        torch.unsqueeze(
-            torch.arange(1, num_decodes + 1, dtype=torch.float32) / (num_decodes + 1),
-            dim=0), (batch_size, 1))
-  return torch.fmod(codes + offset, 1.0)
-
-
-
-batch_size = 10
-num_decodes = 5
-rng = torch.Generator().manual_seed(42)  # Set a random seed for reproducibility
-result = _make_default_codes(batch_size, num_decodes, rng)
-print(result)
-
