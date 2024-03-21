@@ -212,7 +212,7 @@ if __name__ == '__main__':
     logger.info(args.__dict__)
     set_seed(args.seed)
     # Create output dir
-    out_dir = os.path.join("outputs",args.out_dir,args.dataset_name.split(':')[1])
+    out_dir = os.path.join("outputs",args.out_dir,args.dataset_name.split(':')[0])
     os.makedirs(out_dir, exist_ok=True)
 
     llm = SelfConsistency(model=args.model, is_chat=args.is_chat, load_in_8bit=args.load_in_8bit)
