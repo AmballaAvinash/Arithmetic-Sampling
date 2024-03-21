@@ -32,8 +32,7 @@ def load_hf_data_set(split, dataset_name, dataset_subname):
 
 def run_experiments(zero_shot_cot_flag=False):
     tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
-    model = AutoModelForCausalLM.from_pretrained("/".join(MODEL), load_in_4bit=True).to("cuda")
-    torch.device = "cuda"
+    model = AutoModelForSeq2SeqLM.from_pretrained("/".join(MODEL)).to("cpu")
     model.config.pad_token_id = model.config.eos_token_id
     model.generation_config.pad_token_id = model.config.eos_token_id
     dataset = load_hf_data_set(*DATASET).with_format("torch")
@@ -48,7 +47,7 @@ def reasoning_test(model, tokenizer, data, demo="", N=10, temp=0.5):
     output_dict = {}
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
         x, y = d["question"], d["answer"]
-        x = "Q: " + x[0] + "\n" + "A:"
+        x = "Question: " + x + "\n" + "Answer:"
         y = y.split("####")[-1].strip()
         if demo != "":
             x = x + " " + ZERO_SHOT_COT_TRIGGER
@@ -57,7 +56,7 @@ def reasoning_test(model, tokenizer, data, demo="", N=10, temp=0.5):
         input_prompt = x
         input_ids = tokenizer(
             input_prompt, truncation=True, return_tensors="pt"
-        ).input_ids.to("cuda")
+        ).input_ids.to("cpu")
         outputs_arith = model.generate(
             input_ids=input_ids,
             num_return_sequences=N,
@@ -78,6 +77,7 @@ def reasoning_test(model, tokenizer, data, demo="", N=10, temp=0.5):
         )
         output_dict[idx] = {}
         output_dict[idx]["gt"] = y
+        output_dict[idx]["input"] = x
         output_dict[idx]["arithmetic"] = [
             i.split(ZERO_SHOT_COT_TRIGGER)[-1].strip("\n")
             for i in tokenizer.batch_decode(outputs_arith, skip_special_tokens=True)
