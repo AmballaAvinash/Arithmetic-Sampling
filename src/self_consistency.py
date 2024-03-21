@@ -40,7 +40,17 @@ class SelfConsistency(LLMWrapper):
         self.default_fwd_target_token  = "Answer"
         
         self.default_metrics = default_metrics
-        
+        if args.dataset_name == 'strategy_qa':
+            # extracting the few exemplars for strategy_qa
+            with('data/demos/strategy_qa_demos.json', 'r') as f:
+                self.datasets['demo'] = json.load(f)
+            filepath = "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/stratqa_data.json"
+            with open(filepath,'r') as f:
+                strat_data = json.load(f)['examples']
+            demo_questions = [d['question'] for d in self.datasets['demo']]
+            strat_data = [i for i in strat_data if i['input'] not in demo_questions]
+            self.datasets[args.eval_split]   = strat_data
+            breakpoint()
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
              output_sampling_strategy='max',
@@ -74,10 +84,7 @@ class SelfConsistency(LLMWrapper):
             #breakpoint()
             try:
                 inf_args, ref = construct_args_from_example(d, task_name)
-                inf_args['input_prefix'] = inf_args['input_prefix']
-                inf_args['output_prefix'] = inf_args['output_prefix']
-                inf_args['instructions'] = inf_args['instructions']
-                
+                breakpoint()
             except ValueError:
                 logger.info('`sample_answer` not found in example while using use_answer=True mode')
                 logger.info('Exiting...')
