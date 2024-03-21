@@ -70,7 +70,7 @@ class SelfConsistency(LLMWrapper):
             'fewshot': self.few_shot
         }[inf_fn_key]
         # breakpoint()
-        dataset = self.datasets[split]['translation']
+        dataset = self.datasets[split]
         if (n_samples is not None and n_samples != -1) and n_samples < len(dataset):
             if dataset_sample_strategy == 'static':
                 dataset = list(dataset)[:n_samples]
@@ -233,7 +233,8 @@ if __name__ == '__main__':
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
                        output_sampling_strategy=args.eval_output_sampling_strategy, 
-                       run_id=RUN_ID,)
+                       run_id=RUN_ID,
+                       dataset_sample_strategy = args.dataset_sample_strategy)
 
     if args.debug:
         breakpoint()
