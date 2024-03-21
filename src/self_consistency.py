@@ -220,7 +220,7 @@ if __name__ == '__main__':
     dataset_name = args.dataset_name.split(':')[0]
     # dataset_subname = args.dataset_name.split(':')[1]
     #breakpoint()
-    llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname=dataset_subname)
+    llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
     metrics =[{"name": "sacrebleu", 'score_keys': ['sacrebleu'], 'args': {}},{"name": "meteor", 'score_keys': ['meteor'], 'args': {}}]
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
                        split=args.eval_split, 
