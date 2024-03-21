@@ -98,7 +98,7 @@ def construct_args_from_example(d,task_name):
         question = d['input']
         answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
         target = d['target']
-        return question,answer,target
+        return {'question':question,'answer':answer},target
     if 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
