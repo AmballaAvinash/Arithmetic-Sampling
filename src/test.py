@@ -45,7 +45,7 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
             max_new_tokens = 100,
             temperature = temp,
             num_beams = 1,
-            use_arithmetic = True
+            arithmetic_sampling = True
             )
         outputs_sample = model.generate(
             input_ids = input_ids,
@@ -54,7 +54,7 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
             temperature = temp,
             num_beams = 1,
             max_new_tokens = 100,
-            use_arithmetic = False
+            arithmetic_sampling = False
             )
         output_dict[idx] = {}
         output_dict[idx]['gt'] = d['en']
