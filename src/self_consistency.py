@@ -233,8 +233,7 @@ if __name__ == '__main__':
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
                        output_sampling_strategy=args.eval_output_sampling_strategy, 
-                       run_id=RUN_ID,
-                       dataset_sample_strategy=args.dataset_sample_strategy,)
+                       run_id=RUN_ID,)
 
     if args.debug:
         breakpoint()
