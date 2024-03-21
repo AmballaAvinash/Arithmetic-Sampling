@@ -5,7 +5,7 @@ import torch
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
 from tqdm import tqdm
-from src.reasoning.utils import *
+from utils import *
 
 # Reference: https://github.com/kojima-takeshi188/zero_shot_cot/blob/main/main.py
 
@@ -18,10 +18,10 @@ def cot_reasoning(
 ):
     arg_key = f"N={num_samples},T={temperature}"
     outputs = {}
-    if os.path.exists():
+    if os.path.exists(output_filename):
         with open(output_filename, "r") as output_file:
             outputs = json.load(output_file)
-    outputs[arg_key] = {}
+    outputs[arg_key] = []
     for example in tqdm(data, desc="Predicting"):
         question, answer = example["question"], example["answer"]
         answer = answer.split("####")[-1].strip()
