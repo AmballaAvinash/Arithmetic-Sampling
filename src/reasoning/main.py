@@ -1,120 +1,151 @@
-import json
 import os
-import random
+import json
+import argparse
 import torch
-import datasets
-from tqdm import tqdm
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-from nltk.util import ngrams
+
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
-from utils import create_demo_text
+from tqdm import tqdm
+from src.reasoning.utils import *
 
 # Reference: https://github.com/kojima-takeshi188/zero_shot_cot/blob/main/main.py
 
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
-
-ZERO_SHOT_ANSWER_TRIGGER = "\nTherefore, the answer (numeric) is"
-ZERO_SHOT_COT_TRIGGER = "Let's think step by step."
-FEW_SHOT_ANSWER_TRIGGER = "The answer (numeric) is"
-FEW_SHOT_COT_TRIGGER = "Let's think step by step."
-
-MODEL = ("google","flan-t5-large")
-# MODEL = ("google", "gemma-2b-it")
-DATASET = ("test", "gsm8k", "main")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-def load_hf_data_set(split, dataset_name, dataset_subname):
-    data = {}
-    return datasets.load_dataset(
-        dataset_name, dataset_subname, split=split, trust_remote_code=True
-    )
-
-
-def run_experiments(zero_shot_cot_flag=False):
-    tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained("/".join(MODEL)).to("cpu")
-    model.config.pad_token_id = model.config.eos_token_id
-    model.generation_config.pad_token_id = model.config.eos_token_id
-    dataset = load_hf_data_set(*DATASET).with_format("torch")
-    data = dataset.shuffle(seed=42).select(range(10))
-    demo = create_demo_text(FEW_SHOT_ANSWER_TRIGGER) if not zero_shot_cot_flag else ""
-    for N in [5, 10]:
-        for temp in [0.5, 1.0]:
-            reasoning_test(model, tokenizer, data, demo, N, temp)
-
-
-def reasoning_test(model, tokenizer, data, demo="", N=10, temp=0.5):
-    output_dict = {}
-    for idx, d in enumerate(tqdm(data, desc="Predicting")):
-        x, y = d["question"], d["answer"]
-        x = "Question: " + x + "\n" + "Answer:"
-        y = y.split("####")[-1].strip()
-        if demo != "":
-            x = x + " " + ZERO_SHOT_COT_TRIGGER
-        else:
-            x = demo + x
-        input_prompt = x
+def cot_reasoning(
+    output_filename, model, tokenizer, data, prompt_prefix, num_samples, temperature
+):
+    arg_key = f"N={num_samples},T={temperature}"
+    outputs = {}
+    if os.path.exists():
+        with open(output_filename, "r") as output_file:
+            outputs = json.load(output_file)
+    outputs[arg_key] = {}
+    for example in tqdm(data, desc="Predicting"):
+        question, answer = example["question"], example["answer"]
+        answer = answer.split("####")[-1].strip()
+        input_prompt = f"Question: {question} \nAnswer: {COT_TRIGGER}"
+        if len(prompt_prefix):
+            input_prompt = prompt_prefix + input_prompt
         input_ids = tokenizer(
             input_prompt, truncation=True, return_tensors="pt"
-        ).input_ids.to("cpu")
-        outputs_arith = model.generate(
+        ).input_ids.to(DEVICE)
+        arithmetic_sample_outputs = model.generate(
             input_ids=input_ids,
-            num_return_sequences=N,
+            num_return_sequences=num_samples,
             do_sample=True,
             max_new_tokens=100,
-            temperature=temp,
+            temperature=temperature,
             num_beams=1,
             use_arithmetic=True,
         )
-        outputs_sample = model.generate(
+        ancestral_sample_outputs = model.generate(
             input_ids=input_ids,
-            num_return_sequences=N,
+            num_return_sequences=num_samples,
             do_sample=True,
-            temperature=temp,
-            num_beams=1,
             max_new_tokens=100,
+            temperature=temperature,
+            num_beams=1,
             use_arithmetic=False,
         )
-        output_dict[idx] = {}
-        output_dict[idx]["gt"] = y
-        output_dict[idx]["input"] = x
-        output_dict[idx]["arithmetic"] = [
-            i.split(ZERO_SHOT_COT_TRIGGER)[-1].strip("\n")
-            for i in tokenizer.batch_decode(outputs_arith, skip_special_tokens=True)
+        outputs[arg_key].append({})
+        outputs[arg_key][-1]["gt"] = answer
+        outputs[arg_key][-1]["question"] = question
+        outputs[arg_key][-1]["input_prompt"] = input_prompt
+        outputs[arg_key][-1]["arithmetic_sampling"] = [
+            sequence.split(COT_TRIGGER)[-1].strip("\n")
+            for sequence in tokenizer.batch_decode(
+                arithmetic_sample_outputs, skip_special_tokens=True
+            )
         ]
-        output_dict[idx]["sampling"] = [
-            i.split(ZERO_SHOT_COT_TRIGGER)[-1].strip("\n")
-            for i in tokenizer.batch_decode(outputs_sample, skip_special_tokens=True)
+        outputs[arg_key][-1]["ancestral_sampling"] = [
+            sequence.split(COT_TRIGGER)[-1].strip("\n")
+            for sequence in tokenizer.batch_decode(
+                ancestral_sample_outputs, skip_special_tokens=True
+            )
         ]
-    with open(f"{MODEL[1]}__{DATASET[1]}__N_{N}__temp_{temp}__output.json", "w") as f:
-        json.dump(output_dict, f)
-
-
-def calculate_bleu_and_ngram_diversity(reference, translations):
-    bleu_score = sentence_bleu(
-        [reference] * len(translations),
-        translations,
-        smoothing_function=SmoothingFunction().method4,
-    )
-    n_values = [1, 2, 3, 4]
-    total_unique_ngrams = 0
-    ngram_diversity_score = 0
-    for n in n_values:
-        unique_ngrams = set()
-        total_ngram_count = 0
-        for translation in translations:
-            # Compute n-grams
-            translation_ngrams = list(ngrams(translation.split(), n))
-            # Count unique n-grams
-            total_ngram_count += len(list(translation_ngrams))
-            unique_ngrams.update(translation_ngrams)
-        # Update total counts
-        total_unique_ngrams = len(unique_ngrams)
-        ngram_diversity_score += total_unique_ngrams / (
-            total_ngram_count + torch.finfo(torch.float32).eps
+        outputs[arg_key][-1]["metrics"] = {
+            "arithmetic_ngram_diversity": ngram_diversity(
+                outputs[arg_key][-1]["arithmetic_sampling"]
+            ),
+            "ancestral_ngram_diversity": ngram_diversity(
+                outputs[arg_key][-1]["ancestral_sampling"]
+            ),
+            "arithmetic_accuracy": numerical_accuracy(
+                outputs[arg_key][-1]["arithmetic_sampling"], answer
+            ),
+            "ancestral_accuracy": numerical_accuracy(
+                outputs[arg_key][-1]["ancestral_sampling"], answer
+            ),
+        }
+    with open(output_filename, "w") as output_file:
+        json.dump(outputs, output_file)
+    for arg_key, data in outputs.items():
+        print(f"Results for {arg_key}:")
+        arithmetic_ngram_diversity = 0
+        ancestral_ngram_diversity = 0
+        arithmetic_accuracy = 0
+        ancestral_accuracy = 0
+        for example in data:
+            arithmetic_ngram_diversity += example["metrics"][
+                "arithmetic_ngram_diversity"
+            ]
+            ancestral_ngram_diversity += example["metrics"]["ancestral_ngram_diversity"]
+            arithmetic_accuracy += example["metrics"]["arithmetic_accuracy"]
+            ancestral_accuracy += example["metrics"]["ancestral_accuracy"]
+        num_examples = len(data)
+        print(
+            f"Arithmetic N-gram Diversity: {arithmetic_ngram_diversity / num_examples}"
         )
-    return bleu_score, ngram_diversity_score
+        print(f"Ancestral N-gram Diversity: {ancestral_ngram_diversity / num_examples}")
+        print(f"Arithmetic Accuracy: {arithmetic_accuracy / num_examples}")
+        print(f"Ancestral Accuracy: {ancestral_accuracy / num_examples}")
 
 
 if __name__ == "__main__":
-    run_experiments(zero_shot_cot_flag=True)
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--num-shots", action="store_true", default=0)
+    parser.add_argument("--model", action="store_true", default="flan-t5-base")
+    parser.add_argument("--dataset", action="store_true", default="gsm8k")
+    parser.add_argument("--quant-8-bit", action="store_true", default=False)
+    parser.add_argument("-D", "--num-examples", action="store_true", default=10)
+    parser.add_argument("-N", "--num-samples", action="store_true", default=10)
+    parser.add_argument("-T", "--temperature", action="store_true", default=0.5)
+    parser.add_argument("--seed", action="store_true", default=42)
+    parser.parse_args()
+    args = parser.parse_args()
+
+    MODEL = MODEL_ENUM[args.model]
+    DATASET = DATASET_ENUM[args.dataset]
+
+    if "flan-t5" in MODEL[1]:
+        model_class = AutoModelForSeq2SeqLM
+    else:
+        model_class = AutoModelForCausalLM
+    model = model_class.from_pretrained(
+        "/".join(MODEL), load_in_8bit=args.quant_8_bit
+    ).to(DEVICE)
+    tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
+
+    model.config.pad_token_id = model.config.eos_token_id
+    model.generation_config.pad_token_id = model.config.eos_token_id
+
+    dataset = (
+        load_HF_dataset(DATASET[0], DATASET[1], DATASET[2])
+        .with_format("torch")
+        .shuffle(seed=args.seed)
+        .select(range(args.num_examples))
+    )
+
+    prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=args.num_shots)
+    output_filename = f"{MODEL[1]}__{DATASET[0]}__output.json"
+    cot_reasoning(
+        output_filename,
+        model,
+        tokenizer,
+        dataset,
+        prompt_prefix,
+        num_samples=args.num_samples,
+        temperature=args.temperature,
+    )

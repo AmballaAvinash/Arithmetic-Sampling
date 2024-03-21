@@ -54,6 +54,7 @@ class SelfConsistency(LLMWrapper):
             strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = strat_data
             breakpoint()
+        
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
              output_sampling_strategy='max',
