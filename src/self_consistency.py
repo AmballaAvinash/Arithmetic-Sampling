@@ -41,9 +41,9 @@ class SelfConsistency(LLMWrapper):
         
         self.default_metrics = default_metrics
         if args.dataset_name == 'strategy_qa':
-            # extracting the few exemplars for strategy_qa
+            # extracting the few shot exemplars for strategy_qa
             demo_file_path = '/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/demos/strategy_qa_demos.json'
-            with(demo_file_path, 'r') as f:
+            with open(demo_file_path, 'r') as f:
                 self.datasets['demo'] = json.load(f)
             filepath = "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/stratqa_data.json"
             with open(filepath,'r') as f:
