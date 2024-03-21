@@ -94,6 +94,11 @@ def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
 
 def construct_args_from_example(d,task_name):
     # breakpoint()
+    if 'strategy_qa' in task_name:
+        question = d['input']
+        answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
+        target = d['target']
+        return question,answer,target
     if 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
