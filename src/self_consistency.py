@@ -83,13 +83,13 @@ class SelfConsistency(LLMWrapper):
         # breakpoint()
         for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
             #breakpoint()
-            try:
-                inf_args, ref = construct_args_from_example(d, task_name)
-                breakpoint()
-            except ValueError:
-                logger.info('`sample_answer` not found in example while using use_answer=True mode')
-                logger.info('Exiting...')
-                exit()
+            # try:
+            inf_args, ref = construct_args_from_example(d, task_name)
+            breakpoint()
+            # except ValueError:
+            #     logger.info('`sample_answer` not found in example while using use_answer=True mode')
+            #     logger.info('Exiting...')
+            #     exit()
             # Make LLM call
 
         end_time = time.time()
