@@ -226,7 +226,7 @@ if __name__ == '__main__':
                        split=args.eval_split, 
                        metrics = [k for k in default_metrics if k['name'] == 'accuracy'],
                        n_samples=args.eval_n_samples,
-                       task_name="machinetranslation",
+                       task_name=dataset_name,
                        dataset_name  = dataset_name,
                     #    dataset_subname = dataset_subname,
                        out_dir = out_dir,
@@ -234,9 +234,7 @@ if __name__ == '__main__':
                        retrieval_strategy=args.eval_retrieval_strategy,
                        output_sampling_strategy=args.eval_output_sampling_strategy, 
                        run_id=RUN_ID,
-                       inv_consistency_alpha=args.eval_inv_consistency_alpha,
-                       dataset_sample_strategy=args.dataset_sample_strategy,
-                       all_inv_consistency_alpha=args.eval_all_inv_consistency_alpha)
+                       dataset_sample_strategy=args.dataset_sample_strategy,)
 
     if args.debug:
         breakpoint()
