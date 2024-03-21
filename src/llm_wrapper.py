@@ -82,8 +82,8 @@ class LLMWrapper:
         # Add stopping criterion that terminates generation when a newline is generated
         
         # TODO: Change these defaults to be generic (not task-specific)
-        self.default_instructions = default_instructions
-        self.default_instructions_answer = default_instructions_answer
+        # self.default_instructions = default_instructions
+        # self.default_instructions_answer = default_instructions_answer
         self.default_answer_prefix = default_answer_prefix
         self.default_question_prefix = default_output_prefix  # Used in few-shot demonstrations
         self.default_output_prefix = default_output_prefix
