@@ -15,20 +15,20 @@ def load_hf_data_set(split,dataset_name, dataset_subname):
         data[split] = datasets.load_dataset(dataset_name,dataset_subname, split="validation",trust_remote_code=True)
         return data[split]
 
-def run_experiments():
+def run_experiments(data):
     tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large", use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large").to('cuda')
-    torch.device = 'cuda'
+    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large")
     # set pad_token_id to eos_token_id because GPT2 does not have a EOS token
     model.config.pad_token_id = model.config.eos_token_id
     model.generation_config.pad_token_id = model.config.eos_token_id
-    data = random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],200)
+    
     default_fwd_instruction = "Translate the following German sentence to an English sentence."
     default_fwd_input_prefix = "German sentence: "
     default_fwd_target_prefix = "English sentence: "
     prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
-    for N in [5, 10]:
-        for temp in [0.5, 1.0]:
+    
+    for N in [5, 10]: # num_decodes
+        for temp in [0.5, 1.0]: # temperature
             test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N, temp)
 
 def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, temp = 0.5):
@@ -36,17 +36,19 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
         prompt_arr.append(d['de'])
         prompt_arr.append(default_fwd_target_prefix)
-        input_prompt = (' ').join(prompt_arr)
-        input_ids = tokenizer(input_prompt, truncation=True, return_tensors="pt").input_ids.to('cuda')
+        input_prompt = (' ').join(prompt_arr)  # join the sentences
+        input_ids = tokenizer(input_prompt, truncation=True, return_tensors="pt").input_ids
+       
         outputs_arith = model.generate(
             input_ids = input_ids,
             num_return_sequences = N,
             do_sample = True,
-            max_new_tokens = 100,
             temperature = temp,
             num_beams = 1,
+            max_new_tokens = 100,
             use_arithmetic = True
             )
+        
         outputs_sample = model.generate(
             input_ids = input_ids,
             num_return_sequences = N,
@@ -56,6 +58,17 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
             max_new_tokens = 100,
             use_arithmetic = False
             )
+        
+        outputs_sample = model.generate(input_ids = input_ids,
+            num_return_sequences = N,
+            do_sample = True,
+            temperature = temp,
+            top_p=0.7,
+            top_k=5,
+            num_beams = 1,
+            max_new_tokens = 100,
+            )
+        
         output_dict[idx] = {}
         output_dict[idx]['gt'] = d['en']
         output_dict[idx]['arithmetic'] = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_arith, skip_special_tokens=True)]
@@ -85,4 +98,6 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    run_experiments()
+    samplesize = 200
+    data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
+    run_experiments(data)
