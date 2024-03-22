@@ -106,6 +106,8 @@ def construct_args_from_example(d,task_name):
                 'instruction': default_strat_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
+                "n_shots" : 5,
+                "demos_split":'demo',
                 'construct_args_fn' : construct_args_from_example}, target
     if 'arc' in task_name:
         question = d['question']
