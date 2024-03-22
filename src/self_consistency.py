@@ -36,10 +36,10 @@ class SelfConsistency(LLMWrapper):
         self.default_fwd_question_prefix = "Question: "
         self.default_fwd_answer_prefix = "Answer: "
         
-        self.default_fwd_instruction = "Answer the following question"
-        self.default_fwd_input_prefix = "Question: "
-        self.default_fwd_target_prefix = "Answer: "
-        self.default_fwd_target_token  = "Answer"
+        # self.default_fwd_instruction = "Answer the following question"
+        # self.default_fwd_input_prefix = "Question: "
+        # self.default_fwd_target_prefix = "Answer: "
+        # self.default_fwd_target_token  = "Answer"
         
         self.default_metrics = default_metrics
         if args.dataset_name == 'strategy_qa':
@@ -117,12 +117,8 @@ class SelfConsistency(LLMWrapper):
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
                     inf_args.update({
-                        "question_prefix" : self.default_fwd_question_prefix,
-                        "answer_prefix": self.default_fwd_answer_prefix,
-                        "instructions": self.default_fwd_instruction,
                         "n_shots" : 5,
                         "demos_split":'train',
-                        'construct_args_fn' : construct_args_from_example
                     })
                     inf_fn_kwargs.update({
                         "do_sample": True,

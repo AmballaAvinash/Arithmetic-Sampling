@@ -112,7 +112,7 @@ class LLMWrapper:
 
         decoding_args = copy.deepcopy(self.default_decoding_args)
         decoding_args.update(kwargs)
-
+        breakpoint()
         if self.strip_prompt:
             _prompt = _prompt.strip()
 
@@ -173,14 +173,14 @@ class LLMWrapper:
         # Demonstrations
         for d in sampled_demos:
             d_inf_args, d_ref = construct_args_fn(d)
-            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],self.default_question_prefix,
-                                                            d_inf_args['answer'],self.default_answer_prefix)
+            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
+                                                            d_inf_args['answer'],answer_prefix)
         # Question
         prompt_arr += construct_qa_prompt_from_args(question,self.default_question_prefix)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep, self.is_llama2, self.is_chat,
-                                   self.default_output_prefix if output_prefix is None else output_prefix)
-
+                                   self.default_output_prefix if answer_prefix is None else answer_prefix)
+        breakpoint()
         return self._base_generator(prompt, **kwargs)
     
     def load_metrics(self, metrics):

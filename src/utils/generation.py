@@ -10,6 +10,9 @@ from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+default_strat_qa_instruction = "Answer the following question with Yes or No, that is the last line of your answer should be of the format : So the answer is <your_answer>."
+
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
@@ -61,8 +64,8 @@ class TruncateLogitsProcessor(LogitsProcessor):
             scores[:, self.eos_token_id] = 1
                 
         return scores
-def construct_qa_prompt_from_args( answer, answer_prefix,
-                                     question=None, question_prefix=None):
+def construct_qa_prompt_from_args( question, question_prefix,
+                                     answer=None, answer_prefix=None):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     # The test or demonstration question
     if question_prefix is None:
@@ -98,7 +101,12 @@ def construct_args_from_example(d,task_name):
         question = d['input']
         answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
         target = d['target']
-        return {'question':question,'answer':answer},target
+        return {'question':question,
+                'answer':answer,
+                'instruction': default_strat_qa_instruction,
+                "question_prefix" : default_question_prefix,
+                "answer_prefix": default_answer_prefix,
+                'construct_args_fn' : construct_args_from_example}, target
     if 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
