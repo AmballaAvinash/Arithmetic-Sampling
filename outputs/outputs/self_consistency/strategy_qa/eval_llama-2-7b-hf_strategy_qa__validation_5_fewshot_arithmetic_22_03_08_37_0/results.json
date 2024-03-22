@@ -1,0 +1,132 @@
+{
+  "experiment": "eval_llama-2-7b-hf_strategy_qa__validation_5_fewshot_arithmetic_22_03_08_37_0",
+  "n_total": 5,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 5,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.2
+  },
+  "time_taken": {
+    "sampling": 10.61531686782837
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": null,
+      "prediction": "nan",
+      "generation_candidates": [
+        "1) Gandalf is a witch-king. 2) Rincewinds is a bumbling wizard. 3) Gandolf is a powerful wizard, and Rincewin is a weak wizard (see above). Thus, Gandalf would defeat Rincewise in a battle. So, the answer would be yes.",
+        "1) Gandalf is a witch-king. 2) Rincewinds is a bumbling wizard. 3) Gandolf is a powerful wizard, and Rincewin is a weak wizard (see above). Thus, Gandalf would defeat Rincewise in a battle. So, the answer would be yes.",
+        "1) Gandalf is a witch-king. 2) Rincewinds is a bumbling wizard. 3) Gandolf is a powerful wizard, and Rincewin is a weak wizard (see above). Thus, Gandalf would defeat Rincewise in a battle. So, the answer would be yes.",
+        "1) Gandalf is a witch-king. 2) Rincewinds is a bumbling wizard. 3) Gandolf is a powerful wizard, and Rincewin is a weak wizard (see above). Thus, Gandalf would defeat Rincewise in a battle. So, the answer would be yes.",
+        "1) Gandalf is a witch-king. 2) Rincewinds is a bumbling wizard. 3) Gandolf is a powerful wizard, and Rincewin is a weak wizard (see above). Thus, Gandalf would defeat Rincewise in a battle. So, the answer would be yes."
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1) Ontology is the study of being. 2) A scalpel is a surgical instrument. 3) Surgery is the treatment of disease by cutting. 4) Disease is the state of being unhealthy. 5) Being unheathy is not being. Thus 1, 2, 3, and 4 are true. 6) Therefore, ontology requires a scalpal. So, the answer to the question is yes, ontolgy requires a surgcal.\n1. What is the difference between a yes or no question and a question that requires a yes/no answer?\n2. What are the advantages of using a yes-no question?\n3. What types of questions can be answered with a yes, no, or maybe?\n4. What type of question is a yes no question?",
+        "1) Ontology is the study of being. 2) A scalpel is a surgical instrument. 3) Surgery is the treatment of disease by cutting. 4) Disease is the state of being unhealthy. 5) Being unheathy is not being. Thus 1, 2, 3, and 4 are true. 6) Therefore, ontology requires a scalpal. So, the answer to the question is yes, ontolgy requires a surgcal.\n1. What is the difference between a yes or no question and a question that requires a yes/no answer?\n2. What are the advantages of using a yes-no question?\n3. What types of questions can be answered with a yes, no, or maybe?\n4. What type of question is a yes no question?",
+        "1) Ontology is the study of being. 2) A scalpel is a surgical instrument. 3) Surgery is the treatment of disease by cutting. 4) Disease is the state of being unhealthy. 5) Being unheathy is not being. Thus 1, 2, 3, and 4 are true. 6) Therefore, ontology requires a scalpal. So, the answer to the question is yes, ontolgy requires a surgcal.\n1. What is the difference between a yes or no question and a question that requires a yes/no answer?\n2. What are the advantages of using a yes-no question?\n3. What types of questions can be answered with a yes, no, or maybe?\n4. What type of question is a yes no question?",
+        "1) Ontology is the study of being. 2) A scalpel is a surgical instrument. 3) Surgery is the treatment of disease by cutting. 4) Disease is the state of being unhealthy. 5) Being unheathy is not being. Thus 1, 2, 3, and 4 are true. 6) Therefore, ontology requires a scalpal. So, the answer to the question is yes, ontolgy requires a surgcal.\n1. What is the difference between a yes or no question and a question that requires a yes/no answer?\n2. What are the advantages of using a yes-no question?\n3. What types of questions can be answered with a yes, no, or maybe?\n4. What type of question is a yes no question?",
+        "1) Ontology is the study of being. 2) A scalpel is a surgical instrument. 3) Surgery is the treatment of disease by cutting. 4) Disease is the state of being unhealthy. 5) Being unheathy is not being. Thus 1, 2, 3, and 4 are true. 6) Therefore, ontology requires a scalpal. So, the answer to the question is yes, ontolgy requires a surgcal.\n1. What is the difference between a yes or no question and a question that requires a yes/no answer?\n2. What are the advantages of using a yes-no question?\n3. What types of questions can be answered with a yes, no, or maybe?\n4. What type of question is a yes no question?"
+      ]
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1) Parsley is a herb. Herbs are in the produce section. 2) Parsnip is a root vegetable. Root vegetables are in produce. 3) Parrot is a bird. Birds are in pet food. Thus parsnips are in multiple groc. sections. So, the answer to the question is yes, it is normal to see parsely in multiple produce sections.\nLike the previous example, answer this question with a yes or no, and then provide the reason for your answer.\nRefer to the following table.\nWhich of the following is a true statement?\nA. The average of the first three numbers is 2.\nB. The sum of the last three numbers equals 12.",
+        "1) Parsley is a herb. Herbs are in the produce section. 2) Parsnip is a root vegetable. Root vegetables are in produce. 3) Parrot is a bird. Birds are in pet food. Thus parsnips are in multiple groc. sections. So, the answer to the question is yes, it is normal to see parsely in multiple produce sections.\nLike the previous example, answer this question with a yes or no, and then provide the reason for your answer.\nRefer to the following table.\nWhich of the following is a true statement?\nA. The average of the first three numbers is 2.\nB. The sum of the last three numbers equals 12.",
+        "1) Parsley is a herb. Herbs are in the produce section. 2) Parsnip is a root vegetable. Root vegetables are in produce. 3) Parrot is a bird. Birds are in pet food. Thus parsnips are in multiple groc. sections. So, the answer to the question is yes, it is normal to see parsely in multiple produce sections.\nLike the previous example, answer this question with a yes or no, and then provide the reason for your answer.\nRefer to the following table.\nWhich of the following is a true statement?\nA. The average of the first three numbers is 2.\nB. The sum of the last three numbers equals 12.",
+        "1) Parsley is a herb. Herbs are in the produce section. 2) Parsnip is a root vegetable. Root vegetables are in produce. 3) Parrot is a bird. Birds are in pet food. Thus parsnips are in multiple groc. sections. So, the answer to the question is yes, it is normal to see parsely in multiple produce sections.\nLike the previous example, answer this question with a yes or no, and then provide the reason for your answer.\nRefer to the following table.\nWhich of the following is a true statement?\nA. The average of the first three numbers is 2.\nB. The sum of the last three numbers equals 12.",
+        "1) Parsley is a herb. Herbs are in the produce section. 2) Parsnip is a root vegetable. Root vegetables are in produce. 3) Parrot is a bird. Birds are in pet food. Thus parsnips are in multiple groc. sections. So, the answer to the question is yes, it is normal to see parsely in multiple produce sections.\nLike the previous example, answer this question with a yes or no, and then provide the reason for your answer.\nRefer to the following table.\nWhich of the following is a true statement?\nA. The average of the first three numbers is 2.\nB. The sum of the last three numbers equals 12."
+      ]
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Has Johns Hopkins University always treated subjects ethically?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1906 is the year Johns' Hopkins Hospital was founded. Johns\u2019 Hopkins was the first hospital to treat patients ethically. Thus Johns-Hopkins University has always treated its subjects ethical. So, the answer to the question is yes, Johns\u2013Hopkin's University has treated its patients ethical since its founding.\n# 10\n# The Power of \"Yes\"\nThe power of \"yes\" is the ability to say \"yes.\"\nThe ability to answer \"yes,\" \"no,\" or \"maybe\" is a powerful tool. It is a tool that can be used to make decisions, to communicate, and to build relationships.\nThe Power of Yes\nThe first step to using the power of yes is to understand what it is. The power of the yes is the power to say yes. It's the power that allows you to say, \"Yes, I can do that.\" It",
+        "1906 is the year Johns' Hopkins Hospital was founded. Johns\u2019 Hopkins was the first hospital to treat patients ethically. Thus Johns-Hopkins University has always treated its subjects ethical. So, the answer to the question is yes, Johns\u2013Hopkin's University has treated its patients ethical since its founding.\n# 10\n# The Power of \"Yes\"\nThe power of \"yes\" is the ability to say \"yes.\"\nThe ability to answer \"yes,\" \"no,\" or \"maybe\" is a powerful tool. It is a tool that can be used to make decisions, to communicate, and to build relationships.\nThe Power of Yes\nThe first step to using the power of yes is to understand what it is. The power of the yes is the power to say yes. It's the power that allows you to say, \"Yes, I can do that.\" It",
+        "1906 is the year Johns' Hopkins Hospital was founded. Johns\u2019 Hopkins was the first hospital to treat patients ethically. Thus Johns-Hopkins University has always treated its subjects ethical. So, the answer to the question is yes, Johns\u2013Hopkin's University has treated its patients ethical since its founding.\n# 10\n# The Power of \"Yes\"\nThe power of \"yes\" is the ability to say \"yes.\"\nThe ability to answer \"yes,\" \"no,\" or \"maybe\" is a powerful tool. It is a tool that can be used to make decisions, to communicate, and to build relationships.\nThe Power of Yes\nThe first step to using the power of yes is to understand what it is. The power of the yes is the power to say yes. It's the power that allows you to say, \"Yes, I can do that.\" It",
+        "1906 is the year Johns' Hopkins Hospital was founded. Johns\u2019 Hopkins was the first hospital to treat patients ethically. Thus Johns-Hopkins University has always treated its subjects ethical. So, the answer to the question is yes, Johns\u2013Hopkin's University has treated its patients ethical since its founding.\n# 10\n# The Power of \"Yes\"\nThe power of \"yes\" is the ability to say \"yes.\"\nThe ability to answer \"yes,\" \"no,\" or \"maybe\" is a powerful tool. It is a tool that can be used to make decisions, to communicate, and to build relationships.\nThe Power of Yes\nThe first step to using the power of yes is to understand what it is. The power of the yes is the power to say yes. It's the power that allows you to say, \"Yes, I can do that.\" It",
+        "1906 is the year Johns' Hopkins Hospital was founded. Johns\u2019 Hopkins was the first hospital to treat patients ethically. Thus Johns-Hopkins University has always treated its subjects ethical. So, the answer to the question is yes, Johns\u2013Hopkin's University has treated its patients ethical since its founding.\n# 10\n# The Power of \"Yes\"\nThe power of \"yes\" is the ability to say \"yes.\"\nThe ability to answer \"yes,\" \"no,\" or \"maybe\" is a powerful tool. It is a tool that can be used to make decisions, to communicate, and to build relationships.\nThe Power of Yes\nThe first step to using the power of yes is to understand what it is. The power of the yes is the power to say yes. It's the power that allows you to say, \"Yes, I can do that.\" It"
+      ]
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Did Elle Fanning play an essential part in ending apartheid?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1994 was the year that apartheid ended in South Africa. Elle Fannings\u2019s first film was in 2001. Thus Elle Fannon could not have played an essential role in ending Apartheid. So, the answer to this question is no, Elle Fanner did not play an important role in the end of apartheid.\nReview\nIn this chapter, you learned how to answer questions with Yes and No. You also learned how the answer could be Yes or no, and how to provide the reason for your answer.\nIn the next chapter, we will learn how to use the word \"because\" to explain why something is true.\n# Chapter 10. Using \"Because\"\nIn This Chapter\n  * Using \"because.\"\n  How to use \"because,\" and how not to use it.\n  Using \"since\" and \"because of.\"\nIn English, we use the words \"because\", \"",
+        "1994 was the year that apartheid ended in South Africa. Elle Fannings\u2019s first film was in 2001. Thus Elle Fannon could not have played an essential role in ending Apartheid. So, the answer to this question is no, Elle Fanner did not play an important role in the end of apartheid.\nReview\nIn this chapter, you learned how to answer questions with Yes and No. You also learned how the answer could be Yes or no, and how to provide the reason for your answer.\nIn the next chapter, we will learn how to use the word \"because\" to explain why something is true.\n# Chapter 10. Using \"Because\"\nIn This Chapter\n  * Using \"because.\"\n  How to use \"because,\" and how not to use it.\n  Using \"since\" and \"because of.\"\nIn English, we use the words \"because\", \"",
+        "1994 was the year that apartheid ended in South Africa. Elle Fannings\u2019s first film was in 2001. Thus Elle Fannon could not have played an essential role in ending Apartheid. So, the answer to this question is no, Elle Fanner did not play an important role in the end of apartheid.\nReview\nIn this chapter, you learned how to answer questions with Yes and No. You also learned how the answer could be Yes or no, and how to provide the reason for your answer.\nIn the next chapter, we will learn how to use the word \"because\" to explain why something is true.\n# Chapter 10. Using \"Because\"\nIn This Chapter\n  * Using \"because.\"\n  How to use \"because,\" and how not to use it.\n  Using \"since\" and \"because of.\"\nIn English, we use the words \"because\", \"",
+        "1994 was the year that apartheid ended in South Africa. Elle Fannings\u2019s first film was in 2001. Thus Elle Fannon could not have played an essential role in ending Apartheid. So, the answer to this question is no, Elle Fanner did not play an important role in the end of apartheid.\nReview\nIn this chapter, you learned how to answer questions with Yes and No. You also learned how the answer could be Yes or no, and how to provide the reason for your answer.\nIn the next chapter, we will learn how to use the word \"because\" to explain why something is true.\n# Chapter 10. Using \"Because\"\nIn This Chapter\n  * Using \"because.\"\n  How to use \"because,\" and how not to use it.\n  Using \"since\" and \"because of.\"\nIn English, we use the words \"because\", \"",
+        "1994 was the year that apartheid ended in South Africa. Elle Fannings\u2019s first film was in 2001. Thus Elle Fannon could not have played an essential role in ending Apartheid. So, the answer to this question is no, Elle Fanner did not play an important role in the end of apartheid.\nReview\nIn this chapter, you learned how to answer questions with Yes and No. You also learned how the answer could be Yes or no, and how to provide the reason for your answer.\nIn the next chapter, we will learn how to use the word \"because\" to explain why something is true.\n# Chapter 10. Using \"Because\"\nIn This Chapter\n  * Using \"because.\"\n  How to use \"because,\" and how not to use it.\n  Using \"since\" and \"because of.\"\nIn English, we use the words \"because\", \""
+      ]
+    }
+  ]
+}

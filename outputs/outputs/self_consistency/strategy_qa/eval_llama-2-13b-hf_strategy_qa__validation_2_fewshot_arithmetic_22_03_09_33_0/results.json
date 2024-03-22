@@ -1,0 +1,77 @@
+{
+  "experiment": "eval_llama-2-13b-hf_strategy_qa__validation_2_fewshot_arithmetic_22_03_09_33_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 2,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.5,
+    "ngram_diversity.ngram_diversity": 1.0
+  },
+  "time_taken": {
+    "sampling": 90.38735389709473
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": null,
+      "prediction": "nan",
+      "generation_candidates": [
+        "\n\n#1. \u201cYes\u201d is : Hydrogen was not the last word of this book. Ogg\u2019s answer; but Ogg\u2019s answer was the last word of the previous book. \u201cYes\u201d was not the last word of this book; but \u201cYes\u201d was the last word of the previous book.\nThis proves my point that a word was the last word of the previous book; but the previous book was not the previous book that a word was the last word of.\n\u201cYes\u201d\u201d is the only word in the previous book was the last word of the previous book.\nIt was the last word of the previous book.\nAnswer:Yes 2. \u201cNo\u201d",
+        "\nAnswer: \n"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "\n\nAnswer:\n \nQuestion:\nReasoning:\n:\n\n\nAnswer: yes\n\n\n\nQuestion: Is the first name of the person standing in front of us?",
+        "\nAnswer: no\n3. Why did you write this passage?\n4. What did you want this passage to communicate?\n5. With what types of readers in mind?\nHow might I use this in? How?\n6. What would I want int? How?\n7. What would I want that this passage had?\n8. What?\n\n4. 4. Are there any ways I could improve this passage? What?\n9. How could this passage communicate with more with?\nWhat did write? 6.\nwould improve that this passage? 4.\n3. 9. 4. this passage\n9. 5. 6. 4. 9. 6. 9. 6. 4. 6. 9. 6.\nWhat do I learn from this?\nDid I need?\n\nWhat did You learn?\nWhat was your learning?\n"
+      ]
+    }
+  ]
+}

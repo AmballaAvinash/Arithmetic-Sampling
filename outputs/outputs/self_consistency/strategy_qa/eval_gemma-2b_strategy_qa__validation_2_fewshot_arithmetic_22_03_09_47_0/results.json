@@ -1,0 +1,94 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_arithmetic_22_03_09_47_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 10,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 2,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 1.0,
+    "ngram_diversity.ngram_diversity": 1.0
+  },
+  "time_taken": {
+    "sampling": 20.98946714401245
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": null,
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Gandalf is a wizard, and Rincewind is not.\n2. Gandalf has a sword that can cut through the flesh of his enemy. Rincewind has a spell that can make him invisible. These two spells (one physical, one magical) cannot possibly be capable of defeating each other. So Rincewind cannot defeat Gandalf.\n3. Gandalf has a staff called the Glamdring, which can change into any type of weapon or appendage he wants, and any size. And Gandalf uses his finger to touch an apple. Thus, Gandalf can use his staff to cut the armor off the invisible Rincewind. So Rincewind could be defeated by Gandalf in a wizard battle. Thus the answer is yes.",
+        "1. Gandalf = good wizard. 2. Wizard = wizard. 3. Wizard is good. 4. Gandalf is good. 5. Gandalf > Wizard. 6. Gandalf > good wizard. 7. Gandalf > Rincewind. 8. Gandalf > 12. 12 is less than 7. 9. 7 > 12 > 1. 10. Gandalf, the good, defeated Rincewind, the evil. Thus, Gandalf hypothetically defeats Rincewind, the evil. So the answer is yes.\nAnswer: yes",
+        "1) Wizard battle means a battle between wizards. 2) Gandalf is a wizard. 3) Rincewind is a wizard. 4) Gandalf is stronger. Thus, Gandalf would hypothetically defeat Rincewind in a wizard battle. Therefore, Gandalf hypothetically defeat Rincewind in a wizard battle.\nAnswer: yes\nQuestion: Could a human successfully grow into a giraffe while in a wheelchair during the first human race?\nReasoning: Humans have the ability to become as tall as they would like to be. Therefore, a human would successfully grow into a giraffe during the first human race. So the answer is yes.\nAnswer: yes\n<h3>More Example-Based Reasoning</h3>\n<b>Example 2:</b> If I cut the number by 5, will the answer be less than 20?\n<b>Example 3:</b> Could a squirrel run across the floor of a room if a wall was in between each square of the floor?\n<h3>Multiple",
+        "1) Gandalf is the wisest wizard, 2) Rincewind is a wizard, 3) Gandalf is as likely as Rincewind to win a wizard battle. Thus, Gandalf would win a wizard battle. So the answer is yes.",
+        "1) Gandalf and Rincewind are both wizards.\n           2) Gandalf has a staff with more magical power than Rincewind.\n           3) Gandalf has a sword, while Rincewind does not.\n           4) Rincewind does not have a weapon to fight Gandalf. \n           5) Gandalf\u2019s magic is faster than Rincewind\u2019s.",
+        "<em>The Lord of the Rings</em> book series written by J.R.R. Tolkien was an adaption of the Old English story <em>Beowulf</em>. In <em>The Hobbit</em>, Bilbo encounters a wizard named Gandalf. In <em>The Lord of the Rings</em>, Gandalf and Bilbo go on a quest to destroy an evil ring known as the One Ring. Gandalf is known for being a better and more capable wizard than Bilbo. Thus, Gandalf would definitely be able to defeat Rincewind in a wizard battle. So the answer is yes.",
+        "2 = 2 is not a counterexample. 3 = 2, but 3 is not a counterexample. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle.\nAnswer: yes\nQuestion: Should we change the number of 7 in $\\sqrt{7}=2$  ?\nReasoning: 7 is not an even number. The exponent for a number is a counterexample. So we change the number of 7 in $\\sqrt{7}=2$ .\nAnswer: yes\nQuestion: Would the Eiffel tower fall down?\nReasoning: The Eiffel Tower has been standing since 1889. This is greater than 3.5 years. Thus, the Eiffel tower could not collapse because it has been standing for more than 3.5 years. So the answer is no.\nAnswer: no, but it could take 3.5 years\nQuestion: Does the Sun heat an apple?\n",
+        "\nThere is a debate as to who won: Gandalf or Rincewind. Gandalf, the Lord of the Rings, is described as one of the world's greatest wizards. Gandalf is also responsible for defeating Sauron's Nazg\u00fbls. On the other hand, Rincewind is described as the most useless wizard who ever lived.  Given that Gandalf is also the best wizard and Rincewind is the worst wizard, Gandalf likely won the wizard duel.\n\nQuestion: If the 1988 U.S. presidential election were run again, would Ross Perot likely win?\nReasoning: Perot is best known primarily for his 1992 bid for the presidency on the Reform Party ticket. For this reason, Perot has made numerous statements in support of the reform party. Perot has made these statements in an attempt to boost Reform Party support. In 1992, Perot's party did receive some votes but not enough",
+        "<b>Wizard</b> is the common ancestor to Gandalf and Rincewind. A common ancestor of two entities is the more ancient entity. In the case of wizard, wizard is the ancestral to Rincewind and Gandalf. Since wizard is more ancient than Gandalf, Gandalf loses. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle.",
+        "1. Rincewind lost to Voldemort in a Wizard Contest.\n2. Rincewind once lost a wager to a spider.\n3. Rincewind has lost in the past to a dragon.\n4. Gandalf defeated Aragorn.\n5. Voldemort defeated Gandalf.\n6. Voldemort lost to Gandalf.\n7. Gandalf defeated Theoden.\n8. Gandalf defeated Rohan.\n9. Gandalf defeated the Witch-king.\n10. Gandalf defeated Saruman.\n11. Gandalf defeated Sauron.\n12. Gandalf defeated King Theoden.\n13. Gandalf lost to Aragorn.\n14. Rincewind could not defeat a spider.\n15. Gandalf could not defeat Voldemort.\n16. Gandalf could not defeat Aragorn.\n17. Gandalf was defeated by the Witch-king.\n18. Gandalf was defeated by Saruman.\n19. Gandalf was defeated by Sauron.\nThis is"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Ontology is a branch of philosophy concerned with the nature and structure of being. This is important because without ontology, the idea of \u2018things\u2019 would not exist because existence and meaning are dependent on one\u2019s understanding of the nature of things, which is the basic unit of ontology. 2. A scalpel is a tool used for surgical cutting of tissue. This implies that ontology requires the scalpel to exist. 3. If ontology exists, there would be a scalpel already created for cutting with. So in the above example, ontology requires a scalpel. Therefore, the answer is yes.\nAnswer: yes\nQuestion: If a tree falls in a forest but no one is around to hear the sound, did it make a sound?\nReasoning: The answer is yes. Although a tree may not make a sound, it still exists. An example of this is your hand. Although your fingers may not make a sound, they still exist. The answer is yes",
+        "1. You must answer the question with Yes or No. This is the rule for question #2. 2. You must answer a question with Yes or No. You cannot leave a question. 3. You can only answer a Yes or No with a scalpel. Thus, a scalpel is required. So the answer is yes.\nQuestion: Does the US government need to be abolished?\nReasoning: 1. US and the USSR became super powers, so it's the only thing they could do. 2. The US government has a lot of power. 3. The US is not as democratic as it should be. 4. Both are true. Thus, the US government is not abolished. So the answer is no.\nQuestion: Do any horses in Antarctica have to die for the sake of a human life?\nReasoning: Horses are used for work. Humans like to do fun things, for example: go to the beach,",
+        "1. A scalpel requires ontology. 2. 1 does not require a scalpel. Thus, the answer is no.\nAnswer: no",
+        "1) Ontology is a theory of the world based on first principles, not empirical data. 2) An ontology could not require a scalpel. 3) A scalpel is an object that cuts. If ontology required a scalpel, then it could not be an ontology. Thus, answer is no.\nAnswer: no\nQuestion: Could a person successfully navigate New York City by relying on the Internet?\nReasoning: The internet has no world coordinates and therefore, navigation would not be possible. So the answer is no.\nAnswer: no\nQuestion: If a man walks three blocks north, goes west three blocks, and returns to where they started, then what are the coordinates of the person\u2019s starting point?\nReasoning: The man started at (0,0) and walked a north, west, north and went back to where they started at (0,0).\nThus, the coordinates are (0,0).\nAnswer: (0,",
+        "1) A scalpel is a tool in surgery. 2) Ontology is the study of what is. Thus, 1 is a property (definition of what a tool is) and 2 is the target of the property (what is a scalpel). Therefore, ontology does require a scalpel.\nAnswer: yes\nQuestion: Should I buy a 1001-point-five-mile Toyota Prius with 250,000 miles?\nReasoning: Toyota Prius has a gas mileage of around 40 miles per gallon (MPG). This means that the car can go 1,000 miles before one fills up the gas tank. It takes 7 gallons of gas to go 100 miles. Therefore, it will take about 14,300 gallons of gas for the Prius to go 250,000 miles. Toyota has been in business since 1890. Thus",
+        "<em>Ontology</em> is <em>ontology</em>. <em>Ontology</em> is a scalpel. Thus, <em>ontology</em> requires a scalpel. So the answer is no.\nAnswer: no",
+        "<em>A scalpel is</em> a scalpel. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n<strong>\n<strong>\n<strong><strong><strong><strong>\n<strong><strong><strong><strong><strong>\n<strong><strong><strong><strong><strong>Answers to Quiz Chapter Five</strong>\n</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>\n</strong>\n</strong>\n</strong>",
+        "2 + 2 has an ontology of 5. 5 requires a scalpel to slice it. So scalpel requires a scalpel. So the answer is yes.\n<strong>This quiz contains 6 questions and answers.</strong>\nClick on answers below if incorrect\nAnswer1\n \nQuestion 2\nNo.\n \nQuestion 3\nYes.\n \nQuestion 4\nNo.\n \nQuestion 5\nNo.\n \nQuestion 6\nNo.\n \n<em>This quiz is based on questions found in The Philosophy of Ignorance by Mark H. Salter http://philosophyofignorance.co.uk</em>",
+        "<u>All</u> people have eyes. However, some people use eyes that come with scalpel holders. Thus, ontology does not require a scalpel. So the answer is no.\nAnswer: no",
+        "<strong>Ontology</strong> - An ontology specifies a formal theory of a domain. The word, ontology, comes from the Greek <strong>\u00f3</strong> ontology, which means \"knowledge\". <strong>Ontology</strong> is the structure of knowledge. <strong>Scalpel</strong> - A sca<u>lp</u>el. <strong>Scalpel</strong> used in medicine. Scalpel. Medicine is the art and science of diagnosing, treating, and preventing diseases. <strong>Disease</strong> - a state of being affected by an illness or infection. Thus, \u201cdoes ontology require a scalpel\u201d is a logical contradiction, hence, the reasoning is flawed and there is a flaw in the answer. Thus, the answer is no.\nAnswer: no\nQuestion: Is a human, an animal, a machine or a vegetable?\nReasoning: There are many schools of thought when it comes to classifying organisms, but generally speaking, you can say that animals (humans, animals, vegetables) are \u201cliving organisms\u201d. To put it simply,"
+      ]
+    }
+  ]
+}

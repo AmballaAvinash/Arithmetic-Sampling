@@ -1,0 +1,77 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_sample_22_03_09_26_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 2,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.5,
+    "ngram_diversity.ngram_diversity": 0.5
+  },
+  "time_taken": {
+    "sampling": 4.497670412063599
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": null,
+      "prediction": "no",
+      "generation_candidates": [
+        "13 wizards exist in the book. Gandalf exists in the book. If he defeated Rincewind, he would win.\nAnswer: yes\nQuestion: A giraffe could give birth to an elephant one day?\nReasoning: The gestation period of an elephant is 2 to 6 years. The gestation period of giraffe is 13 to 16 months. Given a giraffe gives birth to a baby one day, it does not take 16 months. The answer is no.\nAnswer: no\nQuestion: Is a hippopotomus the only animal with no eyes?\nReasoning: There are 4 species of hippos, all but the pygmy hippos have no eyes. There is one kind of pygmy hippo. The answer is yes.\nAnswer: yes\nQuestion: Can you ever lose a tooth without being knocked out?\nQuestion: 2439 is exactly divisible by 9 but 15 is not.\nQuestion",
+        "20th book of the Lord of the Rings trilogy is \u201cThe Return of the King\u201d. Rincewind goes to Valinor. Thus, Rincewind does not exist in the world of the Lord of the Rings, so he cannot beat Gandalf. So the answer is No."
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1 is not even. 2 is even. Even is a quality that is not required for an ontology. So the answer is no.\nAnswer: no\nQuestion: Would a monkey be considered an amphibian?\nReasoning: A Monkey is an vertebrate. A frog is a urodele. A frog is not a vertebrate. Thus, a Monkey is not an Amphibola. So the answer is no.\nAnswer: no",
+        "0 means false. Ontology is about how things are in the world, which is false because false things do not exist. So ontology does not require a scalpel.\nAnswer: no"
+      ]
+    }
+  ]
+}

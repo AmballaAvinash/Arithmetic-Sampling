@@ -1,6 +1,6 @@
 from transformers import GenerationMixin
 
-from utils import ArithmeticSamplingGenerationMixin
+from transformers_utils import ArithmeticSamplingGenerationMixin
 
 
 def ArithmeticSampler(model_class: type) -> type:

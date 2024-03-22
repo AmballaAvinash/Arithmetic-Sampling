@@ -1,0 +1,94 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_sample_22_03_09_47_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 10,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 2,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.5,
+    "ngram_diversity.ngram_diversity": 0.5
+  },
+  "time_taken": {
+    "sampling": 20.944056034088135
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": null,
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Gandalf defeated Smaug and the Easterling army as per <em>Lord of the Rings</em> movies. 2. Gandalf saved Aragorn and the fellowship as per <em>Lord of the Rings</em> movies. 3. Gandalf killed Balin\u2019s host. Gandalf therefore has defeated several dangerous enemies like dragons, Easterling army, giants, Balin\u2019s host, and orcs, etc. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle. So the answer is yes.\n\nQuestion: Does a human have more arms and legs than a monkey?\nReasoning: A human has five fingers on both hands, and humans generally have five fingers on both hands. A human has five toes on both feet and humans generally have five toes on both feet. So, a human has more fingers on both hands and more toes on both feet than a monkey does. Thus, a human has more arms and legs than a monkey. So the answer is yes.\nAnswer",
+        "1. Gandalf is a member of a civilization of magical beings called wizards. Each wizard uses magic 2. Rincewind is a member of a civilization of magical beings called wizards. Each wizard uses magic 3. In order to defeat a foe with magic, the wizard must be proficient in magic 4. Rincewind is not able to use magic 5. Gandalf is able to defeat Rincewind in a wizard battle 6. Gandalf defeats Rincewind in a wizard battle",
+        "10. Wizard wars were considered a part of magic. Thus, Gandalf could defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "1) Wizards take 10 years to grow, which is longer than 4 days.\n          So Gandalf cannot defeat Rincewind as it has been longer than 10 years since Gandalf is a wizard.\n2) Gandalf may have defeated the last living orc in their war in Middle Earth.\n3) Rincewind is mortal.\n4) If Gandalf wants to kill Rincewind, then he is required to use his magic, which is forbidden.\nThus, Gandalf could not defeat Rincewind on behalf of the wizarding community.\nAnswer: no",
+        "1) Gandalf\u2019s wizarding level is 4. Rincewind\u2019s wizarding level is 1. Thus, Gandalf is 3 wizard levels above Rincewind. 3 times 4 = 12. Gandalf\u2019s wizard level exceeds 12 in powers of 3. Thus, Gandalf could defeat Rincewind. 2) The \u201cbattle\u201d would not really count. Rincewind could get into a magic-induced induced high from Gandalf\u2019s incantations, but Rincewind has no magical defense. So, even if Gandalf defeated Rincewind, this would not be a real physical wizard battle. 3) Gandalf is a powerful wizard. He would probably win a real physical wizard battle.\nAnswer: yes\nWhen answering these questions, you do not need to provide detailed reasoning. That is not the purpose of the examples. If you include extraneous information for each questions or for the final answer, points can be deducted.",
+        "<s>Gandalf, the wizard, defeats Rincewind, an adventurer. Gandalf beats an adventurer. Gandalf wins the battle. Gandalf is a wizard. Gandalf the dwarf battles Rincewind. Gandalf the dwarf is a wizard. Gandalf defeats the dwarf. Gandalf beats an adventurer. Gandalf wins the battle. Gandalf is a wizard. Gandalf defeats Rincewind, an adventurer. Gandalf the wizard defeats Rincewind. Gandalf the dwarf defeats Rincewind. Gandalf the dwarf beats an adventurer. Gandalf the dwarf wins the battle. Gandalf the wizard. Gandalf defeats Rincewind. Gandalf the dwarf</s>. <s>Gandalf beats an adventurer. Gandalf wins the battle. Gandalf is a wizard. Gandalf the dwarf battles Gandalf the dwarf. Gandalf defeats Rincewind, an adventurer. Gandalf the wizard defeats Rincewind. Gandalf the dwarf defeats Rincewind. Gandalf the dwarf wins the battle. Gandalf. Gandalf beats Rincewind, an adventurer. Gandalf wins the battle. Gandalf is a wizard. Gandalf defeats",
+        "22. Gandalf = 704 + 6 and 78 = 1. Rincewind = 1 + 60 + 10 + 4. The difference between Gandalf and Rincewind must be greater than or equal to 4. 4 + (10/9) = 14. Gandalf would defeat Rincewind. So the answer is yes.\nAnswer: yes",
+        "<i>The Fellowship</i> is Book three, and <i>Discworld</i> is Book 83. <i>The Fellowship</i> is composed of 18 novels and <i>DiscWorld</i> is composed of 16 novels. Gandalf hypothetically defeats Rincewind in a wizard battle. Gandalf is level eight in <i>The Fellowship of The Ring</i> which is Book 3 of 18, and Rincewind is level zero in <i>Discworld</i> which is Book 83 of 16. Gandalf defeats Rincewind hypothetically in a wizard battle. So the answer is yes.\nAnswer: yes",
+        "37 > 11 (Gandalf\u2019s life expectancy)\nThe question implies the winner of a specific wizard battle versus a Gandalf vs Rincewind battle. We know that Gandalf is immortal and Rincewind has 11 lives, and Gandalf already has 37. Gandalf has more lives than Rincewind does. So yes, he could beat him.\nAnswer: yes\nExplanation:\n37 > 11 (Gandalf\u2019s life expectancy)\nThe question implies the winner of a specific wizard battle versus a Gandalf vs Rincewind battle. We know that Gandalf is immortal and Rincewind has 11 lives, and Gandalf already has 37. Gandalf has more lives than Rincewind does. So yes, he could beat him.\nExplanation:\n3 and 24,100608 are the same thing. 608 is the prime factor of 324060 which makes one",
+        "50 Gandalf\u2019s is equivalent to 500 Rincewind. Rincewind is one of nine children of 7 women. Thus, 500 + 7 = 507. Gandalf defeats Rincewind in a wizard battle if and only if he has a wizard\u2019s degree. Gandalf has a wizard degree if and only if he is the last of the nine sons of the Lord of Rivendell. The last of nine sons of a man can be the oldest of nine sons, which is Gandalf. 9 squared equals 81. Gandalf defeats Rincewind in a wizard battle if and only if it is Gandalf whose degree equals 81 minus 1.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Ontology is a set of universal beliefs about the nature of the physical universe.\n2. Ontology exists as a set of concepts.\n3. Any element required to define concepts is called a predicate. (An example of a predicate is \u201ca scalpel.\u201d)\n4. Ontology does not require a scalpel. Thus, ontology does not require a scalpel.\nAnswer: no\nQuestion: Do a dog\u2019s eyes close when he is eating?\nReasoning: Dogs are prey animals. Prey are food for predators. Thus, dogs, as prey, shut their eyes when they are eating. Thus, a dog\u2019s eyes close when he is eating. So the answer is yes.\nAnswer: yes\nQuestion: Can the first person drive by the second the third?\nReasoning: The first person can\u2019t drive by a second person (or a second by an third). If the vehicle (the second one) drives between the first vehicle (the third",
+        "1. You need a scalpel. 2. Scalpel requires scalpel. 3. So Yes, ontology requires a scalpel.\nAnswer: yes",
+        "1. ontology is about knowledge of a field. 2. \u201cscalpel\u201d can be used to cut. Thus, ontology requires a scalpel. So the answer is yes.",
+        "1) Ontology is a field that seeks to understand the fundamental nature of reality as well as how objects relate to each other. 2) A scalpel is a sharp instrument used for cutting. If 1 or 2 does not appear, then ontology does not require a scalpel. So the answer is no.\nAnswer: no\nQuestion: Can a giraffe see farther than an ostrich?\nReasoning: Giraffes' eyes are 18 cm apart, which is farther than the 14 cm separation of an ostrich's eyes. So if one is larger than the other, it is more likely that the larger one sees farther. Thus, the answer is yes.\nAnswer: yes\nQuestion: Is an owl a predator?\nReasoning: Predators hunt and attack prey. Thus, owls are predators. So the answer is yes.\nAnswer: yes [Note: To further support the answer, an owl hunts and attacks a mouse.]\nQuestion: Could a",
+        "1) ontology is the study of being and does not need a scalpel. 2) A scalpel is a sharp tool and is not needed to study ontology. Thus, the answer is No.\nAnswer: no\nQuestion: Can there be any difference between two-part and part-two numbers?\nReasoning: In part-two, numbers have more information compared to one-part numbers. For example, there can be three parts, not two parts. Thus, two-part numbers have different characteristics than part-two numbers. So the answer is yes.\nAnswer: yes\nQuestion: Does a two-dimensional plane ever touch a three-dimensional plane?\nReasoning: A two-dimensional plane and a three-dimensional plane cannot intersect at a point. However, at every point on the two-dimensional plane, the plane will meet the three-dimensional plane. Thus, A plane and a plane will intersect at every point. So the answer is yes.",
+        "<em>Ontology</em> is the study of what things are, what they contain, and what changes one into another. Something without a physical container can\u2019t contain anything or change into anything. Thus, an ontology does not require a scalpel. So the answer is no.\nQuestion: For a 5-minute sprint or a marathon?\nReasoning: The sprint is about 60 seconds. 5 times 60 is 300 seconds, or 5 minutes. Thus, a 5-minute sprint and a marathon are different durations. So the answer is not the same.\nAnswer: not the same\nDo you agree with the answer to the previous question of Not the Same?\nAnswer: yes\nQuestion: Can a dolphin dive underwater?\nReasoning: Dolphins have flippers. Flippers cannot swim underwater. Thus, a dolphin cannot dive underwater. So the answer is no.\nQuestion: For your first year of college?\nReasoning:",
+        "<em>ontology</em> refers to the study of being and existence. An ontology requires a scalpel to dissect an object. So the answer is no.\nAnswer: no\nQuestion: Does math require calculus?\nReasoning: <em>math</em> refers to the study of quantity, especially numerical quantity. Calculus is the study of derivatives and integrals, or how rate of change changes over time. So the answer is no.\nReasoning: A <em>compass</em> helps navigate and chart paths. The North Star is a star that helps navigate at night. Thus, a compass can help navigate by telling where the North Star is. The North Star is in the North Hemisphere, and thus can help to plot paths and navigate during the day. So the answer is yes.\nAnswer: yes\nQuestion: Can a cow ever be a pig?\nReasoning: The DNA from a pig and cow are similar. Thus, a pig could be a cow. So the answer is yes.\nAnswer",
+        "2 + 2 = 4 is a philosophical statement. A statement is a statement only if it is true. Since 2 + 2 is a statement that is true, 2 + 2 + 2 + 2 is also a statement that is true and therefore requires no scalpel. So the answer is no.\nAnswer: no\nQuestion: Is there a way for a bird to learn to fly?\nReasoning: A way is a method. It could be a method that has been proven. Thus, a way for a bird to learn to fly could be a method that has been proven to work. So the answer is yes.\nAnswer: yes\nQuestion: Is it possible for a tree to not lose leaves during the autumn season?\nReasoning: Trees lose their leaves during the autumn season. A tree could lose its leaves either because it didn\u2019t have leaves to lose or because the tree lost its leaves during a season other than the autumn season",
+        "\n- Some scalpel-users do not use them. \n- At least one scalpel user does not hold a scalpel-holder. \n- One scalpels-holder was holding the scalpel without a scalpel in his left hand. \n- One scalpels-holder was holding the scalpel in one hand, and doing something with a pen in the other? \n- One scalpels-holder was holding the scalpel with only one finger. \nIn addition, a scalpel is not something needed to use another object. So the answer is no.\nAnswer: no\nQuestion: If a baseball were thrown so fast that it would stop on Earth, would it stop?\nReasoning: \n- Since baseballs rarely reach speeds of 165 miles per hour, if they were thrown that fast, they would only slow down to 165 miles per hour and become less than 165 miles per hour. The",
+        "<strong>Ontology</strong> asks about definitions and essences. A scalpel is used for surgery (cutting, scraping). Thus, a scalpel cannot be a definition of ontology. So the answer is no.\nAnswer: no"
+      ]
+    }
+  ]
+}
