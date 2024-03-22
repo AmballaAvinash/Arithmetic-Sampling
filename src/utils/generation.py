@@ -26,12 +26,12 @@ default_decoding_args = {
     "temperature": 0.5,  # lower makes the distribution sharper
     "min_length": None,
     "use_cache": True,
-    "top_k": 100,  # restrict to top-k probability tokens
+    # "top_k": 100,  # restrict to top-k probability tokens
     "repetition_penalty": 1.,  # 1 means no penalty; up to inf
     "length_penalty": 1.,  # length_penalty > 0.0 == longer sequences; length_penalty < 0.0 == shorter sequences
     "num_beams": 1,  # beam search
     "num_return_sequences": 1,  # number of beams to return
-    "no_repeat_ngram_size": 3,
+    # "no_repeat_ngram_size": 3,
     "renormalize_logits": True,
 }
 default_metrics = [
