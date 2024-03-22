@@ -102,7 +102,8 @@ def construct_args_from_example(d,task_name):
         answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
         target = d['target']
         return {'question':question,
-                'answer':answer,
+                'answer':target,
+                'answer_bool' : answer,
                 'instructions': default_strat_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
