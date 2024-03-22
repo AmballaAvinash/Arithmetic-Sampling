@@ -53,7 +53,6 @@ class SelfConsistency(LLMWrapper):
             demo_questions = [d['input'] for d in self.datasets['demo']]
             strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = strat_data
-            breakpoint()
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
              output_sampling_strategy='max',
@@ -121,7 +120,6 @@ class SelfConsistency(LLMWrapper):
                         "use_arithmetic": True,
                         "num_return_sequences" : args.eval_n_samples
                     })
-                    breakpoint()
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
                 elif _strat=='eta':
