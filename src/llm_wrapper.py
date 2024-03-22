@@ -176,7 +176,7 @@ class LLMWrapper:
             prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
                                                             d_inf_args['answer'],answer_prefix)
         # Question
-        prompt_arr += construct_qa_prompt_from_args(question,self.default_question_prefix)
+        prompt_arr += construct_qa_prompt_from_args(question, question_prefix)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    self.default_answer_prefix if answer_prefix is None else answer_prefix)
