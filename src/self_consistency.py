@@ -18,7 +18,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel
 from llm_wrapper import LLMWrapper
 from src.utils.generation import default_metrics, \
     default_answer_prefix, default_output_prefix,\
-        construct_args_from_example
+        construct_args_from_example, fix_posthoc
 import torch
 from src.utils.helpers import setup_logger
 from src.utils.arguments import Arguments
@@ -81,7 +81,7 @@ class SelfConsistency(LLMWrapper):
 
         references, _examples = [], []
         # Get LLM generations
-        start_time = time.time()
+        
         # breakpoint()
         _strats = ['arithmetic','temperature','topk','nucleus','eta', 'epsilon'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
@@ -89,7 +89,7 @@ class SelfConsistency(LLMWrapper):
         metric_results, results = defaultdict(dict), defaultdict(dict)
         
         for _strat in _strats:
-        
+            start_time = time.time()
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
                 #breakpoint()
                 # try:
@@ -101,16 +101,16 @@ class SelfConsistency(LLMWrapper):
                 #     exit()
                 # Make LLM call
 
-            end_time = time.time()
-            generation_time = end_time - start_time
+            # end_time = time.time()
+            # generation_time = end_time - start_time
 
             
         # Select prediction from generations
-        
-        for _strat in _strats:
-            logger.info(f"Sampling generations (strategy={_strat}):")
-            start_time = time.time()
-            for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
+                _ex = d
+        # for _strat in _strats:
+                logger.info(f"Sampling generations (strategy={_strat}):")
+                start_time = time.time()
+                # for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
                 ex = copy.deepcopy(_ex)
                 pred_cands, pred_seq_scores = zip(*ex["prediction_candidates_max"])
                 if _strat == 'max':
@@ -155,26 +155,29 @@ class SelfConsistency(LLMWrapper):
                 ex["prediction"] = pred_selected
                 predictions[_strat].append(pred_selected)
                 examples[_strat].append(ex)
-            end_time = time.time()
-            llm_decoded = fix_posthoc(llm_decoded)
-            if verbose:
-                logger.info(f"Example #{idx + 1}:")
-                logger.info(f"Prompt:\n{llm_prompt}")
-                logger.info(f"Gold: {ref}")
-                logger.info(f"Predictions: {llm_decoded}")
-            if ref is not None:
-                references.append(ref.lower())
+            
+                llm_decoded = fix_posthoc(llm_decoded,task_name)
+                if verbose:
+                    logger.info(f"Example #{idx + 1}:")
+                    logger.info(f"Prompt:\n{llm_prompt}")
+                    logger.info(f"Gold: {ref}")
+                    logger.info(f"Predictions: {llm_decoded}")
+                if ref is not None:
+                    references.append(ref.lower())
 
+                
            
-            _examples.append({
-                "idx": idx + 1,
-                # "id": d["concept_set_idx"],
-                "prompt": llm_prompt,
-                "input": inf_args['input'],
-                "reference": references[-1] if len(references) > 0 else None,
-                "prediction": None,
-                "prediction_candidates": llm_decoded,
-            })
+                _examples.append({
+                    "idx": idx + 1,
+                    # "id": d["concept_set_idx"],
+                    "prompt": llm_prompt,
+                    "input": inf_args['input'],
+                    "reference": references[-1] if len(references) > 0 else None,
+                    "prediction": None,
+                    "prediction_candidates": llm_decoded,
+                })
+            end_time = time.time()
+                
             # Compute metrics
             if len(references) > 0:
                 for metric in metrics:

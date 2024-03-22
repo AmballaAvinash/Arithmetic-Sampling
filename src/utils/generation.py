@@ -105,3 +105,5 @@ def construct_args_from_example(d,task_name):
         options = d['choices']['text']
         answer = d['choices']['text'][d['choices']['label'].index(d['answerKey'])]
         return question,labels,options,answer
+def fix_posthoc(decoded,task_name):
+    return decoded
