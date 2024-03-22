@@ -7,6 +7,7 @@ from pathlib import Path
 import random
 import numpy as np
 import datasets
+from nltk.util import ngrams
 from datasets import load_dataset
 import torch
 from sacrebleu.metrics import BLEU
@@ -196,13 +197,30 @@ class LLMWrapper:
         if metric["name"] == 'accuracy':
             # breakpoint()
             scores['accuracy'] = self.compute_accuracy(predictions=predictions,references=references)
+        if metric["name"] == 'ngram_diversity':
+            scores['ngram_diversity'] = self.compute_ngram_diversity(predictions)
         if metric["name"] == "sacrebleu":
             scores["sacrebleu"] = self.compute_sacrebleu(predictions,references)
         if metric["name"] == "meteor":
             scores["meteor"] = self.compute_meteor(predictions,references)
         
         return scores
-    
+    def compute_ngram_diversity(self,translations):
+        ngram_diversity_score = 0
+        n_values = [1, 2, 3, 4]
+        for n in n_values:
+            unique_ngrams = set()
+            total_ngram_count = 0
+            for translation in translations:
+                # Compute n-grams
+                translation_ngrams = list(ngrams(translation.split(), n))
+                # Count unique n-grams
+                total_ngram_count += len(list(translation_ngrams))
+                unique_ngrams.update(translation_ngrams)
+            # Update total counts
+            total_unique_ngrams = len(unique_ngrams)
+            ngram_diversity_score += total_unique_ngrams / (total_ngram_count + torch.finfo(torch.float32).eps)
+        return ngram_diversity_score
     def compute_accuracy(self,predictions,references):
         return np.mean(list(map(lambda x:x[0]==x[1],zip(predictions,references))))
     def compute_sacrebleu(self,predictions,references):

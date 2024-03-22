@@ -223,7 +223,7 @@ if __name__ == '__main__':
     # dataset_subname = args.dataset_name.split(':')[1]
     #breakpoint()
     # llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
-    metrics =[{"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}}]
+    metrics =[{"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},{"name": "ngram_diversity", 'score_keys': ['ngram_diversity'], 'args': {}}]
     inf_fn_kwargs = {
                     "max_new_tokens": 100,
                     "do_sample": False,  # enable sampling
