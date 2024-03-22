@@ -124,7 +124,7 @@ class LLMWrapper:
         if decoding_args.get('logits_processor', None) is not None:
             # Set prompt length for logits processor
             decoding_args['logits_processor'][0].set_prompt_len(prompt_tokenized.input_ids.size(1))
-
+        breakpoint()
         # Generate
         with torch.no_grad():
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
@@ -132,6 +132,7 @@ class LLMWrapper:
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
             o in outputs.sequences]
+        breakpoint()
         return decoded, outputs, _prompt, decoding_args
 
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
@@ -152,7 +153,6 @@ class LLMWrapper:
     def few_shot(self, question, construct_args_fn, question_prefix=None, answer=None, answer_prefix=None,
                 instructions=None, output_prefix=None, prompt_sep="\n", n_shots=1,
                  retrieval_strategy='random',task_name = None, demos_split='train',use_answer=False, **kwargs):
-        breakpoint()
         demos = self.datasets[demos_split]
         # more retrieval strategies can be added if required
         if retrieval_strategy == "random":
@@ -175,7 +175,6 @@ class LLMWrapper:
             d_inf_args, d_ref = construct_args_fn(d,task_name)
             prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
                                                             d_inf_args['answer'],answer_prefix)
-        breakpoint()
         # Question
         prompt_arr += construct_qa_prompt_from_args(question,self.default_question_prefix)
         # Get prompt text
