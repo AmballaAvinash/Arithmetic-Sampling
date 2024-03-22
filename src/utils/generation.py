@@ -11,12 +11,13 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-default_strat_qa_instruction = "Answer the following question with Yes or No, that is the last line of your answer should be of the format : So the answer is <your_answer>."
+default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples."
 
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
 default_question_prefix = "Question: "
+default_reasoning_prefix = "Reasoning: "
 default_decoding_args = {
     "max_new_tokens": 100,
     "do_sample": False,  # enable sampling
@@ -65,6 +66,7 @@ class TruncateLogitsProcessor(LogitsProcessor):
                 
         return scores
 def construct_qa_prompt_from_args( question, question_prefix,
+                                    reasoning=None, reasoning_prefix=None,
                                      answer=None, answer_prefix=None):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     # The test or demonstration question
@@ -72,6 +74,10 @@ def construct_qa_prompt_from_args( question, question_prefix,
         question_prefix = copy.copy(default_question_prefix)
     question_text = f"{question_prefix}{question}"
     prompt_arr.append(question_text)
+    if reasoning is not None and reasoning_prefix is not None:
+        reasoning_text = f"{reasoning_prefix}{reasoning}"
+        if reasoning_text != "":
+            prompt_arr.append(reasoning_text)
     if answer is not None and answer_prefix is not None:
         answer_text = f"{answer_prefix}{answer}"
         if answer_text != "":
@@ -101,10 +107,12 @@ def construct_args_from_example(d,task_name):
         answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
         target = d['target']
         return {'question':question,
-                'answer':target,
+                'reasoning':target,
+                "answer" : answer,
                 'instructions': default_strat_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
+                "reasoning_prefix":default_reasoning_prefix,
                 "n_shots" : 5,
                 "demos_split":'demo',
                 "task_name" : task_name,
