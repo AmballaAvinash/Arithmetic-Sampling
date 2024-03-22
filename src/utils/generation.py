@@ -27,8 +27,8 @@ default_decoding_args = {
     "top_k": 100,  # restrict to top-k probability tokens
     "repetition_penalty": 1.,  # 1 means no penalty; up to inf
     "length_penalty": 1.,  # length_penalty > 0.0 == longer sequences; length_penalty < 0.0 == shorter sequences
-    "num_beams": 10,  # beam search
-    "num_return_sequences": 10,  # number of beams to return
+    "num_beams": 1,  # beam search
+    "num_return_sequences": 1,  # number of beams to return
     "no_repeat_ngram_size": 3,
     "renormalize_logits": True,
 }
@@ -103,14 +103,13 @@ def construct_args_from_example(d,task_name):
         target = d['target']
         return {'question':question,
                 'answer':target,
-                'answer_bool' : answer,
                 'instructions': default_strat_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
                 "n_shots" : 5,
                 "demos_split":'demo',
                 "task_name" : task_name,
-                'construct_args_fn' : construct_args_from_example}, target
+                'construct_args_fn' : construct_args_from_example}, answer
     if 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
