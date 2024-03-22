@@ -93,18 +93,6 @@ class SelfConsistency(LLMWrapper):
                 #breakpoint()
                 # try:
                 inf_args, ref = construct_args_from_example(d, task_name)
-                # breakpoint()
-                # except ValueError:
-                #     logger.info('`sample_answer` not found in example while using use_answer=True mode')
-                #     logger.info('Exiting...')
-                #     exit()
-                # Make LLM call
-
-            # end_time = time.time()
-            # generation_time = end_time - start_time
-
-            
-        # Select prediction from generations
                 _ex = d
         # for _strat in _strats:
                 logger.info(f"Sampling generations (strategy={_strat}):")
@@ -121,6 +109,7 @@ class SelfConsistency(LLMWrapper):
                         "num_return_sequences" : args.eval_n_samples
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     breakpoint()
                 elif _strat=='eta':
                     #prepare kwargs for the sampling strategy
@@ -141,11 +130,18 @@ class SelfConsistency(LLMWrapper):
                     inf_fn(**inf_args, **inf_fn_kwargs)
                 else:
                     raise ValueError()
-                ex["prediction"] = pred_selected
-                predictions[_strat].append(pred_selected)
+                predictions[_strat].append(prediction)
+                ex.update({
+                    "idx": idx + 1,
+                    # "id": d["concept_set_idx"],
+                    "prompt": llm_prompt,
+                    "input": inf_args['input'],
+                    "reference": references[-1] if len(references) > 0 else None,
+                    "prediction": prediction,
+                    "generation_candidates": llm_decoded,
+                })
                 examples[_strat].append(ex)
             
-                llm_decoded = fix_posthoc(llm_decoded,task_name)
                 if verbose:
                     logger.info(f"Example #{idx + 1}:")
                     logger.info(f"Prompt:\n{llm_prompt}")
@@ -154,17 +150,9 @@ class SelfConsistency(LLMWrapper):
                 if ref is not None:
                     references.append(ref.lower())
 
-                
+            breakpoint()
            
-                _examples.append({
-                    "idx": idx + 1,
-                    # "id": d["concept_set_idx"],
-                    "prompt": llm_prompt,
-                    "input": inf_args['input'],
-                    "reference": references[-1] if len(references) > 0 else None,
-                    "prediction": None,
-                    "prediction_candidates": llm_decoded,
-                })
+            
             end_time = time.time()
                 
             # Compute metrics
@@ -177,6 +165,7 @@ class SelfConsistency(LLMWrapper):
                         metric_results[_strat][f"{metric['name']}.{k}"] = round(np.mean(scores[k]), 4)
                 if verbose:
                     logger.info(metric_results[_strat])
+            breakpoint()
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
@@ -194,9 +183,7 @@ class SelfConsistency(LLMWrapper):
                 "eval_args": eval_args,
                 "scores": metric_results[_strat],
                 "time_taken": {
-                    "generation": generation_time,
                     "sampling": end_time - start_time,
-                    "total": generation_time + (end_time - start_time)
                 },
                 "examples": examples[_strat]
             }
@@ -232,7 +219,7 @@ if __name__ == '__main__':
     # dataset_subname = args.dataset_name.split(':')[1]
     #breakpoint()
     # llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
-    metrics =[{"name": "sacrebleu", 'score_keys': ['sacrebleu'], 'args': {}},{"name": "meteor", 'score_keys': ['meteor'], 'args': {}}]
+    metrics =[{"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}}]
     inf_fn_kwargs = {
                     "max_new_tokens": 100,
                     "do_sample": False,  # enable sampling
