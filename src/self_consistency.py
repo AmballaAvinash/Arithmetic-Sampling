@@ -236,7 +236,7 @@ if __name__ == '__main__':
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
                        split=args.eval_split, 
                        metrics = metrics,
-                       dataset_size = args.eval_dataset_size,
+                       eval_dataset_size = args.eval_dataset_size,
                        n_samples=args.eval_n_samples,
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
