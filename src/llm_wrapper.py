@@ -179,7 +179,7 @@ class LLMWrapper:
         prompt_arr += construct_qa_prompt_from_args(question,self.default_question_prefix)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
-                                   self.default_output_prefix if answer_prefix is None else answer_prefix)
+                                   self.default_answer_prefix if answer_prefix is None else answer_prefix)
         breakpoint()
         return self._base_generator(prompt, **kwargs)
     
