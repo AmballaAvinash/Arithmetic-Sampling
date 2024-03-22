@@ -135,7 +135,7 @@ class SelfConsistency(LLMWrapper):
                     "idx": idx + 1,
                     # "id": d["concept_set_idx"],
                     "prompt": llm_prompt,
-                    "input": inf_args['input'],
+                    "input": inf_args['question'],
                     "reference": references[-1] if len(references) > 0 else None,
                     "prediction": prediction,
                     "generation_candidates": llm_decoded,
@@ -150,7 +150,7 @@ class SelfConsistency(LLMWrapper):
                 if ref is not None:
                     references.append(ref.lower())
 
-            breakpoint()
+            breakpoint(c)
            
             
             end_time = time.time()
