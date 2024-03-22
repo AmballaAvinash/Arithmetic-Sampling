@@ -59,7 +59,11 @@ class Arguments(argparse.ArgumentParser):
                     "--eval_retrieval_strategy", type=str
                 )
                 self.add_argument(
-                    "--eval_output_sampling_strategy", type=str
+                    "--eval_output_sampling_strategy", type=str 
+                )
+
+                self.add_argument(
+                    "--eval_output_beam_size", type=int,
                 )
                 self.add_argument(
                     "--dataset_sample_strategy", type=str
