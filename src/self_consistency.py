@@ -83,7 +83,7 @@ class SelfConsistency(LLMWrapper):
         # Get LLM generations
         
         # breakpoint()
-        _strats = ['arithmetic','temperature','topk','nucleus','eta', 'epsilon'] if output_sampling_strategy == 'all' else [
+        _strats = ['arithmetic','temperature','topk','nucleus','eta', 'epsilon','sample'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
         predictions, examples = defaultdict(list), defaultdict(list)
         metric_results, results = defaultdict(dict), defaultdict(dict)
@@ -112,11 +112,8 @@ class SelfConsistency(LLMWrapper):
                 start_time = time.time()
                 # for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
                 ex = copy.deepcopy(_ex)
-                pred_cands, pred_seq_scores = zip(*ex["prediction_candidates_max"])
-                if _strat == 'max':
-                    pred_selected = pred_cands[0]  # the decoded list is sorted
-                elif _strat == 'random':
-                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = random.choice(pred_cands)
+                if _strat == 'sample':
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
                     inf_args.update({
