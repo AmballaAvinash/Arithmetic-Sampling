@@ -103,7 +103,7 @@ def construct_args_from_example(d,task_name):
         target = d['target']
         return {'question':question,
                 'answer':answer,
-                'instruction': default_strat_qa_instruction,
+                'instructions': default_strat_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
                 "n_shots" : 5,
