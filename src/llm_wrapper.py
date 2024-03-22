@@ -64,6 +64,7 @@ class LLMWrapper:
             cls_model = AutoModelForCausalLM
             cls_tokenizer = AutoTokenizer.from_pretrained('google/gemma-2b',cache_dir = '')
         if load_in_8bit:
+            breakpoint()
             bnb_config= BitsAndBytesConfig(
             load_in_8bit=True,)
             self.model = cls_model.from_pretrained(model,
@@ -74,6 +75,7 @@ class LLMWrapper:
                                                 cache_dir = '/work/pi_mccallum_umass_edu/aparashar_umass_edu/models/.cache',
                                                 trust_remote_code=True,
                                                 )
+        
         else:
             self.model = cls_model.from_pretrained(model,
                                                 torch_dtype=torch_dtype,
