@@ -150,7 +150,7 @@ class SelfConsistency(LLMWrapper):
                 if ref is not None:
                     references.append(ref.lower())
 
-            breakpoint()
+            # breakpoint()
            
             
             end_time = time.time()
@@ -165,7 +165,7 @@ class SelfConsistency(LLMWrapper):
                         metric_results[_strat][f"{metric['name']}.{k}"] = round(np.mean(scores[k]), 4)
                 if verbose:
                     logger.info(metric_results[_strat])
-            breakpoint()
+            # breakpoint()
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
@@ -235,7 +235,7 @@ if __name__ == '__main__':
                        n_samples=args.eval_n_samples,
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
-                    #    dataset_subname = dataset_subname,
+                       dataset_subname = '',
                        out_dir = out_dir,
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
