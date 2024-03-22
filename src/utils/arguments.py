@@ -37,7 +37,7 @@ class Arguments(argparse.ArgumentParser):
                     "--is_chat", action='store_true'
                 )
                 self.add_argument(
-                    "--load_in_8bit", action="store_false"
+                    "--load_in_8bit", action="store_true"
                 )
             if group == "self_consistency":
                 self.add_argument(
