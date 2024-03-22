@@ -140,7 +140,7 @@ def fix_posthoc(decoded,task_name):
                 match = re.search(pattern, d)
                 if match:
                     matches.append(match.group(1))
-            # breakpoint()
+            breakpoint()
             majority_match = max( Counter(matches), key=Counter(matches).get)
             labels.append(majority_match)
         majority_label = max( Counter(labels), key=Counter(labels).get)
