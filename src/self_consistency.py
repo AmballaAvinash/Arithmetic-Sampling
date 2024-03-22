@@ -82,7 +82,7 @@ class SelfConsistency(LLMWrapper):
         # Get LLM generations
         
         # breakpoint()
-        _strats = ['arithmetic','temperature','topk','nucleus','eta', 'epsilon','sample'] if output_sampling_strategy == 'all' else [
+        _strats = ['arithmetic','sample'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
         predictions, examples = defaultdict(list), defaultdict(list)
         metric_results, results = defaultdict(dict), defaultdict(dict)
@@ -110,11 +110,15 @@ class SelfConsistency(LLMWrapper):
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
-                    breakpoint()
-                elif _strat=='eta':
+                    # breakpoint()
+                elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
+                    inf_fn_kwargs.update({
+                        "do_sample": True,
+                        "num_return_sequences" : args.eval_n_samples
+                    })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                    
+                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif _strat=='epsilon':
                     #prepare kwargs for the sampling strategy
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
