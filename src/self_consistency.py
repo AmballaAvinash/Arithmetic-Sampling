@@ -129,7 +129,7 @@ class SelfConsistency(LLMWrapper):
                         "use_arithmetic": True,
                     })
                     breakpoint()
-                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(construct_args_from_example,**inf_args, **inf_fn_kwargs)
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
                 elif _strat=='eta':
                     #prepare kwargs for the sampling strategy
