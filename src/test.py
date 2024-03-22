@@ -18,7 +18,7 @@ def load_hf_data_set(split,dataset_name, dataset_subname):
 
 def run_experiments(data):
     tokenizer = AutoTokenizer.from_pretrained("google/flan-t5-large", use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large")
+    model = AutoModelForSeq2SeqLM.from_pretrained("google/flan-t5-large").to('cuda')
     # set pad_token_id to eos_token_id because GPT2 does not have a EOS token
     model.config.pad_token_id = model.config.eos_token_id
     model.generation_config.pad_token_id = model.config.eos_token_id
@@ -72,7 +72,7 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 1, t
         prompt_arr.append(d['de'])
         prompt_arr.append(default_fwd_target_prefix)
         input_prompt = (' ').join(prompt_arr)  # join the sentences
-        input_ids = tokenizer(input_prompt, truncation=True, return_tensors="pt").input_ids
+        input_ids = tokenizer(input_prompt, truncation=True, return_tensors="pt").input_ids.to('cuda')
        
         
         outputs_arith_toppk = model.generate(
