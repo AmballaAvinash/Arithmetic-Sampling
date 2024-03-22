@@ -1,4 +1,5 @@
 import json
+import numpy as np
 import os
 import random
 import torch
@@ -27,11 +28,45 @@ def run_experiments(data):
     default_fwd_target_prefix = "English sentence: "
     prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
     
+    results = {}
     for N in [5, 10]: # num_decodes
         for temp in [0.5, 1.0]: # temperature
-            test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N, temp)
+            for p in [0.8, 1.0]: # top p 
+                for k in [30, 50]: # top k 
+                   output_dict = test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N, temp, p, k )
+                   avg_bleu_arith_toppk = []
+                   avg_bleu_temp_toppk = []
+                   avg_ngram_arith_toppk = []
+                   avg_ngram_temp_toppk = []
+                   for idx in range(len(data)):   
+                       avg_bleu_arith_toppk.append(output_dict[idx]['bleu_score_arith_toppk'])
+                       avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
+                       avg_bleu_temp_toppk.append(output_dict[idx]['bleu_score_temp_toppk'])
+                       avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
+                       
+                   avg_bleu_arith_toppk = np.mean(avg_bleu_arith_toppk)
+                   avg_bleu_temp_toppk = np.mean(avg_bleu_temp_toppk)
+                   avg_ngram_arith_toppk = np.mean(avg_ngram_arith_toppk)
+                   avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
+                   
+                   results = {}
+                   results["Num decodes"] = N
+                   results["temperature"] = temp
+                   results["Top p "] = p
+                   results["Top k"] = k
+                   
+                   results["BLEU Arithmetic"] = avg_bleu_arith_toppk
+                   results["BLEU Sampling"] = avg_bleu_temp_toppk
+                   results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
+                   results["N gram diversity Sampling"] = avg_ngram_temp_toppk
+                   
+                   with open(f'outputs/flan_t5_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
+                       json.dump(results,f)
+                   
+                   
+                   
 
-def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, temp = 0.5):
+def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 1, temp = 1, p=1, k = 50):
     output_dict = {}
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
         prompt_arr.append(d['de'])
@@ -39,49 +74,49 @@ def test(prompt_arr, model, tokenizer, data, default_fwd_target_prefix, N = 10, 
         input_prompt = (' ').join(prompt_arr)  # join the sentences
         input_ids = tokenizer(input_prompt, truncation=True, return_tensors="pt").input_ids
        
-        outputs_arith = model.generate(
+        
+        outputs_arith_toppk = model.generate(
             input_ids = input_ids,
             num_return_sequences = N,
             do_sample = True,
             temperature = temp,
+            top_p=p,
+            top_k=k,
             num_beams = 1,
             max_new_tokens = 100,
             use_arithmetic = True
             )
         
-        outputs_sample = model.generate(
+        outputs_temp_toppk = model.generate(
             input_ids = input_ids,
             num_return_sequences = N,
             do_sample = True,
             temperature = temp,
+            top_p=p,
+            top_k=k,
             num_beams = 1,
             max_new_tokens = 100,
             use_arithmetic = False
             )
         
-        outputs_sample = model.generate(input_ids = input_ids,
-            num_return_sequences = N,
-            do_sample = True,
-            temperature = temp,
-            top_p=0.7,
-            top_k=5,
-            num_beams = 1,
-            max_new_tokens = 100,
-            use_arithmetic = True
-            )
-        
         output_dict[idx] = {}
         output_dict[idx]['gt'] = d['en']
-        output_dict[idx]['arithmetic'] = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_arith, skip_special_tokens=True)]
-        output_dict[idx]['sampling'] = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_sample, skip_special_tokens=True)]
-        output_dict[idx]['bleu_score_arith'], output_dict[idx]['n_gram_div_arith'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['arithmetic'])
-        output_dict[idx]['bleu_score_sample'], output_dict[idx]['n_gram_div_sample'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['sampling'])
-    with open(f'flan_t5_wmt14_de-en_{N}__temp_{temp}_output.json','a+') as f:
+        
+        output_dict[idx]['arith_toppk'] = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]
+        output_dict[idx]['temp_toppk'] = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]
+       
+        output_dict[idx]['bleu_score_arith_toppk'], output_dict[idx]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['arith_toppk'])
+        output_dict[idx]['bleu_score_temp_toppk'], output_dict[idx]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['temp_toppk'])
+    with open(f'outputs/flan_t5_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
         json.dump(output_dict,f)
+        
+    return output_dict
 
 def calculate_bleu_and_ngram_diversity(reference, translations):
-    bleu_score = sentence_bleu([reference]*len(translations), translations, smoothing_function=SmoothingFunction().method4)
-    n_values = [1, 2, 3, 4]
+    translations_split = [x.split() for x in translations]
+    bleu_score = np.mean([ sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4) for x in translations_split])
+
+    n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
     ngram_diversity_score = 0
     for n in n_values:
@@ -99,6 +134,6 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 200
+    samplesize = 500
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
     run_experiments(data)
