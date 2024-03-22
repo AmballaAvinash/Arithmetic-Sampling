@@ -9,6 +9,8 @@ import numpy as np
 import datasets
 from nltk.util import ngrams
 from datasets import load_dataset
+from transformers import BitsAndBytesConfig
+
 import torch
 from sacrebleu.metrics import BLEU
 import nltk
@@ -61,14 +63,26 @@ class LLMWrapper:
         if self.is_gemma:
             cls_model = AutoModelForCausalLM
             cls_tokenizer = AutoTokenizer.from_pretrained('google/gemma-2b',cache_dir = '')
-            
-        self.model = cls_model.from_pretrained(model,
+        if load_in_8bit:
+            bnb_config= BitsAndBytesConfig(
+            load_in_8bit=True,)
+            self.model = cls_model.from_pretrained(model,
+                                                torch_dtype=torch.bfloat16,
+                                                device_map=device_map,
+                                                quantization_config=bnb_config,
+                                                # low_cpu_mem_usage=low_cpu_mem_usage,
+                                                cache_dir = '/work/pi_mccallum_umass_edu/aparashar_umass_edu/models/.cache',
+                                                trust_remote_code=True,
+                                                )
+        else:
+            self.model = cls_model.from_pretrained(model,
                                                 torch_dtype=torch_dtype,
                                                 device_map=device_map,
                                                 # low_cpu_mem_usage=low_cpu_mem_usage,
                                                 cache_dir = '/work/pi_mccallum_umass_edu/aparashar_umass_edu/models/.cache',
                                                 trust_remote_code=True,
                                                 load_in_8bit=load_in_8bit)
+        
         self.tokenizer.pad_token =  self.tokenizer.eos_token
         self.model.config.pad_token_id = self.model.config.eos_token_id
         self.model.eval()
