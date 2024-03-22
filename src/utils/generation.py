@@ -141,8 +141,12 @@ def fix_posthoc(decoded,task_name):
                 if match:
                     matches.append(match.group(1))
             # breakpoint()
-            majority_match = max( Counter(matches), key=Counter(matches).get)
-            labels.append(majority_match)
+            try:
+                majority_match = max( Counter(matches), key=Counter(matches).get)
+                labels.append(majority_match)
+            except:
+                print(f"Answer couldn't be extracted: {d}")
+                labels.append('nan')
         majority_label = max( Counter(labels), key=Counter(labels).get)
         # breakpoint()
     return majority_label
