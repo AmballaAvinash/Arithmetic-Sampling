@@ -151,7 +151,7 @@ class LLMWrapper:
         return self._base_generator(prompt, **kwargs)
     def few_shot(self, question, construct_args_fn, question_prefix=None, answer=None, answer_prefix=None,
                 instructions=None, output_prefix=None, prompt_sep="\n", n_shots=1,
-                 retrieval_strategy='random', demos_split='train',use_answer=False, **kwargs):
+                 retrieval_strategy='random',task_name = None, demos_split='train',use_answer=False, **kwargs):
         breakpoint()
         demos = self.datasets[demos_split]
         # more retrieval strategies can be added if required
@@ -172,9 +172,10 @@ class LLMWrapper:
             prompt_arr.append(instructions)
         # Demonstrations
         for d in sampled_demos:
-            d_inf_args, d_ref = construct_args_fn(d)
+            d_inf_args, d_ref = construct_args_fn(d,task_name)
             prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
                                                             d_inf_args['answer'],answer_prefix)
+        breakpoint()
         # Question
         prompt_arr += construct_qa_prompt_from_args(question,self.default_question_prefix)
         # Get prompt text
