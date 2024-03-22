@@ -20,7 +20,7 @@ default_answer_prefix = "Answer: "
 default_question_prefix = "Question: "
 default_reasoning_prefix = "Reasoning: "
 default_decoding_args = {
-    "max_new_tokens": 100,
+    "max_new_tokens": 200,
     "do_sample": False,  # enable sampling
     "top_p": 0,  # nucleus sampling
     "temperature": 0.5,  # lower makes the distribution sharper
