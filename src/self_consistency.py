@@ -94,7 +94,7 @@ class SelfConsistency(LLMWrapper):
                 #breakpoint()
                 # try:
                 inf_args, ref = construct_args_from_example(d, task_name)
-                breakpoint()
+                # breakpoint()
                 # except ValueError:
                 #     logger.info('`sample_answer` not found in example while using use_answer=True mode')
                 #     logger.info('Exiting...')
@@ -121,13 +121,14 @@ class SelfConsistency(LLMWrapper):
                         "answer_prefix": self.default_fwd_answer_prefix,
                         "instructions": self.default_fwd_instruction,
                         "n_shots" : 5,
-                        "demos_split":'train'
+                        "demos_split":'train',
+                        'construct_args_fn' : construct_args_from_example
                     })
                     inf_fn_kwargs.update({
                         "do_sample": True,
                         "use_arithmetic": True,
                     })
-                    
+                    breakpoint()
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(construct_args_from_example,**inf_args, **inf_fn_kwargs)
                     breakpoint()
                 elif _strat=='eta':
