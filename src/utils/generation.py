@@ -1,8 +1,9 @@
+from collections import Counter
 import copy
 import random
 from typing import Union, List
 import logging
-
+import re
 import torch
 from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 # import openai
@@ -124,4 +125,23 @@ def construct_args_from_example(d,task_name):
         answer = d['choices']['text'][d['choices']['label'].index(d['answerKey'])]
         return question,labels,options,answer
 def fix_posthoc(decoded,task_name):
-    return decoded
+    if 'strategy_qa' in task_name:
+        labels = []
+        for d in decoded:
+            patterns = {
+            "the answer is" : r"the\s+answer\s+is\s+(\w+)",
+            "so the answer is": r"so\s+the\s+answer\s+is\s+(\w+)",
+            "so the answer to the question is": r"so\s+the\s+answer\s+to\s+the\s+question\s+is\s+(\w+)",
+            "answer": r"snswer:\s+(\w+)"
+            }
+            matches = []
+            for phrase, pattern in patterns.items():
+                d = d.replace(',','')
+                match = re.search(pattern, d)
+                if match:
+                    matches.append(match.group(1))
+            majority_match = max( Counter(matches), key=Counter(matches).get)
+            labels.append(majority_match)
+        majority_label = max( Counter(labels), key=Counter(labels).get)
+        breakpoint()
+    return majority_label
