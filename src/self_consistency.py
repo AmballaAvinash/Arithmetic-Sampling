@@ -50,7 +50,7 @@ class SelfConsistency(LLMWrapper):
             filepath = "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/stratqa_data.json"
             with open(filepath,'r') as f:
                 strat_data = json.load(f)['examples']
-            demo_questions = [d['question'] for d in self.datasets['demo']]
+            demo_questions = [d['input'] for d in self.datasets['demo']]
             strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = strat_data
             breakpoint()
