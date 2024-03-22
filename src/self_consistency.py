@@ -116,10 +116,6 @@ class SelfConsistency(LLMWrapper):
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
-                    inf_args.update({
-                        "n_shots" : 5,
-                        "demos_split":'train',
-                    })
                     inf_fn_kwargs.update({
                         "do_sample": True,
                         "use_arithmetic": True,
