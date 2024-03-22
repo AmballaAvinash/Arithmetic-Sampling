@@ -127,7 +127,7 @@ class LLMWrapper:
         # breakpoint()
         # Generate
         with torch.no_grad():
-            breakpoint()
+            # breakpoint()
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                           return_dict_in_generate=True, output_scores=True)
         decoded = [
