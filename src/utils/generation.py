@@ -132,7 +132,7 @@ def fix_posthoc(decoded,task_name):
             "the answer is" : r"the\s+answer\s+is\s+(\w+)",
             "so the answer is": r"so\s+the\s+answer\s+is\s+(\w+)",
             "so the answer to the question is": r"so\s+the\s+answer\s+to\s+the\s+question\s+is\s+(\w+)",
-            "answer": r"snswer:\s+(\w+)"
+            "answer": r"answer:\s+(\w+)"
             }
             matches = []
             for phrase, pattern in patterns.items():
@@ -147,6 +147,8 @@ def fix_posthoc(decoded,task_name):
             except:
                 print(f"Answer couldn't be extracted: {d}")
                 labels.append('nan')
+        if len([x for x in matches if x != 'nan']) > 0:
+            labels = [x for x in matches if x != 'nan']
         majority_label = max( Counter(labels), key=Counter(labels).get)
         # breakpoint()
     return majority_label

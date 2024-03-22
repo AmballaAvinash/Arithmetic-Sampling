@@ -78,7 +78,6 @@ class SelfConsistency(LLMWrapper):
             elif dataset_sample_strategy == 'random':
                 dataset = random.sample(list(dataset), n_samples)
 
-        references, _examples = [], []
         # Get LLM generations
         
         # breakpoint()
@@ -88,6 +87,7 @@ class SelfConsistency(LLMWrapper):
         metric_results, results = defaultdict(dict), defaultdict(dict)
         
         for _strat in _strats:
+            references, _examples = [], []
             start_time = time.time()
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
                 #breakpoint()
