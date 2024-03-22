@@ -235,7 +235,7 @@ if __name__ == '__main__':
                     }
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
                        split=args.eval_split, 
-                       metrics = [k for k in default_metrics if k['name'] == 'accuracy'],
+                       metrics = metrics,
                        n_samples=args.eval_n_samples,
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
