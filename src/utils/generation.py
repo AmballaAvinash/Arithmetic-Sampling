@@ -136,7 +136,7 @@ def fix_posthoc(decoded,task_name):
             }
             matches = []
             for phrase, pattern in patterns.items():
-                d = d.replace(',','')
+                d = d.replace(',','').lower()
                 match = re.search(pattern, d)
                 if match:
                     matches.append(match.group(1))
