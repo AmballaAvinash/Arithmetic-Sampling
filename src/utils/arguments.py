@@ -53,6 +53,9 @@ class Arguments(argparse.ArgumentParser):
                     "--dataset_subname", type=str
                 )
                 self.add_argument(
+                    "--eval_dataset_size", type=int
+                )
+                self.add_argument(
                     "--eval_n_samples", type=int
                 )
                 self.add_argument(

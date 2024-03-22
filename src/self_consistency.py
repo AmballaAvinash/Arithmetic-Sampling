@@ -55,7 +55,7 @@ class SelfConsistency(LLMWrapper):
             self.datasets[args.eval_split]   = strat_data
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
-             output_sampling_strategy='max',
+             output_sampling_strategy='max', eval_dataset_size=None,\
               verbose=False, out_dir=None, n_shots=None,
              retrieval_strategy=None, run_id=str(int(time.time())), **inf_fn_kwargs):
 
@@ -72,11 +72,11 @@ class SelfConsistency(LLMWrapper):
         }[inf_fn_key]
         # breakpoint()
         dataset = self.datasets[split]
-        if (n_samples is not None and n_samples != -1) and n_samples < len(dataset):
+        if (eval_dataset_size is not None and eval_dataset_size != -1) and eval_dataset_size < len(dataset):
             if dataset_sample_strategy == 'static':
-                dataset = list(dataset)[:n_samples]
+                dataset = list(dataset)[:eval_dataset_size]
             elif dataset_sample_strategy == 'random':
-                dataset = random.sample(list(dataset), n_samples)
+                dataset = random.sample(list(dataset), eval_dataset_size)
 
         # Get LLM generations
         
@@ -173,8 +173,8 @@ class SelfConsistency(LLMWrapper):
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
-            if n_samples is not None:
-                res_dir += [str(n_samples)]
+            if eval_dataset_size is not None:
+                res_dir += [str(eval_dataset_size)]
             res_dir += [inf_fn_key, _strat]
             dt_string  = datetime.now().strftime("%d_%m_%H_%M")
             res_dir += [dt_string]
@@ -236,6 +236,7 @@ if __name__ == '__main__':
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
                        split=args.eval_split, 
                        metrics = metrics,
+                       dataset_size = args.eval_dataset_size,
                        n_samples=args.eval_n_samples,
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
