@@ -151,7 +151,7 @@ class LLMWrapper:
 
         return self._base_generator(prompt, **kwargs)
     def few_shot(self, question, construct_args_fn, question_prefix=None, answer=None, answer_prefix=None,
-                instructions=None, output_prefix=None, prompt_sep="\n", n_shots=1,
+                instructions=None,  prompt_sep="\n", n_shots=1,reasoning=None,reasoning_prefix=None,
                  retrieval_strategy='random',task_name = None, demos_split='train',use_answer=False, **kwargs):
         demos = self.datasets[demos_split]
         # more retrieval strategies can be added if required
@@ -162,6 +162,13 @@ class LLMWrapper:
         # Construct prompt
         prompt = ""
         prompt_arr = []
+        
+        # Demonstrations
+        for d in sampled_demos:
+            d_inf_args, d_ref = construct_args_fn(d,task_name)
+            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
+                                                            d_inf_args['reasoning'],reasoning_prefix,
+                                                            d_inf_args['answer'],answer_prefix)
         # Task instructions
         if instructions is None:
             instructions = copy.copy(self.default_instructions)
@@ -170,16 +177,11 @@ class LLMWrapper:
             instructions = " ".join(instructions)
         if instructions != "":
             prompt_arr.append(instructions)
-        # Demonstrations
-        for d in sampled_demos:
-            d_inf_args, d_ref = construct_args_fn(d,task_name)
-            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
-                                                            d_inf_args['answer'],answer_prefix)
         # Question
         prompt_arr += construct_qa_prompt_from_args(question, question_prefix)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
-                                   self.default_answer_prefix if answer_prefix is None else answer_prefix)
+                                   self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         breakpoint()
         return self._base_generator(prompt, **kwargs)
     
