@@ -150,7 +150,7 @@ class SelfConsistency(LLMWrapper):
                 if ref is not None:
                     references.append(ref.lower())
 
-            breakpoint(c)
+            breakpoint()
            
             
             end_time = time.time()
