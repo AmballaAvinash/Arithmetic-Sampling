@@ -112,7 +112,7 @@ class LLMWrapper:
 
         decoding_args = copy.deepcopy(self.default_decoding_args)
         decoding_args.update(kwargs)
-        breakpoint()
+        # breakpoint()
         if self.strip_prompt:
             _prompt = _prompt.strip()
 
@@ -124,7 +124,7 @@ class LLMWrapper:
         if decoding_args.get('logits_processor', None) is not None:
             # Set prompt length for logits processor
             decoding_args['logits_processor'][0].set_prompt_len(prompt_tokenized.input_ids.size(1))
-        breakpoint()
+        # breakpoint()
         # Generate
         with torch.no_grad():
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
@@ -132,7 +132,7 @@ class LLMWrapper:
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
             o in outputs.sequences]
-        breakpoint()
+        # breakpoint()
         return decoded, outputs, _prompt, decoding_args
 
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
@@ -182,7 +182,7 @@ class LLMWrapper:
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
-        breakpoint()
+        # breakpoint()
         return self._base_generator(prompt, **kwargs)
     
     def load_metrics(self, metrics):
