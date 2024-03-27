@@ -1,3 +1,4 @@
+import re
 import random
 import torch
 from datasets import load_dataset, Dataset
@@ -57,7 +58,9 @@ MODEL_ENUM = {
 
 DATASET_ENUM = {"gsm8k": ("gsm8k", "main", "test", GSM8K_EXEMPLARS)}
 
-ANSWER_TRIGGER = "Therefore, the answer (number) is"
+INSTRUCTION_PREFIX = "Answer the following question with a numerical answer. Your final sentence (substituting final answer in <numerical_answer>) should be: Therefore, the answer is <numerical_answer>.\n\n"
+
+ANSWER_TRIGGER = "Therefore, the answer is"
 
 COT_TRIGGER = "Let us think step by step using mathematical reasoning."
 
@@ -113,7 +116,7 @@ def generate_few_shot_exemplars(dataset_name: str, num_examples: int = -1) -> st
         )
         prompt_prefix += f"Question: {question} \nAnswer: {COT_TRIGGER} {reasoning} {ANSWER_TRIGGER} {answer}.\n\n"
 
-    return prompt_prefix
+    return INSTRUCTION_PREFIX + prompt_prefix
 
 
 def ngram_diversity(sequences: list[str]) -> float:
@@ -135,9 +138,12 @@ def ngram_diversity(sequences: list[str]) -> float:
 
 
 def numerical_accuracy(sequences: list[str], ground_truth: str) -> float:
-    return sum(
-        [
-            int(sequence.split(COT_TRIGGER)[-1].strip("\n") != ground_truth)
-            for sequence in sequences
-        ]
-    ) / len(sequences)
+    num_correct = 0
+    for sequence in sequences:
+        numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
+        pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
+        if pred != "" and pred[-1] == ".":
+            pred = pred[:-1]
+        if pred == ground_truth:
+            num_correct += 1
+    return num_correct / len(sequences)

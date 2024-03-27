@@ -12,7 +12,6 @@ from utils import *
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-
 def cot_reasoning(
     output_filename, model, tokenizer, data, prompt_prefix, num_samples, temperature
 ):
@@ -105,14 +104,14 @@ def cot_reasoning(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--num-shots", action="store_true", default=0)
-    parser.add_argument("--model", action="store_true", default="flan-t5-base")
-    parser.add_argument("--dataset", action="store_true", default="gsm8k")
-    parser.add_argument("--quant-8-bit", action="store_true", default=False)
-    parser.add_argument("-D", "--num-examples", action="store_true", default=10)
-    parser.add_argument("-N", "--num-samples", action="store_true", default=10)
-    parser.add_argument("-T", "--temperature", action="store_true", default=0.5)
-    parser.add_argument("--seed", action="store_true", default=42)
+    parser.add_argument("--num-shots", type=int, default=0)
+    parser.add_argument("--model", default="flan-t5-large")
+    parser.add_argument("--dataset", default="gsm8k")
+    parser.add_argument("--quant-8-bit", action="store_true")
+    parser.add_argument("-D", "--num-examples", type=int, default=30)
+    parser.add_argument("-N", "--num-samples", type=int, default=10)
+    parser.add_argument("-T", "--temperature", type=float, default=0.5)
+    parser.add_argument("--seed", type=int, default=1379)
     parser.parse_args()
     args = parser.parse_args()
 
@@ -139,7 +138,10 @@ if __name__ == "__main__":
     )
 
     prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=args.num_shots)
-    output_filename = f"{MODEL[1]}__{DATASET[0]}__output.json"
+    if args.num_shots == -1:
+        output_filename = f"{args.model}__{args.dataset}__all-shot__output.json"
+    else:
+        output_filename = f"{args.model}__{args.dataset}__{args.num_shots}-shot__output.json"
     cot_reasoning(
         output_filename,
         model,
