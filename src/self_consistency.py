@@ -93,6 +93,7 @@ class SelfConsistency(LLMWrapper):
                 #breakpoint()
                 # try:
                 inf_args, ref = construct_args_from_example(d, task_name)
+                breakpoint()
                 _ex = d
         # for _strat in _strats:
                 logger.info(f"Sampling generations (strategy={_strat}):")
