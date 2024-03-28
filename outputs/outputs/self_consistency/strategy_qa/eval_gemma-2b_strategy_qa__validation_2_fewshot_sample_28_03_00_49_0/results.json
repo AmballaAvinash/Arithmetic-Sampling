@@ -1,0 +1,84 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_sample_28_03_00_49_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 5,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 2,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.5,
+    "ngram_diversity.ngram_diversity": 0.5
+  },
+  "time_taken": {
+    "sampling": 15.659821271896362
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Gandalf is a wizard. 2. Gandalf fights Rincewind. 3. Gandalf wins the fight. 4. The end. In this hypothetical battle, Gandalf defeats Rincewind. Thus, the answer is yes.\nAnswer: yes",
+        "1304 < 1313 < Gandalf\u2019s wizard battle with Rincewind = 1322 < 1324 = 1327 < Gringotts Wizarding Bank, so Gandalf could defeat Rincewind in a wizard battle. So the answer is yes.",
+        "1 + 2 = 3 Which is Gandalf\u2019s power\nAnswer: no",
+        "20th+ of 20th+ =90, and 60th+ of 60+ =36. Thus, Gandalf could probably defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\nQuestion: The atomic number of a certain element adds up to 3, and the number of neutrons is 7?\nReasoning: The atomic number of an element is equal to the number of protons in the nucleus of that element. Since neutrons and protons both have an atomic number of 1, we can conclude that the atomic number of the element equal to the number of neutrons in the element is 7. So the answer is yes.\nAnswer: yes\nQuestion: Could you do anything with your tongue inside?\nReasoning: There are 20 bones in the upper and lower jaws. Each jaw can twist, turn, and wiggle. Thus, your tongue can twist, turn, and wiggle inside your",
+        "\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. The definition of ontology is \u201ca branch of philosophy that is connected to the way in which things are organized in a world. This includes the nature of the world, reality, reality with all of its parts and components, and also people.\u201d\n\n2. It is necessary to understand what ontology is in order to understand the question.\n\n3. The question could be about a piece of equipment that a scalpel, which is a knife that is used for small jobs.\n\n4. Thus, no answer would be given.\n\nConclusion: 1. Given the criteria explained, the answer is no. 2. So, yes there is a necessary connection. 3. Therefore, a scalpel is necessary to answer the question.",
+        "1 is 1. 2 is 1 + 1. 3 is 2 + 1. 4 is 2 + 2. 5 is 3 + 2. 6 is 2 + 3. 7 is 3 + 3. 8 is 4 + 2. 9 is 9. 10 is 4 + 10. 11 is 3 + 10. 12 is 4 + 11. 13 is 10 + 2. 14 is 2 x 7. 15 is 10 + 3. 16 is 4 + 10. 17 is 4 + 11. 18 is 4 + 12. 19 is 4 + 13. 20 is 4 + 14. 21 is 2",
+        "1 + 2 = 2 + 1 = 3 = x + 3 = 3x, where x is a constant. The equation has only one variable, which gives no insight into the size of x. Thus, not every question can solve the size of \u201cx\u201d. So the answer is no.\nAnswer: no",
+        "<em>a</em> is a form of <em>onto</em>, which means ontology is a form of <em>a</em>, so ontology requires a scalpel. So the answer is yes.",
+        "\nOntology is the discipline of thinking about the nature of reality - about being, things that exist and what they may possibly be. So, ontology does not require a scalpel. So the answer is no.\nQuestion: Would a spider have four legs, if she had only one leg?\nReasoning: For a spider to have four legs, it would need to have one more. So a spider would not have four legs, if she only had one leg. Thus, four legs requires one more. So the answer is yes.\nQuestion: What was the first food item made by modern man?\nReasoning: The cave man found the first foods by making meals from bones. He boiled the meat of a gazelle by burying it in water. So the answer is cooked meat. The food item was cooked meat.\nQuestion: Do the words of a song rhyme with the words in an e-reader?\nReasoning: The correct e-readers have the correct words of"
+      ]
+    }
+  ]
+}
