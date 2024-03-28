@@ -164,6 +164,7 @@ class SelfConsistency(LLMWrapper):
             # Compute metrics
             if len(references) > 0:
                 for metric in metrics:
+                    breakpoint()
                     scores = self.get_metric_scores(metric, predictions[_strat], references)
             
                     for k in metric["score_keys"]:
