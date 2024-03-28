@@ -35,7 +35,7 @@ class LLMWrapper:
         self.model_name = None
         self.model = None
         self.tokenizer = None
-        self.task_logits_processors=None
+        self.task_logits_processors={}
         self.is_llama2 = is_llama2
         self.is_t5 = is_t5
         self.is_gemma = is_gemma
