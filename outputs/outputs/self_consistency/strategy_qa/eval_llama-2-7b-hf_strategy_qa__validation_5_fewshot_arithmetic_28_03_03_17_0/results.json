@@ -1,0 +1,174 @@
+{
+  "experiment": "eval_llama-2-7b-hf_strategy_qa__validation_5_fewshot_arithmetic_28_03_03_17_0",
+  "n_total": 5,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 10,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 5,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {
+      "max_new_tokens": 100,
+      "do_sample": false,
+      "top_p": 1.0,
+      "temperature": 1.0,
+      "top_k": 50,
+      "num_beams": 1,
+      "num_return_sequences": 10
+    }
+  },
+  "scores": {
+    "accuracy.accuracy": 0.8,
+    "ngram_diversity.ngram_diversity": 0.6
+  },
+  "time_taken": {
+    "sampling": 7.102224111557007
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Gandalf defeats Rincewind hypothetically.\n2. Rincewind defeats Gandalf hypothetically.\n3. Thus, Gandalf defeats Rincewind and vice versa.\nAnswer: yes\n7.4.1.3 Answering Questions\nYou can also turn your questions into if\u2014then statements. If a dinosaur was alive today, it would be about this tall. This statement can be phrased as If the dinosa",
+        "1. Gandalf is a Gandalf. 2. Rincewind is a Rincewind. 3. Thus, Gandalf defeats Rincewind. 4. Thus, Gandalf defeats Rincewind in a wizard battle. 5. So the answer is yes.\nAnswer: yes\nQuestion: Llamas commonly live in New Jersey?\nReasoning: New Jersey\u2019s climate is similar to a llama\u2019s climate. Llamas",
+        "\ud83d\ude0e\ud83d\udca1\ud83d\ude0e\u2753\ud83d\udcd0\nAnswer: \ud83d\ude0e\ud83d\udca1\ud83d\ude0e\n# 13.2 \ud83d\udcf7\nSituation 13.1\nThese are the only three images related to this situation.\nIn the first image, Pete is holding a piece of paper, and there are two words written on that paper. The two words on that piece",
+        "2004 will be the International Year of Pasta. There are three types of pasta. The International Year of Pasta will last 12 months, and thus there will be 48 weeks. Gandalf is much stronger than Rincewind. Thus, Gandalf defeats Rincewind. So the answer is yes.\nQuestion: Could a lemon fall out of a tree?\nReasoning: Lemons are fruit. Fruit fall from trees. There",
+        "\u0007We know that Gandalf defeats Rincewind in The Hogfather. We also know that in The Hogfather, Gandalf and Rincewind aren\u2019t fighting over magic, so the answer is yes.",
+        " Gandalf is an Elf Lord. Lord is equal to wizard. So Gandalf is a wizard.  Gandalf is a hero.\nAnswer: yes, because Gandalf is a hero.\nYou could reason one of these two ways:\n1. Gandalf defeated Rincewind, and Gandalf is an excellent wizard. The conclusion is that Gandalf is likely better at a wizard battle than Rincewind and should likely win all wizard battles.\n",
+        "7 exceeds 5.\nAnswer: yes\nQuestion: Is 142155 a prime number?\nReasoning: 142155/2 is not a whole number\u2014not an integer\u2014which is an indication that it is not prime.\nAnswer: yes\nQuestion: Is 6 greater than 7?\nReasoning: 6 is not less than 7, so it is certainly greater than 7.\nAnswer",
+        "4 is a prime number. Thus, there cannot be both prime and even divisors of 4. Thus, Gandalf cannot defeat Rincewind in a wizard battle if he has an even number of lives. So the answer is no.\nAnswer: no\nQuestion: Do most people take the train in Chicago?\nReasoning: Trains are a form of public transit. Public transit is commonly used in Chicago. Not many people take the bus, so trains are",
+        "164.1 wizard 9 is bigger than 84.7, since 1/22 bigger than 15/27. Because Gandalf is the 1/22 wizard and Rincewind is the 15/27, Gandalf is better than Rincewind. So the answer is yes.\nAnswer: yes\nQuestion: Is your answer to question 18 a reasonable answer?\nReasoning: The answer to",
+        "1) Gandalf\u2019s combat experience: he has fought in the Second and Third ages of Middle Earth, where he fought the armies of Morgoth and Sauron, and withstood the power of the One Ring without it hurting him. 2) Gandalf can cast lightning, wind, and storm spells, which can defeat Rincewind, who is only a very low-level wizard who only can cast basic spells. 3) Rincewind"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "ontology",
+      "generation_candidates": [
+        "1. Ontology is the study of being.\n2. Being is more common than a scalpel.\n3. Scalpels are sharper than a hammer.\n4. Scalpels are used to remove a tumor.\nTherefore, being has a greater potential for removing tumors than a hammer does; and, thus, ontology requires a scalpel.\nAnswer: yes\n**3**\nThis approach is also a good way to",
+        "1ontology is a field of study concerned with the types of entities and their properties and the relations between them. 1ontology involves a study of entities, types, and properties, and the relations between them through the use of a scalpel. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\nQuestion: Toilet paper requires lithotomy tables to function?\nReasoning: Lithotomy tables are used by uro",
+        " Ontology is the study of existence. But an ontologist has no need of a scalpel. A scalpel is a surgery tool. But an ontologist is not a surgery expert, so an ontologist would never need to use a scalpel. Thus, an ontologist does not need a scalpel. So the answer is no.\nAnswer: no\nQuestion: Was Kobe Bryant\u2019s salary larger than the Gross Domestic Product of Zimbabwe",
+        "2 is the only odd prime number. 4 is the only other number evenly divisible by all integers (1 through 6). Thus, \u201c4\u201d is the only two-digit integer that is a factor of 2 (1 x 2 = 2). So the answer is no.\nLike each of the previous examples, answer the following question with Yes or No, and provide the reason as demonstrated in the examples.\nQuestion: Does being a member of Mensa exclude",
+        "\uf0e0 Object ontology requires a scalpel. The answer is maybe. \uf0e0 The answer is No. \uf0e0 Duty ontology does not require a scalpel. The answer is Yes.\nQuestion: Can a camel walk at a snail\u2019s pace when it is thirsty?\nReasoning: \uf0e0 We know that they are different animals, and we would have to know the pace of a snail to answer this",
+        " _\nAnswer:  _\nQuestion: Are pencils composed of penta-elements?\nReasoning:  _\nAnswer:  _\nQuestion: Did the 2010 Memphis Tigers football team contain fewer players than the 1993 University of Wisconsin football team?\nReasoning: The Memphis Tigers have 85 players, the Wisconsin Badgers have 127 players. Thus, The 201",
+        "5\n86. Reasons for Falsehoods (Part 3)\nThe question, \u201cCan a 45-degree slope be parallel to the horizon?\u201d, was answered by a reasoner by an answer of \u201cyes\u201d. The answer turned out to be a falsehood. Here are the reasons why:\nThe rule at play in the 45-degree slope question was the Existential Quantifier rule, a rule of the Existential Quantifier type",
+        "\u2161.E.1: Ontology requires precise definitions, which require clarity. A scalpel is a sharp, precise tool. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\nQuestion: Is it reasonable to believe that there could be 941315239174116033909553243695951491956",
+        "1st statement: A surgeon is an expert in ontology. Ontolgiy is the study of being and reality or philosophy. 2nd statement: A surgeon is an expert in surgery. Surgery is the use of a scalpel to cut or remove tissue. Therefore a surgeon can use a scalpel to cut or remove tissue.\nAnswer: No\nQuestion: Are bats more powerful than pigeons?\nReasoning: Bats",
+        "1) Ontology is related to the Greek word onta, meaning \u201cbeing.\u201d 2) A scalpel is a surgical instrument. 3) A scalpel is used in surgery; thus, surgery is a form of treatment/care for a being. Thus, _______________ .\nAnswer: Ontology requires a scalpel.\nOntology needs to be defined in order to understand your question. I went to dictionary.com.\nOn\u00b7to"
+      ]
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Parsley has flat leaves, which makes it easy to cut. Flat leaves take up less area than round leaves (like lettuce), so parsley is more dense than lettuce. 2. Flat leaf plants are better at adapting to poor growth conditions. 3. Many herbs grow better in hot weather than cold weather. Thus, herbs are likely to thrive in a climate where parsley is the dominant green. So the answer is yes",
+        "1. Parsley grows on the east coast of the United States. The majority of supermarkets are on the east coast of the United States. Thus, it\u2019s common to find parsley in grocery stores in eastern supermarkets. 2. Parsley grows on the west coast of Central America. However, this does not affect my claim since my statement is referring to parsley in the United States. 3. Parsley can grow in Africa",
+        "1. Is it normal at CVS to find toilet paper over by the food in the shopping section near the check out?\nAnswer: no\nQuestion: Are kids allowed to be born on Leap Day?\nReasoning: 1. Is it normal to find parsley in multiple sections of the grocery store?\nAnswer: yes\nQuestion: Can baking soda be bought during a tornado?\nReasoning: 1.",
+        "2008: parsley was in Produce\u2014with produce. But also in Dairy\u2014with produce. Thus, it is normal to find parsley in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\nQuestion: Is it unusual for the number of pineapple slices produced by a pineapple plant to exceed 1?\nReasoning: Pineapple slices do not always fit atop a",
+        "61% of Americans grow parsley in their homes. Many grocery stores stock more products than produce items so, of course, parsley is not found in every section. However, parsley is often grown as an aesthetic item in people\u2019s homes, and there is a high likelihood that at least one person\u2019s parsley will have been purchased and taken home by a store worker. Thus, even though it is unlikely that a customer would",
+        "90% of parsley (80%) is grown in California. Groceries in California are sold in grocery stores. Thus, it is normal to find parsley in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\nQuestion: Did an astronaut eat a sandwich on Mars?\nReasoning: Humans have eaten food on Mars. Humans are astronauts. Thus, an astronaut a",
+        "\u2705 Parsley can be found in produce, dairy, and the bakery aisles, because parsley is used in multiple cuisines and has multiple uses (produce, vegetables, cooking).\nAnswer: yes\nQuestion: Are pineapples in a variety of flavors uncommon to find in a grocery store?\nReasoning: \u274c Pineapples are typically only available plain.\nAnswer: no\n",
+        "5. A parsley\u2019s weight is 1.6 g. A parsley\u2019s volume is 12.5 cm3. Thus, parsley\u2019s density is 1.6 g/12.5 cm3 = 130.67 g/L.\nWhat is the correct density of parsley?\nAnswer: parsley\u2019s density = 1.30 g/cm3\nIf the correct density",
+        "\u2b07\ufe0f\nAnswer: yes\nQuestion: Does it seem likely a cactus is more common in Texas than in Hawaii?\nReasoning: \u2b07\ufe0f\nAnswer: yes\nQuestion: Will someone need a magnifying glass to view a star with sixteen billion degrees?\nReasoning: \u2b07\ufe0f\nAnswer: yes\nQuestion: Do you think a blue marlin will eat a green marlin?\nReasoning: ",
+        "1 ounce of parsley costs about $0.25. Parsley costs are not very expensive, so they can be used in a variety of recipes. Thus, we should find parsley in a variety of places in the grocery store. So the answer is yes.\nAnswer: yes\n6\n# Chapter 10\n# Answering \"The Question\"\n# Chapter 10 contains the answers to the questions from \"The Question\" chapter"
+      ]
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Has Johns Hopkins University always treated subjects ethically?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "18-11 = -7 Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nExample 9\nQuestion: Has Rolf E. Stone played in any professional baseball games?\nReasoning: A baseball game involves two teams of nine players each. Thus, there must be at least 18 players per game. Because there are nine players per team, there must be at least two teams per game in professional baseball. Rolf E",
+        "1796 is when Johns Hopkins University was founded. 1796-106 years ago. This is before animal testing. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nAnswer: yes\nNotice that in each example, the author is required to apply the appropriate rules to demonstrate that an argument is valid.\nLogical Fallacies\nMost common logical fallacies include:\n   _",
+        "1. Johns Hopkins University has treated subjects ethically since at least its opening in 1876. 2. Johns Hopkins University has treated subjects ethically in all years since 2000. 3. Johns Hopkins University has treated subjects ethically every year from 1000 to the present. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is no.\nAnswer: no",
+        "2016 was not in the past 100 years. Therefore, Johns Hopkins University did not treat subjects ethically before 2000, which is yes. Thus, Johns Hopkins always treated subjects ethically. So the answer is yes.\nAnswer: yes\nQuestion: Could I eat a single apple a day for a week?\nReasoning: A day is 24 hours. A week consists of 7 days. Thus, I",
+        "2) Johns Hopkins University has been around since 1876, which is more than 10 years. 3) In 1884, Johns Hopkins University became the first American university to include research as part of its mission. 4) The Nuremberg code is a set of medical ethical principles that govern medical experiments that were written in 1947, which is even more than 42 years prior. Thus 2",
+        "7 subjects have complained about Johns Hopkins University\u2019s research. There is only 1 Johns Hopkins University. So all of the complaining subjects are from the same institution, which is a violation of ethical treatment. Thus, Johns Hopkins University has not always treated subjects ethically. So the answer is yes.\nAnswer: yes\nQuestion: Did the U.S.A lose the Olympics more than once?\nReasoning: The U.S",
+        "\u2234 Johns Hopkins University has always treated subjects ethically.\nAnswer: yes\nQuestion: Have humans ever known any life on Mars?\nReasoning: \u2234 All known life on Mars has been of humans.\nAnswer: no\nQuestion: Is there always a reason for bad luck?\nReasoning: \u2234 Bad luck is always due to a cause.\nAnswer: no\nQuestion: Would my cousin need to be inoculated",
+        "1940 is not the first year Johns Hopkins University treated patients. Thus, Johns Hopkins University has not always treated patients ethically. So the answer is no.\nAnswer: no\nQuestion: Was Botticelli\u2019s first painting a self-portrait?\nReasoning: Botticelli\u2019s first painting was a Madonna. It is not clear whether or not it was a self-portrait. Thus, the first painting was not a",
+        "1998 to present is 21 years, which is less than 35 years. 1968 to present is also 21 years. (Note: \u201cSince Johns Hopkins University began\u201d is how the question states the time frame for treatment of subjects ethically.) Thus, Johns Hopkins University has treated subjects ethically for part of its history, and was not always ethical in how it treated its subjects. So the answer is yes.\n",
+        "1468 subjects were injured as a result of medical research at Johns Hopkins University. If Johns Hopkins had always treated subjects ethically, then fewer than 1468 subjects would have been injured. Thus, Johns Hopkins has probably not always treated subjects ethically. So the answer is no.\nAnswer: no\nQuestion: Does each piece of popcorn have equal probability of being white or yellow?\nReasoning: If each piece of pop"
+      ]
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Did Elle Fanning play an essential part in ending apartheid?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1) Elle Fanning is a famous American movie actor. \u2234 Elle Fanning did not play a part in ending apartheid in Africa. \u2234 Elle Fanning did not have an impact on politics in Africa.\nAnswer: no\nExample #4: 2 Questions\nQuestion: Is a bubble smaller than a soap bubble?\nReasoning: A bubble is a spherical shape. Spheres have one point of contact with a plane",
+        "1. Elle Fanning is not a public office-holder. 2. If a movie actor is a person who has a public office, then Elle Fanning is not a movie actor. Thus, Elle Fanning did not play an essential part in ending apartheid. So the answer is obviously no, and it needs no further explanation.\nQuestion: Do ducks have only one beak?\nReasoning: Ducks have two bills. A bill is a beak",
+        "12-year-old Elle Fanning was cast in 2009\u2019s The Last Exorcism with Patrick Fabian, a Catholic. Patrick Fabian wore an exorcism uniform in which he played a Catholic priest. A Catholic priest\u2019s duty is to exorcise demons, or spirits that do not follow God\u2019s will. Demon possession is often associated with apartheid. So, apartheid ended because of Patrick fabric, not because of",
+        "2017\n2017 is the same as 1994 because 1994 was _____ years before 2017.\n1994 is the same as 2017 because 1994 was _____ years after 2017.\n1994 and 2017 are both _____ years after 1961.\n1994 is _____ years after ",
+        " Elen Fanning was in the 2012 movie _Dakota Fanning was in the 2010 movie The Secret Life of Bees, which takes place in South Carolina during the last few months of apartheid. This 66th S 2009 film is about a young white boy and 14-year-old girl's relationship during apartheid; the two are unafraid to talk about it. [26] Some",
+        "35 years after apartheid ended, Elle Fanning was born. Thus, Elle Fanning could not play an essential part in ending apartheid, as she wasn\u2019t born yet. So the answer is no.\nQuestion: Have some animals been featured on the US bank notes?\nReasoning: The US dollar has featured pictures of George Washington, Abraham Lincoln and Alexander Hamilton on its bills. These historical characters are not animals, so it\u2019s not possible for animals to",
+        "1976 Apartheid ended. 1979 Elle Fanning was born. These events happened in different years. Thus, Elle Fanning played no essential part in ending apartheid. So the answer is no.\nAnswer: no\nQuestion: Did any member of Limp Bizkit die in March of 2018?\nReasoning: Limp Bizkit has existed since 1994. The March before 2018",
+        "1994 was 24 years after apartheid officially began. By 1994, apartheid was ending. Thus, Elle Fanning did a role that contributed to ending apartheid. So the answer is yes.\nQuestion: Is a beetle related to any animals that can go underwater?\nReasoning: Beetles\u2019 wings are hard, so they cannot go underwater. If an animal cannot go underwater, it is not related to any",
+        "1994 was a year after Elle Fanning was born. In 1994, Nelson Mandela was elected President. Nelson Mandela helped to end apartheid. Thus, Elle Fanning played some role in ending apartheid. So the answer is yes.\nIn your answers, ensure that they follow the following guidelines:\nBe specific in what you write. If you mention names, list them. If you mention titles, list them. If you mention the significance",
+        "1995 was the year apartheid ended. Elle Fanning was born in 1998. Thus, Elle Fanning could not play an essential part in ending apartheid. So the answer is no.\nQuestion: Is it possible to get a snake in Africa to be a vegetarian?\nReasoning: Snakes are carnivorous. Most people in Africa live in rural areas. Most animals are vegetarian. Thus, snakes could get in touch"
+      ]
+    }
+  ]
+}
