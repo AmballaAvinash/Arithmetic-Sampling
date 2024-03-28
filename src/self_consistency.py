@@ -105,6 +105,7 @@ class SelfConsistency(LLMWrapper):
                         "num_return_sequences" :  1
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
+                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
                     inf_fn_kwargs.update({
