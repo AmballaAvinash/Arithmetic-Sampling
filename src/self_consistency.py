@@ -115,11 +115,13 @@ class SelfConsistency(LLMWrapper):
                         "use_arithmetic": True,
                         "num_return_sequences" : args.eval_n_samples
                     })
+                    breakpoint()
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
+                    breakpoint()
                     inf_fn_kwargs.update({
                         "do_sample": True,
                         "num_return_sequences" : args.eval_n_samples
