@@ -114,7 +114,7 @@ def construct_args_from_example(d,task_name):
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
                 "reasoning_prefix":default_reasoning_prefix,
-                "n_shots" : 5,
+                "n_shots" : 6,
                 "demos_split":'demo',
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
