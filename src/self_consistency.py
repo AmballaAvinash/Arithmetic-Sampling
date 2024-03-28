@@ -29,7 +29,7 @@ logger = logging.getLogger(__name__)
 class SelfConsistency(LLMWrapper):
     def __init__(self, model, torch_dtype=torch.float16, low_cpu_mem_usage=True, device_map="auto",
                  is_chat=None, is_llama2=None, load_in_8bit=False):
-        super().__init__(model, torch_dtype=torch_dtype, low_cpu_mem_usage=low_cpu_mem_usage, device_map=device_map,
+        super().__init__(model,task_logits_processors=None, torch_dtype=torch_dtype, low_cpu_mem_usage=low_cpu_mem_usage, device_map=device_map,
                          is_chat=is_chat, is_llama2=is_llama2, load_in_8bit=load_in_8bit)
 
         self.default_fwd_instruction = "Answer the following question with Yes or No, that is the last line of your answer should be of the format : So the answer is <your_answer>."
