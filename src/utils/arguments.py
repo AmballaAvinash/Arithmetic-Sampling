@@ -72,13 +72,13 @@ class Arguments(argparse.ArgumentParser):
                     "--dataset_sample_strategy", type=str
                 )
                 self.add_argument(
-                    "--eval_output_temperature", type=str
+                    "--eval_output_temperature", type=float
                 )
                 self.add_argument(
-                    "--eval_output_top_k", type=str
+                    "--eval_output_top_k", type=int
                 )
                 self.add_argument(
-                    "--eval_output_top_p", type=str
+                    "--eval_output_top_p", type=float
                 )
             
             pass

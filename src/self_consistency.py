@@ -17,7 +17,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel
 
 from llm_wrapper import LLMWrapper
 from src.utils.generation import default_metrics, \
-    default_answer_prefix, default_output_prefix,\
+    default_answer_prefix, default_output_prefix,default_decoding_args,\
         construct_args_from_example, fix_posthoc
 import torch
 from src.utils.helpers import setup_logger
@@ -59,7 +59,7 @@ class SelfConsistency(LLMWrapper):
               verbose=False, out_dir=None, n_shots=None,
              retrieval_strategy=None, run_id=str(int(time.time())), **inf_fn_kwargs):
 
-        #breakpoint()
+        breakpoint()
         if metrics is None:
             metrics = copy.deepcopy(self.default_metrics)
         eval_args = copy.deepcopy(locals())
@@ -230,9 +230,9 @@ if __name__ == '__main__':
                     "max_new_tokens": 100,
                     "do_sample": False,  # enable sampling
                     "top_p": args.eval_output_top_p,  # nucleus sampling
-                    "temperature": args.eval_output_temperature,  # lower makes the distribution sharper
-                    "top_k": args.eval_output_top_k, # restrict to top-k probability tokens
-                    "num_beams": args.eval_output_beam_size ,  # beam search
+                    "temperature": args.eval_output_temperature if args.eval_output_temperature is not None else default_decoding_args["temperature"],  # lower makes the distribution sharper
+                    "top_k": args.eval_output_top_k if args.eval_output_top_k is not None else default_decoding_args["top_k"], # restrict to top-k probability tokens
+                    "num_beams": args.eval_output_beam_size if args.eval_output_beam_size is not None else default_decoding_args["num_beams"], # beam search
                     "num_return_sequences": args.eval_n_samples,  # number of beams to return
                     }
     results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
@@ -249,8 +249,7 @@ if __name__ == '__main__':
                        output_sampling_strategy=args.eval_output_sampling_strategy, 
                        run_id=RUN_ID,
                        dataset_sample_strategy = args.dataset_sample_strategy,
-                       
-                    
+                       **inf_fn_kwargs
                        )
 
     if args.debug:

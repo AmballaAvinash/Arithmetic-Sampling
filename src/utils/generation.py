@@ -24,6 +24,7 @@ default_decoding_args = {
     "do_sample": False,  # enable sampling
     "top_p": 1.,  # nucleus sampling
     "temperature": 1.,  # lower makes the distribution sharper
+    "top_k" : 50,
     "min_length": None,
     # "use_cache": True,
     # "top_k": 100,  # restrict to top-k probability tokens
