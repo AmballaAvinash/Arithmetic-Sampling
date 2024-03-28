@@ -1,0 +1,149 @@
+{
+  "experiment": "eval_gemma-2b-it_strategy_qa__validation_5_fewshot_sample_28_03_19_30_0",
+  "n_total": 5,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 5,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "static",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "sample",
+    "eval_dataset_size": 5,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {
+      "max_new_tokens": 100,
+      "do_sample": false,
+      "top_p": 1.0,
+      "temperature": 0.5,
+      "top_k": 0,
+      "num_beams": 1,
+      "num_return_sequences": 5
+    }
+  },
+  "scores": {
+    "accuracy.accuracy": 1.0,
+    "ngram_diversity.ngram_diversity": 0.4
+  },
+  "time_taken": {
+    "sampling": 7.109701871871948
+  },
+  "examples": [
+    {
+      "input": "Hydrogen's atomic number squared exceeds number of Spice Girls?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Hydrogen is the first element and has an atomic number of one. To square a number, you multiply it by itself. The Spice Girls has five members.",
+      "idx": 1,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Hydrogen's atomic number squared exceeds number of Spice Girls?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1 squared is 1. There are 5 Spice Girls. So, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.",
+        "1 squared is 1. There are 5 Spice Girls. So hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.",
+        "1 squared is 1. There are 5 Spice Girls. Hydrogen has an atomic number of 1. So 1 squared is less than 5. So the answer is no.\nSo the answer is no.",
+        "1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.",
+        "1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nSo the answer is no."
+      ]
+    },
+    {
+      "input": "Are all limbs required for jujutsu?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Jujutsu is a Japanese martial art that uses unarmed combat to subdue opponents. Nick Newell, a congenital amputee, got his black belt after two straight submission wins. Fighter Aaron LaPointe has succeeded in martial arts with a fully paralyzed arm.",
+      "idx": 2,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Are all limbs required for jujutsu?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Jujutsu is a Japanese martial art and martial arts school. 2. Jujutsu focuses on the use of the hands and fingers. 3. There are no limbs required for Jujutsu. 4. So the answer is no.\nAnswer: no",
+        "100% of the limbs required for jujutsu are not explicitly stated in the rules. However, jujutsu requires the user to have the ability to move their body. Therefore, the answer is no.\nSo the answer is no.",
+        "14 out of the 15 limbs are required for jujutsu. So, the answer is yes.\nAnswer: yes",
+        "80% of jujutsu techniques involve the manipulation of limbs. So, the answer is yes.\nAnswer: yes",
+        "1. Jujutsu is a martial art that focuses on the use of hands. 2. Hands are not required for jujutsu. \nSo the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Does Linus Torvalds make money off of DirectX?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. DirectX is a proprietary technology owned by Microsoft. Linus Torvalds is the creator and lead developer for the open-source Linux kernel. The Linux kernel is used in operating systems that are competitors of Microsoft Windows.",
+      "idx": 3,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does Linus Torvalds make money off of DirectX?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "\nThe passage does not provide any information about whether Linus Torvalds makes money off of DirectX. Therefore, I cannot answer this question from the provided context.",
+        "\nThere is no evidence to support the claim that Linus Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no",
+        "1) Linus Torvalds is the co-creator of DirectX. 2) He has made significant financial gains from the game. 3) He has also invested in other companies that have benefited from the success of DirectX. So the answer is yes.\nAnswer: yes",
+        "2K is a company that develops software for game developers. Linus Torvalds is the co-founder and CEO of 2K. So, yes, Linus Torvalds makes money off of DirectX.\nAnswer: yes",
+        "3D Realms, the company that developed DirectX, was founded by Linus Torvalds. However, there is no evidence to suggest that Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Could a silverfish reach the top of the Empire State Building?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Silverfish cannot fly. Animals that cannot fly can only access objects at or near ground level without mechanical assistance. The top of the Empire State Building is \t1,454 ft high.",
+      "idx": 4,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Could a silverfish reach the top of the Empire State Building?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1) The Empire State Building is about 1,454 feet high. 2) Silverfish are freshwater fish. 3) A silverfish's maximum height is about 2.5 feet. 4) Therefore, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no",
+        "1) A silverfish's average lifespan is only about 2.5 years. 2) The Empire State Building is about 1,454 feet high. 3) A silverfish's size is about 1 inch long. 4) The Empire State Building is about 1,776 feet high. So, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no",
+        "1) A silverfish is a fish. 2) The Empire State Building is about 1,454 feet high. 3) A fish's ability to reach great heights is not related to its size. 4) Therefore, a silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no",
+        "20-inch silverfish are known to be the longest fish in the world. The Empire State Building is 1,453 feet high. 20-inch fish are only about 0.5 feet long. Thus, a 20-inch silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no",
+        "4-inch silverfish are known to be the most they can grow to reach. The Empire State Building is 1,454 feet high. Thus, a 4-inch silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Are the majority of Reddit users familiar with the Pledge of Allegiance?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. 55% of the Reddit user base comes from the United States. Congressional sessions open with the recital of the Pledge, as do many government meetings at local levels, and meetings held by many private organizations. All states except California, Hawaii, Iowa, Vermont, and Wyoming require a regularly scheduled recitation of the pledge in public schools.",
+      "idx": 5,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Are the majority of Reddit users familiar with the Pledge of Allegiance?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "74.8% of users on Reddit have agreed to the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes",
+        "88.7% of users have viewed the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes",
+        "1) The passage does not mention whether the majority of Reddit users are familiar with the Pledge of Allegiance. 2) The passage does not provide any evidence to suggest that the majority of Reddit users are familiar with the Pledge of Allegiance. 3) The passage does not provide any information about the demographics of Reddit users, which could be relevant to the question. So the answer is no.\nAnswer: No",
+        "99.3% of users on Reddit have viewed the Pledge of Allegiance at least once. So, the answer is yes.\nAnswer: yes",
+        "90.6% of users on Reddit have viewed the Pledge of Allegiance. Therefore, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes"
+      ]
+    }
+  ]
+}

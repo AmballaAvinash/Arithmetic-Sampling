@@ -283888,3 +283888,427 @@ Reasoning:
 03/28/2024 17:25:46 - INFO - __main__ -   Predictions: ['2023 is not a period in which WWE Raw airs. So, Bruiser Brody has never wrestled on WWE Raw. So the answer is no.\nAnswer: no', '2023 is not a year that has occurred in the history of WWE Raw. Therefore, Bruiser Brody has never wrestled on WWE Raw. So the answer is no.\nAnswer: no', '2023 is not a time period for WWE Raw. So, Bruiser Brody did not wrestle on WWE Raw in 2023. So the answer is no.\nAnswer: no', '2023 is not a time period for WWE Raw, so Bruiser Brody did not wrestle on WWE Raw in 2023. So the answer is no.\nAnswer: no', '2023 is not a time period in which WWE Raw airs. So, Bruiser Brody never wrestled on WWE Raw. So the answer is no.\nAnswer: no', '2023 is not a time period in which Bruiser Brody has been featured on WWE Raw. So the answer is no.\nAnswer: no', '2022 was the last year that Bruiser Brody appeared on WWE Raw. So, he did not wrestle on WWE Raw in 2022. So the answer is no.\nAnswer: no', '2022-04-25, Bruiser Brody was not on WWE Raw. So the answer is no.\nAnswer: no', '2020 was the last year that Bruiser Brody appeared on WWE Raw. So, he did not wrestle on WWE Raw in 2020. So the answer is no.\nAnswer: no', '2020-2021, Bruiser Brody did not wrestle on WWE Raw. So the answer is no.\nAnswer: no', '2019 video evidence shows that Bruiser Brody did not wrestle on WWE Raw. So the answer is no.\nAnswer: no', '2019 footage shows Brody wrestling on WWE Raw. So the answer is yes.\nAnswer: yes', '2019 reports that Bruiser Brody was not a part of WWE Raw. So the answer is no.\nAnswer: no', '2015-2016, Bruiser Brody was a competitor on WWE Raw. So the answer is yes.\nAnswer: yes', '2017-2018, Bruiser Brody was on the WWE Raw brand. However, he was released from the company in 2018 and has not been on the Raw brand since then. So the answer is no.\nAnswer: no', '2017 reports that Bruiser Brody was not on WWE Raw. So the answer is no.\nAnswer: no', '2018 footage shows that Bruiser Brody was not involved in a wrestling match on WWE Raw. So the answer is no.\nAnswer: no', '2016 footage on YouTube shows that Bruiser Brody was not on WWE Raw. So the answer is no.\nAnswer: no', '2016 footage shows Bruiser Brody wrestling on WWE Raw. So, the answer is yes.\nAnswer: yes', '2021-2022, Bruiser Brody did not wrestle on WWE Raw. So the answer is no.\nReasoning: The sentence is not supported by any evidence.']
 03/28/2024 17:25:46 - INFO - __main__ -   {'accuracy.accuracy': 0.548, 'ngram_diversity.ngram_diversity': 0.004}
 03/28/2024 17:25:46 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/strategy_qa/eval_gemma-2b-it_strategy_qa__validation_500_fewshot_arithmetic_28_03_17_25_0/results.json
+03/28/2024 19:12:45 - INFO - __main__ -   Script arguments:
+03/28/2024 19:12:45 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b-it', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 10, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+03/28/2024 19:12:52 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+03/28/2024 19:12:57 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 19:12:58 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 10, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 10}}
+03/28/2024 19:12:58 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:14:53 - INFO - __main__ -   Script arguments:
+03/28/2024 19:14:53 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b-it', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'sample', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+03/28/2024 19:15:01 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+03/28/2024 19:15:05 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 19:15:07 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'sample', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+03/28/2024 19:15:07 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:15:52 - INFO - __main__ -   Example #1:
+03/28/2024 19:15:52 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Gandalf hypothetically defeats Rincewind in a wizard battle?
+Reasoning: 
+03/28/2024 19:15:52 - INFO - __main__ -   Gold: yes
+03/28/2024 19:15:52 - INFO - __main__ -   Predictions: ['1. Gandalf is a powerful wizard. 2. Rincewind is a powerful wizard. 3. The outcome of a wizard battle depends on various factors, including the strength of the wizards, the magic used, and the environment. 4. There is no information in the question about the strength of Gandalf or Rincewind, or the magic used. 5. Therefore, we cannot determine if Gandalf hypothetically defeats Rincewind in a wizard battle. So the answer is no.', '1. Gandalf is a powerful wizard, but Rincewind is a mighty sorcerer. 2. The outcome of a wizard battle depends on various factors, including magic, luck, and the abilities of the combatants. 3. There is no information in the question to suggest that Gandalf and Rincewind have ever fought. 4. Therefore, the answer is no.\nAnswer: no', "1) Gandalf's magic is based on the elements of water and earth. Rincewind's magic is based on the elements of fire. 2) Water and earth are not inherently combative elements. 3) Gandalf's magic is not explicitly described as being more powerful than Rincewind's. 4) The outcome of a wizard battle is not explicitly described in the story. So, the answer is no.\nAnswer: no", '\nThere is no evidence to support the claim that Gandalf defeats Rincewind in a wizard battle. So the answer is no.\nSo the answer is no.', '1. Gandalf is a powerful wizard. 2. Rincewind is a powerful wizard. 3. There is no information in the question about the outcome of a wizard battle between Gandalf and Rincewind. 4. So, the answer is no.\nAnswer: no']
+03/28/2024 19:15:52 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:17:30 - INFO - __main__ -   Example #2:
+03/28/2024 19:17:30 - INFO - __main__ -   Prompt:
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Does ontology require a scalpel?
+Reasoning: 
+03/28/2024 19:17:30 - INFO - __main__ -   Gold: no
+03/28/2024 19:17:30 - INFO - __main__ -   Predictions: ['1. Ontology is the study of what exists. 2. A scalpel is a tool used for surgery. 3. Ontology is used in surgery. So, the answer is yes.\nAnswer: yes', '1. Ontology is the study of being and existence. 2. A scalpel is a tool used for surgery. 3. Ontology is not a surgical procedure. 4. Therefore, ontology does not require a scalpel.\nSo the answer is no.', '1) Ontology is the study of being and existence. 2) A scalpel is a tool used for surgery. 3) Ontology is not a surgical procedure. 4) Therefore, ontology does not require a scalpel.\nSo the answer is no.', '\nSo the answer is no.', '\nSo the answer is no.']
+03/28/2024 19:17:30 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:19:02 - INFO - __main__ -   Example #3:
+03/28/2024 19:19:02 - INFO - __main__ -   Prompt:
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Is it normal to find parsley in multiple sections of the grocery store?
+Reasoning: 
+03/28/2024 19:19:02 - INFO - __main__ -   Gold: yes
+03/28/2024 19:19:02 - INFO - __main__ -   Predictions: ['\nSo the answer is no.', '\nSo the answer is no.', '1) Parsley is a type of herb. Herbs are not typically sold individually in grocery stores. 2) Parsley is not a common grocery item. 3) Parsley is often grown in home gardens. So the answer is no.\nAnswer: no', '\nSo the answer is no.', '\nSo the answer is no.']
+03/28/2024 19:19:02 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:23:42 - INFO - __main__ -   Script arguments:
+03/28/2024 19:23:42 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b-it', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'sample', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+03/28/2024 19:23:49 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+03/28/2024 19:23:54 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 19:23:55 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'sample', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+03/28/2024 19:23:55 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:24:40 - INFO - __main__ -   Example #1:
+03/28/2024 19:24:40 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Gandalf hypothetically defeats Rincewind in a wizard battle?
+Reasoning: 
+03/28/2024 19:24:40 - INFO - __main__ -   Gold: yes
+03/28/2024 19:24:40 - INFO - __main__ -   Predictions: ['1. Gandalf is a powerful wizard. 2. Rincewind is a powerful wizard. 3. The outcome of a wizard battle depends on various factors, including the strength of the wizards, the magic used, and the environment. 4. There is no information in the question about the strength of Gandalf or Rincewind, or the magic used. 5. Therefore, we cannot determine if Gandalf hypothetically defeats Rincewind in a wizard battle. So the answer is no.', '1. Gandalf is a powerful wizard, but Rincewind is a mighty sorcerer. 2. The outcome of a wizard battle depends on various factors, including magic, luck, and the abilities of the combatants. 3. There is no information in the question to suggest that Gandalf and Rincewind have ever fought. 4. Therefore, the answer is no.\nAnswer: no', "1) Gandalf's magic is based on the elements of water and earth. Rincewind's magic is based on the elements of fire. 2) Water and earth are not inherently combative elements. 3) Gandalf's magic is not explicitly described as being more powerful than Rincewind's. 4) The outcome of a wizard battle is not explicitly described in the story. So, the answer is no.\nAnswer: no", '\nThere is no evidence to support the claim that Gandalf defeats Rincewind in a wizard battle. So the answer is no.\nSo the answer is no.', '1. Gandalf is a powerful wizard. 2. Rincewind is a powerful wizard. 3. There is no information in the question about the outcome of a wizard battle between Gandalf and Rincewind. 4. So, the answer is no.\nAnswer: no']
+03/28/2024 19:24:40 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:29:34 - INFO - __main__ -   Script arguments:
+03/28/2024 19:29:34 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b-it', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 5, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'sample', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'static', 'eval_output_temperature': 0.5, 'eval_output_top_k': 0, 'eval_output_top_p': 1.0}
+03/28/2024 19:29:42 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+03/28/2024 19:29:47 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 19:29:48 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'static', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'sample', 'eval_dataset_size': 5, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 0, 'num_beams': 1, 'num_return_sequences': 5}}
+03/28/2024 19:29:48 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:29:53 - INFO - __main__ -   Example #1:
+03/28/2024 19:29:53 - INFO - __main__ -   Prompt:
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Hydrogen's atomic number squared exceeds number of Spice Girls?
+Reasoning: 
+03/28/2024 19:29:53 - INFO - __main__ -   Gold: no
+03/28/2024 19:29:53 - INFO - __main__ -   Predictions: ["1 squared is 1. There are 5 Spice Girls. So, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", "1 squared is 1. There are 5 Spice Girls. So hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", '1 squared is 1. There are 5 Spice Girls. Hydrogen has an atomic number of 1. So 1 squared is less than 5. So the answer is no.\nSo the answer is no.', "1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", '1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.\nSo the answer is no.']
+03/28/2024 19:29:53 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:29:58 - INFO - __main__ -   Example #2:
+03/28/2024 19:29:58 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Are all limbs required for jujutsu?
+Reasoning: 
+03/28/2024 19:29:58 - INFO - __main__ -   Gold: no
+03/28/2024 19:29:58 - INFO - __main__ -   Predictions: ['1. Jujutsu is a Japanese martial art and martial arts school. 2. Jujutsu focuses on the use of the hands and fingers. 3. There are no limbs required for Jujutsu. 4. So the answer is no.\nAnswer: no', '100% of the limbs required for jujutsu are not explicitly stated in the rules. However, jujutsu requires the user to have the ability to move their body. Therefore, the answer is no.\nSo the answer is no.', '14 out of the 15 limbs are required for jujutsu. So, the answer is yes.\nAnswer: yes', '80% of jujutsu techniques involve the manipulation of limbs. So, the answer is yes.\nAnswer: yes', '1. Jujutsu is a martial art that focuses on the use of hands. 2. Hands are not required for jujutsu. \nSo the answer is no.\nAnswer: no']
+03/28/2024 19:29:58 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:30:03 - INFO - __main__ -   Example #3:
+03/28/2024 19:30:03 - INFO - __main__ -   Prompt:
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Does Linus Torvalds make money off of DirectX?
+Reasoning: 
+03/28/2024 19:30:03 - INFO - __main__ -   Gold: no
+03/28/2024 19:30:03 - INFO - __main__ -   Predictions: ['\nThe passage does not provide any information about whether Linus Torvalds makes money off of DirectX. Therefore, I cannot answer this question from the provided context.', '\nThere is no evidence to support the claim that Linus Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no', '1) Linus Torvalds is the co-creator of DirectX. 2) He has made significant financial gains from the game. 3) He has also invested in other companies that have benefited from the success of DirectX. So the answer is yes.\nAnswer: yes', '2K is a company that develops software for game developers. Linus Torvalds is the co-founder and CEO of 2K. So, yes, Linus Torvalds makes money off of DirectX.\nAnswer: yes', '3D Realms, the company that developed DirectX, was founded by Linus Torvalds. However, there is no evidence to suggest that Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no']
+03/28/2024 19:30:03 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:30:11 - INFO - __main__ -   Example #4:
+03/28/2024 19:30:11 - INFO - __main__ -   Prompt:
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Could a silverfish reach the top of the Empire State Building?
+Reasoning: 
+03/28/2024 19:30:11 - INFO - __main__ -   Gold: no
+03/28/2024 19:30:11 - INFO - __main__ -   Predictions: ["1) The Empire State Building is about 1,454 feet high. 2) Silverfish are freshwater fish. 3) A silverfish's maximum height is about 2.5 feet. 4) Therefore, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no", "1) A silverfish's average lifespan is only about 2.5 years. 2) The Empire State Building is about 1,454 feet high. 3) A silverfish's size is about 1 inch long. 4) The Empire State Building is about 1,776 feet high. So, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no", "1) A silverfish is a fish. 2) The Empire State Building is about 1,454 feet high. 3) A fish's ability to reach great heights is not related to its size. 4) Therefore, a silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no", '20-inch silverfish are known to be the longest fish in the world. The Empire State Building is 1,453 feet high. 20-inch fish are only about 0.5 feet long. Thus, a 20-inch silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no', '4-inch silverfish are known to be the most they can grow to reach. The Empire State Building is 1,454 feet high. Thus, a 4-inch silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no']
+03/28/2024 19:30:11 - INFO - __main__ -   Sampling generations (strategy=sample):
+03/28/2024 19:30:18 - INFO - __main__ -   Example #5:
+03/28/2024 19:30:18 - INFO - __main__ -   Prompt:
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Are the majority of Reddit users familiar with the Pledge of Allegiance?
+Reasoning: 
+03/28/2024 19:30:18 - INFO - __main__ -   Gold: yes
+03/28/2024 19:30:18 - INFO - __main__ -   Predictions: ['74.8% of users on Reddit have agreed to the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes', '88.7% of users have viewed the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes', '1) The passage does not mention whether the majority of Reddit users are familiar with the Pledge of Allegiance. 2) The passage does not provide any evidence to suggest that the majority of Reddit users are familiar with the Pledge of Allegiance. 3) The passage does not provide any information about the demographics of Reddit users, which could be relevant to the question. So the answer is no.\nAnswer: No', '99.3% of users on Reddit have viewed the Pledge of Allegiance at least once. So, the answer is yes.\nAnswer: yes', '90.6% of users on Reddit have viewed the Pledge of Allegiance. Therefore, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes']
+03/28/2024 19:30:18 - INFO - __main__ -   {'accuracy.accuracy': 1.0, 'ngram_diversity.ngram_diversity': 0.4}
+03/28/2024 19:30:18 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/strategy_qa/eval_gemma-2b-it_strategy_qa__validation_5_fewshot_sample_28_03_19_30_0/results.json
+03/28/2024 19:30:27 - INFO - __main__ -   Script arguments:
+03/28/2024 19:30:27 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b-it', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 5, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'static', 'eval_output_temperature': 0.5, 'eval_output_top_k': 0, 'eval_output_top_p': 1.0}
+03/28/2024 19:30:33 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+03/28/2024 19:30:38 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 19:30:39 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'static', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 5, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 0, 'num_beams': 1, 'num_return_sequences': 5}}
+03/28/2024 19:30:39 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:30:44 - INFO - __main__ -   Example #1:
+03/28/2024 19:30:44 - INFO - __main__ -   Prompt:
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Hydrogen's atomic number squared exceeds number of Spice Girls?
+Reasoning: 
+03/28/2024 19:30:44 - INFO - __main__ -   Gold: no
+03/28/2024 19:30:44 - INFO - __main__ -   Predictions: ["1 squared is 1. There are 5 Spice Girls. So, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", "1 squared is 1. There are 5 Spice Girls. So hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", '1 squared is 1. There are 5 Spice Girls. Hydrogen has an atomic number of 1. So 1 squared is less than 5. So the answer is no.\nSo the answer is no.', "1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen's atomic number squared is less than 5. So the answer is no.\nSo the answer is no.", '1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.\nSo the answer is no.']
+03/28/2024 19:30:44 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:30:49 - INFO - __main__ -   Example #2:
+03/28/2024 19:30:49 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Are all limbs required for jujutsu?
+Reasoning: 
+03/28/2024 19:30:49 - INFO - __main__ -   Gold: no
+03/28/2024 19:30:49 - INFO - __main__ -   Predictions: ['1. Jujutsu is a Japanese martial art and martial arts school. 2. Jujutsu focuses on the use of the hands and fingers. 3. There are no limbs required for Jujutsu. 4. So the answer is no.\nAnswer: no', '100% of the limbs required for jujutsu are not explicitly stated in the rules. However, jujutsu requires the user to have the ability to move their body. Therefore, the answer is no.\nSo the answer is no.', '14 out of the 15 limbs are required for jujutsu. So, the answer is yes.\nAnswer: yes', '80% of jujutsu techniques involve the manipulation of limbs. So, the answer is yes.\nAnswer: yes', '1. Jujutsu is a martial art that focuses on the use of hands. 2. Hands are not required for jujutsu. \nSo the answer is no.\nAnswer: no']
+03/28/2024 19:30:49 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:30:54 - INFO - __main__ -   Example #3:
+03/28/2024 19:30:54 - INFO - __main__ -   Prompt:
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Does Linus Torvalds make money off of DirectX?
+Reasoning: 
+03/28/2024 19:30:54 - INFO - __main__ -   Gold: no
+03/28/2024 19:30:54 - INFO - __main__ -   Predictions: ['\nThe passage does not provide any information about whether Linus Torvalds makes money off of DirectX. Therefore, I cannot answer this question from the provided context.', '\nThere is no evidence to support the claim that Linus Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no', '1) Linus Torvalds is the co-creator of DirectX. 2) He has made significant financial gains from the game. 3) He has also invested in other companies that have benefited from the success of DirectX. So the answer is yes.\nAnswer: yes', '2K is a company that develops software for game developers. Linus Torvalds is the co-founder and CEO of 2K. So, yes, Linus Torvalds makes money off of DirectX.\nAnswer: yes', '3D Realms, the company that developed DirectX, was founded by Linus Torvalds. However, there is no evidence to suggest that Torvalds makes money off of DirectX. So the answer is no.\nAnswer: no']
+03/28/2024 19:30:54 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:31:02 - INFO - __main__ -   Example #4:
+03/28/2024 19:31:02 - INFO - __main__ -   Prompt:
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Could a silverfish reach the top of the Empire State Building?
+Reasoning: 
+03/28/2024 19:31:02 - INFO - __main__ -   Gold: no
+03/28/2024 19:31:02 - INFO - __main__ -   Predictions: ["1) The Empire State Building is about 1,454 feet high. 2) Silverfish are freshwater fish. 3) A silverfish's maximum height is about 2.5 feet. 4) Therefore, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no", "1) A silverfish's average lifespan is only about 2.5 years. 2) The Empire State Building is about 1,454 feet high. 3) A silverfish's size is about 1 inch long. 4) The Empire State Building is about 1,776 feet high. So, a silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no", "1) A silverfish is a fish. 2) The Empire State Building is about 1,454 feet high. 3) A fish's ability to reach great heights is not related to its size. 4) Therefore, a silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no", '20-inch silverfish are known to be the longest fish in the world. The Empire State Building is 1,453 feet high. 20-inch fish are only about 0.5 feet long. Thus, a 20-inch silverfish could not reach the top of the Empire State Building. So the answer is no.\nAnswer: no', '4-inch silverfish are known to be the most they can grow to reach. The Empire State Building is 1,454 feet high. Thus, a 4-inch silverfish would not be able to reach the top of the Empire State Building. So the answer is no.\nAnswer: no']
+03/28/2024 19:31:02 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+03/28/2024 19:31:09 - INFO - __main__ -   Example #5:
+03/28/2024 19:31:09 - INFO - __main__ -   Prompt:
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Are the majority of Reddit users familiar with the Pledge of Allegiance?
+Reasoning: 
+03/28/2024 19:31:09 - INFO - __main__ -   Gold: yes
+03/28/2024 19:31:09 - INFO - __main__ -   Predictions: ['74.8% of users on Reddit have agreed to the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes', '88.7% of users have viewed the Pledge of Allegiance. So, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes', '1) The passage does not mention whether the majority of Reddit users are familiar with the Pledge of Allegiance. 2) The passage does not provide any evidence to suggest that the majority of Reddit users are familiar with the Pledge of Allegiance. 3) The passage does not provide any information about the demographics of Reddit users, which could be relevant to the question. So the answer is no.\nAnswer: No', '99.3% of users on Reddit have viewed the Pledge of Allegiance at least once. So, the answer is yes.\nAnswer: yes', '90.6% of users on Reddit have viewed the Pledge of Allegiance. Therefore, the majority of Reddit users are familiar with the Pledge of Allegiance. So the answer is yes.\nAnswer: yes']
+03/28/2024 19:31:10 - INFO - __main__ -   {'accuracy.accuracy': 1.0, 'ngram_diversity.ngram_diversity': 0.4}
+03/28/2024 19:31:10 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/strategy_qa/eval_gemma-2b-it_strategy_qa__validation_5_fewshot_arithmetic_28_03_19_31_0/results.json
