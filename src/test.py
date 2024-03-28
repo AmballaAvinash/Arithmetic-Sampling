@@ -115,7 +115,7 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                    results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
                    results["N gram diversity Sampling"] = avg_ngram_temp_toppk
                    
-                   with open(f'outputs/flan_t5_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
+                   with open(f'outputs/{model_name}_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
                        json.dump(results,f)
                    
                    
@@ -205,9 +205,9 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 
 if __name__ == "__main__":
     samplesize = 500
-    batch = 10
-    model_name = "flan-t5" # ["llama-2", "flan-t5", "gemma"]
-    model = "google/flan-t5-large"  # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b", "google/gemma-7b"]
+    batch = 50
+    model_name = "llama-2" # ["llama-2", "flan-t5", "gemma"]
+    model = "meta-llama/Llama-2-7b-hf"  # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b", "google/gemma-7b"]
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
     run_experiments(model_name, model, data, batch, load_in_8bit=False)
     
