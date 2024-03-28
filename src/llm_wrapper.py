@@ -19,7 +19,7 @@ from nltk import word_tokenize
 from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,\
     T5ForConditionalGeneration
 from src.utils.generation import construct_prompt_from_args,construct_qa_prompt_from_args, default_metrics, default_decoding_args, \
-     default_input_prefix,\
+     default_input_prefix,task_logits_processors,\
     default_answer_prefix, default_output_prefix, \
     TruncateLogitsProcessor, prompt_arr_2_text \
 
@@ -88,7 +88,13 @@ class LLMWrapper:
         self.tokenizer.pad_token =  self.tokenizer.eos_token
         self.model.config.pad_token_id = self.model.config.eos_token_id
         self.model.eval()
-
+        self.task_logits_processors.update(
+            {'strat_qa':LogitsProcessorList(
+                                [
+                                    #StopAfterTokenLogitsProcessor(token_id_to_stop=29973,max_length=40),
+                                    TruncateLogitsProcessor(stop_word='Question',token_id=[self.tokenizer.encode('Question')],eos_token_id=self.tokenizer.eos_token_id,tokenizer=self.tokenizer),
+                                ])}
+        )
         self.default_decoding_args = default_decoding_args
         if any([m in self.model_name for m in ['falcon', 'mpt']]):
             self.default_decoding_args.update({

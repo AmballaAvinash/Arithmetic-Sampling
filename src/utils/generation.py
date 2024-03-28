@@ -43,6 +43,7 @@ default_metrics = [
     {"name": "bertscore", 'score_keys': ['f1'], 'args': {'model_type': 'distilbert-base-uncased'}},
     {"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},
 ]
+task_logits_processors = {}
 class TruncateLogitsProcessor(LogitsProcessor):
     def __init__(self,token_id: Union[int, List[int]],eos_token_id: Union[int, List[int]],tokenizer):
         if isinstance(token_id, int):
@@ -59,7 +60,7 @@ class TruncateLogitsProcessor(LogitsProcessor):
         cur_len = input_ids.shape[-1]
         max_score_ids = torch.argmax(scores, dim=1)
         for i in range(len(max_score_ids)):
-            if (max_score_ids[i] in self.token_id) or (self.tokenizer.decode(max_score_ids[i]).find(':') != -1) :
+            if (max_score_ids[i] in self.tokenizer(self.stop_word).input_ids) :
                 scores[i][:] = -float('inf')
                 scores[i][self.eos_token_id[0]] = 0
         scores.to(input_ids.device)

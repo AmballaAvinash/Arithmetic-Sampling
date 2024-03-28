@@ -13,10 +13,10 @@ import torch
 from transformers import set_seed
 from tqdm import tqdm
 import numpy as np
-from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel
+from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel, LogitsProcessor,LogitsProcessorList
 
 from llm_wrapper import LLMWrapper
-from src.utils.generation import default_metrics, \
+from src.utils.generation import TruncateLogitsProcessor, default_metrics, \
     default_answer_prefix, default_output_prefix,default_decoding_args,\
         construct_args_from_example, fix_posthoc
 import torch
@@ -79,7 +79,9 @@ class SelfConsistency(LLMWrapper):
                 dataset = random.sample(list(dataset), eval_dataset_size)
 
         # Get LLM generations
-        
+        if 'strategy_qa' in task_name:
+            inf_fn_kwargs.update(self.task_logits_processors['strat_qa'])
+        breakpoint()
         # breakpoint()
         _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
