@@ -45,7 +45,7 @@ default_metrics = [
 ]
 task_logits_processors = {}
 class TruncateLogitsProcessor(LogitsProcessor):
-    def __init__(self,token_id: Union[int, List[int]],eos_token_id: Union[int, List[int]],tokenizer):
+    def __init__(self,token_id: Union[int, List[int]],stop_word:Union[str, List[str]],eos_token_id: Union[int, List[int]],tokenizer):
         if isinstance(token_id, int):
             token_id = [token_id]
         if isinstance(eos_token_id, int):
@@ -53,7 +53,7 @@ class TruncateLogitsProcessor(LogitsProcessor):
         if not all(isinstance(i,int) for i in token_id) or any(i < 0 for i in token_id):
             logger.warning(f"`token_id` has to be a list of positive integers, but is {token_id}")
         self.token_id = token_id
-        
+        self.stop_word = stop_word
         self.eos_token_id = eos_token_id
         self.tokenizer = tokenizer
     def __call__(self,input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
