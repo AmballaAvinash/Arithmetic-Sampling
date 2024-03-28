@@ -93,7 +93,7 @@ class SelfConsistency(LLMWrapper):
                 #breakpoint()
                 # try:
                 inf_args, ref = construct_args_from_example(d, task_name)
-                breakpoint()
+                # breakpoint()
                 _ex = d
         # for _strat in _strats:
                 logger.info(f"Sampling generations (strategy={_strat}):")
@@ -136,6 +136,8 @@ class SelfConsistency(LLMWrapper):
                 else:
                     raise ValueError()
                 predictions[_strat].append(prediction)
+                if ref is not None:
+                    references.append(ref.lower())
                 ex.update({
                     "idx": idx + 1,
                     # "id": d["concept_set_idx"],
@@ -152,8 +154,7 @@ class SelfConsistency(LLMWrapper):
                     logger.info(f"Prompt:\n{llm_prompt}")
                     logger.info(f"Gold: {ref}")
                     logger.info(f"Predictions: {llm_decoded}")
-                if ref is not None:
-                    references.append(ref.lower())
+                
 
             # breakpoint()
            
