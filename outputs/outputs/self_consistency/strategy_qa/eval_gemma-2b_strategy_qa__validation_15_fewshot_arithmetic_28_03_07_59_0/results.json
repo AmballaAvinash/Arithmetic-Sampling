@@ -1,0 +1,414 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_15_fewshot_arithmetic_28_03_07_59_0",
+  "n_total": 15,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 10,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 15,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {
+      "max_new_tokens": 100,
+      "do_sample": false,
+      "top_p": 1.0,
+      "temperature": 1.0,
+      "top_k": 50,
+      "num_beams": 1,
+      "num_return_sequences": 10
+    }
+  },
+  "scores": {
+    "accuracy.accuracy": 0.6,
+    "ngram_diversity.ngram_diversity": 0.1333
+  },
+  "time_taken": {
+    "sampling": 12.350263833999634
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Gandalf is about the same strength as Rincewind. 2. Gandalf has about 9730 years of magical experience. 3. Rincewind has about 101 years of magical experience. 4. Rincewind is 5 and a half feet tall. 5. Gandalf is 9 feet tall. Gandalf can easily defeat Rincewind. Gandalf is about as powerful as Gandalf the White, who defeated the Istari. Since Gandalf doesn'",
+        "1. Gandalf can move faster than Rincewind. 2. Gandalf does not have a sword. 3. Gandalf is older than Rincewind. Thus, Gandalf can defeat Rincewind. So the answer is yes.\nAnswer: yes\n",
+        "100, Gandalf has never lost a battle. 1, Rincewind is pretty bad at wizarding. 1/100, Rincewind would probably lose any fight. So Gandalf would literally be able to defeat Rincewind in a wizardly fight. Thus, Gandalf should hypothetically be able to defeat Rincewind in a wizard battle? Yes.\nAnswer: y\n",
+        "1) Gandalf has high intelligence and is knowledgeable in several subjects (e.g., the history of the wizard war, wizard tactics, and magic).\n2) Rincewind has knowledge only in two subjects (magic, history).\nThus, Gandalf could hypothetically defeat Rincewind. So the answer is yes.\nAnswer: yes\n",
+        "1) Gandalf and Rincewind represent all wizards (Gandalf) and all human beings (Rincewind). 2) Gandalf hypothetically defeats Rincewind with a single hit. 3) In battle, Gandalf's hit rate is about 90%. Thus, Gandalf could kill or seriously injure Rincewind in one hit. Therefore, Gandalf \"hypothetically defeats Rincewind in a wizard battle\" (no).\nAnswer: no\n",
+        "<em>The Two Towers</em>, <em>The Fellowship of the Ring</em>, and <em>Lord of the Rings</em> are books about the Second Great Wizard Battle. Gandalf and Rincewind are the main characters in three of the five volumes. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle.  So the answer is no (as Gandalf won't live to testify.)\nAnswer: no\n",
+        "2 people could win a wizard battle, Gandalf and Rincewind. Gandalf is very smart, and Rincewind is a very low-level wizard. Gandalf cannot lose. So the answer is no.\nAnswer: no\n",
+        "7 dwarves are better at fighting than 4 wizards. 7 dwarves is greater than 4. Rincewind could win a wizard battle against 7 dwarves. So the answer is yes.\nAnswer: yes\n",
+        "4 Wizard Battles have been written by Terry Pratchett. Gandalf has never lost. Thus, if Gandalf were to hypothetically defeat Rincewind in a Wizard Battle, Gandalf would win. So the answer is yes.\nAnswer: yes\n",
+        "1, Gandalf is a very powerful wizard. He is 2. Gwin is a dwarf. Dwarves are magical creatures that can fight wizards for them. 3, Rincewind is a terrible wizard. He is 3. He usually does not win wizard battles. He is 4. This does not imply that Rincewind would win any wizard battle at all. 5, Gandalf is very powerful and thus has a very high chance of defeating Rincewind in a wizard battle"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1936-542 (Scalpels: 4000)\nAnswer: no\n",
+        "1. Ontology means an accurate description. 2. An accurate description needs to encompass everything. 3. A scalpel is something that cuts. 4. A scalpel cuts. So the answer is yes.\nAnswer: yes\n",
+        "1. scalpel requires ontology. 2. There exists a scalpel. 3. By extension, ontology requires a scalpel.\nAnswer: yes\n",
+        "1000 words is about 25 minutes of a speech. Since it fits onto a scalpel and on a speech, it is about 25 minutes of a speech. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "1) ontology is the system of concepts used in mathematics. 2) A scalpel is a cutting instrument (from Wiki). 3) Mathematics does not include scalpel because: 3a) Mathematics is the study of shapes. 3b) Mathematicians must not have access to the scalpel, since this would be the use of a scalpel. So ontology requires no scalpel. So the answer is no.\nAnswer: no\n",
+        "<em>Science = O+nto+logy</em>. Ontology is the branch of science that deals with the properties of matter. When you dissect an animal, you use a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "<em>Topography</em> refers to the study of places. <em>Topology</em> involves mathematics. Scalpel refers to a surgical tool. Thus, a scalpel is required for topographic surgery. So the answer is yes.\nAnswer: yes\n",
+        "2:1 is the ratio of a scalpel to the number of scalpel required. Thus, ontology would have enough scalpel. So the answer is yes. If the ratio of scalpel to ontology is the same, then the answer would be no.\nAnswer: yes\n",
+        "<i>Ontology</i> is a branch of philosophy that deals with the nature of being. A scalpel cuts through and separates tissue. Thus, a scalpel is a tool used in <i>Ontology </i>\nAnswer: yes\n",
+        "3 + 2 = 5. A scalpel is an instrument to make a precise cut. It provides an exact line for an incision, which is the start of a scalpel.\n  Yes, a scalpel is required to cut open ontologies. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "46% of the grocery stores have parsley in the deli section. 33% of grocery stores have parsley in the frozen meat section. 49% of the grocery stores have parsley in the produce section. Thus, parsley is likely in the produce section. So the answer is yes.\nAnswer: yes",
+        "8 of the 12 sections of the grocery store sell parsley. 12 has no 8 in it. Thus, it is not normal to find parsley in multiple sections of the grocery store. So the answer is no.\nAnswer: no\n",
+        "1. The grocery store is a physical location.\n2. Many grocery stores have a main aisle (sometimes called the \"long aisle\") where fresh food, baked items, and frozen items are located.\n3. Parsley is grown from a root, and thus a section of the grocery store where root vegetables and spices are found will have parsley.\n4. Thus, parsley is found in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "1/2 is a fraction. 1 \u00f7 2 is 1/2. A fraction is a value between 0 and 1. Thus, one could find parsley in multiple sections of the grocery stores. So the answer is yes.\nAnswer: yes\n",
+        "1) Parsley is in the grocery store section for non-perishable goods. 2) Non-perishable goods take up a large area. 3) In the \"Parsley\" section, parsley is next to potatoes. 4) Parsley requires refrigeration.\nIt is normal to find parsley in multiple sections of the grocery store. Explanation 1) Parsley is in the grocery store section for non-perishable goods. 2) Non-perishable goods take up",
+        "67% of people like parsley. A grocery store has 1288 people. Thus, somewhere between 82 and 94 will also like parsley. So the answer is between 82 and 94 people.\nAnswer: between 82 and 94\n",
+        "9 out of 12 supermarkets had parsley in one section. 9 out of 12 supermarkets had parsley in two sections. 4 out of 12 supermarkets had parsley in three sections. 9 out of 12 supermarkets had parsley in four sections. 0 out of the remaining 4 had parsley in five sections. Therefore, parsley is only found in 4 out of 12 sections. The distribution is not uniform and is not a \"normal\" distribution. So",
+        "2/5 students have found parsley. There are 10 sections of the grocery store. One of those sections would have parsley. One more section needs to have parsley. It is 33.3% to randomly find parsley at some grocery stores. Therefore, in 1 million grocery stores, approximately (1/2)^1 million is 999,999,999 such stores. We multiply this number by 10. So 10,0",
+        "<i>\"Parsley\"</i> is a type of vegetable. Parsley has several subspecies. Thus, it is possible to find parsley in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "3 of the sections are for vegetables, 1 is for fruits, and 3 are for dry goods. Of the 6, parsley is not found in a specific section. Thus, parsley is located in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Has Johns Hopkins University always treated subjects ethically?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1:1000 people say it. 4 out of 1000 is 0.04. Thus, not all people at Johns Hopkins have treated subjects ethically. So the answer is no.\nAnswer: no\n",
+        "1. Johns Hopkins is a fairly old university (established in 1876). 2. It was reported that Johns Hopkins failed in 2008 to get a 5 star rating during a survey by the Human Subjects Protection Office. Thus, there has been some ethical failure at Johns Hopkins. So the answer is yes. (Note: In 2015 Johns Hopkins got a 5 star rating)\nAnswer: yes\n",
+        "100 years ago, Johns Hopkins University studied human health by conducting experiments without informed consent. Informed consent means the subjects of those experiments were not told what the experiment was about and thus were not able to consent. However, as of around 2007\u20132012, the University no longer does this kind of unethical research. So you would want to answer yes.\nAnswer: yes\n",
+        "1) In response to the Covid-19 pandemic, Johns Hopkins University has begun testing asymptomatic medical students. 2) From at least 1946, Johns Hopkins University has been engaged in scientific experiments to treat cancer patients. 3) In 1954, Johns Hopkins University began studying the effectiveness of sleeping pills to reduce jet lag. 4) The National Institute for Health and its Director-General have expressed concern over the ethical treatment of patients during COVID-19",
+        "1655-1658: During this time, the subject was not allowed to consent to participate in a medical experiment - or to decline to participate if the subject wished. 1740-1752: During this time, the physician performed the experiment on himself first and then gave the participants of the experiment alcohol and observed their reactions. 1746-1768: During this time, the subjects of the experiment were allowed to consent to",
+        "<em>The Baltimore Sun</em> had found that Johns Hopkins University students lied when they said they were taking anti-racist and anti-sexism classes. <em>The Baltimore Sun</em> said this when it \"studied more than 100 students over their first year at the university and found evidence of racial and gender bias in their comments and behavior.\" However, Johns Hopkins University President Ron Daniels has since stated that it does not believe Johns Hopkins University has engaged in this behavior. So the answer is no.",
+        "2010: \"The school [is] among the 16 schools to voluntarily self-report an ongoing research misconduct investigation...It says it has been investigating a researcher whose behavior has led to the termination of 57 graduate students at its School of Arts and Sciences.\" 1990: \"The School of Arts and Sciences and the School of Public Health were placed on probation by the Office of the Attorney General.\" 1928: \"A 192",
+        "<i>Human Research Protection Program</i> says that participants must have sufficient information to be able to understand and give consent for their participation. They must know it is safe, not have been deceived by the study, not be coerced into participating, not be placed at undue risk, not be put into an irreversible risk to their health, not be given an experimental treatment that they are not informed will have negative effects, not be asked to sign an informed consent that they did not understand, and have sufficient time to",
+        "41 years after the Baltimore Convention, the University found itself in controversy. 89 delegates attended that convention and there were multiple meetings. The Johns Hopkins University was an active participant in unethical research. Thus, Johns Hopkins University has not always treated subjects ethically. So the answer is yes.\nAnswer: yes\n",
+        "1931 was the first year that Johns Hopkins University was founded. 1931 minus 1988 equals 13, which is more than 10. Thus, Johns Hopkins University has been treating subjects ethically for more than 10 years. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Elle Fanning play an essential part in ending apartheid?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "<b>Yes.</b> If Elle Fanning played an essential part in ending apartheid, then she would not be a part of the <em>Maleficent</em> film franchise.\nAnswer: yes\n",
+        "1999 was the year of the end of Apartheid (a governmental system of racial discrimination in South Africa). From 1948 until 1991, white leaders used racial segregation in South Africa. Apartheid ended with the election of Nelson Mandela, who was black. To help end the system, actress Elle Fanning helped support Mandela's Black Consciousness movement. Thus, Elle Fanning played a key role in ending apartheid. So the answer is yes.\nAnswer: yes",
+        "1977. Elle Fanning was 6 years old in 1977. 1980. Elle Fanning was 12 in 1980. 1984. Elle Fanning was 17 in 1984. 36 years was 6 years older. Elle Fanning was around 13-years-old in 1977. Elle Fanning was 17 in 2015. Elle Fanning",
+        "1. Elle Fanning played an essential part in ending apartheid. Elle Fanning is a woman. A woman is a person who would be born in any era until 1900, inclusive. This means she was born in 1995 or later. Since all humans were born at least 21,500 years ago, \"Elle Fanning\" existed at least 21,500 years ago. 2. Because 1 exists, \"Elle Fanning\" existed",
+        "1) Elle Fanning starred in the movie Maleficent (2014). This movie did not end apartheid. 2) Elle Fanning appeared in the movie Twilight (2008). This movie did not end apartheid. 3) Elle Fanning played a main role in the movie The Road (2011). The movie did not end apartheid. 4) Elle Fanning appeared in the movie Super 8 (2012). The movie did not end apartheid. 5",
+        "<em>The Greatest Showman</em> (2018) was released during 1980-1991, which does not include apartheid. Elle Fanning starred in <em>Lady and The Traitor</em> (2021), which happened in 1990 and 1991, including apartheid. So Elle Fanning played an essential part in ending apartheid with <em>The Greatest Showman</em>, not with <em>Lady and The Traitor</em>. Thus,",
+        "<em>Maleficent</em> was released in 2014. Maleficent's ending was in 1955. Apartheid didn't end until 1994. Elle Fanning was born in 2002. Elle Fanning, who appeared in both Maleficent and <em>Maleficent: Mistress of Evil</em>, did not appear in 1994. So Elle Fanning did not have a pivotal role in ending apartheid. So the answer is no.\n",
+        "2019-1/2 = 2019-0:4. So 2019-0 and 2019-1 are 2019-0 and 2019-1 seconds before Elle Fanning\u2019s birth. As Elle Fanning was born before apartheid occurred in South Africa, Elle Fanning was not an essential part in ending apartheid.\nAnswer: no\n",
+        "27 July 1963. 27 is less than 100. July is less than 11. 19 is less than 20. 1963 is a 4-digit number. Thus, 1963 is less than 43000. Elle Fanning was born in 1996. So Elle Fanning was living in 1963, 27 July 1963",
+        "<i>Maleficent</i> was released in 2014. The end of apartheid occurred in 1992. Thus, Elle Fanning's role in the movie was not a major contributing factor in ending apartheid. So the answer is no.\nAnswer: no\n"
+      ]
+    },
+    {
+      "input": "Did Cynthia Powell celebrate a silver anniversary with John Lennon?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A silver anniversary takes place during the 25th year of marriage. Cynthia Powell married John Lennon in 1962. Cynthia Powell and John Lennon got divorced in 1968.",
+      "idx": 6,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Cynthia Powell celebrate a silver anniversary with John Lennon?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1968\u20131983 was Cynthia Powell's age at the time of John Lennon's murder in 1980. Thus, she was 75 years old. 1968 \u2013 1983 gives Cynthia Powell a 2 year span, so she celebrated a silver anniversary with John Lennon in 1986. So the answer is yes.\nAnswer: yes\n",
+        "1980 is the same year Cynthia Powell celebrated a silver anniversary with John Lennon. Thus, Cynthia Powell celebrated a silver anniversary with John Lennon. So the answer is yes.\nAnswer: yes\n",
+        "12+35=47, Cynthia was 47 years old when she got married. The marriage of Lennon and Ono had 35 years\u2019 difference with Lennon. So Powell would have celebrated a silver anniversary with Lennon, thus the answer is yes.\nAnswer: Yes\n",
+        "10/01 was a time when Cynthia and John celebrated a silver anniversary. Thus, Cynthia and John did celebrate a silver anniversary. So the answer is yes.\nAnswer: yes\n",
+        "1) Cynthia Powell lives to be 86 years old. 2) John Lennon died at the age of 40. 3) 40 minus 86 equals -46. 4) 46 is the number of months between Cynthia Powell and John Lennon's (birth years). 5) -46 is negative 46. 6) A negative number is not equal to a positive number. Thus, Cynthia Powell probably does not celebrate a",
+        "0.625 is between 0.3 and 1.0, which is a common anniversary year. 25 years = 0.25 of a century. Thus, a silver anniversary could have happened. The number 0.25 is also found in 5x5, which is 5x5 = 0.25. So the answer is yes.\nAnswer: yes\n",
+        "25 is 25. She celebrates a 25th anniversary with him. Thus, she celebrated a silver anniversary with John Lennon. So the answer is yes.\nAnswer: yes\n",
+        "25 years is equal to a silver anniversary.\nAnswer: yes\n",
+        "75/05 = 15. Cynthia celebrates a silver anniversary with John Lennon every 15 years. Thus, Cynthia celebrated a silver anniversary with John Lennon 7 times. So the answer is 7 times.\nAnswer: 7 times",
+        "50 is half of 100. The Silver Anniversary is 50 years. The Silver Anniversary is more than half of 100 years. Thus, Cynthia Powell celebrated her Silver Anniversary with John Lennon. Answer: Yes\n"
+      ]
+    },
+    {
+      "input": "Do human sacrums have more fused vertebrae than an Alaskan Malamute?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. The human sacrum consists of five fused vertebrae. An Alaskan Malamute is a large domestic dog breed. Dogs have three fused vertebrae attached to their sacrums.",
+      "idx": 7,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Do human sacrums have more fused vertebrae than an Alaskan Malamute?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "41 of 42 Alaska Malamutes have 15 fused vertebrae in their sacrum, and a human has 18 fused vertebrae in their sacrum. However, 4 people have 17 fused vertebrae in their sacrum, so the answer is no.\nAnswer: no\n",
+        "8-digit numbers never end in zero. They must be 9-digit numbers or greater. In humans, the sacrum has 7 fused vertebrae. In an Alaskan Malamute, the sacrum has 8-11 fused vertebrae. The number of fused vertebrae for a human sacrum is greater than for an Alaskan Malamute's sacrum. Thus, the human sacrum has more fused vertebrae. So the answer is yes.\nAnswer: yes\n",
+        "1. Two vertebrae are fused together in the backbone of a human. 2. 18 vertebrae are fused together in the backbone of an Alaskan Malamute. This results in 18 +2 = 20 vertebrae in a human, less than the 19 vertebrae in an Alaskan Malamute. 3. If this is true, then a human\u2019s vertebrae are less fused than a Malamute. Thus, a human\u2019s vertebral column is not more fused than a Malam",
+        "10 human vertebrae make a sacrum, while 42 fused human vertebrae make up one thoracic backbone. However, the Alaskan Malamute has 12 vertebrae (5 fused) in the thoracic portion of the backbone and 3 fused vertebrae in the pelvis. Thus, there are more fused vertebrae in a human sacrum than an Alaskan Malamute. So the answer is yes.\nAnswer: yes\n",
+        "1) A human has about 75 vertebrae. An Alaskan Malamute has 29 vertebrae. So the Alaska Malamute has fewer vertebrae than a human. 2) Both the human and Alaska Malamute have a sacrum and coccyx. Each body part plays a role in the way the human or Alaska Malamute is able to walk. Thus, the answer is yes.\nAnswer: Yes\n",
+        "6 fused vertebrae. Answer: Yes Explanation: Human sacrums have 6 fused vertebrae. No, Alaskan Malamute has 7 fused vertebrae.\n",
+        "<em>Human sacrums have a total of 48 vertebrae</em>. The Alaskan Malamute has <em>43 vertebrae</em>. There are no words in the answers that have double digits in them. Thus, it\u2019s highly unlikely that \"there are 48\" appears in one answer and 43 in another. So the answer is no.\nAnswer: no\n",
+        "2 people are trying to solve this math problem. One of them has no clue and so answers \"yes\" to this question. The other one is smarter than the first and looks up an online dictionary. After the 2nd person gives his answer, he goes to math.stackexchange.com and posts a question about this question. The poster is very smart and reads through the original reasoning on Math Stack Exchange to see if the original reasoning is the right way. He finds a mathematical error",
+        "26 fused vertebrae are required for human sacrums, but 32 are required for Alaskan Malamutes. Thus, a human sacrum will have more fused vertebrae.\nAnswer: no\n",
+        "7 fused vertebrae would be the upper back of an Alaskan Malamute. The sacrum is where multiple vertebrae meet to become fused and form one. Thus, a human sacrum would have more fused vertebrae than an Alaskan Malamute. So the answer is yes.\nAnswer: yes"
+      ]
+    },
+    {
+      "input": "Can Simon Cowell vote for the next Supreme Court judge?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The Supreme Court is the highest court in the USA. Simon Cowell is a British talent competition judge. Members of the Supreme Court are appointed, rather than elected.",
+      "idx": 8,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can Simon Cowell vote for the next Supreme Court judge?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "54% of the American population voted in the 2016 Presidential Election. 53.8% of the current Supreme Court consisted of people nominated by Republicans. Thus, at least 2 of the current Supreme Court consist of people nominated by an organization that 54% of the American populat",
+        "1 US Supreme Court justice is selected every year. The president selects the justice. The president can find 1 qualified justice to select for 1 of 4 available positions. Thus, Simon has 5 chances to select the next justice, so can select to vote for any choice (including the current nominee, if there is a different judge already nominated). So the answer is yes.\nReasoning is optional.\nReasoning has to be in plain language, and is not evaluated.\nAnswer",
+        "1. Simon Cowell is old enough to vote.\n2. Simon Cowell is of the same sex as the next Supreme Court judge (who already passed away).\n3. Simon Cowell has never been a judge on the Supreme Court. Thus, he could not have voted for the next Supreme Court judge.\nAnswer: no\n",
+        "15 people voted in the American Idol show. This is just fewer than the number of justices in the Supreme Court, so there are just 15 of the nine justices present. Thus, Simon can vote for the next Supreme Court judge. So the answer is yes.\nAnswer: yes\n",
+        "1) Every justice on the Supreme Court is nominated by the president of the United States to a lifetime position by the Senate. 2) There has never been a case where Simon Cowell's vote was used to confirm or reject a Supreme Court nominee. Thus a candidate could not be rejected through Simon Cowell's vote. So the answer is no.\nAnswer: no\n",
+        "6 out of 10 judges on the Supreme Court have a Ph.D. A Ph.D. is a type of doctorate. A doctor of Jurisprudence is the type of doctorate associated with the next Supreme Court Judges. Thus, a Ph.D. is not a doctorate. So the answer is no.\nAnswer: no\n",
+        "2 votes out of 18 are required for a Supreme Court vote to pass. Simon Cowell, who is known for being rather outspoken, is not part of the 5 Conservative justices. So Simon Cowell cannot vote for the next Supreme Court judge and is not the necessary number for a majority vote. So the answer is no.\nAnswer: no\n",
+        "2020 is 4 digits, which is less than 2024, the year Simon Cowell was born. 1666 and 1936 are 4 digits, which are both more than 2024, the year Simon Cowell was born. Since the number of digits is greater for dates of Simon Cowell's birth than the voting year's four digits, Simon Cowell could not vote for the next Supreme Court judge. So the answer is",
+        "<i>American Idol</i> is on Fox. This channel can vote for some federal judge. But Fox is owned by Rupert Murdoch. Rupert Murdoch does not get to determine who becomes a Supreme Court judge. So <i>American Idol</i> cannot vote for a Supreme Court judge. Thus, Simon Cowell cannot vote for the next Supreme Court judge. So the answer is no.\nAnswer: no\n",
+        "34 is 5% less than 35. Candidates for the next Supreme Court judge need to have a 5% margin of victory (the number of votes by which they win). 5% of 374 votes is 18.5. But Simon Cowell does not need an 18.5% margin of victory. He needs a 37.4% margin of victory. Thus, Simon Cowell can vote for the next Supreme Court judge. So the"
+      ]
+    },
+    {
+      "input": "Did the band Led Zeppelin own a prime number of gilded gramophones?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. 5 is a prime number. A Grammy Award trophy is a gilded gramophone. Led Zeppelin won 5 Grammy Awards.",
+      "idx": 9,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did the band Led Zeppelin own a prime number of gilded gramophones?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "507 is not prime. The next prime is 509, which is 7 more than 507. Thus, Led Zeppelin did not own a prime number of gilded gramophones. So the answer is no.\nAnswer: no\n",
+        "<b>3</b> is a prime number. The band Led Zeppelin was named after the Prime Minister of England. Thus, it is highly unlikely that the band Led Zeppelin owned a prime number of gilded gramophones. So the answer is no. In contrast, <b>3</b> is the only other prime number whose square is less than its square root. Therefore <b>3</b> is probably named after the Prime Minister of England. <b>No clue whatsoever is needed for this part.</b> So the answer is",
+        "1. Since there are 4 letters in the band name, the band must have either 1,2,3,4,5,7 or 11 gilded gramophones. 2. Led Zeppelin had a member named John Bonham, so at least one band member owned a grand. Thus, Led Zeppelin had either one, two, three, four, five, seven or eleven gilded gramophones. 3. The total of the band members is nine, so there are ",
+        "1 is the only prime number. 66,678.53 grams = 1 grammopole. The total is 2 + 3 + ... + 8 + 1 = 25 = 2.4 prime numbers. So the answer is yes.\nAnswer: yes\n",
+        "1) 1 is the only number that is both a prime number and a power of itself: 12^1. 2) The band's name is all consonants. 3) Of all the music awards, at least 12 gramophones belong to Led Zeppelin. 4) Gold records only include one gramophone. Thus, there is at least one led Zeppelin gold record gramophone. The answer is yes.\nAnswer: yes\n",
+        "6 was the only prime number between 1 and 1000. Thus, Led Zeppelin owned a prime number of gilded gramophones. So the answer is yes.\nAnswer: yes\n",
+        "2+2+2=6. 4+4+4=12. 8+8=16. 16+16+16=48. If a number is a prime number, then it equals this sum. Thus, Led Zeppelin owned a prime number of gilded gramophones.\nAnswer: no\n",
+        "7 can be written in the form 2 x a (because 7 = 2 x 3) and 9 can be written in the form 2 x b (because 9 = 2 x 4). Goldilocks has two grams, for a total of 3 grams. Thus, the question is meaningless. So the answer is no.\nAnswer: no\n",
+        "3,5,7,11,13,17,19,23,25,27,29,31.... These are prime numbers. 20 is not a prime number since 20=2*2*5. Thus, the band Led Zeppelin did not own or own any prime number of gilded gramophones. So the answer is no.\nAnswer: no\n",
+        "347 is a prime number. Prime numbers have only 2 factors: 1 and the number itself. So the number of Led Zeppelin's gilded gramophones could not be a prime number. So the answer is no.\nAnswer: no\n"
+      ]
+    },
+    {
+      "input": "Did any cultures associate celery with death?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Ancient Greeks used garlands of celery leafs to bury their dead. Ancient Greece was considered a culture. ",
+      "idx": 10,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did any cultures associate celery with death?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "85% of cultures associate a celery with death. 8% of cultures associate celery with birth. 4% of cultures do not associate celery in any context. Thus, most cultures associate celery with death. So the answer is yes.\nAnswer: yes\n",
+        "1. The meaning of \"celery\" and the meaning of \"death\" relate to each others, but at odd degrees. There is much irony and ambiguity in the word \"celery\". Its etymology goes back to the 16th or 17th century.\nAnswer: there is no evidence that anything was known about the use of celery and death during the time period in question\n",
+        "1. Celery and death are in the same class of things. 2. Some cultures associate celery with death. Thus, some cultures could associate celery with death. So the answer is yes.\nAnswer:  yes",
+        "13% of American deaths were caused by heart disease. 15% of American deaths were caused by cancer. 10% of American deaths were caused by respiratory disease. These percentages were obtained from an article. So the answer is yes.\nAnswer: yes\n",
+        "1) People can not be sure if a culture actually considered celery \"death food\". 2) 48% of the cultures in the 2018 data considered celery to be \"healthy\". Thus, a 48% culture may consider celery \"death food\". So the answer is unsure.\nAnswer: Unsure\n",
+        "67% of the survey participants think that the ancient Egyptians associated celery with death. But since Egyptians are now associated with celery, then ancient Egyptians thought celery was associated with death. So the answer is yes.\nAnswer: yes\n",
+        "22 cultures associate celery with death. Thus, at least one culture did associate celery with death. So the answer is yes.\nAnswer: yes\n",
+        "25% of the Celts used celery as a symbol for life. 75% of the Celts used celery as a symbol for death. Thus, celery did not associate with death. So the answer is no.\nAnswer: no",
+        "7 cultures associated celery with death. 7 is more than 3. Thus, celery could be used symbolically to say death. So the answer is yes.\nAnswer: yes\n",
+        "36 out of 45 cultures associated celery with death. Thus, an association with death did not happen for 36 out of 45 cultures. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Did the Coen brothers ever collaborate with the Brothers Grimm?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The Coen brothers were born in 1954 and 1957. The Brothers Grimm died in 1859 and 1863.",
+      "idx": 11,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did the Coen brothers ever collaborate with the Brothers Grimm?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "<i>La Belle et la B\u00eate</i> did not come out until 2001, whereas the Brothers Grimm was written by the siblings in the 18th century. Therefore, no",
+        "3 directors have created films starring \"The Son of Wolf & The Wolf's Child (2011) on their films\", including the Coen brothers. However, only the Coen brothers did a film called \"The Son of Wolf & The Wolf's Child (2011)\" alone. The Coen brothers did not collaborate with the Brothers Grimm. So the answer is no.\nAnswer: no\n",
+        "1998 was the year that the Coen brothers collaborated with the Brothers Grimm. Thus, at some point in history, the Coen brothers could have collaborated with the Brothers Grimm. So the answer is yes.\nAnswer: yes\n",
+        "1. In 1996, the Coen brothers' first movie based on The Brothers Grimm, The Big Lebowski, did not include the Brothers Grimm. 2. The Brothers Grimm did not have one project in 1996. Since the Coen brothers worked on The Big Lebowski, 3. there were no projects in 1996. Thus, the Brothers Grimm had not collaborated with the Coen brothers in 1996. So the answer is yes",
+        "1) The Coen brothers are brothers; 2) Brothers Grimm are brothers; 3) Their parents were brothers; and 4) It takes more than two people to have a collaborative effort. Therefore, the Coens never collaborated with the Brothers Grimm. So the answer is no.\nAnswer: no\n",
+        "<em>The Big Lebowski</em> and <em>O Brother, Where Art Thou?</em> are Coen Brothers film. Brothers Grimm are fairy tales. Thus, the Brothers Grimm collaborated with the Coen brothers. So the answer is yes.\nAnswer: yes\n",
+        "<em>The Simpsons</em> often uses elements from fiction, like fairy tales, folklore, myths, and legends. The Coen brothers have worked on several projects with the Brothers Grimm. Thus, the Coen brothers collaborated with the Brothers Grimm. So the answer is yes.\nAnswer: yes\n",
+        "<em>O Brother, Where Art Thou?</em> and the <em>Hansel and Gretel</em> movie both came out in the same year. Thus, the Coen brothers could have collaborated. So the answer is yes.\nAnswer: yes\n",
+        "2 of the Coen brothers' movies, O Brother, Where Art Thou? and A Serious Man are based on the Brothers Grimm. The Coen brothers worked on the Brothers Grimm. Thus, no, the Coen brothers did not collaborate with the Brothers Grimm. So the answer is no.\nAnswer: no\n",
+        "<i>The Big Lebowski</i> and <i>The Son of the Big Lebowski</i> both have a small segment in them involving the Coen brothers and the Brothers Grimm. Thus, the Coen brothers did once collaborate with the Brothers Grimm. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Can Stone Cold Steve Austin apply his finisher to a mule deer?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Steve Austin's finisher, The Stone Cold Stunner, involves lifting the opponent and then pulling their head down. The largest male mule deer's are around 330 pounds. Steve Austin has applied his finisher to the wrestler The Big Show. The Big Show weighs 383 pounds.",
+      "idx": 12,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can Stone Cold Steve Austin apply his finisher to a mule deer?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Steve Austin is a professional wrestler. 2. A mule deer can weigh up to 160 lbs (72.5 kg). 3. The finisher of Austin is the Stone Cold Stunner. 4. The Stone Cold Stunner involves a chair. 5. A mule deer is capable of jumping a chair. Thus, Austin can probably apply his finisher to a mule deer. So the answer is yes.\nAnswer: yes\n",
+        "10 years ago, Stone Cold Steve Austin performed a finishing move on a mule deer. The mule deer was less than 10 kg (22 lb), which is less than Stone Cold Steve Austin's deadlift max. 0.222 kg / 42.2 lb = 0.00052 x 100 = 5.2%. Thus, he could apply his finisher to a mule deer. So the answer is yes.\n",
+        "1) Stone Cold Steve Austin is not a deer. 2) If he were, he would not be using his finisher which is only used on deer. Thus, Stone Cold Steve Austin cannot apply his finisher to a mule deer. So the answer is no.\nAnswer: no\n",
+        "1) The finisher involves hitting the opponent with the top of the head, while Stone Cold Steve Austin doesn't touch the ground at all. 2) The mule deer weighs about 120 pounds. 3) The finisher will knock the mule deer onto the ground. Thus, a mule deer cannot absorb the finisher. So the answer is no.\nAnswer: no\n",
+        "1) A mule deer weighs more then a wrestler. It's an animal that a sumo wrestler couldn't apply his finisher to. 2) A mule deer is more agile than a wrestler. Thus, a mule deer could avoid being struck by his finisher and survive. 3) According to Wikipedia, Stone Cold Steve Austin was about 75% of his body weight when he applied one of his finishers. Although that is possible, a mule deer likely weighs more. So the",
+        "99.4% of deer are less than 1,000 pounds. Stone Cold Steve Austin weighs 176.9 lbs. Because Stone Cold Steve Austin could not lift 99.4% of deer, he could not apply his finisher to a mule deer. So the answer is no.\nAnswer: no\n",
+        "2005 was when WWE started putting out WWF video games, which was a decade before any mule deer were released on WWE video games. So Stone Cold Steve Austin could not have applied his finisher to any mule deer. So the answer is no.\nAnswer: no\n",
+        "3 of the 4 steps for using Stone Cold Steve Austin's finisher to apply it and successfully land it. 2 are met. Thus, Austin could apply his finisher to a mule deer for success. So the answer is yes.\nAnswer: yes\n",
+        "45.5 ounces is lighter than 160kg. A mule deer's usual body weight ranges from 45 kg to 100 kg. Thus, Stone Cold Steve Austin could apply his finisher to a mule deer. So the answer is yes.\nAnswer: yes\n",
+        "1,281 humans have applied Stone Cold Steve Austin\u2019s finisher to a deer. No deer, including mule deer, have died in any of the collisions. Thus, Stone Cold Steve Austin could use his finisher on a mule deer. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Is 3D printing able to make adenovirus?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. 3D printers come with limitations in terms of precision. The standard nozzle output is about 0.4 mm. Therefore, if you are planning to print something that is below 0.4mm, you will not get a useful item. Adenoviruses are medium-sized (90\u2013100 nm), nonenveloped (without an outer lipid bilayer) viruses with an icosahedral nucleocapsid containing a double stranded DNA genome.",
+      "idx": 13,
+      "prompt": "Question: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is 3D printing able to make adenovirus?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "3D printing can build the adenovirus that 2D printers cannot build. 2D printers cannot build the adenovirus that 3D printers build. Thus, 3D printing is able to make the adenovirus that 2D printers cannot make. So the answer is yes.\nAnswer: yes\n",
+        "3D printing creates the 3D shape while the adenovirus remains inside a virus. So, 3D printing is able to make the adenovirus. Thus, the answer is yes.\nAnswer: yes\n",
+        "3D printing consists of replicating DNA, which is a genetic instruction. Adenovirus is a genetic instruction, so 3D printing can make adenoviruses. Thus, 3D printing can make adenoviruses. So the answer is yes.\nAnswer: yes\n",
+        "3D printers can print 10 different chemical ingredients to make adenovirus. Thus, 3D printing can be used to make an adenovirus. So the answer is yes.\nAnswer: yes\n",
+        "3D printers are used to construct items. Adenovirus are viruses that can infect cells. Adenovirus cannot be made with a 3D printer. Thus, 3D printing is not able to make adenovirus. So the answer is no.\nAnswer: no\n",
+        "3D printing has been used to make devices and structures. But there has not been adenovirus printed by 3D printing. So, even though researchers plan to use 3D printing to make adenovirus, 3D printing has not so far been used to make adenovirus. So, the answer is \"No.\"\nAnswer: no\n",
+        "3D printing is able to make any shape. To make an adenovirus, they are able to control the shape and size of the adenovirus. Adenoviruses are made by RNA, and RNA replicates. RNA can replicate without needing a cell. So yes, they can make any shape of adenovirus by 3D printing. Thus the answer is yes.\nAnswer: yes\n",
+        "3D printing is used for building models. 3D printing is not used for making vaccines. Thus, using 3D printing to make an adenovirus would not make sense. So the answer is no.\nAnswer: no\n",
+        "3D printing is unable to make adenovirus. Adenovirus is the type of virus that causes COVID-19. 3D printing lacks the ability to create molecules with a viral envelope. So, 3D printing is unable to make adenovirus. Thus, the answer is no.\nAnswer: no\n",
+        "3D printing is a subtractive technique. Thus, 3D printing cannot make adenovirus. So the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Does the United States Secretary of State answer the phones for the White House?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The role of United States Secretary of State carries out the President's foreign policy. The White House has multiple phone lines managed by multiple people.",
+      "idx": 14,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does the United States Secretary of State answer the phones for the White House?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "550,000 people go to the White House each year. The amount of people in the United States is over 300 million people. 300 million squared is a lot of numbers. As a fraction, 300 is equal to 3. So 300 square is approximately 90000000. 90000000x would equal 550000. Since 5",
+        "127,000 persons work at the White House as of 2007. The White House also has 450 permanent members of staff. The State Department is responsible for foreign affairs while the White House is responsible for domestic affairs. There are 220 persons at the State Department. 220 persons is 450 x 127,000 persons. The ratio 450:220 is the same as",
+        "1. The number of employees of the United States Department of State is more than the number of phones in the White House. 2. The United States Department of State has the number of employees, not the number of phones. 3. Thus, there is a better chance that the United States Secretary of State answers phones than the number of phones in the White House. So the answer is yes. Answer: Yes",
+        "1 is the number of Secretaries of the United States. 1 is less than 2. So the answer is no. The answer is: The United States Secretary of State does not answer the phones for the White House.\nAnswer: no\n",
+        "1) Secretaries of State work in State Department buildings, which are not part of the White House. 2) There are 16 secretaries of state, but the White House phone only has six buttons. Thus, the United States Secretary of State does not answer the White House's phones. So the answer is \"No\".\nAnswer: \"No\"\n",
+        "6 out of 35 of the United States Secretaries of State answered the phones for the White House. Thus, the United States Secretary of State answered the White House\u2019s phones. So the answer is yes.\nAnswer: yes\n",
+        "2,469 US presidents were elected, and 74.5% of them were not assassinated. Thus, the United States Secretary of State does not answer the phones for the White House. So the answer is no.\nAnswer: no\n",
+        "21 is the White House number, and 301 is the US Secretary of State number. 21 is not equal to 301. So the answer is no, the United States Secretary of State does not answer the phones for the White House. Thus, the sentence \"So the answer is Yes\" is incorrect. Thus you can answer \"No\".\nAnswer: no\n",
+        "7:30 a.m. is before 8 a.m., which is the time on the White House phones. 7:30 a.m. is 140 minutes after the day has begun. 140 minutes after the day has begun, you will start at 1:30 p.m., but Secretary of State is 7:30 a.m. This should answer the question: does the United States Secretary of State answer the",
+        "355 is the phone number for the United States Secretary of State and 202 is the phone number for the White House. Adding 355 to 202 gives 557. 557 is not a prime number. Thus, the United States Secretary of State does not answer the phones for the White House. So the answer is no.\nAnswer: no\n"
+      ]
+    },
+    {
+      "input": "Would a lullaby be enough to wake Hellen Keller up?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Lullabies can be sung or played via instrument. Hellen Keller was deaf. ",
+      "idx": 15,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Would a lullaby be enough to wake Hellen Keller up?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Helen Keller is deaf. 2. Lullabies are only for babies (the youngest). 3. The youngest is the baby child. 4. The baby child wakes up easily. 5. Therefore, a lullaby will not wake Helen Keller up enough to get her out of bed. So the answer is no.\nAnswer: no\n",
+        "1. Hellen Keller is able to wake herself, without help. 2. Her eyes were opened by the lullaby, which made her wake. 3. The lullaby helped her wake. Thus, the lullaby must have been enough to wake Hellen Keller. So the answer is yes.\nAnswer: yes\n",
+        "1000 can be divided by 0.5. 1000 \u00f7 0.5 = 2000. 2000 times 0.5 is enough to wake up Hellen Keller. So the answer is yes.\nAnswer: yes\n",
+        "1) The frequency of a lullaby is 2.2Hz. 2) The pitch of a lullaby is about F4. F4 is 396Hz. 3) Keller only gets up if her dream is a lullaby. 4) Keller woke up 29 times during the dream. 5) The pitch of the dream sound (when adjusted by a lullaby with a frequency of 2.2Hz) is A4. 6)",
+        "1) Hellen Keller is deaf. Deaf people cannot hear. 2) A lullaby is a song that is usually soft and sung to children. So, a lullaby would not wake up a deaf person. So the answer is no.\nAnswer: no\n",
+        "9 seconds is probably not enough time to wake someone up. So the answer is no.\nAnswer: no\n",
+        "0 is less than 1. 1 is less than 2. 2 is less than 3. 3 is less than 4. 4 is less than 5. Therefore, the length of time it takes to wake Hellen Keller up is a number which is not less than 5. 0 is not less than 5. So the answer is no.\nAnswer: no\n",
+        "2 Lullables are sung to babies. Babies can't speak. Thus, 2 lullabies are not enough to wake someone. So the answer is no.\nAnswer: no\n",
+        "3 x 2 = 6. 6 is less than 6. So the answer is no. Hellen Keller would not wake up with a lullaby.\nAnswer: no\n",
+        "52 is divisible by 107 (52\u00f7107=0 with a remainder of 0). 5 and 11 are the first two digits that do not end in 0 when multiplied together. Thus, a lullaby is certainly enough to wake Hellen Keller up. So the answer is yes.\nAnswer: yes\n"
+      ]
+    }
+  ]
+}
