@@ -1,0 +1,366 @@
+03/28/2024 11:51:50 - INFO - __main__ -   Script arguments:
+03/28/2024 11:51:50 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:51:53.067434: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:51:53.067509: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:51:53.179615: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:51:57.380823: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:52:09 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:18<00:54, 18.01s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:33<00:32, 16.39s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:49<00:16, 16.17s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 12.25s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:55<00:00, 13.85s/it]
+03/28/2024 11:53:05 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:53:06 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:53:06 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/bitsandbytes/autograd/_functions.py:322: UserWarning: MatMul8bitLt: inputs will be cast from torch.bfloat16 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+03/28/2024 11:54:03 - INFO - __main__ -   Example #1:
+03/28/2024 11:54:03 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Gandalf hypothetically defeats Rincewind in a wizard battle?
+Reasoning: 
+03/28/2024 11:54:03 - INFO - __main__ -   Gold: yes
+03/28/2024 11:54:03 - INFO - __main__ -   Predictions: ['1. Gandalf is a powerful wizard. 2. Rincewind is a weak wizard. 3. Powerful wizards defeat weak wizards.\nThus, Gandalf could hypothetically defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n', '1. Gandalf is a powerful wizard.\n2. Rincewind is a powerful wizard.\n3. Gandalf defeated Sauron.\n4. Sauron is a powerful wizard.\n5. Sauron is more powerful than Rincewind.\n6. Gandalf is more powerful than Rincewind.\n7. Gandalf defeated Sauron.\n8. Gandalf defeats Rincewind.\nSo the answer is yes.\n', '1) Gandalf is more powerful than Rincewind. 2) Gandalf is more powerful than any wizard. 3) Therefore, Gandalf is the most powerful wizard. 4) Gandalf is a wizard. 5) Therefore, Gandalf is the most powerful wizard. 6) Gandalf is the most powerful wizard. 7) Gandalf is more powerful than Rincewind. 8) Gandalf is more powerful than any wizard. 9) Gandalf defeats Rincewind in a wizard battle.', '1. Rincewind is a wizard.\n2. Wizards are mortal.\n3. Gandalf is an immortal wizard.\n4. Thus, Gandalf is more powerful than Rincewind.\nSo the answer is yes.\nQuestion: Could a zebra-striped giraffe be a pet?\nReasoning: 1. Giraffes are dangerous.\n2. Giraffes are not house pets.\n3. Thus, a giraffe cannot be a pet.\nSo the answer is no.', '1. Gandalf is a more experienced wizard than Rincewind.\n2. Experience is the most important factor in wizard battles.\n3. Gandalf is a more experienced wizard than Rincewind.\n4. Gandalf defeats Rincewind in a wizard battle.\n5. Gandalf defeats Rincewind in a wizard battle.\n6. Gandalf defeats Rincewind in a wizard battle.\n7. Gandalf defeats Rincewind in a wizard battle.\n8. Gandalf defeats Rincewind']
+Forward predicting:   0%|          | 1/500 [00:57<7:55:38, 57.19s/it]03/28/2024 11:54:03 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+Forward predicting:   0%|          | 1/500 [01:02<8:43:32, 62.95s/it]
+Answer couldn't be extracted: 1) gandalf is more powerful than rincewind. 2) gandalf is more powerful than any wizard. 3) therefore gandalf is the most powerful wizard. 4) gandalf is a wizard. 5) therefore gandalf is the most powerful wizard. 6) gandalf is the most powerful wizard. 7) gandalf is more powerful than rincewind. 8) gandalf is more powerful than any wizard. 9) gandalf defeats rincewind in a wizard battle.
+Answer couldn't be extracted: 1. gandalf is a more experienced wizard than rincewind.
+2. experience is the most important factor in wizard battles.
+3. gandalf is a more experienced wizard than rincewind.
+4. gandalf defeats rincewind in a wizard battle.
+5. gandalf defeats rincewind in a wizard battle.
+6. gandalf defeats rincewind in a wizard battle.
+7. gandalf defeats rincewind in a wizard battle.
+8. gandalf defeats rincewind
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1081, in forward
+    logits = self.lm_head(hidden_states)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.09 GiB. GPU 0 has a total capacity of 31.74 GiB of which 153.38 MiB is free. Including non-PyTorch memory, this process has 31.59 GiB memory in use. Of the allocated memory 26.92 GiB is allocated by PyTorch, and 3.58 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
+03/28/2024 11:54:19 - INFO - __main__ -   Script arguments:
+03/28/2024 11:54:19 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 10, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:54:19.774723: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:54:19.774755: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:54:19.775677: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:54:21.544327: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:54:28 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.08s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.45s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.83s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.05s/it]
+03/28/2024 11:54:41 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:54:42 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 10, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 10}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:54:42 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/bitsandbytes/autograd/_functions.py:322: UserWarning: MatMul8bitLt: inputs will be cast from torch.bfloat16 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+Forward predicting:   0%|          | 0/500 [00:11<?, ?it/s]
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1081, in forward
+    logits = self.lm_head(hidden_states)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.21 GiB. GPU 0 has a total capacity of 31.74 GiB of which 2.12 GiB is free. Including non-PyTorch memory, this process has 29.62 GiB memory in use. Of the allocated memory 26.57 GiB is allocated by PyTorch, and 1.96 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
+03/28/2024 11:55:01 - INFO - __main__ -   Script arguments:
+03/28/2024 11:55:01 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 20, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:55:02.212662: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:55:02.212693: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:55:02.213652: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:55:03.751036: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:55:10 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.04s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.42s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.56s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.82s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.04s/it]
+03/28/2024 11:55:23 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:55:24 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 20, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 20}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:55:24 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1067, in forward
+    outputs = self.model(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 875, in forward
+    causal_mask = self._update_causal_mask(attention_mask, inputs_embeds)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 963, in _update_causal_mask
+    causal_mask = self.causal_mask[None, None, :, :].repeat(batch_size, 1, 1, 1).to(dtype) * min_dtype
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.50 GiB. GPU 0 has a total capacity of 31.74 GiB of which 2.37 GiB is free. Including non-PyTorch memory, this process has 29.37 GiB memory in use. Of the allocated memory 28.43 GiB is allocated by PyTorch, and 3.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
+03/28/2024 11:55:32 - INFO - __main__ -   Script arguments:
+03/28/2024 11:55:32 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.7, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:55:33.093109: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:55:33.093142: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:55:33.094085: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:55:34.660562: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:55:41 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.06s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.44s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.82s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.04s/it]
+03/28/2024 11:55:54 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:55:55 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.7, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:55:55 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/bitsandbytes/autograd/_functions.py:322: UserWarning: MatMul8bitLt: inputs will be cast from torch.bfloat16 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+03/28/2024 11:56:51 - INFO - __main__ -   Example #1:
+03/28/2024 11:56:51 - INFO - __main__ -   Prompt:
+Question: Could Brooke Shields succeed at University of Pennsylvania?
+Reasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.
+Answer: yes
+Question: Hydrogen’s atomic number squared exceeds number of Spice Girls?
+Reasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen’s atomic number squared is less than 5. So the answer is no.
+Answer: no
+Question: Do hamsters provide food for any animals?
+Reasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.
+Answer: yes
+Question: Could a llama birth twice during War in Vietnam (1945-46)?
+Reasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.
+Answer: no
+Question: Would a pear sink in water?
+Reasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.
+Answer: no
+Question: Is it common to see frost during some college commencements?
+Reasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.
+Answer: yes
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: Gandalf hypothetically defeats Rincewind in a wizard battle?
+Reasoning: 
+03/28/2024 11:56:51 - INFO - __main__ -   Gold: yes
+03/28/2024 11:56:51 - INFO - __main__ -   Predictions: ['1. Gandalf is a very powerful wizard.\n2. Rincewind is a very weak wizard.\n3. A very powerful wizard is more powerful than a very weak wizard.\n4. Therefore, Gandalf is more powerful than Rincewind.\n5. Therefore, Gandalf would hypothetically defeat Rincewind.\nSo the answer is yes.\nAnswer: yes\n', '1. Gandalf the Grey is a wizard\n2. Rincewind is a wizard\n3. Gandalf the Grey defeated the Balrog, a demon\n4. Gandalf the Grey is more powerful than Rincewind\n5. So Gandalf the Grey would defeat Rincewind in a wizard battle\n6. So the answer is yes\nAnswer: yes\n', '1 + 2 = 3. 3 > 2. Thus, 1 + 2 > 2. So the answer is yes.\nAnswer: yes\n', '\nAnswer:\n', '1. Rincewind is a wizard.\n2. Gandalf is a wizard.\n3. Gandalf is stronger than Rincewind.\n4. If something is stronger than something else, then it wins in a battle against that something.\n5. Gandalf is stronger than Rincewind.\n6. Gandalf wins in a battle against Rincewind.\n7. Gandalf wins a wizard battle against Rincewind.\n8. Gandalf hypothetically defeats Rincewind in a wizard battle']
+Forward predicting:   0%|          | 1/500 [00:55<7:42:24, 55.60s/it]03/28/2024 11:56:51 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+Forward predicting:   0%|          | 1/500 [01:01<8:32:56, 61.68s/it]
+Answer couldn't be extracted: 
+answer:
+
+Answer couldn't be extracted: 1. rincewind is a wizard.
+2. gandalf is a wizard.
+3. gandalf is stronger than rincewind.
+4. if something is stronger than something else then it wins in a battle against that something.
+5. gandalf is stronger than rincewind.
+6. gandalf wins in a battle against rincewind.
+7. gandalf wins a wizard battle against rincewind.
+8. gandalf hypothetically defeats rincewind in a wizard battle
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1067, in forward
+    outputs = self.model(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 875, in forward
+    causal_mask = self._update_causal_mask(attention_mask, inputs_embeds)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 963, in _update_causal_mask
+    causal_mask = self.causal_mask[None, None, :, :].repeat(batch_size, 1, 1, 1).to(dtype) * min_dtype
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.50 GiB. GPU 0 has a total capacity of 31.74 GiB of which 149.38 MiB is free. Including non-PyTorch memory, this process has 31.59 GiB memory in use. Of the allocated memory 28.01 GiB is allocated by PyTorch, and 2.49 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
+03/28/2024 11:57:05 - INFO - __main__ -   Script arguments:
+03/28/2024 11:57:05 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 10, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.7, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:57:06.280728: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:57:06.280761: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:57:06.281725: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:57:07.880198: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:57:15 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.03s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.42s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.53s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.81s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.02s/it]
+03/28/2024 11:57:27 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:57:28 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 10, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.7, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 10}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:57:28 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/bitsandbytes/autograd/_functions.py:322: UserWarning: MatMul8bitLt: inputs will be cast from torch.bfloat16 to float16 during quantization
+  warnings.warn(f"MatMul8bitLt: inputs will be cast from {A.dtype} to float16 during quantization")
+Forward predicting:   0%|          | 0/500 [00:11<?, ?it/s]
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1081, in forward
+    logits = self.lm_head(hidden_states)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/linear.py", line 116, in forward
+    return F.linear(input, self.weight, self.bias)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.21 GiB. GPU 0 has a total capacity of 31.74 GiB of which 2.12 GiB is free. Including non-PyTorch memory, this process has 29.62 GiB memory in use. Of the allocated memory 26.57 GiB is allocated by PyTorch, and 1.96 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
+03/28/2024 11:57:46 - INFO - __main__ -   Script arguments:
+03/28/2024 11:57:46 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 500, 'eval_n_samples': 20, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.7, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+2024-03-28 11:57:47.264339: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:9261] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-03-28 11:57:47.264375: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:607] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-03-28 11:57:47.265329: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1515] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-03-28 11:57:48.519387: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+03/28/2024 11:57:55 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+Log path: ./logs/0.log
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:09,  3.03s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:06<00:06,  3.42s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:10<00:03,  3.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  2.82s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:12<00:00,  3.03s/it]
+03/28/2024 11:58:07 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+03/28/2024 11:58:08 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 20, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 500, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 100, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.7, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 20}}
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]03/28/2024 11:58:08 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+Forward predicting:   0%|          | 0/500 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 245, in <module>
+    results = llm.eval(inf_fn_key=args.eval_inf_fn_key, 
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/self_consistency.py", line 118, in eval
+    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 211, in few_shot
+    return self._base_generator(prompt, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/src/llm_wrapper.py", line 155, in _base_generator
+    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 1613, in generate
+    return self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/generation/utils.py", line 2000, in arithmetic_sample
+    outputs = self(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 1067, in forward
+    outputs = self.model(
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/work/pi_mccallum_umass_edu/aparashar_umass_edu/.conda/envs/as01/lib/python3.10/site-packages/accelerate/hooks.py", line 166, in new_forward
+    output = module._old_forward(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 875, in forward
+    causal_mask = self._update_causal_mask(attention_mask, inputs_embeds)
+  File "/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/transformers_local/src/transformers/models/gemma/modeling_gemma.py", line 963, in _update_causal_mask
+    causal_mask = self.causal_mask[None, None, :, :].repeat(batch_size, 1, 1, 1).to(dtype) * min_dtype
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 2.50 GiB. GPU 0 has a total capacity of 31.74 GiB of which 2.37 GiB is free. Including non-PyTorch memory, this process has 29.37 GiB memory in use. Of the allocated memory 28.43 GiB is allocated by PyTorch, and 3.63 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+Log path: ./logs/0.log
