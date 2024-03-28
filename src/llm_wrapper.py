@@ -141,13 +141,13 @@ class LLMWrapper:
             _prompt = _prompt.strip()
 
         assert _prompt != ""
-
+        breakpoint()
         # Tokenize
         prompt_tokenized = self.tokenizer(_prompt, return_tensors="pt", return_token_type_ids=False)
         prompt_tokenized.to("cuda")
-        if decoding_args.get('logits_processor', None) is not None:
-            # Set prompt length for logits processor
-            decoding_args['logits_processor'][0].set_prompt_len(prompt_tokenized.input_ids.size(1))
+        # if decoding_args.get('logits_processor', None) is not None:
+        #     # Set prompt length for logits processor
+        #     decoding_args['logits_processor'][0].set_prompt_len(prompt_tokenized.input_ids.size(1))
         # breakpoint()
         # Generate
         with torch.no_grad():
