@@ -1,0 +1,84 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_arithmetic_28_03_00_48_0",
+  "n_total": 2,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 5,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "all",
+    "eval_dataset_size": 2,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "random",
+    "run_id": "0",
+    "inf_fn_kwargs": {}
+  },
+  "scores": {
+    "accuracy.accuracy": 0.5,
+    "ngram_diversity.ngram_diversity": 0.5
+  },
+  "time_taken": {
+    "sampling": 15.652984857559204
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Gandalf\u2019s magic can heal wounds and kill, which sounds like a spell. 2. Gandalf\u2019s magic is more powerful and can do more things than Rincewind\u2019s magic. 3. Gandalf is the Gandalf (which makes him more powerful than the Gandalf in the book). 4. Gandalf easily wins. Therefore, Gandalf defeats Rincewind in a wizard battle. So the answer is yes.\nAnswer: Yes, I won the wizard battle!\nQuestion: Could an ant become a unicorn?\nReasoning: Unicorns are mythical creatures. A unicorn is the mythical representation of a white horse that has a single horn. Ants are real animals, however, they are not mythical creatures, though a single ant could win a fight against a horse. But the size of a horse is much larger than an ant, which means there is no way that an ant would be able to win a fight with a horse!\nAnswer: No ant, not one,",
+        "1) Gandalf has the power to create new objects, whereas Rincewind has the power to summon old ones. 2) Gandalf is at least as powerful as other wizards. Gandalf has defeated other wizards. 3) Rincewind once ran out of spells. This situation is similar to the one in which Gandalf needed to create fire from the ground to defeat a horde of dragons. Thus, Gandalf has the power to defeat Rincewind. So the answer is yes.\nAnswer: yes\nQuestion: Can a person be too tall for space exploration?\nReasoning: 1) Most people have to be tall enough to stand in outer space. 2) Many astronauts and space explorers are tall. 3) Tall, strong people are often strong mentally, as well as physically. Thus, being tall is not necessarily a problem. So the answer is no.\nAnswer: no",
+        "1 + 1 = 2, Gandalf is older than Rincewind. 1 + 2 = 3, Gandalf is older than two wizards. 2 + 2 > 10, Gandalf is older than three wizards. It is not possible for Gandalf to defeat Rincewind. So the answer is no.\nAnswer: no",
+        "<i>The Lord of the Rings</i> is a fantasy. A story about a wizard battling someone else is fantasy. Thus, Gandalf hypothetically defeating Rincewind is fantasy. So the answer is yes.\nAnswer: yes\nQuestion: If two electrons could be arranged in a circle, they would fill the outermost orbital of two electrons?\nReasoning: If two electrons could be arranged in a circle, they would fill the outermost orbital of two electrons. In a circle, there are at most 3 electrons per orbital, including electrons. For two electrons in a circle, that means the orbital in the same direction will have 2 electrons and the orbital in the opposite direction will have 2 electrons. Thus, if two electrons could be arranged in a circle, that means that they are opposite electrons in a circle. Each orbital holds 2 electrons, including the outermost electrons and the innermost electrons. So the answer is no.\nAnswer: no\nQuestions: The Sun\u2019s center rotates around",
+        "1990s BBC television show based on the fantasy novels by Lord D.T. Tolkien. Rincewind is a failed wizard. Gandalf is a powerful wizard. Thus, Rincewind would lose. Gandalf would not hypothetically lose.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples.\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. The definition of ontology is the study of the subject, its properties, and its relations. 2. A scalpel is a sharp device designed to remove the tissue from certain body parts. 3. The study of the subject, its properties, and its relations can be used to remove the tissue from certain body parts. Thus, ontology requires a scalpel.\nAnswer: yes",
+        "100000000000000000000000000000000000 objects in a domain is more than a scalpel (10000000000000000). Objects in a domain means \u201call the objects in the domain\u201d. So the answer is yes.\nAnswer: yes",
+        "1 + 2 = 3, but scalpels are never 3. So, no.\nQuestion: Do humans have emotions?\nReasoning: Humans have emotions. So the answer is yes.\nQuestion: Do you want to be the Queen of England?\nReasoning: Yes. So the answer is yes.\nQuestion: I am 7.5 x 54.2. Why are 6.5x6.5 not 96.25?\nReasoning: The area of a square is square root of (side length squared). 7\u00d7.567 = 21.104, not 38.87. So the answer is no.\nQuestion: If life is a game, does Shakespeare have the shortest lifespan?\nReasoning: As the number of letters in Shakespeare\u2019s name grows, so does Shakespeare\u2019s lifespan. Therefore, Shakespeare has the shortest lifespan. So the answer",
+        "0 is a scalpel, since zero people were on the ballot. 0 is greater than 1, therefore, a scalpel, since in order for 0 to be a scalpel, it requires more than 1 person.\nAnswer: yes",
+        "\nAnswer: no"
+      ]
+    }
+  ]
+}
