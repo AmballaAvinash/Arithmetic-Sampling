@@ -229,7 +229,7 @@ if __name__ == '__main__':
     inf_fn_kwargs = {
                     "max_new_tokens": 100,
                     "do_sample": False,  # enable sampling
-                    "top_p": args.eval_output_top_p,  # nucleus sampling
+                    "top_p": args.eval_output_top_p if args.eval_output_top_p is not None else default_decoding_args["eval_output_top_p"],  # nucleus sampling
                     "temperature": args.eval_output_temperature if args.eval_output_temperature is not None else default_decoding_args["temperature"],  # lower makes the distribution sharper
                     "top_k": args.eval_output_top_k if args.eval_output_top_k is not None else default_decoding_args["top_k"], # restrict to top-k probability tokens
                     "num_beams": args.eval_output_beam_size if args.eval_output_beam_size is not None else default_decoding_args["num_beams"], # beam search
