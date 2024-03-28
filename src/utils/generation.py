@@ -12,7 +12,7 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated in the examples."
+default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated earlier. The reasoning should end with the sentence(with <your_answer> substituted by your final answer):  So the answer is <your_answer>. The answer should be either Yes or No."
 
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
@@ -148,8 +148,8 @@ def fix_posthoc(decoded,task_name):
             except:
                 print(f"Answer couldn't be extracted: {d}")
                 labels.append('nan')
-        if len([x for x in matches if x != 'nan']) > 0:
-            labels = [x for x in matches if x != 'nan']
+        if len([x for x in labels if x != 'nan']) > 0:
+            labels = [x for x in labels if x != 'nan']
         majority_label = max( Counter(labels), key=Counter(labels).get)
         # breakpoint()
     return majority_label

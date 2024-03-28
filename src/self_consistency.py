@@ -81,7 +81,7 @@ class SelfConsistency(LLMWrapper):
         # Get LLM generations
         
         # breakpoint()
-        _strats = ['arithmetic','sample'] if output_sampling_strategy == 'all' else [
+        _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
         predictions, examples = defaultdict(list), defaultdict(list)
         metric_results, results = defaultdict(dict), defaultdict(dict)
@@ -100,7 +100,7 @@ class SelfConsistency(LLMWrapper):
                 start_time = time.time()
                 # for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
                 ex = copy.deepcopy(_ex)
-                if _strat == 'sample':
+                if _strat == 'greedy':
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
