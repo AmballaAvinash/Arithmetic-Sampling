@@ -1,0 +1,244 @@
+{
+  "experiment": "eval_gemma-2b-it_strategy_qa__validation_10_fewshot_arithmetic_28_03_22_02_0",
+  "n_total": 10,
+  "eval_args": {
+    "inf_fn_key": "fewshot",
+    "split": "validation",
+    "metrics": [
+      {
+        "name": "accuracy",
+        "score_keys": [
+          "accuracy"
+        ],
+        "args": {}
+      },
+      {
+        "name": "ngram_diversity",
+        "score_keys": [
+          "ngram_diversity"
+        ],
+        "args": {}
+      }
+    ],
+    "n_samples": 5,
+    "task_name": "strategy_qa",
+    "dataset_sample_strategy": "random",
+    "dataset_name": "strategy_qa",
+    "dataset_subname": "",
+    "output_sampling_strategy": "arithmetic",
+    "eval_dataset_size": 10,
+    "verbose": true,
+    "out_dir": "outputs/outputs/self_consistency/strategy_qa",
+    "n_shots": null,
+    "retrieval_strategy": "static",
+    "run_id": "0",
+    "inf_fn_kwargs": {
+      "max_new_tokens": 100,
+      "do_sample": false,
+      "top_p": 1.0,
+      "temperature": 0.5,
+      "top_k": 40,
+      "num_beams": 1,
+      "num_return_sequences": 5
+    }
+  },
+  "scores": {
+    "accuracy.accuracy": 0.7,
+    "ngram_diversity.ngram_diversity": 0.2
+  },
+  "time_taken": {
+    "sampling": 3.620290756225586
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Gandalf is a powerful wizard. 2. Rincewind is a powerful wizard. 3. The outcome of a wizard battle depends on various factors, including magic, skill, and luck. 4. There is no evidence to support the claim that Gandalf defeats Rincewind. So the answer is no.\nAnswer: no",
+        "1. Gandalf is a powerful wizard, but Rincewind is a more powerful wizard. 2. The outcome of a wizard battle depends on many factors, such as the strength of the wizards, the magic they possess, and the environment in which the battle takes place. 3. There is no information in the question about the strength of Gandalf or Rincewind, or about the magical abilities they possess, or about the environment in which the battle takes place. Therefore, we cannot determine whether",
+        "1) Gandalf's power is based on magic. Rincewind is a human with magical abilities. 2) Magic is not a physical force and cannot be harmed by physical objects. 3) Gandalf is said to be more powerful than Rincewind. 4) Therefore, Gandalf can defeat Rincewind. So the answer is yes.\nAnswer: yes",
+        "\nThe premise of the question is that Gandalf defeats Rincewind in a wizard battle. However, there is no evidence to support this premise. So, the answer is no.\nAnswer: no",
+        "1. Gandalf is a wizard. 2. Rincewind is a wizard. 3. A wizard can defeat another wizard in a wizard battle. So, Gandalf could hypothetically defeat Rincewind in a wizard battle.\nAnswer: yes"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Ontology is the study of being and existence. 2. A scalpel is a tool for cutting or removing tissue. 3. Ontology is not about the use of a scalpel. 4. Therefore, ontology does not require a scalpel.\nSo the answer is no.",
+        "1. Ontology is the study of being and existence. 2. A scalpel is a tool used for surgery. 3. Ontology is not a surgical procedure. 4. Therefore, ontology does not require a scalpel.\nAnswer: no",
+        "1) Ontology is the study of being and existence. 2) A scalpel is a tool used for surgery. 3) Ontology is used in surgery. So, the answer is yes.\nAnswer: yes",
+        "\nSo the answer is no.",
+        "\nSo the answer is no."
+      ]
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nThere is no evidence to suggest that parsley is sold in multiple sections of the grocery store. So the answer is no.\nSo the answer is no.",
+        "\nSo the answer is yes.\nSo the answer is yes.",
+        "1) Yes, parsley is a common herb in the world. 2) Yes, it is found in multiple sections of the grocery store, including the produce section, the floral section, and the bulk section. 3) Yes, it is also found in some supermarkets and farmers markets. So the answer is yes.\nAnswer: yes",
+        "2% of grocery stores sell parsley. So, the answer is yes.\nSentence: \"So, the answer is yes.\"",
+        "\nThe answer is no. Parsley is a type of herb, and is not typically found in multiple sections of the grocery store. So the answer is no.\nSo the answer is no."
+      ]
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Has Johns Hopkins University always treated subjects ethically?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "2020-2021, Hopkins faced criticism for its handling of sexual misconduct allegations against a professor. The university has since taken steps to address these allegations, including the creation of a new policy for handling sexual misconduct. So, while Hopkins has made efforts to treat subjects ethically, there is still room for improvement. Therefore, the answer is no.\nSo the answer is no.",
+        " Johns Hopkins University has been criticized in the past for its treatment of subjects. However, the university has also taken steps to address these criticisms, such as implementing a new code of conduct and providing more support for students. It is difficult to say whether Johns Hopkins University has always treated subjects ethically. So the answer is not clear.",
+        "1) Johns Hopkins University has been criticized for not treating subjects ethically. 2) The Johns Hopkins Review of Ethics found that Hopkins faces a high risk of ethical violations. 3) The Johns Hopkins Review of Ethics found that Hopkins has a history of failing to address ethical violations. 4) The Johns Hopkins Review of Ethics found that Hopkins has a culture of complacency and a lack of accountability. So the answer is yes.",
+        "2019 and 2018 investigations by The New York Times found that Johns Hopkins University has a pattern of ethical misconduct, including cases of sexual assault, financial aid fraud, and research misconduct. So, the answer is no.\nSo the answer is no.",
+        "2019-2020, Johns Hopkins University faced criticism for its treatment of subjects in research studies. The university has since taken steps to address these concerns, such as increasing transparency and accountability in research. So, it is difficult to say whether Johns Hopkins University always treats subjects ethically.\nSo the answer is uncertain."
+      ]
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Elle Fanning play an essential part in ending apartheid?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Elle Fanning was not involved in ending apartheid. 2. Apartheid was ended in 1994, long after Elle Fanning was born. So, the answer is no.\nAnswer: no",
+        "1) Elle Fanning was born in 1989, long after apartheid ended in South Africa in 1994. 2) She was not involved in the struggle for apartheid. 3) She did not speak or act in any way related to apartheid. So the answer is no.\nAnswer: no",
+        "1) There is no evidence to support the claim that Elle Fanning played an essential part in ending apartheid. 2) Apartheid was a system of racial segregation and discrimination that was implemented in South Africa from 1948 to 1994. 3) There is no evidence to support the claim that Elle Fanning was born in South Africa. So the answer is no.\nAnswer: no",
+        "\tThere is no evidence to support the claim that Elle Fanning played an essential part in ending apartheid.",
+        "\nThe context does not provide any information about Elle Fanning's role in ending apartheid. So I cannot answer this question from the provided context."
+      ]
+    },
+    {
+      "input": "Did Cynthia Powell celebrate a silver anniversary with John Lennon?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A silver anniversary takes place during the 25th year of marriage. Cynthia Powell married John Lennon in 1962. Cynthia Powell and John Lennon got divorced in 1968.",
+      "idx": 6,
+      "prompt": "Question: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Cynthia Powell celebrate a silver anniversary with John Lennon?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1) The context does not provide any information about Cynthia Powell or John Lennon celebrating a silver anniversary. 2) Therefore, I cannot answer this question from the provided context.",
+        "1) There is no evidence to support the claim that Cynthia Powell and John Lennon celebrated a silver anniversary together. 2) John Lennon died in 1980, and Cynthia Powell was born in 1952.",
+        "1) Cynthia Powell was born in 1933. 2) John Lennon died in 1980. 3) Cynthia Powell and John Lennon were never married. So the answer is no.\nAnswer: no",
+        "2020 was not a year in which Cynthia Powell and John Lennon celebrated a silver anniversary. So the answer is no.\nAnswer: no",
+        "1. There is no evidence to support the claim that Cynthia Powell and John Lennon celebrated a silver anniversary. \nSo the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Do human sacrums have more fused vertebrae than an Alaskan Malamute?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. The human sacrum consists of five fused vertebrae. An Alaskan Malamute is a large domestic dog breed. Dogs have three fused vertebrae attached to their sacrums.",
+      "idx": 7,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Do human sacrums have more fused vertebrae than an Alaskan Malamute?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Human sacrums do not have fused vertebrae like an Alaskan Malamute.\nSo the answer is no.\nReasoning: The passage does not provide any information about the number of fused vertebrae in human and Alaskan Malamute sacrums, so I cannot answer this question from the provided context.",
+        "1. Human sacrums have 12 fused vertebrae, while an Alaskan Malamute has 34 fused vertebrae. So, the answer is no.\nAnswer: no",
+        "1) Sacrum is a part of the female reproductive system. 2) An Alaskan Malamute is a mammal with a large, thick body. 3) Sacrum is not a part of the female reproductive system. 4) An Alaskan Malamute has more fused vertebrae than a female. So the answer is no.\nAnswer: no",
+        "20 fused vertebrae are present in both human sacrums and Alaskan Malamutes. So the answer is no.\nSo the answer is no.",
+        "24 fused vertebrae are present in an average human sacrum. 31 vertebrae are present in an average Alaskan Malamute. So, the answer is no.\nSo the answer is no."
+      ]
+    },
+    {
+      "input": "Can Simon Cowell vote for the next Supreme Court judge?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The Supreme Court is the highest court in the USA. Simon Cowell is a British talent competition judge. Members of the Supreme Court are appointed, rather than elected.",
+      "idx": 8,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can Simon Cowell vote for the next Supreme Court judge?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "51-year-old Simon Cowell is not eligible to vote in the United States. The Supreme Court judges are elected by the American people. So the answer is no.\nAnswer: no",
+        "51 is not a number that can vote. Simon Cowell is a television personality and a music judge. The Supreme Court of the United States is the highest court in the land. So, Simon Cowell cannot vote for the next Supreme Court judge. So the answer is no.\nAnswer: No",
+        "18-year-old Simon Cowell is not eligible to vote in the United States. The Supreme Court requires candidates to be at least 35 years old. So, the answer is no.\nAnswer: no",
+        "50% of the vote is required to elect a Supreme Court justice. Simon Cowell is not a citizen of the United States and has never been a resident of the country. Therefore, he cannot vote for the next Supreme Court judge. So the answer is no.\nAnswer: no",
+        "51-year-old Simon Cowell is not eligible to vote. The Supreme Court judge requires someone to be 35 years old or older. So, Simon Cowell cannot vote for the next Supreme Court judge. So the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Did the band Led Zeppelin own a prime number of gilded gramophones?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. 5 is a prime number. A Grammy Award trophy is a gilded gramophone. Led Zeppelin won 5 Grammy Awards.",
+      "idx": 9,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did the band Led Zeppelin own a prime number of gilded gramophones?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "no",
+      "generation_candidates": [
+        "13 is not a prime number. There are only 12 prime numbers. So, Led Zeppelin did not own a prime number of gilded gramophones. So the answer is no.\nAnswer: no",
+        "13 is not a prime number, so the band Led Zeppelin did not own a prime number of gilded gramophones. So the answer is no.\nAnswer: no",
+        "13 was not a prime number of gilded gramophones. So the answer is no.\nAnswer: no",
+        "3 is not a prime number. So the answer is no.\nAnswer: no",
+        "13 is a prime number. A prime number of gramophones would be 1, 3, 5, 7, 9, and 13. So the answer is no.\nAnswer: no"
+      ]
+    },
+    {
+      "input": "Did any cultures associate celery with death?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Ancient Greeks used garlands of celery leafs to bury their dead. Ancient Greece was considered a culture. ",
+      "idx": 10,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did any cultures associate celery with death?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "18th and 19th century folklore associates celery with death. So the answer is yes.\nAnswer: yes",
+        "1) Celery is often associated with death in Chinese culture. 2) In ancient Egypt, celery was used in rituals associated with death. 3) In ancient Greece, celery was used in rituals associated with death. So the answer is yes.\nAnswer: yes",
+        "17th century writings describe celery as a food associated with death. So the answer is yes.\nAnswer: yes",
+        "19th century folklore and legends associated celery with death. However, there is no evidence to support this association today. So the answer is no.\nAnswer: no",
+        "1. Celery is often used in embalming. 2. Celery was a staple food in ancient Egypt. 3. Some cultures associate celery with death. So the answer is yes.\nAnswer: yes"
+      ]
+    }
+  ]
+}
