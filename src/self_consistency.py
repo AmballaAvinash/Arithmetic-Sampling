@@ -118,7 +118,7 @@ class SelfConsistency(LLMWrapper):
                     
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
-                    # breakpoint()
+                    breakpoint()
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
                     # breakpoint()
