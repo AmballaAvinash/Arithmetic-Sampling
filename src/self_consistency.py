@@ -80,7 +80,7 @@ class SelfConsistency(LLMWrapper):
 
         # Get LLM generations
         if 'strategy_qa' in task_name:
-            inf_fn_kwargs.update(self.task_logits_processors['strat_qa'])
+            inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
         breakpoint()
         # breakpoint()
         _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
