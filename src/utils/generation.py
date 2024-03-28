@@ -60,7 +60,7 @@ class TruncateLogitsProcessor(LogitsProcessor):
         cur_len = input_ids.shape[-1]
         max_score_ids = torch.argmax(scores, dim=1)
         for i in range(len(max_score_ids)):
-            if (max_score_ids[i] in self.tokenizer('Question').input_ids) :
+            if (max_score_ids[i] in self.tokenizer(self.stop_word).input_ids or self.tokenizer.decode(max_score_ids[i]).find(self.stop_word) != -1) :
                 scores[i][:] = -float('inf')
                 scores[i][self.eos_token_id[0]] = 0
         scores.to(input_ids.device)
