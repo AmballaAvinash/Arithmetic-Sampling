@@ -1,0 +1,30 @@
+Results for N=10,T=0.5:
+Arithmetic N-gram Diversity: 1.0787382559122025
+Ancestral N-gram Diversity: 1.065934269221587
+Arithmetic Accuracy: 0.42000000000000004
+Ancestral Accuracy: 0.37
+Results for N=10,T=1.0:
+Arithmetic N-gram Diversity: 1.5758391542385128
+Ancestral N-gram Diversity: 1.5823153817020323
+Arithmetic Accuracy: 0.35
+Ancestral Accuracy: 0.35
+Results for N=10,T=0.5:
+Arithmetic N-gram Diversity: 1.2540567456516505
+Ancestral N-gram Diversity: 1.2134647913367156
+Arithmetic Accuracy: 0.14
+Ancestral Accuracy: 0.2
+Results for N=10,T=1.0:
+Arithmetic N-gram Diversity: 1.5982427712095881
+Ancestral N-gram Diversity: 1.572369745653383
+Arithmetic Accuracy: 0.30999999999999994
+Ancestral Accuracy: 0.29999999999999993
+Results for N=10,T=0.5:
+Arithmetic N-gram Diversity: 1.1026155813862732
+Ancestral N-gram Diversity: 1.1326563051024314
+Arithmetic Accuracy: 0.36
+Ancestral Accuracy: 0.37000000000000005
+Results for N=10,T=1.0:
+Arithmetic N-gram Diversity: 1.6903688641315973
+Ancestral N-gram Diversity: 1.7234981135968344
+Arithmetic Accuracy: 0.22999999999999998
+Ancestral Accuracy: 0.32
