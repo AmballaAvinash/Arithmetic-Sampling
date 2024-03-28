@@ -150,9 +150,10 @@ class LLMWrapper:
         #     decoding_args['logits_processor'][0].set_prompt_len(prompt_tokenized.input_ids.size(1))
         # breakpoint()
         # Generate
+        breakpoint()
         with torch.no_grad():
             # breakpoint()
-            outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+            outputs = self.model.generate(**prompt_tokenized, decoding_args,
                                           return_dict_in_generate=True, output_scores=True)
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
