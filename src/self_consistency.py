@@ -59,7 +59,7 @@ class SelfConsistency(LLMWrapper):
               verbose=False, out_dir=None, n_shots=None,
              retrieval_strategy=None, run_id=str(int(time.time())), **inf_fn_kwargs):
 
-        breakpoint()
+        # breakpoint()
         if metrics is None:
             metrics = copy.deepcopy(self.default_metrics)
         eval_args = copy.deepcopy(locals())
@@ -101,6 +101,9 @@ class SelfConsistency(LLMWrapper):
                 # for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
                 ex = copy.deepcopy(_ex)
                 if _strat == 'greedy':
+                    inf_fn_kwargs.update({
+                        "num_return_sequences" :  1
+                    })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
