@@ -52,9 +52,11 @@ class LLMWrapper:
         tokenizer_args = {}
         cls_model = AutoModelForCausalLM
         if self.is_llama2:
+            breakpoint()
             cls_tokenizer = LlamaTokenizer
             tokenizer_args.update({"add_bos_token": True, "add_eos_token": False})
             cls_model = LlamaForCausalLM
+            cls_model = cls_model.bfloat16().cuda()
             # cls_tokenizer.pad_token = cls_tokenizer.eos_token
             # cls_model.config.pad_token_id = cls_model.config.eos_token_id
         self.tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
