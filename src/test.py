@@ -165,8 +165,10 @@ def test(prompt_arr, model_name, model, tokenizer, data, batch, default_fwd_targ
                 use_arithmetic = False
                 )
             
-            decode_arith_toppk = tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)
-            decode_temp_toppk = tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)
+            
+            
+            decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
+            decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
                    
             num_decodes = 0
             for j in range(idx-batch+1,idx+1):
