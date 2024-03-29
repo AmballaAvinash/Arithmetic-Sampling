@@ -1,0 +1,324 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_20_fewshot_greedy_29_03_01_03_0",
+  "n_total": 20,
+  "eval_args": {
+    "max_new_tokens": 100,
+    "do_sample": false,
+    "top_p": 1.0,
+    "temperature": 0.5,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 1,
+    "renormalize_logits": true
+  },
+  "scores": {
+    "accuracy.accuracy": 0.3,
+    "ngram_diversity.ngram_diversity": 0.15
+  },
+  "time_taken": {
+    "sampling": 0.879908561706543
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Gandalf is a wizard. 2. Rincewind is a wizard. 3. Gandalf is stronger than Rincewind. 4. Gandalf defeats Rincewind. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. Ontology is a branch of philosophy. 2. Philosophy is a branch of the humanities. 3. The humanities are a branch of the arts. 4. The arts are a branch of the sciences. 5. The sciences are a branch of the natural sciences. 6. The natural sciences are a branch of the physical sciences. 7. The physical sciences are a branch of the social sciences. 8. The social sciences are a branch of the humanities. 9"
+      ]
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Parsley is a herb. 2. Herbs are used in cooking. 3. Herbs are used in cooking in multiple sections of the grocery store. Thus, it is normal to find parsley in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Has Johns Hopkins University always treated subjects ethically?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1993 was the first year that Johns Hopkins University began to treat subjects ethically. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Elle Fanning play an essential part in ending apartheid?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1994 was the year that apartheid ended. Elle Fanning was born in 2002. Elle Fanning was 10 years old in 1994. Elle Fanning was 12 years old in 2002. Elle Fanning was 12 years old in 1994. Elle Fanning was 12 years old in 2002. Elle Fanning was 12 years old in 1994. Elle Fanning was"
+      ]
+    },
+    {
+      "input": "Did Cynthia Powell celebrate a silver anniversary with John Lennon?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A silver anniversary takes place during the 25th year of marriage. Cynthia Powell married John Lennon in 1962. Cynthia Powell and John Lennon got divorced in 1968.",
+      "idx": 6,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Cynthia Powell celebrate a silver anniversary with John Lennon?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1969 was the year of the Silver Jubilee of Queen Elizabeth II. Cynthia Powell was married to John Lennon in 1969. Thus, Cynthia Powell celebrated a silver anniversary with John Lennon. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Do human sacrums have more fused vertebrae than an Alaskan Malamute?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. The human sacrum consists of five fused vertebrae. An Alaskan Malamute is a large domestic dog breed. Dogs have three fused vertebrae attached to their sacrums.",
+      "idx": 7,
+      "prompt": "Question: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Do human sacrums have more fused vertebrae than an Alaskan Malamute?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. The sacrum is the last bone in the spine. 2. The sacrum is fused to the coccyx. 3. The coccyx is fused to the tailbone. 4. The tailbone is fused to the pelvis. 5. The pelvis is fused to the femur. 6. The femur is fused to the tibia. 7. The tibia is fused to the fibula. 8. The fibula is fused to the talus."
+      ]
+    },
+    {
+      "input": "Can Simon Cowell vote for the next Supreme Court judge?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The Supreme Court is the highest court in the USA. Simon Cowell is a British talent competition judge. Members of the Supreme Court are appointed, rather than elected.",
+      "idx": 8,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can Simon Cowell vote for the next Supreme Court judge?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. Simon Cowell is a judge on the American Idol. 2. The American Idol is a reality TV show. 3. The American Idol is a reality TV show that is judged by a panel of judges. 4. The panel of judges on the American Idol is made up of Simon Cowell, Paula Abdul, Randy Jackson, and Kara DioGuardi. 5. The panel of judges on the American Idol is made up of 4 people. 6. The panel of judges"
+      ]
+    },
+    {
+      "input": "Did the band Led Zeppelin own a prime number of gilded gramophones?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. 5 is a prime number. A Grammy Award trophy is a gilded gramophone. Led Zeppelin won 5 Grammy Awards.",
+      "idx": 9,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did the band Led Zeppelin own a prime number of gilded gramophones?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1 is a prime number. 2 is a prime number. 3 is a prime number. 4 is a prime number. 5 is a prime number. 6 is a prime number. 7 is a prime number. 8 is a prime number. 9 is a prime number. 10 is a prime number. 11 is a prime number. 12 is a prime number. 13 is a prime number. 14 is a prime"
+      ]
+    },
+    {
+      "input": "Did any cultures associate celery with death?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Ancient Greeks used garlands of celery leafs to bury their dead. Ancient Greece was considered a culture. ",
+      "idx": 10,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did any cultures associate celery with death?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. The word \"celery\" is derived from the Latin word \"celere\", which means \"to run\". 2. The word \"celery\" is also derived from the Latin word \"celeritas\", which means \"speed\". 3. The word \"celery\" is also derived from the Latin word \"celeritas\", which means \"speed\". 4. The word \"celery\" is also derived from the Latin word \"celeritas\", which means \"speed\". 5. The word"
+      ]
+    },
+    {
+      "input": "Did the Coen brothers ever collaborate with the Brothers Grimm?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The Coen brothers were born in 1954 and 1957. The Brothers Grimm died in 1859 and 1863.",
+      "idx": 11,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did the Coen brothers ever collaborate with the Brothers Grimm?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1) The Coen brothers are brothers. 2) The Brothers Grimm are brothers. 3) The Coen brothers and the Brothers Grimm are brothers. Thus, the Coen brothers and the Brothers Grimm are brothers. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Can Stone Cold Steve Austin apply his finisher to a mule deer?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Steve Austin's finisher, The Stone Cold Stunner, involves lifting the opponent and then pulling their head down. The largest male mule deer's are around 330 pounds. Steve Austin has applied his finisher to the wrestler The Big Show. The Big Show weighs 383 pounds.",
+      "idx": 12,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can Stone Cold Steve Austin apply his finisher to a mule deer?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1) Stone Cold Steve Austin is a professional wrestler. 2) A mule deer is a deer. 3) A mule deer is a deer. 4) A mule deer is a deer. 5) A mule deer is a deer. 6) A mule deer is a deer. 7) A mule deer is a deer. 8) A mule deer is a deer. 9) A mule deer is a deer. 10) A mule deer is a"
+      ]
+    },
+    {
+      "input": "Is 3D printing able to make adenovirus?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. 3D printers come with limitations in terms of precision. The standard nozzle output is about 0.4 mm. Therefore, if you are planning to print something that is below 0.4mm, you will not get a useful item. Adenoviruses are medium-sized (90\u2013100 nm), nonenveloped (without an outer lipid bilayer) viruses with an icosahedral nucleocapsid containing a double stranded DNA genome.",
+      "idx": 13,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is 3D printing able to make adenovirus?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "3D printing is a type of additive manufacturing. Adenovirus is a type of virus. Thus, 3D printing is not able to make adenovirus. So the answer is no.\nAnswer: no\n"
+      ]
+    },
+    {
+      "input": "Does the United States Secretary of State answer the phones for the White House?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. The role of United States Secretary of State carries out the President's foreign policy. The White House has multiple phone lines managed by multiple people.",
+      "idx": 14,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does the United States Secretary of State answer the phones for the White House?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. The United States Secretary of State is the head of the State Department. 2. The State Department is the department of the United States government that deals with foreign affairs. 3. The White House is the official residence of the President of the United States. 4. The President of the United States is the head of state of the United States. 5. The President of the United States is the head of government of the United States. 6. The President of the United"
+      ]
+    },
+    {
+      "input": "Would a lullaby be enough to wake Hellen Keller up?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Lullabies can be sung or played via instrument. Hellen Keller was deaf. ",
+      "idx": 15,
+      "prompt": "Question: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Would a lullaby be enough to wake Hellen Keller up?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Hellen Keller was deaf and blind. 2. A lullaby is a song that is sung to a baby. 3. A baby is not deaf and blind. 4. Thus, a lullaby would not be enough to wake Hellen Keller up. So the answer is no.\nAnswer: no\n"
+      ]
+    },
+    {
+      "input": "Could Bob Marley's children hypothetically win tug of war against Kublai Khan's children?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Bob Marley had 9 children. Kublai Khan had 23 children. Many of Bob Marley's children became singers, and followed his themes of peace and love. The children of Kublai Khan followed in his footsteps and were fierce warlords.",
+      "idx": 16,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Could Bob Marley's children hypothetically win tug of war against Kublai Khan's children?\nReasoning: ",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1) Bob Marley was born in 1945. 2) Kublai Khan was born in 1369. 3) The year 1945 is less than the year 1369. 4) Thus, Bob Marley's children could hypothetically win tug of war against Kublai Khan's children. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Was Achilles a direct descendent of Gaia?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Achilles was the son of a Nereid.  The Nereids were the 50 daughters of Nereus. Nereus was the eldest son of the union between Gaia and Pontus.",
+      "idx": 17,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Was Achilles a direct descendent of Gaia?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Achilles is a direct descendent of Zeus. 2. Zeus is a direct descendent of Gaia. Thus, Achilles is a direct descendent of Gaia. So the answer is yes.\nAnswer: yes\n"
+      ]
+    },
+    {
+      "input": "Can dementia be cured with a cast?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Dementia refers to various disorders of the brain. Casts are used to help treat broken bones. The brain does not contain any bones.",
+      "idx": 18,
+      "prompt": "Question: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Can dementia be cured with a cast?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1. Dementia is a disease. 2. A cast is a type of bandage. 3. A bandage is a type of cast. 4. A cast is a type of bandage. 5. A bandage is a type of cast. 6. A cast is a type of bandage. 7. A bandage is a type of cast. 8. A cast is a type of bandage. 9. A bandage is a type of cast. 10. A"
+      ]
+    },
+    {
+      "input": "Did Rand Paul frequently swim in Lake Michigan during his undergraduate years?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Rand Paul joined the swim team when he attended Baylor University. Baylor University is located in Waco, Texas. Lake Michigan is nearly 1,000 miles from Waco, Texas.",
+      "idx": 19,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Rand Paul frequently swim in Lake Michigan during his undergraduate years?\nReasoning: ",
+      "reference": "no",
+      "prediction": "nan",
+      "generation_candidates": [
+        "1) Rand Paul attended the University of Kentucky. 2) The University of Kentucky is located in Lexington, Kentucky. 3) Lexington is located in the Bluegrass region of Kentucky. 4) The Bluegrass region is located in the Midwest. 5) The Midwest is located in the United States. 6) The United States is located in North America. 7) North America is located in the Northern Hemisphere. 8) The Northern Hemisphere is located in the Northern Hemisphere."
+      ]
+    },
+    {
+      "input": "Is watermelon safe for people with a tricarboxylic acid allergy?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Tricarboxylic acid as an acid that manifests itself in fruits as citric acid. Citric acid can be found in citrus fruits such as oranges and lemon. Watermelon is not a citrus fruit.",
+      "idx": 20,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is watermelon safe for people with a tricarboxylic acid allergy?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1. Watermelon is a fruit. 2. People with a tricarboxylic acid allergy are allergic to fruits. 3. Thus, watermelon is safe for people with a tricarboxylic acid allergy. So the answer is yes.\nAnswer: yes\n"
+      ]
+    }
+  ]
+}
