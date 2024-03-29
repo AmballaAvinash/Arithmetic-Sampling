@@ -8,7 +8,7 @@ from tqdm import tqdm
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.util import ngrams
 from transformers import BitsAndBytesConfig
-from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration
+from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer
 
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -37,16 +37,18 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
     
     if model_name=="llama-2":
         cls_model = LlamaForCausalLM 
-        # cls_tokenizer = LlamaTokenizer
+        cls_tokenizer = LlamaTokenizer
         # tokenizer_args.update({"add_bos_token": True, "add_eos_token": False})
         
         # cls_tokenizer.pad_token = cls_tokenizer.eos_token
         # cls_model.config.pad_token_id = cls_model.config.eos_token_id
     elif model_name=="flan-t5":
-        cls_model = AutoModelForSeq2SeqLM
+        cls_model = T5ForConditionalGeneration
+        cls_tokenizer = T5Tokenizer
         # torch_dtype = torch.float32  # because of a logsoftmax error with half precision; TODO: double-check
     elif model_name=="gemma":
-        cls_model = GemmaForCausalLM
+        cls_model = AutoModelForCausalLM
+        cls_tokenizer = AutoTokenizer
         
     tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
 
@@ -60,7 +62,7 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                                             # low_cpu_mem_usage=low_cpu_mem_usage,
                                             cache_dir = '/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/models/.cache',
                                             trust_remote_code=True,
-                                            ).to('cuda')
+                                            )
     
     else:
         model = cls_model.from_pretrained(model,
@@ -69,7 +71,7 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                                             # low_cpu_mem_usage=low_cpu_mem_usage,
                                             cache_dir = '/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/models/.cache',
                                             trust_remote_code=True,
-                                            load_in_8bit=load_in_8bit).to('cuda')
+                                            load_in_8bit=load_in_8bit)
     
     tokenizer.pad_token =  tokenizer.eos_token
     model.config.pad_token_id = model.config.eos_token_id
