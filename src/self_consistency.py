@@ -197,10 +197,11 @@ class SelfConsistency(LLMWrapper):
             res_dir += [run_id]
             res_dir = f"{'_'.join(res_dir)}"
             # breakpoint()
+            llm_decoding_args_to_save = {k:v for k,v in llm_decoding_args.items() if k != "logits_processor"}
             results[_strat] = {
                 "experiment": res_dir,
                 "n_total": len(dataset),
-                "eval_args": llm_decoding_args,
+                "eval_args": llm_decoding_args_to_save,
                 "scores": metric_results[_strat],
                 "time_taken": {
                     "sampling": end_time - start_time,
