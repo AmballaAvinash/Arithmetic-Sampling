@@ -13,9 +13,9 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def cot_reasoning(
-    output_filename, model, tokenizer, data, prompt_prefix, num_samples, temperature
+    output_filename, model, tokenizer, data, prompt_prefix, num_samples, temperature, num_examples, num_shots
 ):
-    arg_key = f"N={num_samples},T={temperature}"
+    arg_key = f"num_examples={num_examples}, num_samples={num_samples}, temperature={temperature}, shots={num_shots}"
     outputs = {}
     if os.path.exists(output_filename):
         with open(output_filename, "r") as output_file:
@@ -80,6 +80,12 @@ def cot_reasoning(
         }
     with open(output_filename, "w") as output_file:
         json.dump(outputs, output_file)
+
+def analyze_results(output_filename, num_examples):
+    outputs = {}
+    if os.path.exists(output_filename):
+        with open(output_filename, "r") as output_file:
+            outputs = json.load(output_file)
     for arg_key, data in outputs.items():
         print(f"Results for {arg_key}:")
         arithmetic_ngram_diversity = 0
@@ -93,7 +99,6 @@ def cot_reasoning(
             ancestral_ngram_diversity += example["metrics"]["ancestral_ngram_diversity"]
             arithmetic_accuracy += example["metrics"]["arithmetic_accuracy"]
             ancestral_accuracy += example["metrics"]["ancestral_accuracy"]
-        num_examples = len(data)
         print(
             f"Arithmetic N-gram Diversity: {arithmetic_ngram_diversity / num_examples}"
         )
@@ -104,13 +109,15 @@ def cot_reasoning(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--num-shots", type=int, default=0)
+    parser.add_argument("--num-shots", type=int, nargs="*", default=[0, 1])
     parser.add_argument("--model", default="flan-t5-large")
     parser.add_argument("--dataset", default="gsm8k")
     parser.add_argument("--quant-8-bit", action="store_true")
     parser.add_argument("-D", "--num-examples", type=int, default=30)
-    parser.add_argument("-N", "--num-samples", type=int, default=10)
-    parser.add_argument("-T", "--temperature", type=float, default=0.5)
+    parser.add_argument("-N", "--num-samples", type=int, nargs="*", default=[10])
+    parser.add_argument("-T", "--temperature", type=float, nargs="*", default=[0.5])
+    parser.add_argument("-k", "--top-k", type=int|None, nargs="*", default=[None])
+    parser.add_argument("-p", "--top-p", type=int|None, nargs="*", default=[None])
     parser.add_argument("--seed", type=int, default=1379)
     parser.parse_args()
     args = parser.parse_args()
@@ -136,18 +143,20 @@ if __name__ == "__main__":
         .shuffle(seed=args.seed)
         .select(range(args.num_examples))
     )
-
-    prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=args.num_shots)
-    if args.num_shots == -1:
-        output_filename = f"{args.model}__{args.dataset}__all-shot__output.json"
-    else:
-        output_filename = f"{args.model}__{args.dataset}__{args.num_shots}-shot__output.json"
-    cot_reasoning(
-        output_filename,
-        model,
-        tokenizer,
-        dataset,
-        prompt_prefix,
-        num_samples=args.num_samples,
-        temperature=args.temperature,
-    )
+    output_filename = f"{args.model}__{args.dataset}__output.json"
+    for num_shot in args.num_shots:
+        prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=num_shot)
+        for N in args.num_samples:
+            for T in args.temperature:
+                cot_reasoning(
+                    output_filename,
+                    model,
+                    tokenizer,
+                    dataset,
+                    prompt_prefix,
+                    num_samples=N,
+                    temperature=T,
+                    num_examples=args.num_examples,
+                    num_shots=num_shot
+                )
+    analyze_results(output_filename=output_filename, num_examples=args.num_examples)
