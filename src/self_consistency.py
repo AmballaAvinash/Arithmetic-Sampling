@@ -80,8 +80,8 @@ class SelfConsistency(LLMWrapper):
 
         # Get LLM generations
         if 'strategy_qa' in task_name:
-            print("no logits processor")
-            # inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
+            # print("no logits processor")
+            inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
         # breakpoint()
         # breakpoint()
         _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
@@ -105,7 +105,8 @@ class SelfConsistency(LLMWrapper):
                 ex = copy.deepcopy(_ex)
                 if _strat == 'greedy':
                     inf_fn_kwargs.update({
-                        "num_return_sequences" :  1
+                        "num_return_sequences" :  1,
+                        "do_sample": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
@@ -119,7 +120,7 @@ class SelfConsistency(LLMWrapper):
                     
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
-                    breakpoint()
+                    # breakpoint()
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
                     # breakpoint()
@@ -199,7 +200,7 @@ class SelfConsistency(LLMWrapper):
             results[_strat] = {
                 "experiment": res_dir,
                 "n_total": len(dataset),
-                "eval_args": eval_args,
+                "eval_args": llm_decoding_args,
                 "scores": metric_results[_strat],
                 "time_taken": {
                     "sampling": end_time - start_time,
