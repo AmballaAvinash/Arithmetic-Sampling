@@ -242,7 +242,7 @@ if __name__ == '__main__':
     # llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
     metrics =[{"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},{"name": "ngram_diversity", 'score_keys': ['ngram_diversity'], 'args': {}}]
     inf_fn_kwargs = {
-                    "max_new_tokens": 100,
+                    "max_new_tokens": 200,
                     "do_sample": False,  # enable sampling
                     "top_p": args.eval_output_top_p if args.eval_output_top_p is not None else default_decoding_args["eval_output_top_p"],  # nucleus sampling
                     "temperature": args.eval_output_temperature if args.eval_output_temperature is not None else default_decoding_args["temperature"],  # lower makes the distribution sharper
