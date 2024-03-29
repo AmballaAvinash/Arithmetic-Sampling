@@ -206,8 +206,8 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 500
-    batch = 1
+    samplesize = 50 #500
+    batch = 2
     model_name = "gemma" # ["llama-2", "flan-t5", "gemma"]
     model = "google/gemma-2b" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b", "google/gemma-7b"]
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
