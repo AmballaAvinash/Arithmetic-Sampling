@@ -83,14 +83,13 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
     default_fwd_instruction = "Translate the following German sentence to an English sentence."
     default_fwd_input_prefix = "German sentence: "
     default_fwd_target_prefix = "English sentence: "
-    prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
     
     results = {}
     for N in [5, 10]: # num_decodes
         for temp in [0.5, 1.0]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
-                   output_dict = test(prompt_arr, model_name, model, tokenizer, data, batch, default_fwd_target_prefix, N, temp, p, k )
+                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, N, temp, p, k )
                    avg_bleu_arith_toppk = []
                    avg_bleu_temp_toppk = []
                    avg_ngram_arith_toppk = []
@@ -123,13 +122,14 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                    
                    
 
-def test(prompt_arr, model_name, model, tokenizer, data, batch, default_fwd_target_prefix, N = 1, temp = 1, p=1, k = 50):
+def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, N = 1, temp = 1, p=1, k = 50):
     output_dict = {}
     
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
         if idx%batch==0:
             input_batch =[]
-
+            
+        prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
         prompt_arr.append(d['de'])
         prompt_arr.append(default_fwd_target_prefix)
         input_prompt = (' ').join(prompt_arr)  # join the sentences
@@ -209,9 +209,10 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 
 if __name__ == "__main__":
     samplesize = 10 #500
-    batch = 1
-    model_name = "llama-2" # ["llama-2", "flan-t5", "gemma"]
-    model = "meta-llama/Llama-2-7b-hf" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b", "google/gemma-7b"]
+    batch = 2
+    model_name = "flan-t5" # ["llama-2", "flan-t5", "gemma"]
+    # it versions and quantized
+    model = "google/flan-t5-large" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b", "google/gemma-7b"]
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
     run_experiments(model_name, model, data, batch, load_in_8bit=False)
     
