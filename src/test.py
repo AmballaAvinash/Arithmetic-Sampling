@@ -210,9 +210,9 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 if __name__ == "__main__":
     samplesize = 10 #500
     batch = 2
-    model_name = "gemma" # ["llama-2", "flan-t5", "gemma"]
+    model_name = "llama-2" # ["llama-2", "flan-t5", "gemma"]
     # it versions and quantized
-    model = "google/gemma-2b-it" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b-it", "google/gemma-7b-it"]
+    model = "meta-llama/Llama-2-7b-hf" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b-it", "google/gemma-7b-it"]
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
     run_experiments(model_name, model, data, batch, load_in_8bit=False)
     
