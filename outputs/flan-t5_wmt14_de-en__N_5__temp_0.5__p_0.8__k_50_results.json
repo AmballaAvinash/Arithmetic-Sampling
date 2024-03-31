@@ -1,1 +1,1 @@
-{"Num decodes": 5, "temperature": 0.5, "Top p ": 0.8, "Top k": 50, "BLEU Arithmetic": 0.09836633646499239, "BLEU Sampling": 0.0872245908304411, "N gram diversity Arithmetic": 1.1717907101125644, "N gram diversity Sampling": 1.2235214243102017}
+{"Num decodes": 5, "temperature": 0.5, "Top p ": 0.8, "Top k": 50, "BLEU Arithmetic": 0.15305846702174847, "BLEU Sampling": 0.144019412401577, "N gram diversity Arithmetic": 1.9961754169395909, "N gram diversity Sampling": 1.951599688736713}
