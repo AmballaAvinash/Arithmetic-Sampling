@@ -167,8 +167,8 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             
             
             
-            decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
-            decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n') for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
+            decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
+            decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
                    
             num_decodes = 0
             for j in range(idx-batch+1,idx+1):
