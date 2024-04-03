@@ -53,7 +53,7 @@ class SelfConsistency(LLMWrapper):
             demo_questions = [d['input'] for d in self.datasets['demo']]
             strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = strat_data
-        elif args.dataset_name == 'commonsense_qa':
+        elif 'commonsense_qa' in args.dataset_name:
             demo_file_path = '/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/demos/commonsense_qa_demos.json'
             with open(demo_file_path, 'r') as f:
                 self.datasets['demo'] = json.load(f)
