@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 default_strat_qa_instruction = """Like each of the previous examples, answer the question with either "Yes" or "No".
 Provide reasoning for your answer.
 End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
+default_commonsense_qa_instruction = """Like each of the previous examples, answer the question with either of the answer choices provided.
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
@@ -122,7 +125,24 @@ def construct_args_from_example(d,task_name):
                 "demos_split":'demo',
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
-    if 'arc' in task_name:
+    elif 'commonsense_qa' in task_name:
+        options = ['('+ l.lower() + ') ' + t  for l,t in zip(d['choices']['label'],d['choices']['text'])]
+        options_text = ' Answer choices: ' +' '.join(options_text)
+        question = d['question'] + options_text
+        answer = d['answerKey'].lower()
+        # answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
+        # target = d['answerKey'].lower()
+        return {'question':question,
+                "answer" : answer,
+                'instructions': default_strat_qa_instruction,
+                "question_prefix" : default_question_prefix,
+                "answer_prefix": default_answer_prefix,
+                "reasoning_prefix":default_reasoning_prefix,
+                "n_shots" : 6,
+                "demos_split":'demo',
+                "task_name" : task_name,
+                'construct_args_fn' : construct_args_from_example}, answer
+    elif 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
         options = d['choices']['text']
@@ -137,6 +157,30 @@ def fix_posthoc(decoded,task_name):
             "so the answer is": r"so\s+the\s+answer\s+is\s+(\w+)",
             "so the answer to the question is": r"so\s+the\s+answer\s+to\s+the\s+question\s+is\s+(\w+)",
             "answer": r"answer:\s+(\w+)"
+            }
+            matches = []
+            for phrase, pattern in patterns.items():
+                d = d.replace(',','').lower()
+                match = re.search(pattern, d)
+                if match:
+                    matches.append(match.group(1))
+            # breakpoint()
+            try:
+                majority_match = max( Counter(matches), key=Counter(matches).get)
+                labels.append(majority_match)
+            except:
+                print(f"Answer couldn't be extracted: {d}")
+                labels.append('nan')
+        if len([x for x in labels if x != 'nan']) > 0:
+            labels = [x for x in labels if x != 'nan']
+        majority_label = max( Counter(labels), key=Counter(labels).get)
+    elif 'commonsense_qa' in task_name:
+        labels = []
+        for d in decoded:
+            patterns = {
+            "so the answer is": r"so\s+the\s+answer\s+is\s+\(?(\w)\)?",
+            "so the answer to the question is": r"so\s+the\s+answer\s+to\s+the\s+question\s+is\s+\(?(\w)\)?",
+            "answer": r"answer:\s+\(?(\w)\)?"
             }
             matches = []
             for phrase, pattern in patterns.items():

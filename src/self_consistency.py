@@ -53,6 +53,10 @@ class SelfConsistency(LLMWrapper):
             demo_questions = [d['input'] for d in self.datasets['demo']]
             strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = strat_data
+        elif args.dataset_name == 'commonsense_qa':
+            demo_file_path = '/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/demos/commonsense_qa_demos.json'
+            with open(demo_file_path, 'r') as f:
+                self.datasets['demo'] = json.load(f)
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
              output_sampling_strategy='max', eval_dataset_size=None,\
@@ -82,6 +86,9 @@ class SelfConsistency(LLMWrapper):
         if 'strategy_qa' in task_name:
             # print("no logits processor")
             inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
+        elif 'commonsense_qa' in task_name:
+            inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
+
         # breakpoint()
         # breakpoint()
         _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
@@ -98,7 +105,6 @@ class SelfConsistency(LLMWrapper):
                 inf_args, ref = construct_args_from_example(d, task_name)
                 # breakpoint()
                 _ex = d
-        # for _strat in _strats:
                 logger.info(f"Sampling generations (strategy={_strat}):")
                 start_time = time.time()
                 # for _ex in tqdm(_examples, desc=f"Sampling ({_strat})"):
@@ -109,6 +115,7 @@ class SelfConsistency(LLMWrapper):
                         "do_sample": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
+                    breakpoint()
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
@@ -239,7 +246,8 @@ if __name__ == '__main__':
     dataset_name = args.dataset_name.split(':')[0]
     # dataset_subname = args.dataset_name.split(':')[1]
     #breakpoint()
-    # llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
+    if 'commonsense_qa' in args.dataset_name:
+        llm.load_hf_data_set(split=args.eval_split,dataset_name=dataset_name,dataset_subname='')
     metrics =[{"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},{"name": "ngram_diversity", 'score_keys': ['ngram_diversity'], 'args': {}}]
     inf_fn_kwargs = {
                     "max_new_tokens": 200,
