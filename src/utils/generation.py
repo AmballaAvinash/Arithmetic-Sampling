@@ -126,6 +126,7 @@ def construct_args_from_example(d,task_name):
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
     elif 'commonsense_qa' in task_name:
+        breakpoint()
         options = ['('+ l.lower() + ') ' + t  for l,t in zip(d['choices']['label'],d['choices']['text'])]
         options_text = ' Answer choices: ' +' '.join(options)
         question = d['question'] + options_text
