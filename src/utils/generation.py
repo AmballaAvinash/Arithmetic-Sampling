@@ -127,11 +127,9 @@ def construct_args_from_example(d,task_name):
                 'construct_args_fn' : construct_args_from_example}, answer
     elif 'commonsense_qa' in task_name:
         options = ['('+ l.lower() + ') ' + t  for l,t in zip(d['choices']['label'],d['choices']['text'])]
-        options_text = ' Answer choices: ' +' '.join(options_text)
+        options_text = ' Answer choices: ' +' '.join(options)
         question = d['question'] + options_text
         answer = d['answerKey'].lower()
-        # answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
-        # target = d['answerKey'].lower()
         return {'question':question,
                 "answer" : answer,
                 'instructions': default_strat_qa_instruction,
