@@ -131,6 +131,7 @@ def construct_args_from_example(d,task_name):
         options_text = ' Answer choices: ' +' '.join(options)
         question = d['question'] + options_text
         answer = d['answerKey'].lower()
+        reasoning = d['reasoning'] if 'reasoning' in d.keys() else ''
         return {'question':question,
                 "answer" : answer,
                 'instructions': default_strat_qa_instruction,
@@ -138,6 +139,7 @@ def construct_args_from_example(d,task_name):
                 "answer_prefix": default_answer_prefix,
                 "reasoning_prefix":default_reasoning_prefix,
                 "n_shots" : 6,
+                "reasoning" : reasoning,
                 "demos_split":'demo',
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
