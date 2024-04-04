@@ -167,6 +167,7 @@ class SelfConsistency(LLMWrapper):
                     "reference": references[-1] if len(references) > 0 else None,
                     "prediction": prediction,
                     "generation_candidates": llm_decoded,
+                    "n_gram_diversity" : self.compute_ngram_diversity(llm_decoded)
                 })
                 examples[_strat].append(ex)
             
@@ -181,7 +182,9 @@ class SelfConsistency(LLMWrapper):
            
             
             end_time = time.time()
-                
+            for _ex in examples[_strat]:
+                _ex["n_gram_diversity"] = self.compute_ngram_diversity(_ex["n_gram_diversity"])
+            
             # Compute metrics
             if len(references) > 0:
                 for metric in metrics:
@@ -194,6 +197,7 @@ class SelfConsistency(LLMWrapper):
                 if verbose:
                     logger.info(metric_results[_strat])
             # breakpoint()
+            metric_results[_strat]["n_gram_diversity"] = np.mean([_ex["n_gram_diversity"] for _ex in examples[_strat]])
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
