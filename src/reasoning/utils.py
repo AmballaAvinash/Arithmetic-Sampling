@@ -1,6 +1,8 @@
 import re
 import random
 import torch
+import numpy as np 
+from typing import List
 from datasets import load_dataset, Dataset
 from nltk.util import ngrams
 
@@ -119,14 +121,15 @@ def generate_few_shot_exemplars(dataset_name: str, num_examples: int = -1) -> st
     return INSTRUCTION_PREFIX + prompt_prefix
 
 
-def ngram_diversity(sequences: list[str]) -> float:
+def ngram_diversity(sequences: List[str], subsample: int = 20) -> float:
     n_values = [1, 2, 3, 4]
     total_unique_ngrams = 0
     ngram_diversity_score = 0
     for n in n_values:
         unique_ngrams = set()
         total_ngram_count = 0
-        for sequence in sequences:
+        random.shuffle(sequences)
+        for sequence in sequences[:subsample]:
             sequence_ngrams = list(ngrams(sequence.split(), n))
             total_ngram_count += len(list(sequence_ngrams))
             unique_ngrams.update(sequence_ngrams)
@@ -137,9 +140,10 @@ def ngram_diversity(sequences: list[str]) -> float:
     return ngram_diversity_score
 
 
-def numerical_accuracy(sequences: list[str], ground_truth: str) -> float:
+def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
     num_correct = 0
-    for sequence in sequences:
+    random.shuffle(sequences)
+    for sequence in sequences[:subsample]:
         numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
         pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
         if pred != "" and pred[-1] == ".":
@@ -147,3 +151,16 @@ def numerical_accuracy(sequences: list[str], ground_truth: str) -> float:
         if pred == ground_truth:
             num_correct += 1
     return num_correct / len(sequences)
+
+def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
+    random.shuffle(sequences)
+    predictions = np.zeros(len(sequences[:subsample]), dtype=np.int64)
+    for idx, sequence in enumerate(sequences[:subsample]):
+        numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
+        pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
+        if pred != "" and pred[-1] == ".":
+            pred = pred[:-1]
+        predictions[idx] = int(float(pred)) if pred != "" else -1
+    val, cnt = np.unique(predictions, return_counts=True)
+    argmax = np.argmax(cnt)
+    return 1 if val[argmax] == int(ground_truth) else 0
