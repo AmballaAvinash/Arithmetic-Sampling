@@ -219,11 +219,15 @@ if __name__ == "__main__":
     samplesize = 100 
     batch = 2
     output_dir = "outputs/WMT/V1"
-    # it versions and quantized
-    model_name = "flan-t5" # ["llama-2", "flan-t5", "gemma"]
-    data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
     
-    for shot in ["zeroshot", "oneshot"]:
-        run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+    random.seed(41)
+    data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
+
+    
+    # it versions and quantized
+    for model_name in ["gemma"]:  #"llama-2", "flan-t5"
+        for shot in ["zeroshot", "oneshot"]:
+            print(f"{model_name}, {shot}")
+            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
     
  
