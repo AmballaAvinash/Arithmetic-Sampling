@@ -253,6 +253,9 @@ class LLMWrapper:
         return ngram_diversity_score
     def compute_accuracy(self,predictions,references):
         return np.mean(list(map(lambda x:x[0]==x[1],zip(predictions,references))))
+    def compute_duplicity(self,sequences):
+        unique_sequences = set(sequences)
+        return len(unique_sequences)/len(sequences)
     def compute_sacrebleu(self,predictions,references):
         bleu = BLEU()
         references = [references]

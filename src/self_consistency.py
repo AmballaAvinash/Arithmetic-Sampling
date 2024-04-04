@@ -184,7 +184,7 @@ class SelfConsistency(LLMWrapper):
             end_time = time.time()
             for _ex in examples[_strat]:
                 _ex["n_gram_diversity"] = self.compute_ngram_diversity(_ex["generation_candidates"])
-            
+                _ex["duplicity"] = self.compute_duplicity(_ex["generation_candidates"])
             # Compute metrics
             if len(references) > 0:
                 for metric in metrics:
