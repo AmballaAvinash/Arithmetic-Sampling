@@ -87506,3 +87506,695 @@ Reasoning:
 04/02/2024 19:15:15 - INFO - __main__ -   Gold: yes
 04/02/2024 19:15:15 - INFO - __main__ -   Predictions: ['\nSo the answer is No.', '\nSo the answer is No.', '\nSo the answer is No.', '\nSo the answer is No.\n\nPlease provide the reasoning for your answer below:\n\n---\n\n**Reasoning:**\n\nThere has not yet been any information about a Harry Potter character named after Florence. Therefore, the answer is no.\n\n**So the answer is No**', '\n\nSo the answer is <your_answer>\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n```\n\n**Please provide your answer and reasoning below:**\n\n**Answer:**\n\n**Reasoning', '\nSo the answer is <your_answer>\n\n**Please provide your answer below:**\n```\nThere is a Harry Potter character named after Florence.\n\nReasoning: \n```\n\n**Please provide your reasoning below:**\n```\nSo the answer is <your_answer>\n```\n\n**Your answer:**\n```\n```\nThere is a Harry Potter character named after Florence.\n\nReasoning:\n\nThe name Florence is a character in the Harry Potter universe. So the answer is yes.\n\nSo the answer is yes\n```', '\nSo the answer is <your_answer>\n\n**Answer:** No\n\n**Reasoning:**\n\nThere has not yet been any information about a character named Florence in the Harry Potter universe. Therefore, the answer is no.', '\nSo the answer is <your_answer>', '\nSo the answer is <your_answer>\n**Please provide the answer and reasoning below:**\n\n**Question:** Is there a Harry Potter character named after Florence?\n\n**Reasoning:**\n\n**Answer:**\n\n**Reasoning:**\n\n**So the answer is:**\n```\n**Answer:** No\n\n**Reasoning:** There is no character named Florence in the Harry Potter universe.\n```', '\nSo the answer is <your_answer>\n**Answer:** No\n\n**Reasoning:**\n\nThe book series Harry Potter does not include a character named Florence. There has not been any character named after the city of Florence in the Harry Potter universe.']
 04/02/2024 19:15:15 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 21:38:09 - INFO - __main__ -   Script arguments:
+04/03/2024 21:38:09 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 21:38:16 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 21:38:19 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 21:38:40 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 21:43:09 - INFO - __main__ -   Script arguments:
+04/03/2024 21:43:09 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 21:43:14 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 21:43:17 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 21:43:20 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 21:43:20 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 21:44:45 - INFO - __main__ -   Script arguments:
+04/03/2024 21:44:45 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 21:44:51 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 21:44:53 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 21:44:56 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 21:44:56 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 21:45:40 - INFO - __main__ -   Script arguments:
+04/03/2024 21:45:40 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 21:45:44 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 21:45:47 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 21:45:50 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 21:45:50 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 21:58:24 - INFO - __main__ -   Script arguments:
+04/03/2024 21:58:24 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 21:58:29 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 21:58:31 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 21:58:34 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 21:58:35 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 22:01:09 - INFO - __main__ -   Script arguments:
+04/03/2024 22:01:09 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 22:01:15 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 22:01:17 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 22:01:20 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 22:04:52 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 22:05:47 - INFO - __main__ -   Script arguments:
+04/03/2024 22:05:47 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 22:05:52 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 22:05:54 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 22:05:57 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 22:06:11 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/03/2024 23:13:33 - INFO - __main__ -   Script arguments:
+04/03/2024 23:13:33 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/03/2024 23:13:38 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/03/2024 23:13:41 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/03/2024 23:13:44 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/03/2024 23:14:13 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 04:23:42 - INFO - __main__ -   Script arguments:
+04/04/2024 04:23:42 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 04:23:46 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 04:23:49 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 04:23:52 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 04:25:25 - INFO - __main__ -   Script arguments:
+04/04/2024 04:25:25 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 04:25:30 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 04:25:32 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 04:25:35 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 04:25:57 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 04:39:10 - INFO - __main__ -   Script arguments:
+04/04/2024 04:39:10 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-7b', 'is_chat': False, 'load_in_8bit': True, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'strategy_qa', 'dataset_subname': 'None', 'eval_dataset_size': 200, 'eval_n_samples': 20, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'sample', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 04:39:32 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 04:39:48 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 04:39:49 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 20, 'task_name': 'strategy_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'strategy_qa', 'dataset_subname': '', 'output_sampling_strategy': 'sample', 'eval_dataset_size': 200, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/strategy_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 20}}
+04/04/2024 04:43:54 - INFO - __main__ -   Sampling generations (strategy=sample):
+04/04/2024 04:44:51 - INFO - __main__ -   Script arguments:
+04/04/2024 04:44:51 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 04:44:56 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 04:44:58 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 04:45:01 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 04:47:01 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 04:47:13 - INFO - __main__ -   Example #1:
+04/04/2024 04:47:13 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 04:47:13 - INFO - __main__ -   Gold: a
+04/04/2024 04:47:13 - INFO - __main__ -   Predictions: ['1. The answer must be a feeling. 2. Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling, not a disease. 2. The answer should be something that is produced. 3. The answer should be something that can be done. Of the above choices, only knitting can be done and can produce something. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that can help you get the feeling of something. Of the above choices, only knitting can help you get the feeling of relaxation. 2. It is not necessary to knit a sweater. So the answer is (c).\nAnswer: c\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is the closest to the feeling of doing knitting. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of a person who is knitting. 2) Of the above choices, only "your" is a feeling. So the answer is (e).\nAnswer: e\n']
+04/04/2024 04:47:34 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 04:47:42 - INFO - __main__ -   Example #2:
+04/04/2024 04:47:42 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 04:47:42 - INFO - __main__ -   Gold: b
+04/04/2024 04:47:42 - INFO - __main__ -   Predictions: ["1) If I was getting drunk, I would be slurring my speech. 2) If I couldn't understand people, I would be slurring my speech. 3) If I couldn't understand people, I would be forgetting what I'm saying. 4) If I couldn't understand people, I would be having a seizure. 5) If I couldn't understand people, I would be passing out. So the answer is (e).\nAnswer: e\n", '<i>The answer should be the effect of drinking alcohol.</i> Of the above choices, only slurred speech is the effect of drinking alcohol. So the answer is (b).\nAnswer: b\n', '1. I am not getting drunk. 2. If I was getting drunk, I would slur my words. 3. If I was slurring my words, I would be able to understand people. 4. If I could understand people, I would not be slurring my words. 5. If I were not slurring my words, I would not be getting drunk. 6. Therefore, I am not getting drunk.\nAnswer: a\n', '1. The answer must be something that causes people to not be able to understand you. 2. Of the above choices, only death is something that causes people to not be able to understand you. 3. So the answer is (d).\nAnswer: d\n', '1) If you are getting drunk, you are slurring your speech. 2) You may have a seizure. 3) You may forgetfulness. 4) You may pass out. 5) You may die. So the answer is (a).\nAnswer: a\n']
+04/04/2024 04:47:42 - INFO - __main__ -   {'accuracy.accuracy': 0.0, 'ngram_diversity.ngram_diversity': 1.0}
+04/04/2024 04:47:42 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/tau/commonsense_qa/eval_gemma-2b_tau/commonsense_qa__validation_2_fewshot_arithmetic_04_04_04_47_0/results.json
+04/04/2024 05:05:36 - INFO - __main__ -   Script arguments:
+04/04/2024 05:05:36 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 05:05:41 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 05:05:44 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 05:05:47 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 05:05:47 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:05:49 - INFO - __main__ -   Example #1:
+04/04/2024 05:05:49 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 05:05:49 - INFO - __main__ -   Gold: a
+04/04/2024 05:05:49 - INFO - __main__ -   Predictions: ['1. The answer must be a feeling. 2. Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling, not a disease. 2. The answer should be something that is produced. 3. The answer should be something that can be done. Of the above choices, only knitting can be done and can produce something. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that can help you get the feeling of something. Of the above choices, only knitting can help you get the feeling of relaxation. 2. It is not necessary to knit a sweater. So the answer is (c).\nAnswer: c\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is the closest to the feeling of doing knitting. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of a person who is knitting. 2) Of the above choices, only "your" is a feeling. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:05:49 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:05:51 - INFO - __main__ -   Example #2:
+04/04/2024 05:05:51 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 05:05:51 - INFO - __main__ -   Gold: b
+04/04/2024 05:05:51 - INFO - __main__ -   Predictions: ["1) If I was getting drunk, I would be slurring my speech. 2) If I couldn't understand people, I would be slurring my speech. 3) If I couldn't understand people, I would be forgetting what I'm saying. 4) If I couldn't understand people, I would be having a seizure. 5) If I couldn't understand people, I would be passing out. So the answer is (e).\nAnswer: e\n", '<i>The answer should be the effect of drinking alcohol.</i> Of the above choices, only slurred speech is the effect of drinking alcohol. So the answer is (b).\nAnswer: b\n', '1. I am not getting drunk. 2. If I was getting drunk, I would slur my words. 3. If I was slurring my words, I would be able to understand people. 4. If I could understand people, I would not be slurring my words. 5. If I were not slurring my words, I would not be getting drunk. 6. Therefore, I am not getting drunk.\nAnswer: a\n', '1. The answer must be something that causes people to not be able to understand you. 2. Of the above choices, only death is something that causes people to not be able to understand you. 3. So the answer is (d).\nAnswer: d\n', '1) If you are getting drunk, you are slurring your speech. 2) You may have a seizure. 3) You may forgetfulness. 4) You may pass out. 5) You may die. So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:06:32 - INFO - __main__ -   Script arguments:
+04/04/2024 05:06:32 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 2, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 05:06:36 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 05:06:39 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 05:06:41 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 2, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 05:06:42 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:06:44 - INFO - __main__ -   Example #1:
+04/04/2024 05:06:44 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 05:06:44 - INFO - __main__ -   Gold: a
+04/04/2024 05:06:44 - INFO - __main__ -   Predictions: ['1. The answer must be a feeling. 2. Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling, not a disease. 2. The answer should be something that is produced. 3. The answer should be something that can be done. Of the above choices, only knitting can be done and can produce something. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that can help you get the feeling of something. Of the above choices, only knitting can help you get the feeling of relaxation. 2. It is not necessary to knit a sweater. So the answer is (c).\nAnswer: c\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is the closest to the feeling of doing knitting. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of a person who is knitting. 2) Of the above choices, only "your" is a feeling. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:06:44 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:06:46 - INFO - __main__ -   Example #2:
+04/04/2024 05:06:46 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 05:06:46 - INFO - __main__ -   Gold: b
+04/04/2024 05:06:46 - INFO - __main__ -   Predictions: ["1) If I was getting drunk, I would be slurring my speech. 2) If I couldn't understand people, I would be slurring my speech. 3) If I couldn't understand people, I would be forgetting what I'm saying. 4) If I couldn't understand people, I would be having a seizure. 5) If I couldn't understand people, I would be passing out. So the answer is (e).\nAnswer: e\n", '<i>The answer should be the effect of drinking alcohol.</i> Of the above choices, only slurred speech is the effect of drinking alcohol. So the answer is (b).\nAnswer: b\n', '1. I am not getting drunk. 2. If I was getting drunk, I would slur my words. 3. If I was slurring my words, I would be able to understand people. 4. If I could understand people, I would not be slurring my words. 5. If I were not slurring my words, I would not be getting drunk. 6. Therefore, I am not getting drunk.\nAnswer: a\n', '1. The answer must be something that causes people to not be able to understand you. 2. Of the above choices, only death is something that causes people to not be able to understand you. 3. So the answer is (d).\nAnswer: d\n', '1) If you are getting drunk, you are slurring your speech. 2) You may have a seizure. 3) You may forgetfulness. 4) You may pass out. 5) You may die. So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:06:46 - INFO - __main__ -   {'accuracy.accuracy': 0.0, 'ngram_diversity.ngram_diversity': 1.0}
+04/04/2024 05:06:46 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/tau/commonsense_qa/eval_gemma-2b_tau/commonsense_qa__validation_2_fewshot_arithmetic_04_04_05_06_0/results.json
+04/04/2024 05:08:56 - INFO - __main__ -   Script arguments:
+04/04/2024 05:08:56 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 5, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 05:09:00 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 05:09:03 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 05:09:06 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 5, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 05:09:06 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:09:08 - INFO - __main__ -   Example #1:
+04/04/2024 05:09:08 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 05:09:08 - INFO - __main__ -   Gold: a
+04/04/2024 05:09:08 - INFO - __main__ -   Predictions: ['1) The answer must be a feeling. 2) Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling of something. 2. Of the above choices, only relaxation is a feeling. 3. So the answer is (a).\nAnswer: a\n', '1. The answer must be a feeling. Of the above choices, only adrenaline is a feeling. So the answer is (d). 2. The answer must be something that can be produced. Of the above choices, only sweater can be produced. So the answer is (e).\nAnswer: e\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is a feeling. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of knitting. 2) Of the above choices, only your is something that can be felt. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:09:08 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:09:11 - INFO - __main__ -   Example #2:
+04/04/2024 05:09:11 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 05:09:11 - INFO - __main__ -   Gold: b
+04/04/2024 05:09:11 - INFO - __main__ -   Predictions: ['1. The answer must be something that makes it hard to understand someone (e.g. slurred speech). Of the above choices, only slurred speech makes sense. 2. The answer must be something that causes someone to pass out. Of the above choices, only death makes sense. So the answer is (b).\nAnswer: b\n', "1. If I was getting drunk, I would be slurred. 2. If I was slurred, I would be forgetful. 3. If I was forgetful, I would pass out. 4. If I passed out, I would be dead. 5. If I was dead, I would be unable to speak. 6. If I couldn't speak, I would be unable to understand people. 7. If I couldn't understand people, I would be having a seizure. 8. If I was having a seizure, I would be dead. So the answer is (a).\nAnswer: a\n", '1) The answer must be something that would cause someone to forgetfulness. Of the above choices, only slurred speech would cause someone to forgetfulness. So the answer is (b). 2) The answer must be something that would cause someone to have a seizure. Of the above choices, only death would cause someone to have a seizure. So the answer is (e).\nAnswer: e\n', '1) The answer must be something that causes a person to slur their words. 2) Of the above choices, only slurred speech is caused by drinking. So the answer is (b).\nAnswer: b\n', '1) I would be having alcohol. 2) I would not be able to understand what I was saying. 3) I would be slurring my speech. 4) I would be forgetting things. 5) I would be passed out. So the answer is (b).\nAnswer: b\n']
+04/04/2024 05:09:11 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:09:13 - INFO - __main__ -   Example #3:
+04/04/2024 05:09:13 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If you turn off the music in a room with no other noise that room would be what? Answer choices: (a) silent (b) opera (c) silence (d) television (e) elevator
+Reasoning: 
+04/04/2024 05:09:13 - INFO - __main__ -   Gold: a
+04/04/2024 05:09:13 - INFO - __main__ -   Predictions: ['1)The answer must be the absence of noise. 2) Of the above choices, only silence is the absence of noise. So the answer is (c).\nAnswer: c\n', '1. If you turn off the music in a room with no other noise, the only noise is the music. 2. The only noise is opera. 3. The only noise is silence. 4. The only noise is television. 5. The only noise is elevator. 6. The only noise is silence. 7. The answer is silence. So the answer is (c).\nAnswer: c\n', '1. The room would be silent. 2. The room would be opera. 3. The room would have silence. 4. The room would have television. 5. The room would have elevator. So the answer is (a).\nAnswer: a', '1. The answer must be a place with no other noise. 2. Of the above choices, only silence and television would be silent. So the answer is (c).\nAnswer: c\n', '1. The answer must be a word that means the same thing as "no noise" or "silence" or "quiet". Of the above choices, only "silence" means the same thing as "no noise" or "quiet". So the answer is (c). 2. The answer must be a word that means "no music" or "without music". Of the above choices, only "no music" means "without music". So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:09:13 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:09:15 - INFO - __main__ -   Example #4:
+04/04/2024 05:09:15 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: By learning about the world, many poor college students gain what? Answer choices: (a) pleasure (b) greater mobility (c) desire to travel (d) global warming (e) increased security
+Reasoning: 
+04/04/2024 05:09:15 - INFO - __main__ -   Gold: c
+04/04/2024 05:09:15 - INFO - __main__ -   Predictions: ['1. The answer must be something that poor college students gain. 2. Of the above choices, only global warming is something that poor college students gain. So the answer is (e).\nAnswer: e\n', '1. The answer must be a benefit of learning about the world. Of the above choices, only increased security is a benefit of learning about the world. So the answer is (e).\n2. The answer should be something that is learned. Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: e\n', '1) The answer must be something that is learned. 2) Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: c\n', '1. The answer must be something that poor college students gain. 2. Of the above choices, only desire to travel is something that poor college students gain. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that college students gain. 2. Of the above choices, only global warming is something that college students gain. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:09:15 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:09:19 - INFO - __main__ -   Example #5:
+04/04/2024 05:09:19 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: What is it called when a person tends to leave things to the last minute? Answer choices: (a) procrastinate (b) complete collection (c) headache (d) good time management (e) have to hold
+Reasoning: 
+04/04/2024 05:09:19 - INFO - __main__ -   Gold: a
+04/04/2024 05:09:19 - INFO - __main__ -   Predictions: ['1) The answer must be a person who tends to leave things to the last minute. 2) Of the above choices, only procrastinate is a person who tends to leave things to the last minute. So the answer is (a).\nAnswer: a\n', '1. The answer must be a habit of someone who leaves things to the last minute. 2. Of the above choices, only procrastinate is a habit of someone who leaves things to the last minute. 3. So the answer is (a).\nAnswer: a\n', '1) It is called procrastinate. 2) Of the above choices, the closest answer is procrastinate. So the answer is (a).\nAnswer: a\n', '1. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n2. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n3. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n4. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only', '1. The answer must be a negative feeling. 2. Of the above choices, only procrastinate has a negative feeling. 3. So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:09:19 - INFO - __main__ -   {'accuracy.accuracy': 0.6, 'ngram_diversity.ngram_diversity': 0.8}
+04/04/2024 05:09:19 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/tau/commonsense_qa/eval_gemma-2b_tau/commonsense_qa__validation_5_fewshot_arithmetic_04_04_05_09_0/results.json
+04/04/2024 05:27:09 - INFO - __main__ -   Script arguments:
+04/04/2024 05:27:09 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 5, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 05:27:13 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 05:27:16 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 05:27:19 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 5, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 05:27:19 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:27:21 - INFO - __main__ -   Example #1:
+04/04/2024 05:27:21 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 05:27:21 - INFO - __main__ -   Gold: a
+04/04/2024 05:27:21 - INFO - __main__ -   Predictions: ['1) The answer must be a feeling. 2) Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling of something. 2. Of the above choices, only relaxation is a feeling. 3. So the answer is (a).\nAnswer: a\n', '1. The answer must be a feeling. Of the above choices, only adrenaline is a feeling. So the answer is (d). 2. The answer must be something that can be produced. Of the above choices, only sweater can be produced. So the answer is (e).\nAnswer: e\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is a feeling. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of knitting. 2) Of the above choices, only your is something that can be felt. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:27:21 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:27:24 - INFO - __main__ -   Example #2:
+04/04/2024 05:27:24 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 05:27:24 - INFO - __main__ -   Gold: b
+04/04/2024 05:27:24 - INFO - __main__ -   Predictions: ['1. The answer must be something that makes it hard to understand someone (e.g. slurred speech). Of the above choices, only slurred speech makes sense. 2. The answer must be something that causes someone to pass out. Of the above choices, only death makes sense. So the answer is (b).\nAnswer: b\n', "1. If I was getting drunk, I would be slurred. 2. If I was slurred, I would be forgetful. 3. If I was forgetful, I would pass out. 4. If I passed out, I would be dead. 5. If I was dead, I would be unable to speak. 6. If I couldn't speak, I would be unable to understand people. 7. If I couldn't understand people, I would be having a seizure. 8. If I was having a seizure, I would be dead. So the answer is (a).\nAnswer: a\n", '1) The answer must be something that would cause someone to forgetfulness. Of the above choices, only slurred speech would cause someone to forgetfulness. So the answer is (b). 2) The answer must be something that would cause someone to have a seizure. Of the above choices, only death would cause someone to have a seizure. So the answer is (e).\nAnswer: e\n', '1) The answer must be something that causes a person to slur their words. 2) Of the above choices, only slurred speech is caused by drinking. So the answer is (b).\nAnswer: b\n', '1) I would be having alcohol. 2) I would not be able to understand what I was saying. 3) I would be slurring my speech. 4) I would be forgetting things. 5) I would be passed out. So the answer is (b).\nAnswer: b\n']
+04/04/2024 05:27:24 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:27:27 - INFO - __main__ -   Example #3:
+04/04/2024 05:27:27 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If you turn off the music in a room with no other noise that room would be what? Answer choices: (a) silent (b) opera (c) silence (d) television (e) elevator
+Reasoning: 
+04/04/2024 05:27:27 - INFO - __main__ -   Gold: a
+04/04/2024 05:27:27 - INFO - __main__ -   Predictions: ['1)The answer must be the absence of noise. 2) Of the above choices, only silence is the absence of noise. So the answer is (c).\nAnswer: c\n', '1. If you turn off the music in a room with no other noise, the only noise is the music. 2. The only noise is opera. 3. The only noise is silence. 4. The only noise is television. 5. The only noise is elevator. 6. The only noise is silence. 7. The answer is silence. So the answer is (c).\nAnswer: c\n', '1. The room would be silent. 2. The room would be opera. 3. The room would have silence. 4. The room would have television. 5. The room would have elevator. So the answer is (a).\nAnswer: a', '1. The answer must be a place with no other noise. 2. Of the above choices, only silence and television would be silent. So the answer is (c).\nAnswer: c\n', '1. The answer must be a word that means the same thing as "no noise" or "silence" or "quiet". Of the above choices, only "silence" means the same thing as "no noise" or "quiet". So the answer is (c). 2. The answer must be a word that means "no music" or "without music". Of the above choices, only "no music" means "without music". So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:27:27 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:27:28 - INFO - __main__ -   Example #4:
+04/04/2024 05:27:28 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: By learning about the world, many poor college students gain what? Answer choices: (a) pleasure (b) greater mobility (c) desire to travel (d) global warming (e) increased security
+Reasoning: 
+04/04/2024 05:27:28 - INFO - __main__ -   Gold: c
+04/04/2024 05:27:28 - INFO - __main__ -   Predictions: ['1. The answer must be something that poor college students gain. 2. Of the above choices, only global warming is something that poor college students gain. So the answer is (e).\nAnswer: e\n', '1. The answer must be a benefit of learning about the world. Of the above choices, only increased security is a benefit of learning about the world. So the answer is (e).\n2. The answer should be something that is learned. Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: e\n', '1) The answer must be something that is learned. 2) Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: c\n', '1. The answer must be something that poor college students gain. 2. Of the above choices, only desire to travel is something that poor college students gain. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that college students gain. 2. Of the above choices, only global warming is something that college students gain. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:27:28 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:27:33 - INFO - __main__ -   Example #5:
+04/04/2024 05:27:33 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: What is it called when a person tends to leave things to the last minute? Answer choices: (a) procrastinate (b) complete collection (c) headache (d) good time management (e) have to hold
+Reasoning: 
+04/04/2024 05:27:33 - INFO - __main__ -   Gold: a
+04/04/2024 05:27:33 - INFO - __main__ -   Predictions: ['1) The answer must be a person who tends to leave things to the last minute. 2) Of the above choices, only procrastinate is a person who tends to leave things to the last minute. So the answer is (a).\nAnswer: a\n', '1. The answer must be a habit of someone who leaves things to the last minute. 2. Of the above choices, only procrastinate is a habit of someone who leaves things to the last minute. 3. So the answer is (a).\nAnswer: a\n', '1) It is called procrastinate. 2) Of the above choices, the closest answer is procrastinate. So the answer is (a).\nAnswer: a\n', '1. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n2. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n3. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n4. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only', '1. The answer must be a negative feeling. 2. Of the above choices, only procrastinate has a negative feeling. 3. So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:27:33 - INFO - __main__ -   {'accuracy.accuracy': 0.6, 'ngram_diversity.ngram_diversity': 0.8}
+04/04/2024 05:27:33 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/tau/commonsense_qa/eval_gemma-2b_tau/commonsense_qa__validation_5_fewshot_arithmetic_04_04_05_27_0/results.json
+04/04/2024 05:28:35 - INFO - __main__ -   Script arguments:
+04/04/2024 05:28:35 - INFO - __main__ -   {'out_dir': 'outputs/self_consistency', 'clean_out_dir': 'True', 'debug': True, 'verbose': True, 'seed': 42, 'run_id': 0, 'model': 'google/gemma-2b', 'is_chat': False, 'load_in_8bit': False, 'eval_inf_fn_key': 'fewshot', 'eval_split': 'validation', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': 'None', 'eval_dataset_size': 5, 'eval_n_samples': 5, 'eval_retrieval_strategy': 'random', 'eval_output_sampling_strategy': 'arithmetic', 'eval_output_beam_size': 1, 'dataset_sample_strategy': 'random', 'eval_output_temperature': 0.5, 'eval_output_top_k': 40, 'eval_output_top_p': 1.0}
+04/04/2024 05:28:39 - INFO - accelerate.utils.modeling -   We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+04/04/2024 05:28:42 - WARNING - src.utils.generation -   `token_id` has to be a list of positive integers, but is [[2, 9413]]
+04/04/2024 05:28:45 - INFO - __main__ -   Eval arguments: {'inf_fn_key': 'fewshot', 'split': 'validation', 'metrics': [{'name': 'accuracy', 'score_keys': ['accuracy'], 'args': {}}, {'name': 'ngram_diversity', 'score_keys': ['ngram_diversity'], 'args': {}}], 'n_samples': 5, 'task_name': 'tau/commonsense_qa', 'dataset_sample_strategy': 'random', 'dataset_name': 'tau/commonsense_qa', 'dataset_subname': '', 'output_sampling_strategy': 'arithmetic', 'eval_dataset_size': 5, 'verbose': True, 'out_dir': 'outputs/outputs/self_consistency/tau/commonsense_qa', 'n_shots': None, 'retrieval_strategy': 'random', 'run_id': '0', 'inf_fn_kwargs': {'max_new_tokens': 200, 'do_sample': False, 'top_p': 1.0, 'temperature': 0.5, 'top_k': 40, 'num_beams': 1, 'num_return_sequences': 5}}
+04/04/2024 05:28:45 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:28:47 - INFO - __main__ -   Example #1:
+04/04/2024 05:28:47 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced
+Reasoning: 
+04/04/2024 05:28:47 - INFO - __main__ -   Gold: a
+04/04/2024 05:28:47 - INFO - __main__ -   Predictions: ['1) The answer must be a feeling. 2) Of the above choices, the closest feeling is relaxation. So the answer is (a).\nAnswer: a\n', '1. The answer should be a feeling of something. 2. Of the above choices, only relaxation is a feeling. 3. So the answer is (a).\nAnswer: a\n', '1. The answer must be a feeling. Of the above choices, only adrenaline is a feeling. So the answer is (d). 2. The answer must be something that can be produced. Of the above choices, only sweater can be produced. So the answer is (e).\nAnswer: e\n', '<i>Your</i> sweater may be produced. Of the above choices, only (d) your is a feeling. So the answer is (d).\nAnswer: d\n', '1) The answer must be the feeling of knitting. 2) Of the above choices, only your is something that can be felt. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:28:47 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:28:49 - INFO - __main__ -   Example #2:
+04/04/2024 05:28:49 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out
+Reasoning: 
+04/04/2024 05:28:49 - INFO - __main__ -   Gold: b
+04/04/2024 05:28:49 - INFO - __main__ -   Predictions: ['1. The answer must be something that makes it hard to understand someone (e.g. slurred speech). Of the above choices, only slurred speech makes sense. 2. The answer must be something that causes someone to pass out. Of the above choices, only death makes sense. So the answer is (b).\nAnswer: b\n', "1. If I was getting drunk, I would be slurred. 2. If I was slurred, I would be forgetful. 3. If I was forgetful, I would pass out. 4. If I passed out, I would be dead. 5. If I was dead, I would be unable to speak. 6. If I couldn't speak, I would be unable to understand people. 7. If I couldn't understand people, I would be having a seizure. 8. If I was having a seizure, I would be dead. So the answer is (a).\nAnswer: a\n", '1) The answer must be something that would cause someone to forgetfulness. Of the above choices, only slurred speech would cause someone to forgetfulness. So the answer is (b). 2) The answer must be something that would cause someone to have a seizure. Of the above choices, only death would cause someone to have a seizure. So the answer is (e).\nAnswer: e\n', '1) The answer must be something that causes a person to slur their words. 2) Of the above choices, only slurred speech is caused by drinking. So the answer is (b).\nAnswer: b\n', '1) I would be having alcohol. 2) I would not be able to understand what I was saying. 3) I would be slurring my speech. 4) I would be forgetting things. 5) I would be passed out. So the answer is (b).\nAnswer: b\n']
+04/04/2024 05:28:49 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:28:52 - INFO - __main__ -   Example #3:
+04/04/2024 05:28:52 - INFO - __main__ -   Prompt:
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: If you turn off the music in a room with no other noise that room would be what? Answer choices: (a) silent (b) opera (c) silence (d) television (e) elevator
+Reasoning: 
+04/04/2024 05:28:52 - INFO - __main__ -   Gold: a
+04/04/2024 05:28:52 - INFO - __main__ -   Predictions: ['1)The answer must be the absence of noise. 2) Of the above choices, only silence is the absence of noise. So the answer is (c).\nAnswer: c\n', '1. If you turn off the music in a room with no other noise, the only noise is the music. 2. The only noise is opera. 3. The only noise is silence. 4. The only noise is television. 5. The only noise is elevator. 6. The only noise is silence. 7. The answer is silence. So the answer is (c).\nAnswer: c\n', '1. The room would be silent. 2. The room would be opera. 3. The room would have silence. 4. The room would have television. 5. The room would have elevator. So the answer is (a).\nAnswer: a', '1. The answer must be a place with no other noise. 2. Of the above choices, only silence and television would be silent. So the answer is (c).\nAnswer: c\n', '1. The answer must be a word that means the same thing as "no noise" or "silence" or "quiet". Of the above choices, only "silence" means the same thing as "no noise" or "quiet". So the answer is (c). 2. The answer must be a word that means "no music" or "without music". Of the above choices, only "no music" means "without music". So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:28:52 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:28:53 - INFO - __main__ -   Example #4:
+04/04/2024 05:28:53 - INFO - __main__ -   Prompt:
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: By learning about the world, many poor college students gain what? Answer choices: (a) pleasure (b) greater mobility (c) desire to travel (d) global warming (e) increased security
+Reasoning: 
+04/04/2024 05:28:53 - INFO - __main__ -   Gold: c
+04/04/2024 05:28:53 - INFO - __main__ -   Predictions: ['1. The answer must be something that poor college students gain. 2. Of the above choices, only global warming is something that poor college students gain. So the answer is (e).\nAnswer: e\n', '1. The answer must be a benefit of learning about the world. Of the above choices, only increased security is a benefit of learning about the world. So the answer is (e).\n2. The answer should be something that is learned. Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: e\n', '1) The answer must be something that is learned. 2) Of the above choices, only desire to travel is something that is learned. So the answer is (c).\nAnswer: c\n', '1. The answer must be something that poor college students gain. 2. Of the above choices, only desire to travel is something that poor college students gain. So the answer is (d).\nAnswer: d\n', '1. The answer must be something that college students gain. 2. Of the above choices, only global warming is something that college students gain. So the answer is (e).\nAnswer: e\n']
+04/04/2024 05:28:53 - INFO - __main__ -   Sampling generations (strategy=arithmetic):
+04/04/2024 05:28:58 - INFO - __main__ -   Example #5:
+04/04/2024 05:28:58 - INFO - __main__ -   Prompt:
+Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook
+Reasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).
+Answer: c
+Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock
+Reasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).
+Answer: a
+Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher’s hand (c) inkwell (d) desk drawer (e) blotter
+Reasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).
+Answer: e
+Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market
+Reasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).
+Answer: b
+Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness
+Reasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).
+Answer: c
+Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas
+Reasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).
+Answer: d
+Like each of the previous examples, answer the question with either "Yes" or "No".
+Provide reasoning for your answer.
+End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No".
+Question: What is it called when a person tends to leave things to the last minute? Answer choices: (a) procrastinate (b) complete collection (c) headache (d) good time management (e) have to hold
+Reasoning: 
+04/04/2024 05:28:58 - INFO - __main__ -   Gold: a
+04/04/2024 05:28:58 - INFO - __main__ -   Predictions: ['1) The answer must be a person who tends to leave things to the last minute. 2) Of the above choices, only procrastinate is a person who tends to leave things to the last minute. So the answer is (a).\nAnswer: a\n', '1. The answer must be a habit of someone who leaves things to the last minute. 2. Of the above choices, only procrastinate is a habit of someone who leaves things to the last minute. 3. So the answer is (a).\nAnswer: a\n', '1) It is called procrastinate. 2) Of the above choices, the closest answer is procrastinate. So the answer is (a).\nAnswer: a\n', '1. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n2. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n3. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only procrastinate is the thing that someone who tends to leave things to the last minute tends to do. So the answer is (a).\n4. The answer should be the thing that someone who tends to leave things to the last minute tends to do. Of the above choices, only', '1. The answer must be a negative feeling. 2. Of the above choices, only procrastinate has a negative feeling. 3. So the answer is (a).\nAnswer: a\n']
+04/04/2024 05:28:58 - INFO - __main__ -   {'accuracy.accuracy': 0.6, 'ngram_diversity.ngram_diversity': 0.8}
+04/04/2024 05:28:58 - INFO - __main__ -   Saved results to outputs/outputs/self_consistency/tau/commonsense_qa/eval_gemma-2b_tau/commonsense_qa__validation_5_fewshot_arithmetic_04_04_05_28_0/results.json
