@@ -18,7 +18,7 @@ def load_hf_data_set(split,dataset_name, dataset_subname):
         data[split] = datasets.load_dataset(dataset_name,dataset_subname, split="validation",trust_remote_code=True)
         return data[split]
 
-def run_experiments(model_name, model, data, batch, load_in_8bit=False):
+def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False):
     
     # model = "google/flan-t5-large"
     # tokenizer = AutoTokenizer.from_pretrained(model, use_fast=True)
@@ -29,6 +29,8 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
     # model.generation_config.pad_token_id = model.config.eos_token_id
         
         
+    # model = ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b-it", "google/gemma-7b-it"]
+
     cls_tokenizer = AutoTokenizer
     cls_model = AutoModelForCausalLM
     tokenizer_args = {}
@@ -36,6 +38,7 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
     torch_dtype=torch.float16
     
     if model_name=="llama-2":
+        model = "meta-llama/Llama-2-7b-hf"
         cls_model = LlamaForCausalLM 
         cls_tokenizer = LlamaTokenizer
         tokenizer_args.update({"add_bos_token": True, "add_eos_token": False})
@@ -43,10 +46,12 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
         # cls_tokenizer.pad_token = cls_tokenizer.eos_token
         # cls_model.config.pad_token_id = cls_model.config.eos_token_id
     elif model_name=="flan-t5":
+        model = "google/flan-t5-large"
         cls_model = T5ForConditionalGeneration
         cls_tokenizer = T5Tokenizer
         # torch_dtype = torch.float32  # because of a logsoftmax error with half precision; TODO: double-check
     elif model_name=="gemma":
+        model = "google/gemma-2b-it"
         cls_model = AutoModelForCausalLM
         cls_tokenizer = AutoTokenizer
         
@@ -79,17 +84,19 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
     
         
     
-    
-    default_fwd_instruction = "Translate the following German sentence to an English sentence."
+    if shot=="oneshot": 
+        default_fwd_instruction = "The German sentence: \"Hier ist die Vita von etwa acht Dutzend Talyschen aus der Gegend dokumentiert, die älter als 100. Fatulayeva zeigt auf ein Schwarz-Weiß-Foto.\" translates to an English sentence: \"Here the lives of eight dozen Talysh from the area who lived to older than 100 are documented. Fatulayeva points out a black & white photo.\". Now, Translate the following German sentence to an English sentence."
+    else:
+        default_fwd_instruction = "Translate the following German sentence to an English sentence."
     default_fwd_input_prefix = "German sentence: "
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [5, 10]: # num_decodes
-        for temp in [0.5, 1.0]: # temperature
+    for N in [5]: # num_decodes
+        for temp in [0, 0.5, 1.0]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
-                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, N, temp, p, k )
+                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
                    avg_bleu_arith_toppk = []
                    avg_bleu_temp_toppk = []
                    avg_ngram_arith_toppk = []
@@ -106,6 +113,7 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                    avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
                    
                    results = {}
+                   results["Num Samples"] = len(data)
                    results["Num decodes"] = N
                    results["temperature"] = temp
                    results["Top p "] = p
@@ -116,13 +124,13 @@ def run_experiments(model_name, model, data, batch, load_in_8bit=False):
                    results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
                    results["N gram diversity Sampling"] = avg_ngram_temp_toppk
                    
-                   with open(f'outputs/{model_name}_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
+                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
                        json.dump(results,f)
                    
                    
                    
 
-def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, N = 1, temp = 1, p=1, k = 50):
+def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, output_dir, shot, N = 1, temp = 1, p=1, k = 50):
     output_dict = {}
     
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
@@ -181,7 +189,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                 num_decodes+=N
         
      
-    with open(f'outputs/{model_name}_wmt14_de-en__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
+    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
         json.dump(output_dict,f)
         
     return output_dict
@@ -208,12 +216,14 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 10 #500
+    samplesize = 100 
     batch = 2
-    model_name = "llama-2" # ["llama-2", "flan-t5", "gemma"]
+    output_dir = "outputs/WMT/V1"
     # it versions and quantized
-    model = "meta-llama/Llama-2-7b-hf" # ["google/flan-t5-large" ,"meta-llama/Llama-2-7b-hf",  "google/gemma-2b-it", "google/gemma-7b-it"]
+    model_name = "flan-t5" # ["llama-2", "flan-t5", "gemma"]
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
-    run_experiments(model_name, model, data, batch, load_in_8bit=False)
+    
+    for shot in ["zeroshot", "oneshot"]:
+        run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
     
  
