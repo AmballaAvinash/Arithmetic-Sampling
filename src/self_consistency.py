@@ -198,6 +198,7 @@ class SelfConsistency(LLMWrapper):
                     logger.info(metric_results[_strat])
             # breakpoint()
             metric_results[_strat]["n_gram_diversity"] = np.mean([_ex["n_gram_diversity"] for _ex in examples[_strat]])
+            metric_results[_strat]["duplicity"] = np.mean([_ex["duplicity"] for _ex in examples[_strat]])
             # Save results
             res_dir = ["eval"]
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
