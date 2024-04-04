@@ -100,7 +100,7 @@ class SelfConsistency(LLMWrapper):
             references, _examples = [], []
             start_time = time.time()
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
-                breakpoint()
+                # breakpoint()
                 # try:
 
                 inf_args, ref = construct_args_from_example(d, task_name)
@@ -116,7 +116,7 @@ class SelfConsistency(LLMWrapper):
                         "do_sample": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
-                    breakpoint()
+                    # breakpoint()
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
