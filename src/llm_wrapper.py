@@ -91,7 +91,7 @@ class LLMWrapper:
         
         if self.is_llama2:
             # breakpoint()
-            self.model = self.model.bfloat16().cuda()
+            self.model = self.model.fp16().cuda()
         self.tokenizer.pad_token =  self.tokenizer.eos_token
         self.model.config.pad_token_id = self.model.config.eos_token_id
         self.model.eval()
