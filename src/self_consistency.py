@@ -100,8 +100,9 @@ class SelfConsistency(LLMWrapper):
             references, _examples = [], []
             start_time = time.time()
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
-                #breakpoint()
+                breakpoint()
                 # try:
+
                 inf_args, ref = construct_args_from_example(d, task_name)
                 # breakpoint()
                 _ex = d
