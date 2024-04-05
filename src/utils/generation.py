@@ -179,8 +179,8 @@ def fix_posthoc(decoded,task_name):
         labels = []
         for d in decoded:
             patterns = {
-            "so the answer is": r"so\s+the\s+answer\s+is\s+\(?(\w)\)?",
-            "so the answer to the question is": r"so\s+the\s+answer\s+to\s+the\s+question\s+is\s+\(?(\w)\)?",
+            "the answer is": r"the\s+answer\s+is\s+\(?(\w)\)?",
+            "the answer to the question is": r"the\s+answer\s+to\s+the\s+question\s+is\s+\(?(\w)\)?",
             "answer": r"answer:\s+\(?(\w)\)?"
             }
             matches = []
