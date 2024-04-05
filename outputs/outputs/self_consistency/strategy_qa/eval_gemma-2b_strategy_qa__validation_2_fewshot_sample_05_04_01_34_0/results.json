@@ -1,0 +1,69 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_2_fewshot_sample_05_04_01_34_0",
+  "n_total": 2,
+  "eval_args": {
+    "max_new_tokens": 200,
+    "do_sample": true,
+    "top_p": 1.0,
+    "temperature": 0.5,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 5,
+    "renormalize_logits": true,
+    "use_arithmetic": false
+  },
+  "scores": {
+    "accuracy.accuracy": 1.0,
+    "ngram_diversity.ngram_diversity": 1.0,
+    "n_gram_diversity": 2.20874386246349,
+    "duplicity": 1.0
+  },
+  "time_taken": {
+    "sampling": 4.700378894805908
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?\nReasoning: ",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "1) Gandalf is very powerful. 2) Rincewind has a magic ring. 3) Gandalf can use his magic ring to block Rincewind's magic ring. 4) Rincewind is a wizard. 5) Wizards can use magic rings to block other wizard's magic rings. 6) Gandalf's magic ring can block Rincewind's magic ring. 7) Gandalf can use his magic ring to block Rincewind's magic ring. 8) Rincewind can use his magic ring to block Gandalf's magic ring. 9) Gandalf's magic ring can block Rincewind's magic ring. 10) Gandalf can use his magic ring to block Rincewind's magic ring. 11) Rincewind can use his magic ring to block Gandalf's magic ring. 12) Gandalf's magic ring can block Rincewind's magic ring. 13",
+        "1. Gandalf is a wizard. 2. Gandalf is a wizard who is stronger than Rincewind. Thus, Gandalf could hypothetically defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "<i>The Lord of the Rings</i> is a fantasy series. Fantasy is a genre that is not real. Thus, Gandalf could not defeat Rincewind in a wizard battle. So the answer is no.\nAnswer: no\n",
+        "1) Gandalf is a wizard. Wizards are the strongest of wizards. 2) Rincewind is a wizard. Wizards are the strongest of wizards. 3) Gandalf is stronger than Rincewind. Therefore, Gandalf would defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "1. Gandalf is very powerful. 2. Rincewind is very powerful. 3. Gandalf is a wizard. 4. Wizards can defeat wizards. 5. Gandalf defeats Rincewind. Thus, Gandalf hypothetically defeats Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 2.094293794555453,
+      "duplicity": 1.0
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does ontology require a scalpel?\nReasoning: ",
+      "reference": "no",
+      "prediction": "no",
+      "generation_candidates": [
+        "1. Scalpels are used to cut into soft tissue. 2. Ontology is the study of being. 3. Scalpels are not soft tissue. Thus, ontology does not require a scalpel. So the answer is no.\nAnswer: no\n",
+        "1. \"Ontology\" is a technical term. 2. \"Scalpel\" is a tool. 3. The word \"tools\" is in the definition of \"Ontology\". Thus, \"Ontology\" requires a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "1. \"Ontology\" is a noun. \"Ontology\" is a noun because it is a word that names a type of thing. 2. \"Ontology\" is an abstract noun. An abstract noun is a noun that names a quality, not a thing. 3. \"Ontology\" is not a thing. 4. A scalpel is a tool. 5. A tool is not a thing. 6. \"Ontology\" is not a thing. 7. Therefore, \"Ontology\" does not require a scalpel. 8. Thus, \"Ontology\" does not require a scalpel. 9. So the answer is \"No\".\nAnswer: no\n",
+        "1. Scalpel is a noun.\n2. Ontology is a noun.\n3. A scalpel is an instrument for cutting.\n4. Cutting requires a scalpel.\n5. Thus, ontology requires a scalpel.\nAnswer: yes\n",
+        "1. Ontology is a branch of philosophy. 2. 1. Ontology is a branch of philosophy. 3. 2. Ontology is a branch of philosophy. 4. 3. Ontology is a branch of philosophy. 5. 4. Ontology is a branch of philosophy. 6. 5. Ontology is a branch of philosophy. 7. 6. Ontology is a branch of philosophy. 8. 7. Ontology is a branch of philosophy. 9. 8. Ontology is a branch of philosophy. 10. 9. Ontology is a branch of philosophy. 11. 10. Ontology is a branch of philosophy. 12. 11. Ontology is a branch of philosophy. 13. 12. Ontology is a branch of philosophy. 14. 13. Ontology is a branch of philosophy. 15. 14. Ontology is a branch of"
+      ],
+      "n_gram_diversity": 2.323193930371527,
+      "duplicity": 1.0
+    }
+  ]
+}
