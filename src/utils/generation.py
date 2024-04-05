@@ -134,7 +134,7 @@ def construct_args_from_example(d,task_name):
         reasoning = d['reasoning'] if 'reasoning' in d.keys() else ''
         return {'question':question,
                 "answer" : answer,
-                'instructions': default_strat_qa_instruction,
+                'instructions': default_commonsense_qa_instruction,
                 "question_prefix" : default_question_prefix,
                 "answer_prefix": default_answer_prefix,
                 "reasoning_prefix":default_reasoning_prefix,
@@ -180,8 +180,11 @@ def fix_posthoc(decoded,task_name):
         for d in decoded:
             patterns = {
             "the answer is": r"the\s+answer\s+is\s+\(?(\w)\)?",
-            "the answer to the question is": r"the\s+answer\s+to\s+the\s+question\s+is\s+\(?(\w)\)?",
-            "answer": r"answer:\s+\(?(\w)\)?"
+        "the correct answer is": r"the\s+correct\s +answer\s+is\s+\(?(\w)\)?",
+        "the answer should be" : r"the\s+answer\s+should\s be\s+\(?(\w)\)?",
+        "the answer musr be" : r"the\s+answer\s+must\s be\s+\(?(\w)\)?",
+        "the answer to the question is": r"the\s+answer\s+to\s+the\s+question\s+is\s+\(?(\w)\)?",
+        "answer": r"answer:\s+\(?(\w)\)?"
             }
             matches = []
             for phrase, pattern in patterns.items():
