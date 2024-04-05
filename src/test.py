@@ -228,6 +228,6 @@ if __name__ == "__main__":
     for model_name in ["llama-2"]:  #["llama-2", "flan-t5", "gemma"]
         for shot in ["zeroshot", "oneshot"]:
             print(f"{model_name}, {shot}")
-            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=True)
     
  
