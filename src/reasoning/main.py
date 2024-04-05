@@ -4,7 +4,7 @@ import argparse
 import torch
 import time
 
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, BitsAndBytesConfig
 from tqdm import tqdm
 from utils import *
 
@@ -28,12 +28,9 @@ def cot_reasoning(
         input_prompt = f"Question: {question} \nAnswer: {COT_TRIGGER}"
         if len(prompt_prefix):
             input_prompt = prompt_prefix + input_prompt
-        # input_ids = tokenizer(
-        #     input_prompt, truncation=True, return_tensors="pt"
-        # ).input_ids.to(DEVICE)
         input_ids = tokenizer(
             input_prompt, truncation=True, return_tensors="pt"
-        ).input_ids
+        ).input_ids.to(DEVICE)
         if "arithmetic" in sampling_strategies:
             arithmetic_sample_outputs = model.generate(
                 input_ids=input_ids,
@@ -160,11 +157,11 @@ if __name__ == "__main__":
         model_class = AutoModelForSeq2SeqLM
     else:
         model_class = AutoModelForCausalLM
-    # model = model_class.from_pretrained(
-    #     "/".join(MODEL), load_in_8bit=args.quant_8_bit
-    # ).to(DEVICE)
+    quantization_config = BitsAndBytesConfig(load_in_8bit=True)
     model = model_class.from_pretrained(
-        "/".join(MODEL), load_in_8bit=args.quant_8_bit
+        "/".join(MODEL), 
+        quantization_config = quantization_config,
+        device_map="auto"
     )
     tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
 
