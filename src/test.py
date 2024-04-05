@@ -93,7 +93,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
     results = {}
     for N in [5]: # num_decodes
-        for temp in [0.01, 0.5, 1.0]: # temperature
+        for temp in [0.5, 1.0]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
@@ -228,6 +228,6 @@ if __name__ == "__main__":
     for model_name in ["llama-2"]:  #["llama-2", "flan-t5", "gemma"]
         for shot in ["zeroshot", "oneshot"]:
             print(f"{model_name}, {shot}")
-            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=True)
+            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
     
  
