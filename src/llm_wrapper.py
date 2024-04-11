@@ -162,14 +162,14 @@ class LLMWrapper:
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                         return_dict_in_generate=True, output_scores=True)
         if '-it' in self.model_name or '-chat' in self.model_name:
-            prompt_len = len(_prompt) - len('<start_of_turn>model\n<bos><start_of_turn>user<end_of_turn>\n')
+            prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
         else:
             prompt_len = len(_prompt)
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(prompt_len if return_output_after_prompt else 0):] for
             o in outputs.sequences]
         dec =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
-        breakpoint()
+        # breakpoint()
         return decoded, outputs, _prompt, decoding_args
 
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
@@ -223,7 +223,7 @@ class LLMWrapper:
         if '-it' or '-chat' in self.model_name:
             chat = [ { "role": "user", "content": prompt },]
             prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
-        breakpoint()
+        # breakpoint()
         return self._base_generator(prompt, **kwargs)
     
     def load_metrics(self, metrics):
