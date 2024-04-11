@@ -192,6 +192,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
      
     with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
+        print(output_dict)
         json.dump(output_dict,f)
         
     return output_dict
