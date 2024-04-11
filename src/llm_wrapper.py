@@ -164,7 +164,7 @@ class LLMWrapper:
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
             o in outputs.sequences]
-        # breakpoint()
+        breakpoint()
         return decoded, outputs, _prompt, decoding_args
 
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
@@ -215,6 +215,10 @@ class LLMWrapper:
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         # breakpoint()
+        if '-it' or '-chat' in self.model_name:
+            chat = [ { "role": "user", "content": prompt },]
+            prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+        breakpoint()
         return self._base_generator(prompt, **kwargs)
     
     def load_metrics(self, metrics):
