@@ -251,12 +251,12 @@ class LLMWrapper:
             total_unique_ngrams = len(unique_ngrams)
             ngram_diversity_score += total_unique_ngrams / (total_ngram_count + torch.finfo(torch.float32).eps)
         return ngram_diversity_score
-    def cal_entropy(generated):
+    def compute_entropy(self,generated_seqs):
         #print 'in BLEU score calculation'
         #the maximum is bigram, so assign the weight into 2 half.
         etp_score = [0.0,0.0,0.0,0.0]
         counter = [defaultdict(int),defaultdict(int),defaultdict(int),defaultdict(int)]
-        for gg in generated:
+        for gg in generated_seqs:
             g = gg.rstrip('2').split()
             for n in range(4):
                 for idx in range(len(g)-n):
