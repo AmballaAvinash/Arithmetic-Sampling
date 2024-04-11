@@ -162,7 +162,7 @@ class LLMWrapper:
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                         return_dict_in_generate=True, output_scores=True)
         if '-it' in self.model_name or '-chat' in self.model_name:
-            prompt_len = len(_prompt) - len('<start_of_turn>model\n')
+            prompt_len = len(_prompt) - len('<start_of_turn>model\n<bos><start_of_turn>user<end_of_turn>\n')
         else:
             prompt_len = len(_prompt)
         decoded = [
