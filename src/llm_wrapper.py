@@ -164,6 +164,7 @@ class LLMWrapper:
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
             o in outputs.sequences]
+        dec =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
         breakpoint()
         return decoded, outputs, _prompt, decoding_args
 
