@@ -232,8 +232,8 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["llama-2", "gemma", "mt5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
-        for shot in ["oneshot", "zeroshot"]:
+    for model_name in ["llama-2"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+        for shot in ["zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
@@ -251,4 +251,5 @@ if __name__ == "__main__":
     
     
     # graphs
+    
  
