@@ -220,7 +220,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 if __name__ == "__main__":
     samplesize = 100 
     batch = 2
-    output_dir = "outputs/WMT/V1"
+    output_dir = "outputs/WMT/V2"
     
     random.seed(41)
     data =  random.sample(load_hf_data_set('validation','wmt14','de-en')['translation'],samplesize)
