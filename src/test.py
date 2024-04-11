@@ -8,7 +8,7 @@ from tqdm import tqdm
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.util import ngrams
 from transformers import BitsAndBytesConfig
-from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer
+from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer, MT5ForConditionalGeneration
 import os
 import pandas as pd
 import json
@@ -55,6 +55,11 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     elif model_name=="gemma":
         model = "google/gemma-2b-it"
         cls_model = AutoModelForCausalLM
+        cls_tokenizer = AutoTokenizer
+        
+    elif model_name == "mt5":
+        model = "google/mt5-large"
+        cls_model = MT5ForConditionalGeneration
         cls_tokenizer = AutoTokenizer
         
     tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
@@ -192,14 +197,13 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
      
     with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
-        print(output_dict)
         json.dump(output_dict,f)
         
     return output_dict
 
 def calculate_bleu_and_ngram_diversity(reference, translations):
     translations_split = [x.split() for x in translations]
-    bleu_score = np.max([ sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4) for x in translations_split])
+    bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
 
     n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
@@ -228,13 +232,13 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma"]
+    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
         for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
             
-    # Ouput resuls from json
+    # Otabular output resuls from json
     # json_data = []
     # for file in os.listdir(output_dir):
     #     if "llama-2" in file and "oneshot" in file and "results" in file:
@@ -243,4 +247,6 @@ if __name__ == "__main__":
     #            json_data.append(data)
     # df = pd.DataFrame(json_data)
     
+    
+    # graphs
  
