@@ -12,6 +12,7 @@ from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoMo
 import os
 import pandas as pd
 import json
+import matplotlib.pyplot as plt
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -232,8 +233,8 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["llama-2"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
-        for shot in ["zeroshot"]:
+    for model_name in ["gemma", "mt5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+        for shot in ["zeroshot", "oneshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
@@ -250,6 +251,26 @@ if __name__ == "__main__":
     
     
     
-    # graphs
+            # # graphs
+            # for temp in [0.1, 0.5]: # temperature
+            #     for p in [0.8, 1.0]: # top p 
+            #         for k in [30, 50]: # top k '
+            #           rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
+            #           x = rows["Num decodes"]
+            #           y_sample = rows["BLEU Sampling"] 
+            #           y_arit = rows["BLEU Arithmetic"]
+                      
+            #           plt.xlabel("Num of decodes")
+            #           plt.ylabel("BLEU score")
+            #           plt.plot(x,y_sample, label="Ancestral sampling ")
+            #           plt.plot(x,y_arit, label = "Arithemetic sampling")
+            #           plt.title(f"Temp {temp}, Top p {p}, Top k {k}")
+            #           plt.legend()
+            #           plt.show()
+                            
+        
+            
+    
+    
     
  
