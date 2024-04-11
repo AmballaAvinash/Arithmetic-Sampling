@@ -160,9 +160,13 @@ class LLMWrapper:
         with torch.no_grad():
             # breakpoint()
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
-                                          return_dict_in_generate=True, output_scores=True)
+                                        return_dict_in_generate=True, output_scores=True)
+        if '-it' in self.model_name or '-chat' in self.model_name:
+            prompt_len = len(_prompt) - len('<start_of_turn>model\n')
+        else:
+            prompt_len = len(_prompt)
         decoded = [
-            self.tokenizer.decode(o, skip_special_tokens=True)[(len(_prompt) if return_output_after_prompt else 0):] for
+            self.tokenizer.decode(o, skip_special_tokens=True)[(prompt_len if return_output_after_prompt else 0):] for
             o in outputs.sequences]
         dec =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
         breakpoint()
