@@ -232,20 +232,22 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+    for model_name in ["llama-2", "gemma", "mt5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
         for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
             
-    # Otabular output resuls from json
-    # json_data = []
-    # for file in os.listdir(output_dir):
-    #     if "llama-2" in file and "oneshot" in file and "results" in file:
-    #        with open(os.path.join(output_dir,file),"r") as f:
-    #            data = json.load(f)
-    #            json_data.append(data)
-    # df = pd.DataFrame(json_data)
+            # Otabular output resuls from json
+            json_data = []
+            for file in os.listdir(output_dir):
+                if model_name in file and shot in file and "results" in file:
+                    with open(os.path.join(output_dir,file),"r") as f:
+                        jsondata = json.load(f)
+                        json_data.append(jsondata)
+            df = pd.DataFrame(json_data)
+            df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{len(data)}.csv")
+    
     
     
     # graphs
