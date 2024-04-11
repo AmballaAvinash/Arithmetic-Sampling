@@ -9,7 +9,9 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.util import ngrams
 from transformers import BitsAndBytesConfig
 from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer
-
+import os
+import pandas as pd
+import json
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -92,8 +94,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [5]: # num_decodes
-        for temp in [0.01, 0.5, 1.0]: # temperature
+    for N in [1, 5, 10]: # num_decodes
+        for temp in [0.1, 0.5]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
@@ -196,7 +198,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
 
 def calculate_bleu_and_ngram_diversity(reference, translations):
     translations_split = [x.split() for x in translations]
-    bleu_score = np.mean([ sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4) for x in translations_split])
+    bleu_score = np.max([ sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4) for x in translations_split])
 
     n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
@@ -217,7 +219,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 
 if __name__ == "__main__":
     samplesize = 100 
-    batch = 1
+    batch = 2
     output_dir = "outputs/WMT/V1"
     
     random.seed(41)
@@ -225,9 +227,19 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["llama-2"]:  #["llama-2", "flan-t5", "gemma"]
+    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma"]
         for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+            
+            
+    # Ouput resuls from json
+    # json_data = []
+    # for file in os.listdir(output_dir):
+    #     if "llama-2" in file and "oneshot" in file and "results" in file:
+    #        with open(os.path.join(output_dir,file),"r") as f:
+    #            data = json.load(f)
+    #            json_data.append(data)
+    # df = pd.DataFrame(json_data)
     
  
