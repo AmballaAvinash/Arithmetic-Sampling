@@ -1,0 +1,133 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_5_fewshot_arithmetic_12_04_00_47_0",
+  "n_total": 5,
+  "eval_args": {
+    "max_new_tokens": 200,
+    "do_sample": true,
+    "top_p": 1.0,
+    "temperature": 0.5,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 5,
+    "renormalize_logits": true,
+    "use_arithmetic": true,
+    "arithmetic_seed": 42
+  },
+  "scores": {
+    "accuracy.accuracy": 0.4,
+    "ngram_diversity.ngram_diversity": 0.2,
+    "n_gram_diversity": 1.961726190481773,
+    "duplicity": 1.0
+  },
+  "time_taken": {
+    "sampling": 8.432254791259766
+  },
+  "examples": [
+    {
+      "input": "Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Gandalf is a 2000 plus year old wizard that has fought orcs and spirits in Middle Earth. Rincewind is the protagonist of the Discworld series. Rincewind is a failed student at the Unseen University for wizards in Ankh-Morpork. Rincewind is described by other wizards as the magical equivalent to the number zero.",
+      "idx": 1,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Gandalf hypothetically defeats Rincewind in a wizard battle?",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: Gandalf would be a wizard, and Rincewind would be a wizard. Thus, Gandalf could hypothetically defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Gandalf is a wizard. Rincewind is a wizard. Thus, Gandalf could defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Gandalf is a wizard. Rincewind is a wizard. Gandalf is more powerful than Rincewind. Thus, Gandalf could hypothetically defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Gandalf is a wizard. Rincewind is not a wizard. Thus, Gandalf could defeat Rincewind in a wizard battle. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Gandalf is a wizard. Wizards are capable of defeating Rincewind. Thus, Gandalf could defeat Rincewind. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 1.554316237844258,
+      "duplicity": 1.0
+    },
+    {
+      "input": "Does ontology require a scalpel?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. A scalpel is used during surgery. Ontology is a philosophical domain, not a medical one.",
+      "idx": 2,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Does ontology require a scalpel?",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: Ontology is the branch of philosophy that deals with the nature of reality. Scalpels are used for cutting. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Ontology is the study of the nature of being. A scalpel is a tool. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Ontology is a branch of philosophy that deals with the nature of being. Scalpels are used to cut. Thus, ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Ontology is a branch of philosophy. The word scalpel means a small knife. Thus, ontology would require a scalpel. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: An ontology is a theory of the world. A scalpel is a tool for cutting. Thus, an ontology requires a scalpel. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 2.056575861668983,
+      "duplicity": 1.0
+    },
+    {
+      "input": "Is it normal to find parsley in multiple sections of the grocery store?",
+      "target_scores": {
+        "Yes": 1,
+        "No": 0
+      },
+      "target": "Yes. Parsley is available in both fresh and dry forms. Fresh parsley must be kept cool. Dry parsley is a shelf stable product.",
+      "idx": 3,
+      "prompt": "Question: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Is it normal to find parsley in multiple sections of the grocery store?",
+      "reference": "yes",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: There are multiple sections of the grocery store. Some of them are produce, bakery, meat, and dairy. Parsley is in the produce section. Thus, it is normal to find parsley in multiple sections of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Parsley is a herb. Herbs are used in cooking. Herbs are sold in the produce section of the grocery store. Thus, parsley is sold in the produce section of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Parsley is a herb. Herbs are usually found in the produce section of the grocery store. Thus, parsley is usually found in the produce section of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Parsley is a herb. Herbs are found in the produce section of the grocery store. Thus, parsley is found in the produce section of the grocery store. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Parsley is a vegetable. Vegetables are often found in the produce section of the grocery store. Thus, parsley is often found in the produce section of the grocery store. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 1.4909524533913556,
+      "duplicity": 1.0
+    },
+    {
+      "input": "Has Johns Hopkins University always treated subjects ethically?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Henrietta Lacks' DNA was used and replicated by Johns Hopkins University without her family's knowledge or approval. Henrietta Lacks' family medical history was released by Johns Hopkins University without their knowledge.",
+      "idx": 4,
+      "prompt": "Question: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Has Johns Hopkins University always treated subjects ethically?",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: Johns Hopkins University has always treated subjects ethically. This is because Johns Hopkins University is a medical institution. Medical institutions must treat subjects ethically. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Johns Hopkins University has been around since 1876. In 1946, the university was the first to receive a federal grant to study the effects of radiation on humans. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Johns Hopkins University has a long history of ethical treatment of subjects. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Johns Hopkins University was founded in 1876. The first president of the school was John Hopkins. John Hopkins was a medical doctor. Thus, Johns Hopkins University was founded by a medical doctor. Thus, Johns Hopkins University has always treated subjects ethically. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Since 1993, Johns Hopkins University has employed over 100,000 people. There have been 300 lawsuits against Johns Hopkins University. Of those 300 lawsuits, 100 of them were dismissed. So, Johns Hopkins University has treated subjects ethically. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 2.294287897864668,
+      "duplicity": 1.0
+    },
+    {
+      "input": "Did Elle Fanning play an essential part in ending apartheid?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Apartheid lasted from 1948 until the early 1990s. Actress Elle Fanning was born on April 9, 1998.",
+      "idx": 5,
+      "prompt": "Question: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nLike each of the previous examples, answer the question with either \"Yes\" or \"No\".\nProvide reasoning for your answer.\nEnd your reasoning with the sentence: \"So the answer is <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Did Elle Fanning play an essential part in ending apartheid?",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: Elle Fanning is a famous actress. An essential part of ending apartheid is the end of apartheid. Thus, Elle Fanning's role in ending apartheid was essential. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Elle Fanning was born in 1999. The end of apartheid was in 1994. Elle Fanning is 15 years old. Therefore, Elle Fanning was not born during the time of apartheid. So the answer is no.\nAnswer: no\n",
+        "\nReasoning: Elle Fanning played a role in ending apartheid. She played a character named \"Milly\" in the film \"The Great Gatsby\". The character \"Milly\" was a white woman who was raped by a black man. Thus, Elle Fanning played an essential part in ending apartheid. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Elle Fanning played a small role in ending apartheid. Elle Fanning is a minor actress. Thus, Elle Fanning's role in ending apartheid was minor. So the answer is no.\nAnswer: no\n",
+        "\nReasoning: Elle Fanning played a part in ending apartheid by playing a role in the film \u201cThe Queen of Versailles\u201d. Elle Fanning was a part of the cast of the film. Thus, Elle Fanning played an essential part in ending apartheid. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 2.4124985016396012,
+      "duplicity": 1.0
+    }
+  ]
+}
