@@ -127,7 +127,7 @@ class SelfConsistency(LLMWrapper):
                     # breakpoint()
                     llm_prompt_2  = llm_prompt.strip(' ').strip("Reasoning:") + "Answer: "
                     option_fwd_scores = get_logprob_score(target=inf_args["options"],
-                                                prefix=[llm_prompt]*inf_args["options"],
+                                                prefix=[llm_prompt]*len(inf_args["options"]),
                                                 model=self.model,
                                                 tokenizer=self.tokenizer,
                                                 len_norm=True)
