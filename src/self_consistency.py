@@ -134,7 +134,7 @@ class SelfConsistency(LLMWrapper):
                     option_fwd_scores = [{'target':x[0],'score':x[1]} for x in zip(inf_args["option_texts"],option_fwd_scores)]
                     forward_options_sorted = sorted(option_fwd_scores, key=lambda d: d['score'],reverse= True)
                     prediction_text = forward_options_sorted[0]['target']
-                    prediction = inf_args["options"][inf_args["option_texts"].index(prediction_text)]
+                    prediction = inf_args["options"][inf_args["option_texts"].index(prediction_text)].lower()
 
                     # breakpoint()
                     # forward_pred_option = forward_options_sorted[0]['target']
