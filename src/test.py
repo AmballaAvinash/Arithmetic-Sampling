@@ -63,7 +63,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         cls_model = MT5ForConditionalGeneration
         cls_tokenizer = T5Tokenizer
         
-    elif model == "m2m":
+    elif model_name == "m2m":
         model = "facebook/m2m100_418M"
         cls_model = M2M100ForConditionalGeneration
         cls_tokenizer = M2M100Tokenizer
@@ -71,7 +71,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         
     tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
     
-    if  model == "m2m":
+    if  model_name == "m2m":
         tokenizer.src_lang = "de"
 
     if load_in_8bit:
@@ -242,7 +242,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+    for model_name in ["m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m"]
         for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
