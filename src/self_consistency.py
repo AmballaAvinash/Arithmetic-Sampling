@@ -124,7 +124,7 @@ class SelfConsistency(LLMWrapper):
                         "do_sample": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
-                    breakpoint()
+                    # breakpoint()
                     llm_prompt_2  = llm_prompt.strip(' ').strip("Reasoning:") + " Answer: "
                     option_fwd_scores = get_logprob_score(target=inf_args["option_texts"],
                                                 prefix=[llm_prompt_2]*len(inf_args["options"]),
@@ -136,7 +136,7 @@ class SelfConsistency(LLMWrapper):
                     prediction_text = forward_options_sorted[0]['target']
                     prediction = inf_args["options"][inf_args["option_texts"].index(prediction_text)]
 
-                    breakpoint()
+                    # breakpoint()
                     # forward_pred_option = forward_options_sorted[0]['target']
                     # prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
