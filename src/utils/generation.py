@@ -239,7 +239,7 @@ def construct_args_from_example(d,task_name):
                 "reasoning_prefix":default_reasoning_prefix,
                 "n_shots" : 6,
                 "options"  : [o.lower() for o in d['choices']['label']],
-                "option_texts" : [d['choices']['text']],
+                "option_texts" : d['choices']['text'],
                 "reasoning" : reasoning,
                 "demos_split":'demo',
                 "task_name" : task_name,
