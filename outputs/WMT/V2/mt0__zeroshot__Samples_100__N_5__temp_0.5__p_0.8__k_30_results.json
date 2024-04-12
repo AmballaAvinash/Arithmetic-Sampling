@@ -1,0 +1,1 @@
+{"Num Samples": 100, "Num decodes": 5, "temperature": 0.5, "Top p ": 0.8, "Top k": 30, "BLEU Arithmetic": 17.238030000000002, "BLEU Sampling": 17.34276, "N gram diversity Arithmetic": 2.246870808345323, "N gram diversity Sampling": 2.1550197184785036}
