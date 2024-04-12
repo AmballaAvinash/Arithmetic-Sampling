@@ -125,7 +125,7 @@ class SelfConsistency(LLMWrapper):
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                     # breac/kpoic/nt()
-                    llm_prompt_2  = llm_prompt.strip(' ').strip("Reasoning:") + " Answer: "
+                    llm_prompt_2  = llm_prompt.strip(' ').strip("Reasoning:") + " Answer option: "
                     option_fwd_scores = get_logprob_score(target=inf_args["options"],
                                                 prefix=[llm_prompt_2]*len(inf_args["options"]),
                                                 model=self.model,
