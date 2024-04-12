@@ -18,7 +18,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel,
 from llm_wrapper import LLMWrapper
 from src.utils.generation import TruncateLogitsProcessor, default_metrics, \
     default_answer_prefix, default_output_prefix,default_decoding_args,\
-        construct_args_from_example, fix_posthoc
+        construct_args_from_example, fix_posthoc, get_logprob_score
 import torch
 from src.utils.helpers import setup_logger
 from src.utils.arguments import Arguments
@@ -91,7 +91,7 @@ class SelfConsistency(LLMWrapper):
 
         # breakpoint()
         # breakpoint()
-        _strats = ['greedy','arithmetic','sample'] if output_sampling_strategy == 'all' else [
+        _strats = ['greedy','arithmetic','sample','greedy2'] if output_sampling_strategy == 'all' else [
                 output_sampling_strategy]
         predictions, examples = defaultdict(list), defaultdict(list)
         metric_results, results = defaultdict(dict), defaultdict(dict)
@@ -118,6 +118,25 @@ class SelfConsistency(LLMWrapper):
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                     # breakpoint()
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
+                elif _strat == 'greedy2':
+                    inf_fn_kwargs.update({
+                        "num_return_sequences" :  1,
+                        "do_sample": False,
+                    })
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
+                    # breakpoint()
+                    llm_prompt_2  = llm_prompt.strip(' ').strip("Reasoning:") + "Answer: "
+                    option_fwd_scores = get_logprob_score(target=inf_args["options"],
+                                                prefix=[llm_prompt]*inf_args["options"],
+                                                model=self.model,
+                                                tokenizer=self.tokenizer,
+                                                len_norm=True)
+                    option_fwd_scores = [{'target':x[0],'score':x[1]} for x in zip(inf_args["options"],option_fwd_scores)]
+                    forward_options_sorted = sorted(option_fwd_scores, key=lambda d: d['score'],reverse= True)
+                    prediction = forward_options_sorted[0]['target']
+                    breakpoint()
+                    # forward_pred_option = forward_options_sorted[0]['target']
+                    # prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
                     #prepare kwargs for the sampling strategy
                     inf_fn_kwargs.update({

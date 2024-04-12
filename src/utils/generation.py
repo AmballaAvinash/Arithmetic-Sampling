@@ -73,6 +73,103 @@ class TruncateLogitsProcessor(LogitsProcessor):
             scores[:, self.eos_token_id] = 1
                 
         return scores
+def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
+    # if type(model) is dict and model['org'] == 'openai':
+    #     openai.api_key = model['key']
+    #     # Computing logprobs of a specified sequence of text is only supported by the following until 2024-01-04:
+    #     # text-davinci-003, text-davinci-002, text-davinci-001 ($0.0200 / 1K tokens)
+    #     # text-curie-001 ($0.0020 / 1K tokens)
+    #     # text-babbage-001 (0.0005 / 1K tokens)
+    #     response = openai.Completion.create(model=model['name'],
+    #                                         prompt=list(map(lambda x: ''.join(x), zip(prefix, target))),
+    #                                         max_tokens=0, logprobs=1, echo=True)
+    #     scores = []
+    #     for i, res in enumerate(response['choices']):
+    #         prefix_len = len(tokenizer.encode(prefix[i]))
+    #         target_len = len(tokenizer.encode(target[i]))
+    #         tkn_logprobs = res['logprobs']['token_logprobs']
+    #         assert len(tkn_logprobs) == prefix_len + target_len
+    #         target_logprob_score = sum(tkn_logprobs[prefix_len:]) / (target_len if len_norm else 1.)
+    #         scores.append(target_logprob_score)
+    #     model['session_tokens'] += response['usage']['total_tokens']
+    # else:
+    bos_added = eos_added = False
+    try:
+        bos_added = tokenizer.add_bos_token
+    except:
+        pass
+    try:
+        eos_added = tokenizer.add_eos_token
+    except:
+        pass
+    scores = []
+    # breakpoint()
+
+    if 't5' in tokenizer.name_or_path:
+        prefix_tkn = tokenizer(prefix, return_tensors="pt", padding=True)
+        prefix_input_ids = prefix_tkn.input_ids
+        # prefix_lens = prefix_tkn.attention_mask.sum(dim=1)
+        target_tkn = tokenizer(target, return_tensors="pt", padding=True)
+        target_input_ids = target_tkn.input_ids
+        target_lens = target_tkn.attention_mask.sum(dim=1)
+
+        for batch_i in range(0, len(prefix_input_ids), bsz):
+            batch_prefix_input_ids = prefix_input_ids[batch_i:batch_i + bsz]
+            # batch_prefix_lens = prefix_lens[batch_i:batch_i + bsz]
+            batch_prefix_att_mask = prefix_tkn.attention_mask[batch_i:batch_i + bsz]
+            batch_target_input_ids = target_input_ids[batch_i:batch_i + bsz]
+            batch_target_lens = target_lens[batch_i:batch_i + bsz]
+            # batch_target_att_mask = target_tkn.attention_mask[batch_i:batch_i + bsz]
+            with torch.no_grad():
+                forward = model(input_ids=batch_prefix_input_ids.cuda(),
+                                attention_mask=batch_prefix_att_mask.cuda(),
+                                labels=batch_target_input_ids.cuda())
+            for i, logits in enumerate(forward.logits):
+                target_logits = logits[:batch_target_lens[i]]
+                target_logprobs_all = torch.log_softmax(target_logits, dim=-1, dtype=torch.float)
+                target_logprobs_seq = target_logprobs_all[
+                    torch.arange(batch_target_lens[i]), batch_target_input_ids[i][:batch_target_lens[i]]]
+                target_logprob_score = target_logprobs_seq.mean() if len_norm else target_logprobs_seq.sum()
+                scores.append(target_logprob_score.item())
+    else:
+        pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
+        prefix_input_ids = tokenizer(prefix).input_ids
+        target_input_ids = tokenizer(target).input_ids
+        # breakpoint()
+        if eos_added:
+            # Remove EOS from prefix and suffix
+            prefix_input_ids = list(map(lambda x: x[:-1], prefix_input_ids))
+            target_input_ids = list(map(lambda x: x[:-1], target_input_ids))
+        if bos_added:
+            # Remove BOS from suffix
+            target_input_ids = list(map(lambda x: x[1:], target_input_ids))
+        full_input_ids = list(map(lambda x: x[0] + x[1], zip(prefix_input_ids, target_input_ids)))
+        # Add padding
+        max_len = max(map(len, full_input_ids))
+        # attention_mask = list(map(lambda x: [1] * len(x) + [0] * (max_len - len(x)), full_input_ids))
+        full_input_ids = list(map(lambda x: x + [pad_id] * (max_len - len(x)), full_input_ids))
+
+        for batch_i in range(0, len(full_input_ids), bsz):
+            batch_input_ids = full_input_ids[batch_i:batch_i + bsz]
+            # batch_attention_mask = attention_mask[batch_i:batch_i + bsz]
+            with torch.no_grad():
+                forward = model(
+                    torch.tensor(
+                        batch_input_ids).cuda())  # , attention_mask=torch.tensor(batch_attention_mask).cuda()
+            # breakpoint()
+            for i, logits in enumerate(forward.logits):
+                cur_i = batch_i + i
+                target_logits = logits[
+                                len(prefix_input_ids[
+                                        cur_i]) - 1:-1]  # shifted since calcs. are for the next token position
+                target_logprobs_all = torch.log_softmax(target_logits, dim=-1, dtype=torch.float)
+                target_logprobs_seq = target_logprobs_all[
+                    torch.arange(len(target_input_ids[cur_i])), target_input_ids[cur_i]]
+                print(len)
+                target_logprob_score = target_logprobs_seq.mean() if len_norm else target_logprobs_seq.sum()
+                scores.append(target_logprob_score.item())
+    # breakpoint()
+    return scores
 def construct_qa_prompt_from_args( question, question_prefix,
                                     reasoning=None, reasoning_prefix=None,
                                      answer=None, answer_prefix=None):
@@ -122,6 +219,7 @@ def construct_args_from_example(d,task_name):
                 "answer_prefix": default_answer_prefix,
                 "reasoning_prefix":default_reasoning_prefix,
                 "n_shots" : 6,
+                "options" : ["Yes","No"],
                 "demos_split":'demo',
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
@@ -139,6 +237,7 @@ def construct_args_from_example(d,task_name):
                 "answer_prefix": default_answer_prefix,
                 "reasoning_prefix":default_reasoning_prefix,
                 "n_shots" : 6,
+                "options"  : [o.lower() for o in d['choices']['label']],
                 "reasoning" : reasoning,
                 "demos_split":'demo',
                 "task_name" : task_name,
