@@ -189,7 +189,7 @@ class LLMWrapper:
         return self._base_generator(prompt, **kwargs)
     def few_shot(self, question, construct_args_fn, question_prefix=None, answer=None, answer_prefix=None,
                 instructions=None,  prompt_sep="\n", n_shots=1,reasoning=None,reasoning_prefix=None,
-                 retrieval_strategy='random',task_name = None, demos_split='train',use_answer=False, **kwargs):
+                 retrieval_strategy='random',task_name = None,options=None, demos_split='train',use_answer=False, **kwargs):
         demos = self.datasets[demos_split]
         # more retrieval strategies can be added if required
         if retrieval_strategy == "random":
