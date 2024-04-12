@@ -239,7 +239,7 @@ if __name__ == "__main__":
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
             
-            # Otabular output resuls from json
+            # tabular output resuls from json
             json_data = []
             for file in os.listdir(output_dir):
                 if model_name in file and shot in file and "results" in file:
@@ -251,22 +251,35 @@ if __name__ == "__main__":
     
     
     
-            # # graphs
-            # for temp in [0.1, 0.5]: # temperature
-            #     for p in [0.8, 1.0]: # top p 
-            #         for k in [30, 50]: # top k '
-            #           rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
-            #           x = rows["Num decodes"]
-            #           y_sample = rows["BLEU Sampling"] 
-            #           y_arit = rows["BLEU Arithmetic"]
+            # graphs
+            fig, axs = plt.subplots(2, 4, figsize=(12, 6))
+            c = 0
+            for temp in [0.1, 0.5]: # temperature
+                for p in [0.8, 1.0]: # top p 
+                    for k in [30, 50]: # top k '
+                      rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
+                      x = rows["Num decodes"]
+                      y_sample = rows["BLEU Sampling"] 
+                      y_arit = rows["BLEU Arithmetic"]
                       
-            #           plt.xlabel("Num of decodes")
-            #           plt.ylabel("BLEU score")
-            #           plt.plot(x,y_sample, label="Ancestral sampling ")
-            #           plt.plot(x,y_arit, label = "Arithemetic sampling")
-            #           plt.title(f"Temp {temp}, Top p {p}, Top k {k}")
-            #           plt.legend()
-            #           plt.show()
+                      
+                      i = int(c/4)
+                      j = c%4
+                      
+                      axs[i][j].set_xlabel("Num of decodes")
+                      axs[i][j].set_ylabel("BLEU score")
+                      axs[i][j].plot(x,y_sample, label="Ancestral sampling ")
+                      axs[i][j].plot(x,y_arit, label = "Arithemetic sampling")
+                      
+                      c = c+1
+                      
+                      axs[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                    
+            plt.legend()
+            fig.suptitle(f"Model {model_name}, shot {shot}, Samples {len(data)}")
+            plt.tight_layout()
+            plt.savefig(f"{output_dir}/Figure_{model_name}__{shot}__Samples_{len(data)}.jpg")
+            plt.show()
                             
         
             
