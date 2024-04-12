@@ -17,7 +17,7 @@ default_strat_qa_instruction = """Like each of the previous examples, answer the
 Provide reasoning for your answer.
 End your reasoning with the sentence: "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
 default_commonsense_qa_instruction = """Like each of the previous examples, answer the question with either of the answer choices provided.
-Provide reasoning for your answer.
+Provide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
 End your reasoning with the sentence: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
