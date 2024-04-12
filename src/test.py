@@ -61,7 +61,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     elif model_name == "mt5":
         model = "google/mt5-large"
         cls_model = MT5ForConditionalGeneration
-        cls_tokenizer = AutoTokenizer
+        cls_tokenizer = T5Tokenizer
         
     tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
 
@@ -233,8 +233,8 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["gemma"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
-        for shot in ["oneshot"]:
+    for model_name in ["mt5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+        for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
