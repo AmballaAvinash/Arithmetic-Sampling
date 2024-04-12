@@ -165,30 +165,61 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
         if (idx+1)%batch==0:
             input_ids = tokenizer(input_batch, truncation=True, padding = True, return_tensors="pt").input_ids.to('cuda')
-
-            outputs_arith_toppk = model.generate(
-                input_ids = input_ids,
-                num_return_sequences = N,
-                do_sample = True,
-                temperature = temp,
-                top_p=p,
-                top_k=k,
-                num_beams = 1,
-                max_new_tokens = 100,
-                use_arithmetic = True
-                )
             
-            outputs_temp_toppk = model.generate(
-                input_ids = input_ids,
-                num_return_sequences = N,
-                do_sample = True,
-                temperature = temp,
-                top_p=p,
-                top_k=k,
-                num_beams = 1,
-                max_new_tokens = 100,
-                use_arithmetic = False
-                )
+            if model_name == "m2m":
+                
+                outputs_arith_toppk = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N,
+                    do_sample = True,
+                    temperature = temp,
+                    top_p=p,
+                    top_k=k,
+                    num_beams = 1,
+                    max_new_tokens = 100,
+                    use_arithmetic = True, 
+                    forced_bos_token_id=tokenizer.get_lang_id("en")
+                    )
+                
+                outputs_temp_toppk = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N,
+                    do_sample = True,
+                    temperature = temp,
+                    top_p=p,
+                    top_k=k,
+                    num_beams = 1,
+                    max_new_tokens = 100,
+                    use_arithmetic = False, 
+                    forced_bos_token_id=tokenizer.get_lang_id("en")
+                    )
+                
+                
+            else:     
+                
+                outputs_arith_toppk = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N,
+                    do_sample = True,
+                    temperature = temp,
+                    top_p=p,
+                    top_k=k,
+                    num_beams = 1,
+                    max_new_tokens = 100,
+                    use_arithmetic = True
+                    )
+                
+                outputs_temp_toppk = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N,
+                    do_sample = True,
+                    temperature = temp,
+                    top_p=p,
+                    top_k=k,
+                    num_beams = 1,
+                    max_new_tokens = 100,
+                    use_arithmetic = False
+                    )
             
             
             
@@ -251,12 +282,12 @@ if __name__ == "__main__":
             # tabular output resuls from json
             json_data = []
             for file in os.listdir(output_dir):
-                if model_name in file and shot in file and "results" in file:
+                if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
                     with open(os.path.join(output_dir,file),"r") as f:
                         jsondata = json.load(f)
                         json_data.append(jsondata)
             df = pd.DataFrame(json_data)
-            df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{len(data)}.csv")
+            df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
     
     
     
@@ -297,12 +328,12 @@ if __name__ == "__main__":
                           fig1.legend()
                           fig2.legend()
                     
-            fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {len(data)}")
-            fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {len(data)}")
+            fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {samplesize}")
+            fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {samplesize}")
             fig1.tight_layout()
             fig2.tight_layout()
-            fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{len(data)}.jpg")
-            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{len(data)}.jpg")                   
+            fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.jpg")
+            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
             plt.show()
             
             
