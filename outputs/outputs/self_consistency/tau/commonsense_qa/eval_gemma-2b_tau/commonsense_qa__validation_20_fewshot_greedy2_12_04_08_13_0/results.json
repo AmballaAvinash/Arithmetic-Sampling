@@ -1,0 +1,666 @@
+{
+  "experiment": "eval_gemma-2b_tau/commonsense_qa__validation_20_fewshot_greedy2_12_04_08_13_0",
+  "n_total": 20,
+  "eval_args": {
+    "max_new_tokens": 200,
+    "do_sample": false,
+    "top_p": 1.0,
+    "temperature": 0.5,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 1,
+    "renormalize_logits": true
+  },
+  "scores": {
+    "accuracy.accuracy": 0.35,
+    "ngram_diversity.ngram_diversity": 0.1,
+    "n_gram_diversity": 3.471705334431127,
+    "duplicity": 1.0
+  },
+  "time_taken": {
+    "sampling": 1.0592257976531982
+  },
+  "examples": [
+    {
+      "id": "03ee30b5801b61aee791a551a9d9a49f",
+      "question": "You can do knitting to get the feeling of what?",
+      "question_concept": "knitting",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "relaxation",
+          "arthritis",
+          "adrenaline",
+          "your",
+          "sweater may produced"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 1,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced",
+      "input": "You can do knitting to get the feeling of what? Answer choices: (a) relaxation (b) arthritis (c) adrenaline (d) your (e) sweater may produced",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be the feeling of knitting. Of the above choices, only knitting can produce the feeling of relaxation. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.6731786565684055,
+      "duplicity": 1.0
+    },
+    {
+      "id": "435a728f45d32faa4b3c4553c966fd6b",
+      "question": "If I was getting drunk, and people couldn't understand me, what might I be having?",
+      "question_concept": "getting drunk",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "a seizure",
+          "slurred speech",
+          "death",
+          "forgetfulness",
+          "pass out"
+        ]
+      },
+      "answerKey": "B",
+      "idx": 2,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out",
+      "input": "If I was getting drunk, and people couldn't understand me, what might I be having? Answer choices: (a) a seizure (b) slurred speech (c) death (d) forgetfulness (e) pass out",
+      "reference": "b",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be something that would make it hard to understand what you are saying. Of the above choices, only slurred speech makes it hard to understand what you are saying. So the answer is (b).\nAnswer: b\n"
+      ],
+      "n_gram_diversity": 3.277482938364145,
+      "duplicity": 1.0
+    },
+    {
+      "id": "bee2a6eadfaf7a4fa0a214e341ddbe5b",
+      "question": "If you turn off the music in a room with no other noise that room would be what?",
+      "question_concept": "music",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "silent",
+          "opera",
+          "silence",
+          "television",
+          "elevator"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 3,
+      "prompt": "Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: If you turn off the music in a room with no other noise that room would be what? Answer choices: (a) silent (b) opera (c) silence (d) television (e) elevator",
+      "input": "If you turn off the music in a room with no other noise that room would be what? Answer choices: (a) silent (b) opera (c) silence (d) television (e) elevator",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where there is no noise. Of the above choices, only silence is a place where there is no noise. So the answer is (c).\nAnswer: c\n"
+      ],
+      "n_gram_diversity": 3.1845429986485723,
+      "duplicity": 1.0
+    },
+    {
+      "id": "48abc2c113623fd72f758502529f93a5",
+      "question": "By learning about the world, many poor college students gain what?",
+      "question_concept": "learning about world",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "pleasure",
+          "greater mobility",
+          "desire to travel",
+          "global warming",
+          "increased security"
+        ]
+      },
+      "answerKey": "C",
+      "idx": 4,
+      "prompt": "Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: By learning about the world, many poor college students gain what? Answer choices: (a) pleasure (b) greater mobility (c) desire to travel (d) global warming (e) increased security",
+      "input": "By learning about the world, many poor college students gain what? Answer choices: (a) pleasure (b) greater mobility (c) desire to travel (d) global warming (e) increased security",
+      "reference": "c",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be something that poor college students gain by learning about the world. Of the above choices, only desire to travel is something that poor college students gain by learning about the world. So the answer is (d).\nAnswer: d\n"
+      ],
+      "n_gram_diversity": 2.9935553488592457,
+      "duplicity": 1.0
+    },
+    {
+      "id": "7d70208061ae3185bcfc9e912ee9e141",
+      "question": "What is it called when a person tends to leave things to the last minute?",
+      "question_concept": "person",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "procrastinate",
+          "complete collection",
+          "headache",
+          "good time management",
+          "have to hold"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 5,
+      "prompt": "Question: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: What is it called when a person tends to leave things to the last minute? Answer choices: (a) procrastinate (b) complete collection (c) headache (d) good time management (e) have to hold",
+      "input": "What is it called when a person tends to leave things to the last minute? Answer choices: (a) procrastinate (b) complete collection (c) headache (d) good time management (e) have to hold",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer should be the tendency to leave things to the last minute. Of the above choices, only procrastinate is the closest. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.7666666508369087,
+      "duplicity": 1.0
+    },
+    {
+      "id": "93b52e7ea1acf10db891e9355e234123",
+      "question": "While knitting you can do what using a radio?",
+      "question_concept": "knitting",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "listen to music",
+          "watch television",
+          "making blankets",
+          "eat",
+          "watching tv"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 6,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: While knitting you can do what using a radio? Answer choices: (a) listen to music (b) watch television (c) making blankets (d) eat (e) watching tv",
+      "input": "While knitting you can do what using a radio? Answer choices: (a) listen to music (b) watch television (c) making blankets (d) eat (e) watching tv",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be something that can be done while knitting. Of the above choices, only making blankets can be done while knitting. So the answer is (c).\nAnswer: c\n"
+      ],
+      "n_gram_diversity": 3.433725289311293,
+      "duplicity": 1.0
+    },
+    {
+      "id": "60e8f1a86d4063895f340cd1e3c55f50",
+      "question": "What is likely to happen to someone who is learning?",
+      "question_concept": "learning",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "overconfidence",
+          "effectiveness",
+          "knowing more",
+          "head grows larger",
+          "growth"
+        ]
+      },
+      "answerKey": "C",
+      "idx": 7,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: What is likely to happen to someone who is learning? Answer choices: (a) overconfidence (b) effectiveness (c) knowing more (d) head grows larger (e) growth",
+      "input": "What is likely to happen to someone who is learning? Answer choices: (a) overconfidence (b) effectiveness (c) knowing more (d) head grows larger (e) growth",
+      "reference": "c",
+      "prediction": "a",
+      "generation_candidates": [
+        " in knowledge\nReasoning: The answer should be the effect of learning. Of the above choices, only overconfidence is a negative effect of learning. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.6286535151159116,
+      "duplicity": 1.0
+    },
+    {
+      "id": "d3b145911a76fd6fbe9a23ab027be024",
+      "question": "Where is a bird likely to make it's home?",
+      "question_concept": "bird",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "forest",
+          "nest",
+          "roof",
+          "leaves",
+          "sky"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 8,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Where is a bird likely to make it's home? Answer choices: (a) forest (b) nest (c) roof (d) leaves (e) sky",
+      "input": "Where is a bird likely to make it's home? Answer choices: (a) forest (b) nest (c) roof (d) leaves (e) sky",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where birds live. Of the above choices, only nests are places where birds live. So the answer is (b).\nAnswer: b\n"
+      ],
+      "n_gram_diversity": 3.7088929421306385,
+      "duplicity": 1.0
+    },
+    {
+      "id": "76b6f0765a3b2fba71021f902142edc0",
+      "question": "Why would you be watching tv instead of doing something else?",
+      "question_concept": "watching tv",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "headache",
+          "laughter",
+          "laziness",
+          "erections",
+          "wasting time"
+        ]
+      },
+      "answerKey": "C",
+      "idx": 9,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Why would you be watching tv instead of doing something else? Answer choices: (a) headache (b) laughter (c) laziness (d) erections (e) wasting time",
+      "input": "Why would you be watching tv instead of doing something else? Answer choices: (a) headache (b) laughter (c) laziness (d) erections (e) wasting time",
+      "reference": "c",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer should be something that would make you want to do something else. Of the above choices, only laziness makes the most sense. So the answer is (c).\nAnswer: c\n"
+      ],
+      "n_gram_diversity": 3.8749999848106023,
+      "duplicity": 1.0
+    },
+    {
+      "id": "549cf641318edfc0510fa7c7dbb359e1",
+      "question": "If I did not have a rosebush, where would I get one?",
+      "question_concept": "rosebush",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "pot",
+          "museum",
+          "garden center",
+          "formal garden",
+          "backyard"
+        ]
+      },
+      "answerKey": "C",
+      "idx": 10,
+      "prompt": "Question: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: If I did not have a rosebush, where would I get one? Answer choices: (a) pot (b) museum (c) garden center (d) formal garden (e) backyard",
+      "input": "If I did not have a rosebush, where would I get one? Answer choices: (a) pot (b) museum (c) garden center (d) formal garden (e) backyard",
+      "reference": "c",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where you can get a rosebush. Of the above choices, only garden centers are places where you can get a rosebush. So the answer is (c).\nAnswer: c\n"
+      ],
+      "n_gram_diversity": 3.3808361860443292,
+      "duplicity": 1.0
+    },
+    {
+      "id": "0c1efb38e023ee9725486fbec4f2d797",
+      "question": "He looked at the field of pumps, all slowing churning oil out of the what?",
+      "question_concept": "oil",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "manual",
+          "street",
+          "restaurant",
+          "ground",
+          "service station"
+        ]
+      },
+      "answerKey": "D",
+      "idx": 11,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: He looked at the field of pumps, all slowing churning oil out of the what? Answer choices: (a) manual (b) street (c) restaurant (d) ground (e) service station",
+      "input": "He looked at the field of pumps, all slowing churning oil out of the what? Answer choices: (a) manual (b) street (c) restaurant (d) ground (e) service station",
+      "reference": "d",
+      "prediction": "e",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where oil is pumped out of the ground. Of the above choices, only service stations are places where oil is pumped out of the ground. So the answer is (e).\nAnswer: e\n"
+      ],
+      "n_gram_diversity": 3.2070461047146446,
+      "duplicity": 1.0
+    },
+    {
+      "id": "2d33cde5e3987adc8fa2bca0af4dd3dd",
+      "question": "Where is a human likely to go as a result of being hungry?",
+      "question_concept": "being hungry",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "eat in restaurant",
+          "make bread",
+          "have lunch",
+          "cook dinner",
+          "friends house"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 12,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Where is a human likely to go as a result of being hungry? Answer choices: (a) eat in restaurant (b) make bread (c) have lunch (d) cook dinner (e) friends house",
+      "input": "Where is a human likely to go as a result of being hungry? Answer choices: (a) eat in restaurant (b) make bread (c) have lunch (d) cook dinner (e) friends house",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where people eat. Of the above choices, only restaurant is a place where people eat. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.358763826881389,
+      "duplicity": 1.0
+    },
+    {
+      "id": "a8a8ae7792901c7179ff5538c701af1f",
+      "question": "Where would a computer user be using their own computer?",
+      "question_concept": "computer user",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "hell",
+          "school",
+          "indoors",
+          "internet cafe",
+          "house"
+        ]
+      },
+      "answerKey": "E",
+      "idx": 13,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Where would a computer user be using their own computer? Answer choices: (a) hell (b) school (c) indoors (d) internet cafe (e) house",
+      "input": "Where would a computer user be using their own computer? Answer choices: (a) hell (b) school (c) indoors (d) internet cafe (e) house",
+      "reference": "e",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where a computer user would be using their own computer. Of the above choices, only internet cafes are places where a computer user would be using their own computer. So the answer is (d).\nAnswer: d\n"
+      ],
+      "n_gram_diversity": 3.090010930247224,
+      "duplicity": 1.0
+    },
+    {
+      "id": "e69da59cbcf2a302e4523571eba8186b",
+      "question": "The computer was difficult for he to understand at the store, so what did she sign up for to learn more?",
+      "question_concept": "computer",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "classroom",
+          "facebook",
+          "school",
+          "apartment",
+          "demonstration"
+        ]
+      },
+      "answerKey": "E",
+      "idx": 14,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: The computer was difficult for he to understand at the store, so what did she sign up for to learn more? Answer choices: (a) classroom (b) facebook (c) school (d) apartment (e) demonstration",
+      "input": "The computer was difficult for he to understand at the store, so what did she sign up for to learn more? Answer choices: (a) classroom (b) facebook (c) school (d) apartment (e) demonstration",
+      "reference": "e",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where people can learn. Of the above choices, only classroom makes the most sense for learning. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.8666666504395444,
+      "duplicity": 1.0
+    },
+    {
+      "id": "f13efb91090dd28fd2b3c1f4dde680fd",
+      "question": "Sage loved communicating  He liked doing what with his peers?",
+      "question_concept": "communicating",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "exchanging ideas",
+          "confusion",
+          "peer pressure",
+          "response",
+          "learning"
+        ]
+      },
+      "answerKey": "A",
+      "idx": 15,
+      "prompt": "Question: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Sage loved communicating  He liked doing what with his peers? Answer choices: (a) exchanging ideas (b) confusion (c) peer pressure (d) response (e) learning",
+      "input": "Sage loved communicating  He liked doing what with his peers? Answer choices: (a) exchanging ideas (b) confusion (c) peer pressure (d) response (e) learning",
+      "reference": "a",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be something that Sage liked doing with his peers. Of the above choices, only exchanging ideas is something that Sage liked doing with his peers. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.166458693717162,
+      "duplicity": 1.0
+    },
+    {
+      "id": "d1ad9b79f54205b6b9ac19a27f9c2be5",
+      "question": "The neighborhood had a great sense of community, there was always a crowd at the landing of the what?",
+      "question_concept": "landing",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "stairwell",
+          "arena",
+          "ocean",
+          "airport",
+          "apartment building"
+        ]
+      },
+      "answerKey": "E",
+      "idx": 16,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: The neighborhood had a great sense of community, there was always a crowd at the landing of the what? Answer choices: (a) stairwell (b) arena (c) ocean (d) airport (e) apartment building",
+      "input": "The neighborhood had a great sense of community, there was always a crowd at the landing of the what? Answer choices: (a) stairwell (b) arena (c) ocean (d) airport (e) apartment building",
+      "reference": "e",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where people gather. Of the above choices, only apartment buildings have a crowd. So the answer is (e).\nAnswer: e\n"
+      ],
+      "n_gram_diversity": 3.888888870643905,
+      "duplicity": 1.0
+    },
+    {
+      "id": "e40fd2c17fe2cde4bd4af540d35fd518",
+      "question": "If you have a condo in a Wisconsin city known for beer, where are you?",
+      "question_concept": "condo",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "city",
+          "electrical circuit",
+          "residential area",
+          "suburbia",
+          "milwaukee"
+        ]
+      },
+      "answerKey": "E",
+      "idx": 17,
+      "prompt": "Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: If you have a condo in a Wisconsin city known for beer, where are you? Answer choices: (a) city (b) electrical circuit (c) residential area (d) suburbia (e) milwaukee",
+      "input": "If you have a condo in a Wisconsin city known for beer, where are you? Answer choices: (a) city (b) electrical circuit (c) residential area (d) suburbia (e) milwaukee",
+      "reference": "e",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place in Wisconsin. Of the above choices, only milwaukee is in Wisconsin. So the answer is (e).\nAnswer: e\n"
+      ],
+      "n_gram_diversity": 3.7583333141569266,
+      "duplicity": 1.0
+    },
+    {
+      "id": "b47d912136e3304cb5e5890b6b879551",
+      "question": "Talking to the same person about the same thing over and over again is something someone can what?",
+      "question_concept": "talking to",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "social life",
+          "friendship",
+          "eye contact",
+          "get tired of",
+          "learn lessons from"
+        ]
+      },
+      "answerKey": "D",
+      "idx": 18,
+      "prompt": "Question: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: Talking to the same person about the same thing over and over again is something someone can what? Answer choices: (a) social life (b) friendship (c) eye contact (d) get tired of (e) learn lessons from",
+      "input": "Talking to the same person about the same thing over and over again is something someone can what? Answer choices: (a) social life (b) friendship (c) eye contact (d) get tired of (e) learn lessons from",
+      "reference": "d",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be something that someone can do. Of the above choices, only learning lessons from is something that someone can do. So the answer is (e).\nAnswer: e\n"
+      ],
+      "n_gram_diversity": 3.433725289311293,
+      "duplicity": 1.0
+    },
+    {
+      "id": "a2aa95861ef74bf1ecfc55db505e3982",
+      "question": "A farmer sees a weasel in the woods, where is the farmer?",
+      "question_concept": "weasel",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "chicken coop",
+          "beach",
+          "fairytale",
+          "great outdoors",
+          "corn fields"
+        ]
+      },
+      "answerKey": "D",
+      "idx": 19,
+      "prompt": "Question: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nQuestion: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: A farmer sees a weasel in the woods, where is the farmer? Answer choices: (a) chicken coop (b) beach (c) fairytale (d) great outdoors (e) corn fields",
+      "input": "A farmer sees a weasel in the woods, where is the farmer? Answer choices: (a) chicken coop (b) beach (c) fairytale (d) great outdoors (e) corn fields",
+      "reference": "d",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer must be a place where a farmer would see a weasel. Of the above choices, only corn fields are a place where a farmer would see a weasel. So the answer is (e).\nAnswer: e\n"
+      ],
+      "n_gram_diversity": 3.0758054946741598,
+      "duplicity": 1.0
+    },
+    {
+      "id": "48205cc84aab5e455b22e17c3cc7277d",
+      "question": "What did the adult do before the job interview?",
+      "question_concept": "adult",
+      "choices": {
+        "label": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "text": [
+          "work",
+          "dress himself",
+          "marry",
+          "dress herself",
+          "drive train"
+        ]
+      },
+      "answerKey": "B",
+      "idx": 20,
+      "prompt": "Question: Before getting a divorce, what did the wife feel who was doing all the work? Answer choices: (a) harder (b) anguish (c) bitterness (d) tears (e) sadness\nReasoning: The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).\nAnswer: c\nQuestion: Sammy wanted to go to where the people were. Where might he go? Answer choices: (a) populated areas (b) race track (c) desert (d) apartment (e) roadblock\nReasoning: The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).\nAnswer: a\nQuestion: The fox walked from the city into the forest, what was it looking for? Answer choices: (a) pretty flowers (b) hen house (c) natural habitat (d) storybook\nReasoning: The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).\nAnswer: c\nQuestion: Google Maps and other highway and street GPS services have replaced what? Answer choices: (a) united states (b) mexico (c) countryside (d) atlas\nReasoning: The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).\nAnswer: d\nQuestion: What do people use to absorb extra ink from a fountain pen? Answer choices: (a) shirt pocket (b) calligrapher\u2019s hand (c) inkwell (d) desk drawer (e) blotter\nReasoning: The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).\nAnswer: e\nQuestion: Where do you put your grapes just before checking out? Answer choices: (a) mouth (b) grocery cart (c) super market (d) fruit basket (e) fruit market\nReasoning: The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).\nAnswer: b\nLike each of the previous examples, answer the question with either of the answer choices provided.\nProvide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.\nEnd your reasoning with the sentence: \"So the answer is <your_answer_choice>\". Replace \"<your_answer_choice>\" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.).\nQuestion: What did the adult do before the job interview? Answer choices: (a) work (b) dress himself (c) marry (d) dress herself (e) drive train",
+      "input": "What did the adult do before the job interview? Answer choices: (a) work (b) dress himself (c) marry (d) dress herself (e) drive train",
+      "reference": "b",
+      "prediction": "a",
+      "generation_candidates": [
+        "\nReasoning: The answer should be the adult doing something before the job interview. Of the above choices, only work is something that an adult does before a job interview. So the answer is (a).\nAnswer: a\n"
+      ],
+      "n_gram_diversity": 3.6658730031462294,
+      "duplicity": 1.0
+    }
+  ]
+}
