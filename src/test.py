@@ -8,7 +8,7 @@ from tqdm import tqdm
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 from nltk.util import ngrams
 from transformers import BitsAndBytesConfig
-from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer, MT5ForConditionalGeneration
+from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForSeq2SeqLM, AutoModelForCausalLM, GemmaForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,T5ForConditionalGeneration, T5Tokenizer, MT5ForConditionalGeneration, M2M100ForConditionalGeneration, M2M100Tokenizer
 import os
 import pandas as pd
 import json
@@ -63,7 +63,16 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         cls_model = MT5ForConditionalGeneration
         cls_tokenizer = T5Tokenizer
         
+    elif model == "m2m":
+        model = "facebook/m2m100_418M"
+        cls_model = M2M100ForConditionalGeneration
+        cls_tokenizer = M2M100Tokenizer
+        
+        
     tokenizer = cls_tokenizer.from_pretrained(model, **tokenizer_args)
+    
+    if  model == "m2m":
+        tokenizer.src_lang = "de"
 
     if load_in_8bit:
         # breakpoint()
@@ -224,7 +233,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 100
+    samplesize = 10
     batch = 2
     output_dir = "outputs/WMT/V2"
     
@@ -233,7 +242,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
+    for model_name in ["m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5"]
         for shot in ["oneshot", "zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
