@@ -124,7 +124,7 @@ class SelfConsistency(LLMWrapper):
                         "do_sample": True,
                         "use_arithmetic": True,
                         "num_return_sequences" : args.eval_n_samples,
-                        "arithmetic_seed" : 42
+                        "arithmetic_seed" : 32
                     })
                     
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
