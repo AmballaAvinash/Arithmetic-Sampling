@@ -4,7 +4,7 @@ import argparse
 import torch
 import time
 
-from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, BitsAndBytesConfig
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, BitsAndBytesConfig, set_seed
 from tqdm import tqdm
 from utils import *
 
@@ -14,7 +14,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def cot_reasoning(
-    output_filename, model, tokenizer, data, prompt_prefix, sampling_strategies, num_samples, temperature, num_examples, num_shots, top_k, top_p
+    output_filename, model, it_flag, tokenizer, data, prompt_prefix, sampling_strategies, num_samples, temperature, num_examples, num_shots, top_k, top_p
 ):
     arg_key = f"num_examples={num_examples}, num_samples={num_samples}, temperature={temperature}, shots={num_shots}, top_k={top_k}, top_p={top_p}"
     outputs = {}
@@ -28,6 +28,11 @@ def cot_reasoning(
         input_prompt = f"Question: {question} \nAnswer: {COT_TRIGGER}"
         if len(prompt_prefix):
             input_prompt = prompt_prefix + input_prompt
+        if it_flag:
+            chat = [
+                {"role": "user", "content": input_prompt}
+            ]
+            input_prompt = tokenizer.apply_chat_template(chat, tokenize = False, add_generation_prompt=True)
         input_ids = tokenizer(
             input_prompt, truncation=True, return_tensors="pt"
         ).input_ids.to(DEVICE)
@@ -146,7 +151,8 @@ if __name__ == "__main__":
     parser.add_argument("-T", "--temperature", type=float, nargs="*", default=[1])
     parser.add_argument("-k", "--top-k", type=int, nargs="*", default=[50])
     parser.add_argument("-p", "--top-p", type=float, nargs="*", default=[1.0])
-    parser.add_argument("--seed", type=int, default=1379)
+    parser.add_argument("--seed", type=int, nargs="*", default=[1379])
+    parser.add_argument("--output-path", type=str, default="")
     parser.parse_args()
     args = parser.parse_args()
 
@@ -157,44 +163,47 @@ if __name__ == "__main__":
         model_class = AutoModelForSeq2SeqLM
     else:
         model_class = AutoModelForCausalLM
-    quantization_config = BitsAndBytesConfig(load_in_8bit=True)
+    # quantization_config = BitsAndBytesConfig(load_in_8bit=args.quant_8_bit)
     model = model_class.from_pretrained(
         "/".join(MODEL), 
-        quantization_config = quantization_config,
-        device_map="auto"
-    )
+        # quantization_config = quantization_config,
+        # device_map="auto"
+    ).to(DEVICE)
     tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
 
     model.config.pad_token_id = model.config.eos_token_id
     model.generation_config.pad_token_id = model.config.eos_token_id
 
-    dataset = (
-        load_HF_dataset(DATASET[0], DATASET[1], DATASET[2])
-        .with_format("torch")
-        .shuffle(seed=args.seed)
-        .select(range(args.num_examples))
-    )
-    output_filename = f"{args.model}__{args.dataset}__output.json"
-    for num_shot in args.num_shots:
-        prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=num_shot)
-        for N in args.num_samples:
-            for T in args.temperature:
-                for k in args.top_k:
-                    for p in args.top_p:
-                        cot_reasoning(
-                            output_filename,
-                            model,
-                            tokenizer,
-                            dataset,
-                            prompt_prefix,
-                            sampling_strategies=args.sampling_strategies,
-                            num_samples=N,
-                            temperature=T,
-                            num_examples=args.num_examples,
-                            num_shots=num_shot,
-                            top_k=k,
-                            top_p=p
-                        )
-    analyze_results(output_filename=output_filename, num_examples=args.num_examples, sampling_strategies=args.sampling_strategies)
-    term_time = time.time()
-    print(f"Time taken: {(term_time - init_time):.4f}s")
+    for seed in args.seed:
+        dataset = (
+            load_HF_dataset(DATASET[0], DATASET[1], DATASET[2])
+            .with_format("torch")
+            .shuffle(seed=seed)
+            .select(range(args.num_examples))
+        )
+        set_seed(seed)
+        output_filename = args.output_path if len(args.output_path) != 0 else f"{args.model}__{args.dataset}__{seed}_output.json"
+        for num_shot in args.num_shots:
+            prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=num_shot)
+            for N in args.num_samples:
+                for T in args.temperature:
+                    for k in args.top_k:
+                        for p in args.top_p:
+                            cot_reasoning(
+                                output_filename,
+                                model,
+                                "-it" in MODEL[1],
+                                tokenizer,
+                                dataset,
+                                prompt_prefix,
+                                sampling_strategies=args.sampling_strategies,
+                                num_samples=N,
+                                temperature=T,
+                                num_examples=args.num_examples,
+                                num_shots=num_shot,
+                                top_k=k,
+                                top_p=p
+                            )
+        analyze_results(output_filename=output_filename, num_examples=args.num_examples, sampling_strategies=args.sampling_strategies)
+        term_time = time.time()
+        print(f"Time taken: {(term_time - init_time):.4f}s")

@@ -163,4 +163,9 @@ def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20
         predictions[idx] = int(float(pred)) if pred != "" else -1
     val, cnt = np.unique(predictions, return_counts=True)
     argmax = np.argmax(cnt)
-    return 1 if val[argmax] == int(ground_truth) else 0
+    try:
+        ground_truth = ground_truth.replace(",","")
+        return 1 if val[argmax] == int(ground_truth) else 0
+    except:
+        return 0
+    

@@ -1,0 +1,30 @@
+Results for num_examples=100, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0:
+Arithmetic N-gram Diversity: 1.0423669613396014
+Ancestral N-gram Diversity: 0.961515985296325
+Arithmetic Accuracy: 0.0875
+Ancestral Accuracy: 0.0965
+Time taken: 2130.2869s
+Results for num_examples=100, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0:
+Arithmetic N-gram Diversity: 1.0475120322502602
+Ancestral N-gram Diversity: 0.9753117418560674
+Arithmetic Accuracy: 0.0955
+Ancestral Accuracy: 0.09900000000000002
+Time taken: 4236.9283s
+Results for num_examples=100, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0:
+Arithmetic N-gram Diversity: 1.0144488008882204
+Ancestral N-gram Diversity: 0.9754399123891175
+Arithmetic Accuracy: 0.11049999999999999
+Ancestral Accuracy: 0.10799999999999998
+Time taken: 6394.0485s
+Results for num_examples=100, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0:
+Arithmetic N-gram Diversity: 1.0449361228443077
+Ancestral N-gram Diversity: 0.9812270110899677
+Arithmetic Accuracy: 0.124
+Ancestral Accuracy: 0.1325
+Time taken: 8576.9036s
+Results for num_examples=100, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0:
+Arithmetic N-gram Diversity: 0.9560155356771625
+Ancestral N-gram Diversity: 0.900711594811074
+Arithmetic Accuracy: 0.10950000000000004
+Ancestral Accuracy: 0.117
+Time taken: 10718.0190s
