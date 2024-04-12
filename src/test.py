@@ -252,34 +252,51 @@ if __name__ == "__main__":
     
     
             # graphs
-            fig, axs = plt.subplots(2, 4, figsize=(12, 6))
+            fig1, axs1 = plt.subplots(2, 4, figsize=(12, 6))
+            fig2, axs2 = plt.subplots(2, 4, figsize=(12, 6))
             c = 0
             for temp in [0.1, 0.5]: # temperature
                 for p in [0.8, 1.0]: # top p 
                     for k in [30, 50]: # top k '
                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
                       x = rows["Num decodes"]
-                      y_sample = rows["BLEU Sampling"] 
-                      y_arit = rows["BLEU Arithmetic"]
+                      y_sample_bleu = rows["BLEU Sampling"] 
+                      y_arit_bleu = rows["BLEU Arithmetic"]
+                      y_sample_div = rows["N gram diversity Sampling"] 
+                      y_arit_div = rows["N gram diversity Arithmetic"] 
                       
                       
                       i = int(c/4)
                       j = c%4
                       
-                      axs[i][j].set_xlabel("Num of decodes")
-                      axs[i][j].set_ylabel("BLEU score")
-                      axs[i][j].plot(x,y_sample, label="Ancestral sampling ")
-                      axs[i][j].plot(x,y_arit, label = "Arithemetic sampling")
+                      axs1[i][j].set_xlabel("Num of decodes")
+                      axs1[i][j].set_ylabel("BLEU score")
+                      axs1[i][j].plot(x,y_sample_bleu, label="Ancestral sampling ")
+                      axs1[i][j].plot(x,y_arit_bleu, label = "Arithemetic sampling")
+                      
+                      axs2[i][j].set_xlabel("Num of decodes")
+                      axs2[i][j].set_ylabel("N gram diversity")
+                      axs2[i][j].plot(x,y_sample_div, label="Ancestral sampling ")
+                      axs2[i][j].plot(x,y_arit_div, label = "Arithemetic sampling")
                       
                       c = c+1
                       
-                      axs[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                      axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                      axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                      
+                      if c==1:
+                          fig1.legend()
+                          fig2.legend()
                     
-            plt.legend()
-            fig.suptitle(f"Model {model_name}, shot {shot}, Samples {len(data)}")
-            plt.tight_layout()
-            plt.savefig(f"{output_dir}/Figure_{model_name}__{shot}__Samples_{len(data)}.jpg")
+            fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {len(data)}")
+            fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {len(data)}")
+            fig1.tight_layout()
+            fig2.tight_layout()
+            fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{len(data)}.jpg")
+            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{len(data)}.jpg")                   
             plt.show()
+            
+            
                             
         
             
