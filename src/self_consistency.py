@@ -83,11 +83,11 @@ class SelfConsistency(LLMWrapper):
                 dataset = random.sample(list(dataset), eval_dataset_size)
 
         # Get LLM generations
-        if 'strategy_qa' in task_name:
-            # print("no logits processor")
-            inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
-        elif 'commonsense_qa' in task_name:
-            inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
+        # if 'strategy_qa' in task_name:
+        #     # print("no logits processor")
+        #     inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
+        # elif 'commonsense_qa' in task_name:
+        #     inf_fn_kwargs.update({"logits_processor": self.task_logits_processors['strat_qa']})
 
         # breakpoint()
         # breakpoint()
