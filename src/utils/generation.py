@@ -13,8 +13,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
 logger = logging.getLogger(__name__)
 
 # default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated earlier. The reasoning should end with the sentence(with <your_answer> substituted by your final answer):  So the answer is <your_answer>. The answer should be either Yes or No."
-default_strat_qa_instruction = """Like each of the previous examples, answer the question with either "Yes" or "No".
-Provide reasoning for your answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.' 
+default_strat_qa_instruction = """Like each of the previous examples, answer the question with either "Yes" or "No".The question is designed for strategic answering based on the information provided. Utilize logical reasoning and available knowledge to respond with either 'Yes' or 'No'. The question is complete and correct.
+Provide reasoning for your answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.
 End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
 default_commonsense_qa_instruction = """Like each of the previous examples, answer the question with either of the answer choices provided.
 Provide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
