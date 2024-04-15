@@ -161,10 +161,10 @@ class LLMWrapper:
             # breakpoint()
             outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                         return_dict_in_generate=True, output_scores=True)
-        # if '-it' in self.model_name or '-chat' in self.model_name:
-        #     prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
-        # else:
-        prompt_len = len(_prompt)
+        if '-it' in self.model_name or '-chat' in self.model_name:
+            prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
+        else:
+            prompt_len = len(_prompt)
         decoded = [
             self.tokenizer.decode(o, skip_special_tokens=True)[(prompt_len if return_output_after_prompt else 0):] for
             o in outputs.sequences]
@@ -220,9 +220,9 @@ class LLMWrapper:
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    self.default_answer_prefix if reasoning_prefix is None else "")
         # breakpoint()
-        # if '-it' in self.model_name or '-chat' in self.model_name:
-        #     chat = [ { "role": "user", "content": prompt },]
-        #     prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
+        if '-it' in self.model_name or '-chat' in self.model_name:
+            chat = [ { "role": "user", "content": prompt },]
+            prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
         #     # breakpoint()
         return self._base_generator(prompt, **kwargs)
     def load_metrics(self, metrics):
