@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 # default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated earlier. The reasoning should end with the sentence(with <your_answer> substituted by your final answer):  So the answer is <your_answer>. The answer should be either Yes or No."
 default_strat_qa_instruction = """Like each of the previous examples, answer the question with either "Yes" or "No".
 Provide reasoning for your answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'
-End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No". Do not refrain from answering in Yes or No by citing the lack of information, there is enough information supplied for you to answer. You should provide a final answer in any case."""
+End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
 default_commonsense_qa_instruction = """Like each of the previous examples, answer the question with either of the answer choices provided.
 Provide reasoning for your answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
 End your reasoning with the sentence: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
@@ -253,6 +253,7 @@ def construct_args_from_example(d,task_name):
 def fix_posthoc(decoded,task_name):
     if 'strategy_qa' in task_name:
         labels = []
+        maj_match = {"no":"no","not":"no","n":"no"}
         for d in decoded:
             patterns = {
             "the answer is" : r"the\s+answer\s+is\s+(\w+)",
@@ -269,10 +270,13 @@ def fix_posthoc(decoded,task_name):
             # breakpoint()
             try:
                 majority_match = max( Counter(matches), key=Counter(matches).get)
-                labels.append(majority_match)
+                if majority_match in maj_match.keys():
+                    labels.append(maj_match[majority_match])
+                else:
+                    labels.append(majority_match)
             except:
                 print(f"Answer couldn't be extracted: {d}")
-                labels.append('nan')
+                labels.append('no')
         if len([x for x in labels if x != 'nan']) > 0:
             labels = [x for x in labels if x != 'nan']
         majority_label = max( Counter(labels), key=Counter(labels).get)
