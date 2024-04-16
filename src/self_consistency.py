@@ -84,7 +84,7 @@ class SelfConsistency(LLMWrapper):
                 # breakpoint()
             elif dataset_sample_strategy == 'random':
                 dataset = random.sample(list(dataset), eval_dataset_size)
-        breakpoint()
+        # breakpoint()
         # Get LLM generations
         if 'strategy_qa' in task_name:
             # print("no logits processor")
