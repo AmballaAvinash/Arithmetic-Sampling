@@ -296,7 +296,7 @@ if __name__ == '__main__':
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
                        dataset_subname = '',
-                       dataset_Range = args.eval_dataset_range,
+                       eval_dataset_range = args.eval_dataset_range,
                        out_dir = out_dir,
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
