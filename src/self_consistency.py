@@ -59,7 +59,7 @@ class SelfConsistency(LLMWrapper):
                 self.datasets['demo'] = json.load(f)
     def eval(self, inf_fn_key="zeroshot", split="dev", metrics=None, n_samples=None, task_name = None,
              dataset_sample_strategy='static', dataset_name  = None,dataset_subname = None,\
-             output_sampling_strategy='max', eval_dataset_size=None,\
+             output_sampling_strategy='max', eval_dataset_size=None,eval_dataset_range=None,\
               verbose=False, out_dir=None, n_shots=None,
              retrieval_strategy=None, run_id=str(int(time.time())), **inf_fn_kwargs):
 
@@ -75,10 +75,13 @@ class SelfConsistency(LLMWrapper):
             'fewshot': self.few_shot
         }[inf_fn_key]
         # breakpoint()
+        dataset_start_point = int(eval_dataset_range.split(':')[0])
+        dataset_end_point = int(eval_dataset_range.split(':')[1])
         dataset = self.datasets[split]
         if (eval_dataset_size is not None and eval_dataset_size != -1) and eval_dataset_size < len(dataset):
             if dataset_sample_strategy == 'static':
-                dataset = list(dataset)[:eval_dataset_size]
+                dataset = list(dataset)[dataset_start_point:dataset_end_point]
+                breakpoint()
             elif dataset_sample_strategy == 'random':
                 dataset = random.sample(list(dataset), eval_dataset_size)
 
@@ -225,7 +228,7 @@ class SelfConsistency(LLMWrapper):
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
             if eval_dataset_size is not None:
                 res_dir += [str(eval_dataset_size)]
-            res_dir += [inf_fn_key, _strat]
+            res_dir += [inf_fn_key, _strat,inf_fn_kwargs["temperature"],inf_fn_kwargs["num_return_sequences"]]
             dt_string  = datetime.now().strftime("%d_%m_%H_%M")
             res_dir += [dt_string]
             res_dir += [run_id]
@@ -293,6 +296,7 @@ if __name__ == '__main__':
                        task_name=dataset_name,
                        dataset_name  = dataset_name,
                        dataset_subname = '',
+                       dataset_Range = args.eval_dataset_range,
                        out_dir = out_dir,
                        verbose = args.verbose,
                        retrieval_strategy=args.eval_retrieval_strategy,
