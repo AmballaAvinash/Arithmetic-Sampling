@@ -1,0 +1,48 @@
+{
+  "experiment": "eval_gemma-2b_strategy_qa__validation_1_fewshot_sample_5_1_to_2_17_04_05_22_0",
+  "n_total": 1,
+  "eval_args": {
+    "max_new_tokens": 200,
+    "do_sample": true,
+    "top_p": 1.0,
+    "temperature": 0.7,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 5,
+    "renormalize_logits": true,
+    "use_arithmetic": false
+  },
+  "scores": {
+    "accuracy.accuracy": 0.0,
+    "ngram_diversity.ngram_diversity": 1.0,
+    "n_gram_diversity": 2.475654292637659,
+    "duplicity": 1.0
+  },
+  "time_taken": {
+    "sampling": 2.1502928733825684
+  },
+  "examples": [
+    {
+      "input": "Are all limbs required for jujutsu?",
+      "target_scores": {
+        "Yes": 0,
+        "No": 1
+      },
+      "target": "No. Jujutsu is a Japanese martial art that uses unarmed combat to subdue opponents. Nick Newell, a congenital amputee, got his black belt after two straight submission wins. Fighter Aaron LaPointe has succeeded in martial arts with a fully paralyzed arm.",
+      "idx": 1,
+      "prompt": "Question: Is it common to see frost during some college commencements?\nReasoning: College commencement ceremonies can happen in December, May, and June. December is in the winter, so there can be frost. Thus, there could be frost at some commencements. So the answer is yes.\nAnswer: yes\nQuestion: Hydrogen\u2019s atomic number squared exceeds number of Spice Girls?\nReasoning: Hydrogen has an atomic number of 1. 1 squared is 1. There are 5 Spice Girls. Thus, Hydrogen\u2019s atomic number squared is less than 5. So the answer is no.\nAnswer: no\nQuestion: Would a pear sink in water?\nReasoning: The density of a pear is about 0.6 g/cm3, which is less than water. Objects less dense than water float. Thus, a pear would float. So the answer is no.\nAnswer: no\nQuestion: Could a llama birth twice during War in Vietnam (1945-46)?\nReasoning: The War in Vietnam was 6 months. The gestation period for a llama is 11 months, which is more than 6 months. Thus, a llama could not give birth twice during the War in Vietnam. So the answer is no.\nAnswer: no\nQuestion: Do hamsters provide food for any animals?\nReasoning: Hamsters are prey animals. Prey are food for predators. Thus, hamsters provide food for some animals. So the answer is yes.\nAnswer: yes\nQuestion: Could Brooke Shields succeed at University of Pennsylvania?\nReasoning: Brooke Shields went to Princeton University. Princeton University is about as academically rigorous as the University of Pennsylvania. Thus, Brooke Shields could also succeed at the University of Pennsylvania. So the answer is yes.\nAnswer: yes\nLike each of the previous examples, answer the question with a reasoning and a final answer: either \"Yes\" or \"No\".\nThink step by step and provide a reasoning first, which leads to the final answer. Do not start with the final answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'\nEnd your reasoning with the sentence: \"So the answer is <your_answer>. Answer: <your_answer>\". Replace \"<your_answer>\" with your final answer, which should be either \"Yes\" or \"No\".\nQuestion: Are all limbs required for jujutsu?",
+      "reference": "no",
+      "prediction": "yes",
+      "generation_candidates": [
+        "\nReasoning: In jujutsu, a limb is required for an attack. Thus, all limbs are required for jujutsu. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Jujutsu is a self-defense martial art that uses various types of strikes, throws, and joint locks. It uses the hands and feet to attack, as well as the arms, legs, and body. Thus, all limbs are required for jujutsu. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: A jujutsu practitioner needs to be able to use all of their limbs. Thus, all limbs are required for jujutsu. So the answer is yes.\nAnswer: yes\n",
+        "\nReasoning: Jujutsu is a Japanese martial art. The Japanese martial arts are characterized by minimal use of arms or limbs. Thus, all limbs are not required for jujutsu. So the answer is no.\nAnswer: no\n",
+        "\nReasoning: Jujutsu is a form of martial arts that uses grappling, trapping, and throws. Grappling, trapping, and throws require limbs. Thus, all limbs are required for jujutsu. So the answer is yes.\nAnswer: yes\n"
+      ],
+      "n_gram_diversity": 2.475654292637659,
+      "duplicity": 1.0
+    }
+  ]
+}
