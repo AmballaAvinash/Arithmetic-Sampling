@@ -228,7 +228,7 @@ class SelfConsistency(LLMWrapper):
             res_dir += [self.model_name + ("_chat" if self.is_chat else ""), dataset_name,dataset_subname,split]
             if eval_dataset_size is not None:
                 res_dir += [str(eval_dataset_size)]
-            res_dir += [inf_fn_key, _strat,inf_fn_kwargs["temperature"],inf_fn_kwargs["num_return_sequences"],dataset_start_point,dataset_end_point]
+            res_dir += [inf_fn_key, _strat,str(inf_fn_kwargs["num_return_sequences"]),str(dataset_start_point),str(dataset_end_point)]
             dt_string  = datetime.now().strftime("%d_%m_%H_%M")
             res_dir += [dt_string]
             res_dir += [run_id]
