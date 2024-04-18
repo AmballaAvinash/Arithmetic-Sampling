@@ -16,7 +16,7 @@
   "scores": {
     "accuracy.accuracy": 0.572,
     "ngram_diversity.ngram_diversity": 0.004,
-    "n_gram_diversity": 2.400611125685481,
+    "n_gram_diversity": 611125685481,
     "duplicity": 0.9992000000000001
   },
   "time_taken": {

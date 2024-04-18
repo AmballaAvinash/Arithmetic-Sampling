@@ -1,0 +1,9 @@
+if system('uname -s') == "Darwin\n"
+  set clipboard=unnamed "OSX
+else
+  set clipboard=unnamedplus "Linux
+endifif system('uname -s') == "Darwin\n"
+set clipboard=unnamed "OSX
+else
+set clipboard=unnamedplus "Linux
+endif
