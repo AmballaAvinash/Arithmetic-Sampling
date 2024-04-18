@@ -111,8 +111,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         default_fwd_instruction = "The English sentence: \"Here the lives of eight dozen Talysh from the area who lived to older than 100 are documented. Fatulayeva points out a black & white photo.\" translates to German sentence: \"Hier ist die Vita von etwa acht Dutzend Talyschen aus der Gegend dokumentiert, die älter als 100. Fatulayeva zeigt auf ein Schwarz-Weiß-Foto.\". Now, Translate the following English sentence to German sentence."
     else:
         default_fwd_instruction = "Translate the following English sentence to German sentence."
-    default_fwd_input_prefix = "English sentence: "
-    default_fwd_target_prefix = "German sentence: "
+    default_fwd_input_prefix = ""
+    default_fwd_target_prefix = ""
     
     results = {}
     for N in [1, 5, 10]: # num_decodes
