@@ -16,9 +16,9 @@ logger = logging.getLogger(__name__)
 default_strat_qa_instruction = """Like each of the previous examples, answer the question with a reasoning and a final answer: either "Yes" or "No".
 Think step by step and provide a reasoning first, which leads to the final answer. Do not start with the final answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'
 End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
-default_commonsense_qa_instruction = """Like each of the previous examples,answer the question with a reasoning followed by the answer which is among the choices provided.
-Remember, you must refrain from starting your reasoning with the final answer, and instead, focus on systematically analyzing the information provided in the question and options. So the answer is to begin by breaking down the question and evaluating each option systematically.
-End your reasoning with the sentence: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+default_commonsense_qa_instruction = """Like each of the previous examples,start with a reasoning followed by the answer which is among the choices provided.
+Remember, you must refrain from starting your reasoning with the final answer, and instead, focus on systematically analyzing the information provided in the question and options. So the reasoning is to begin by breaking down the question and evaluating each option systematically.
+End your reasoning with the sentence: "So the answer is <your_answer_choice>  Answer: <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
