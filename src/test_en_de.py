@@ -279,8 +279,8 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in [ "m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-        for shot in ["oneshot", "zeroshot"]:
+    for model_name in [ "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+        for shot in ["zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
