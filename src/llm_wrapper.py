@@ -222,7 +222,7 @@ class LLMWrapper:
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    "Answer: Let's break this down logically ")
         
-        breakpoint()
+        # breakpoint()
         # if '-it' in self.model_name or '-chat' in self.model_name:
         #     chat = [ { "role": "user", "content": prompt },]
         #     prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
