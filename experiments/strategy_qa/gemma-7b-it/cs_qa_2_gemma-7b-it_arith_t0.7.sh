@@ -5,7 +5,7 @@
 #SBATCH -p gpu  # Partition
 #SBATCH -G 1  # Number of GPUs
 #SBATCH -t 6:00:00  # Job time limit
-#SBATCH --constraint=vram23
+#SBATCH --constraint=vram40
 #SBATCH -o slurm-%j.out  # %j = job ID
 export PYTHONPATH="${PYTHONPATH}=$(pwd):$PYTHONPATH"
 #nsamples 5 temp 0.7
