@@ -17,6 +17,8 @@ cls_tokenizer = LlamaTokenizer
 tokenizer = cls_tokenizer.from_pretrained(model)
 model = MBR(cls_model).from_pretrained(model)
 
+tokenizer.pad_token =  tokenizer.eos_token
+
 mbr_config = MBRConfig(
     num_samples=10,
     metric="chrf",
