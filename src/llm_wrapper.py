@@ -203,7 +203,7 @@ class LLMWrapper:
         # Demonstrations
         for d in sampled_demos:
             d_inf_args, d_ref = construct_args_fn(d,task_name)
-            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,
+            prompt_arr += construct_qa_prompt_from_args(d_inf_args['question'],question_prefix,task_name,
                                                             d_inf_args['reasoning'],reasoning_prefix,
                                                             d_inf_args['answer'],answer_prefix)
         # Task instructions
@@ -215,7 +215,7 @@ class LLMWrapper:
         if instructions != "":
             prompt_arr.append(instructions)
         # Question
-        prompt_arr += construct_qa_prompt_from_args(question, question_prefix)
+        prompt_arr += construct_qa_prompt_from_args(question, question_prefix,task_name)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    self.default_answer_prefix if reasoning_prefix is None else "")
