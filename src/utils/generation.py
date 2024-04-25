@@ -16,9 +16,13 @@ logger = logging.getLogger(__name__)
 default_strat_qa_instruction = """Like each of the previous examples, answer the question with a reasoning and a final answer: either "Yes" or "No".
 Think step by step and provide a reasoning first, which leads to the final answer. Do not start with the final answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'
 End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
-default_commonsense_qa_instruction = """Like each of the previous examples,answer the question by thinking step by step, from the information provided. The answer should be in a similar format as the examples : Reasoning: <your_reasoning>, Answer:<your_answer_choice>.
-Reasoning should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
-Reasoning should be followed by: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+# default_commonsense_qa_instruction = """Like each of the previous examples,answer the question by thinking step by step, from the information provided. The answer should be in a similar format as the examples.
+# Reasoning should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
+# Reasoning should be followed by: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+default_commonsense_qa_instruction = """Like each of the previous examples,answer the following question by thinking step by step, from the information provided. The answer should be in a similar format as the examples.
+The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability by logical deduction.
+You should end your answer with : "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
@@ -170,23 +174,37 @@ def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
                 scores.append(target_logprob_score.item())
     # breakpoint()
     return scores
-def construct_qa_prompt_from_args( question, question_prefix,
+def construct_qa_prompt_from_args( question, question_prefix,task_name,
                                     reasoning=None, reasoning_prefix=None,
                                      answer=None, answer_prefix=None):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     # The test or demonstration question
-    if question_prefix is None:
-        question_prefix = copy.copy(default_question_prefix)
-    question_text = f"{question_prefix}{question}"
-    prompt_arr.append(question_text)
-    if reasoning is not None and reasoning_prefix is not None:
-        reasoning_text = f"{reasoning_prefix}{reasoning}"
-        if reasoning_text != "":
-            prompt_arr.append(reasoning_text)
-    if answer is not None and answer_prefix is not None:
-        answer_text = f"{answer_prefix}{answer}"
-        if answer_text != "":
-            prompt_arr.append(answer_text)
+    if 'commonsense_qa' not in task_name:
+        if question_prefix is None:
+            question_prefix = copy.copy(default_question_prefix)
+        question_text = f"{question_prefix}{question}"
+        prompt_arr.append(question_text)
+        if reasoning is not None and reasoning_prefix is not None:
+            reasoning_text = f"{reasoning_prefix}{reasoning}"
+            if reasoning_text != "":
+                prompt_arr.append(reasoning_text)
+        if answer is not None and answer_prefix is not None:
+            answer_text = f"{answer_prefix}{answer}"
+            if answer_text != "":
+                prompt_arr.append(answer_text)
+    else:
+        if question_prefix is None:
+            question_prefix = copy.copy(default_question_prefix)
+        question_text = f"{question_prefix}{question}"
+        prompt_arr.append(question_text)
+        # if reasoning is not None and reasoning_prefix is not None:
+        #     reasoning_text = f"{reasoning_prefix}{reasoning}"
+        #     if reasoning_text != "":
+        #         prompt_arr.append(reasoning_text)
+        if answer is not None and answer_prefix is not None:
+            answer_text = f"{answer_prefix}{reasoning}"
+            if answer_text != "":
+                prompt_arr.append(answer_text)
     return prompt_arr
 def construct_prompt_from_args(input, input_prefix):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
