@@ -212,7 +212,7 @@ class LLMWrapper:
             if answer is not None:
                 instructions += self.default_instructions_answer
             instructions = " ".join(instructions)
-        if instructions != "" and '-it' in self.model_name:
+        if instructions != "":
             prompt_arr.append(instructions)
         # Question
         prompt_arr += construct_qa_prompt_from_args(question, question_prefix,task_name)
