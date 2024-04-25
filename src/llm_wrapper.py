@@ -218,7 +218,7 @@ class LLMWrapper:
         prompt_arr += construct_qa_prompt_from_args(question, question_prefix,task_name)
         # Get prompt text
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
-                                   self.default_answer_prefix if reasoning_prefix is None else "")
+                                   self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         breakpoint()
         if '-it' in self.model_name or '-chat' in self.model_name:
             chat = [ { "role": "user", "content": prompt },]
