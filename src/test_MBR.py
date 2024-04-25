@@ -28,6 +28,13 @@ input_batch = ["Hi how are you?", "I took my cat for a walk."]
 input_ids = tokenizer(input_batch, truncation=True, padding = True, return_tensors="pt").input_ids
 
 
+generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+output = generator("Hello,", mbr_config=mbr_config, tokenizer=tokenizer)
+print(output)
+
+
+
+
 
 outputs_temp_toppk = model.generate(
     input_ids = input_ids,
@@ -39,13 +46,9 @@ outputs_temp_toppk = model.generate(
     num_beams = 1,
     max_new_tokens = 100,
     mbr_config=mbr_config,
-    tokenizer=tokenizer
+    tokenizer=tokenizer,
+    use_arithmetic = False
     )
 
 
 print(outputs_temp_toppk)
-
-
-generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
-output = generator("Hello,", mbr_config=mbr_config, tokenizer=tokenizer)
-print(output)
