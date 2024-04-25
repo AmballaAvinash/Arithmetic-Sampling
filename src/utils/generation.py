@@ -17,8 +17,8 @@ default_strat_qa_instruction = """Like each of the previous examples, answer the
 Think step by step and provide a reasoning first, which leads to the final answer. Do not start with the final answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'
 End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
 default_commonsense_qa_instruction = """Like each of the previous examples,answer the question by thinking step by step, from the information provided.
-The reasoning should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
-End your reasoning with the sentence: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+Start with a reasoning, which should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
+Reasoning should be followed by: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
