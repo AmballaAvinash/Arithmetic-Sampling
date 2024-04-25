@@ -47,7 +47,6 @@ outputs_temp_toppk = model.generate(
     max_new_tokens = 100,
     mbr_config=mbr_config,
     tokenizer=tokenizer,
-    use_arithmetic = False
     )
 
 
