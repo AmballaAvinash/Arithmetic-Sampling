@@ -226,7 +226,7 @@ class LLMWrapper:
         if '-it' in self.model_name or '-chat' in self.model_name:
             chat = [ { "role": "user", "content": prompt },]
             prompt = self.tokenizer.apply_chat_template(chat, tokenize=False, add_generation_prompt=True)
-            breakpoint()
+            # breakpoint()
         return self._base_generator(prompt, **kwargs)
     def load_metrics(self, metrics):
         self.metrics.update({m: load(m) for m in metrics if m not in self.metrics})
