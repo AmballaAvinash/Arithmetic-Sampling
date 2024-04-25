@@ -220,7 +220,7 @@ class LLMWrapper:
         # prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
         #                            self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
-                                   "Answer: Let's break this down logically ")
+                                   "Answer: Let's approach this systematically, ")
         
         # breakpoint()
         # if '-it' in self.model_name or '-chat' in self.model_name:
