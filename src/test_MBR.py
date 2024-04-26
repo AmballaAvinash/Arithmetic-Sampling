@@ -69,6 +69,8 @@ import os
 import pandas as pd
 import json
 import matplotlib.pyplot as plt
+from bleurt import score
+
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -304,6 +306,13 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
     return output_dict
 
+def BleurtScore(ref, output):
+        bleurt_checkpoint = "./bleurt-base-128"
+        scorer = score.BleurtScorer(bleurt_checkpoint)
+        bleurt_score = scorer.score(references=[ref], candidates=[output])
+        return bleurt_score[0]
+    
+    
 def calculate_bleu_and_ngram_diversity(reference, translations):
     translations_split = [x.split() for x in translations]
     
