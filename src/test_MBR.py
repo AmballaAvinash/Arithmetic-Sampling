@@ -306,28 +306,35 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
     return output_dict
 
-def BleurtScore(ref, output):
-        bleurt_checkpoint = "./bleurt-base-128"
-        scorer = score.BleurtScorer(bleurt_checkpoint)
-        bleurt_score = scorer.score(references=[ref], candidates=[output])
+class ScoreBleurt():
+    def __init__(self):
+        super().__init__()
+        bleurt_checkpoint = "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/BLEURT-20-D12"
+        self.scorer = score.BleurtScorer(bleurt_checkpoint)
+        
+    def score(self, ref, output):
+        bleurt_score = self.scorer.score(references=[ref], candidates=[output])
         return bleurt_score[0]
+    
+
+bleurt  = ScoreBleurt()
     
     
 def calculate_bleu_and_ngram_diversity(reference, translations):
-    translations_split = [x.split() for x in translations]
+    # translations_split = [x.split() for x in translations]
     
     translation_MBR = ""
     max_utility = 0
     for i in range(len(translations)):
         utility_score = 0
         for j in range(len(translations)):
-            utility_score += sentence_bleu([translations_split[i]], translations_split[j],  smoothing_function=SmoothingFunction().method4)
+            utility_score += bleurt.score(translations[i], translations[j])
         
         if max_utility < utility_score:
             max_utility = utility_score
-            translation_MBR = translations_split[i]
+            translation_MBR = translations[i]
                       
-    bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR,  smoothing_function=SmoothingFunction().method4),3) 
+    bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR.split(),  smoothing_function=SmoothingFunction().method4),3) 
 
     n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
