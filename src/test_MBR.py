@@ -354,7 +354,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return bleu_score, ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 10
+    samplesize = 100
     batch = 5
     output_dir = "outputs/WMT/V4"
     
@@ -364,7 +364,7 @@ if __name__ == "__main__":
     
     # it versions and quantized
     for model_name in ["flan-t5", "mt0", "m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-        for shot in ["oneshot", "zeroshot"]:
+        for shot in ["zeroshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
