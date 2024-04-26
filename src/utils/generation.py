@@ -19,8 +19,8 @@ End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <
 # default_commonsense_qa_instruction = """Like each of the previous examples,answer the question by thinking step by step, from the information provided. The answer should be in a similar format as the examples.
 # Reasoning should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
 # Reasoning should be followed by: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
-default_commonsense_qa_instruction = """Like each of the previous examples,answer the following question by thinking step by step, from the information provided. The answer should be in a similar format as the examples.
-The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability by logical deduction and elimination of incorrect answers.
+default_commonsense_qa_instruction = """Like each of the previous examples,answer the following question by thinking logically, from the information provided. The answer should be in a similar format as the examples.
+The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability with an answer label(a,b,c,d,e,etc.) by logical deduction and elimination of incorrect answers.
 You should end your answer with : "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 
 default_input_prefix = "Input: "

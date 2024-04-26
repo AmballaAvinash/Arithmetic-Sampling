@@ -5,7 +5,7 @@
       "label": ["a", "b", "c", "d", "e"],
       "text": ["shirt pocket", "calligrapher’s hand", "inkwell", "desk drawer", "blotter"]
     },
-    "reasoning": "The answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).",
+    "reasoning": "Let us think logically, the answer must be an item that can absorb ink. Of the above choices, only blotters are used to absorb ink. So the answer is (e).",
     "answerKey": "e"
   },
   {
@@ -14,7 +14,7 @@
       "label": ["a", "b", "c", "d"],
       "text": ["pretty flowers", "hen house", "natural habitat", "storybook"]
     },
-    "reasoning": "The answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).",
+    "reasoning": "Let us think logically, the answer must be something in the forest. Of the above choices, only natural habitat is in the forest. So the answer is (c).",
     "answerKey": "c"
   },
   {
@@ -23,7 +23,7 @@
       "label": ["a", "b", "c", "d", "e"],
       "text": ["populated areas", "race track", "desert", "apartment", "roadblock"]
     },
-    "reasoning": "The answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).",
+    "reasoning": "Let us think logically, the answer must be a place with a lot of people. Of the above choices, only populated areas have a lot of people. So the answer is (a).",
     "answerKey": "a"
   },
   {
@@ -32,7 +32,7 @@
       "label": ["a", "b", "c", "d", "e"],
       "text": ["mouth", "grocery cart", "super market", "fruit basket", "fruit market"]
     },
-    "reasoning": "The answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).",
+    "reasoning": "Let us think logically, the answer should be the place where grocery items are placed before checking out. Of the above choices, grocery cart makes the most sense for holding grocery items. So the answer is (b).",
     "answerKey": "b"
   },
   {
@@ -41,7 +41,7 @@
       "label": ["a", "b", "c", "d"],
       "text": ["united states", "mexico", "countryside", "atlas"]
     },
-    "reasoning": "The answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).",
+    "reasoning": "Let us think logically, the answer must be something that used to do what Google Maps and GPS services do, which is to give directions. Of the above choices, only atlases are used to give directions. So the answer is (d).",
     "answerKey": "d"
   },
   {
@@ -50,7 +50,7 @@
       "label": ["a", "b", "c", "d", "e"],
       "text": ["harder", "anguish", "bitterness", "tears", "sadness"]
     },
-    "reasoning": "The answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).",
+    "reasoning": "Let us think logically, the answer should be the feeling of someone getting divorced who was doing all the work. Of the above choices, the closest feeling is bitterness. So the answer is (c).",
     "answerKey": "c"
   }
 ]
