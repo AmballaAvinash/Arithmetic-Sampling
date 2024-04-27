@@ -136,7 +136,7 @@ def _make_default_codes(batch_size, num_decodes,
   offset = torch.rand(batch_size, 1) # batch size is for generating parallel sequences in batch 
   codes = torch.tile(
         torch.unsqueeze(
-            torch.arange(1, num_decodes + 1, dtype=torch.float32) / (num_decodes + 1),  # codes spaces at equal interval from [0,1] for diverse gereration
+            torch.arange(1, num_decodes + 1, dtype=torch.float32) / (num_decodes + 1),  # codes spaces at equal interval from [0,1] for diverse generation
             dim=0), (batch_size, 1))
   return torch.flatten(torch.fmod(codes + offset, 1.0)) # offset is removing bias and fmod is making codes to [0,1]
 
