@@ -221,7 +221,7 @@ class LLMWrapper:
         #                            self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
                                    "Answer:Let us think logically,")
-        if 'commonsense_qa' in 
+        # if 'commonsense_qa' in 
         # breakpoint()
         # if '-it' in self.model_name or '-chat' in self.model_name:
         #     chat = [ { "role": "user", "content": prompt },]
