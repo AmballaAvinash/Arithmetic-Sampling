@@ -219,7 +219,7 @@ class LLMWrapper:
         # Get prompt text
         # prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
         #                            self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
-        prompt = prompt_arr_2_text(prompt_arr, prompt_sep)
+        prompt = prompt_arr_2_text(prompt_arr, prompt_sep,"")
         if 'commonsense_qa' in task_name:
             prompt+= "Answer: Let us think logically,"
         
