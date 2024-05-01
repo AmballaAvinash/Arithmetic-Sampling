@@ -221,7 +221,7 @@ class LLMWrapper:
         # prompt = prompt_arr_2_text(prompt_arr, prompt_sep,
         #                            self.default_answer_prefix if reasoning_prefix is None else reasoning_prefix)
         prompt = prompt_arr_2_text(prompt_arr, prompt_sep,"")
-        if 'commonsense_qa' in task_name:
+        if 'commonsense_qa' in task_name and '-it' in self.model_name:
             prompt+= "\nAnswer: Let us think logically,"
         
         # breakpoint()
