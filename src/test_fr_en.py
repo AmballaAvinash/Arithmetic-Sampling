@@ -349,8 +349,8 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 10
-    batch = 5
+    samplesize = 100
+    batch = 10
     output_dir = "outputs/WMT/V5"
     
     random.seed(41)
@@ -361,7 +361,7 @@ if __name__ == "__main__":
     
     # it versions and quantized
     for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-        for shot in ["zeroshot", "oneshot"]:
+        for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
@@ -382,7 +382,7 @@ if __name__ == "__main__":
             fig1, axs1 = plt.subplots(2, 4, figsize=(12, 6))
             fig2, axs2 = plt.subplots(2, 4, figsize=(12, 6))
             c = 0
-            for temp in [0.1, 0.5]: # temperature
+            for temp in [0.1, 1]: # temperature
                 for p in [0.8, 1.0]: # top p 
                     for k in [30, 50]: # top k '
                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
