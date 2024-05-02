@@ -323,7 +323,6 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
             # utility_score += bleurt.score(translations[i], translations[j])   
             
             utility_score += sentence_bleu([translations[i].split()], translations[j].split(), smoothing_function=SmoothingFunction().method4)
-            print(utility_score)
             
         if max_utility < utility_score:
             max_utility = utility_score
