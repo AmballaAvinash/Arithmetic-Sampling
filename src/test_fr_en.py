@@ -116,24 +116,35 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
     results = {}
     for N in [1, 5, 10]: # num_decodes
-        for temp in [0.1, 0.5]: # temperature
+        for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
                    avg_bleu_arith_toppk = []
                    avg_bleu_temp_toppk = []
+                   avg_bleu_greedy = []
+                   
                    avg_ngram_arith_toppk = []
                    avg_ngram_temp_toppk = []
+                   avg_ngram_greedy = []
+                   
                    for idx in range(len(data)):   
                        avg_bleu_arith_toppk.append(output_dict[idx]['bleu_score_arith_toppk'])
                        avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
                        avg_bleu_temp_toppk.append(output_dict[idx]['bleu_score_temp_toppk'])
                        avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
+                       avg_bleu_greedy.append(output_dict[idx]['bleu_score_greedy'])
+                       avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
                        
                    avg_bleu_arith_toppk = np.mean(avg_bleu_arith_toppk)
                    avg_bleu_temp_toppk = np.mean(avg_bleu_temp_toppk)
                    avg_ngram_arith_toppk = np.mean(avg_ngram_arith_toppk)
                    avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
+                   
+                   avg_bleu_greedy = np.mean(avg_bleu_greedy)
+            
+                   avg_ngram_greedy = np.mean(avg_ngram_greedy)
+                   
                    
                    results = {}
                    results["Num Samples"] = len(data)
@@ -144,8 +155,11 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    
                    results["BLEU Arithmetic"] = avg_bleu_arith_toppk
                    results["BLEU Sampling"] = avg_bleu_temp_toppk
+                   results["BLEU Greedy"] = avg_bleu_greedy
+                   
                    results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
                    results["N gram diversity Sampling"] = avg_ngram_temp_toppk
+                   results["N gram diversity Greedy"] = avg_ngram_greedy
                    
                    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
                        json.dump(results,f)
@@ -200,6 +214,11 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
                 
+                outputs_greedy = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N,
+                    forced_bos_token_id=tokenizer.get_lang_id("en")
+                    )
                 
             else:     
                 
@@ -226,20 +245,29 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     max_new_tokens = 100,
                     use_arithmetic = False
                     )
+                
+                outputs_greedy = model.generate(
+                    input_ids = input_ids,
+                    num_return_sequences = N
+                    )
             
             
             
             decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
             decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
-                   
+            decode_greedy = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_greedy, skip_special_tokens=True)]   
+
+
             num_decodes = 0
             for j in range(idx-batch+1,idx+1):
                 output_dict[j]['arith_toppk'] = decode_arith_toppk[num_decodes:num_decodes+N]
                 output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
+                output_dict[j]['greedy'] = decode_greedy[num_decodes:num_decodes+N]
                
                 output_dict[j]['bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
                 output_dict[j]['bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
-           
+                output_dict[j]['bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
+
                 num_decodes+=N
         
      
