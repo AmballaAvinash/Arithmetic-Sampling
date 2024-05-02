@@ -282,7 +282,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             for j in range(idx-batch+1,idx+1):
                 output_dict[j]['arith_toppk'] = decode_arith_toppk[num_decodes:num_decodes+N]
                 output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
-                output_dict[j]['greedy'] = decode_greedy[j-(idx-batch+1)]
+                output_dict[j]['greedy'] = [decode_greedy[j-(idx-batch+1)]]
                
                 output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
                 output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
