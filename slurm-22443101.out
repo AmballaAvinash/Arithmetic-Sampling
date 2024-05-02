@@ -1,0 +1,6 @@
+Removing miniconda version 22.11.1-1
+Loading miniconda version 22.11.1-1
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/project_5/Arithmetic-Sampling/src/reasoning/main.py", line 190, in <module>
+    MODEL = MODEL_ENUM[args.model]
+KeyError: 'gemma-7b'

@@ -1,0 +1,26 @@
+{
+    "num_examples=1, num_samples=20, temperature=0.5, shots=0, top_k=40, top_p=1.0_subsample_5": [
+        {
+            "gt": "7",
+            "question": "Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If Jason had picked up and carried 2 balls, what is the total number of balls that the coach brought to practice?",
+            "input_prompt": "<bos><start_of_turn>user\nAnswer the following question with a numerical answer. Your final sentence (substituting final answer in <numerical_answer>) should be: Therefore, the answer is <numerical_answer>.\n\nQuestion: Coach brought one bag filled with basketballs to practice and dumped them all out onto the gym floor before practice began.  After the practice time was over, he asked Jordan, Jason, and Jeffrey to pick up the balls and carry them over to the bag.  The three boys picked up and carried all of the balls in one trip.  Jordan carried twice as many balls as Jason, and Jason carried twice as many balls as Jeffrey. If Jason had picked up and carried 2 balls, what is the total number of balls that the coach brought to practice? \nAnswer: Let us think step by step using mathematical reasoning.<end_of_turn>\n<start_of_turn>model\n",
+            "arithmetic_sampling": [
+                "model\nJordan carried 2 * 2 = 4 balls.\nJason carried 2 * 2 = 4 balls.\nTherefore, the total number of balls that the coach brought to practice was 4 + 4 + 2 = 10.",
+                "model\nLet x be the number of basketballs Jordan carried.\n\nThen, Jason carried 2x balls and Jeffrey carried 2(x).\n\nWe know that the three boys picked up and carried all of the balls in one trip, so we have the equation:\n\nx = 2(2x) = 4x.\n\nTherefore, the total number of balls that the coach brought to practice is x = 4x = 16 balls.",
+                "model\nJordan carried twice as many balls as Jason, so Jordan picked up 2 * 2 = 4 balls.\nJason carried twice as many balls as Jeffrey, so Jason picked up 2 * 1 = 2 balls.\nTherefore, the total number of balls that the coach brought to practice was 4 + 2 = 6 balls.\nThe answer is 6.",
+                "model\nJordan carried twice as many balls as Jason, so Jordan carried 2 * 2 = 4 balls.\nJason carried twice as many balls as Jeffrey, so Jason carried 2 * 1 = 2 balls.\nTherefore, the total number of balls that the coach brought to practice is 2 + 4 = 6 balls.",
+                "model\nJordan carried 2 * 2 = 4 balls.\nJason carried 2 * 1 = 2 balls.\nJeffrey carried 1 * 2 = 2 balls.\nTherefore, the total number of balls that the coach brought to practice is 4 + 2 + 2 = 8."
+            ],
+            "ancestral_sampling": [
+                "model\nJordan carried 2 * 2 = 4 balls.\nJason carried 2 * 2 = 4 balls.\nJeffrey carried 2 * 2 = 4 balls.\nTherefore, the total number of balls that the coach brought to practice was 4 + 4 + 4 = 12.",
+                "model\nJordan carried twice as many balls as Jason, so Jordan picked up 2 * 2 = 4 balls.\nJason carried twice as many balls as Jeffrey, so Jason picked up 2 * 3 = 6 balls.\nTherefore, the total number of balls that the coach brought to practice was 4 + 6 = 10.",
+                "model\nJordan carried 2 * 2 = 4 balls.\nJason carried 2 * 2 = 4 balls.\nJeffrey carried 2 * 2 = 4 balls.\nTherefore, the total number of balls that the coach brought to practice was 4 + 4 + 4 = 12.",
+                "model\nJordan carried twice as many balls as Jason, so Jordan picked up 2 * 2 = 4 balls.\nJason carried twice as many balls as Jeffrey, so Jason picked up 2 * 3 = 6 balls.\nTherefore, the coach brought 4 + 6 = 10 balls to practice.",
+                "model\nJordan carried twice as many balls as Jason, so Jordan picked up 2 * 2 = 4 balls. \nJason carried twice as many balls as Jeffrey, so Jason picked up 2 * 1 = 2 balls. \nTherefore, the total number of balls that the coach brought to practice was 4 + 2 = 6 balls."
+            ],
+            "greedy_decoding": [
+                "model\nJordan carried twice as many balls as Jason, so Jordan carried 2 * 2 = 4 balls.\nJason carried twice as many balls as Jeffrey, so Jason carried 2 * 3 = 6 balls.\nTherefore, the total number of balls that the coach brought to practice was 2 + 4 + 6 = 12 balls."
+            ]
+        }
+    ]
+}

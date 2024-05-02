@@ -4,6 +4,7 @@ import torch
 import numpy as np 
 from typing import List
 from datasets import load_dataset, Dataset
+from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 from nltk.util import ngrams
 
 GSM8K_EXEMPLARS = [
@@ -51,16 +52,20 @@ GSM8K_EXEMPLARS = [
 
 
 MODEL_ENUM = {
-    "flan-t5-base": ("google", "flan-t5-base"),
-    "flan-t5-large": ("google", "flan-t5-large"),
-    "gemma-2b-it": ("google", "gemma-2b-it"),
-    "gemma-7b-it": ("google", "gemma-7b-it"),
-    "llama-2-7b": ("meta-llama", "Llama-2-7b"),
+    "flan-t5-base": ("google", "flan-t5-base"),     # Instruction-tuned
+    "flan-t5-large": ("google", "flan-t5-large"),   # Instruction-tuned
+    "gemma-2b": ("google", "gemma-2b"),             # Pre-trained
+    "gemma-2b-it": ("google", "gemma-2b-it"),       # Instruction-tuned
+    "gemma-7b": ("google", "gemma-7b"),             # Pre-trained
+    "gemma-7b-it": ("google", "gemma-7b-it"),       # Instruction-tuned
+    "llama-2-7b": ("meta-llama", "Llama-2-7b"),     # Pre-trained
 }
 
-DATASET_ENUM = {"gsm8k": ("gsm8k", "main", "test", GSM8K_EXEMPLARS)}
+DATASET_ENUM = {"gsm8k": ("gsm8k", "main", "train", GSM8K_EXEMPLARS)}
 
 INSTRUCTION_PREFIX = "Answer the following question with a numerical answer. Your final sentence (substituting final answer in <numerical_answer>) should be: Therefore, the answer is <numerical_answer>.\n\n"
+
+PRETRAINED_PREFIX = "As an expert problem solver solve step by step the following mathematical questions."
 
 ANSWER_TRIGGER = "Therefore, the answer is"
 
@@ -120,16 +125,28 @@ def generate_few_shot_exemplars(dataset_name: str, num_examples: int = -1) -> st
 
     return INSTRUCTION_PREFIX + prompt_prefix
 
+# def get_spaced_subsample(sequences: List[str], subsample: int = 20) -> List[str]:
+#     max_len = len(sequences)
+#     if max_len % subsample != 0:
+#         raise BaseException("Subsampling not possible with equal spacing")
+#     step_size = max_len // subsample
+#     indices = range(1, max_len, step_size)
+#     res = []
+#     for index in indices:
+#         res.append(sequences[index])
+#     return res
+
 
 def ngram_diversity(sequences: List[str], subsample: int = 20) -> float:
     n_values = [1, 2, 3, 4]
     total_unique_ngrams = 0
     ngram_diversity_score = 0
+    # sequences = get_spaced_subsample(sequences, subsample)
+    sequences = sequences[:subsample]
     for n in n_values:
         unique_ngrams = set()
         total_ngram_count = 0
-        random.shuffle(sequences)
-        for sequence in sequences[:subsample]:
+        for sequence in sequences:
             sequence_ngrams = list(ngrams(sequence.split(), n))
             total_ngram_count += len(list(sequence_ngrams))
             unique_ngrams.update(sequence_ngrams)
@@ -142,8 +159,9 @@ def ngram_diversity(sequences: List[str], subsample: int = 20) -> float:
 
 def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
     num_correct = 0
-    random.shuffle(sequences)
-    for sequence in sequences[:subsample]:
+    # sequences = get_spaced_subsample(sequences, subsample)
+    sequences = sequences[:subsample]
+    for sequence in sequences:
         numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
         pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
         if pred != "" and pred[-1] == ".":
@@ -153,14 +171,18 @@ def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int =
     return num_correct / len(sequences)
 
 def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
-    random.shuffle(sequences)
     predictions = np.zeros(len(sequences[:subsample]), dtype=np.int64)
-    for idx, sequence in enumerate(sequences[:subsample]):
+    # sequences = get_spaced_subsample(sequences, subsample)
+    sequences = sequences[:subsample]
+    for idx, sequence in enumerate(sequences):
         numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
         pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
         if pred != "" and pred[-1] == ".":
             pred = pred[:-1]
-        predictions[idx] = int(float(pred)) if pred != "" else -1
+        try:
+            predictions[idx] = int(float(pred)) if pred != "" else -1
+        except:
+            predictions[idx] = -1
     val, cnt = np.unique(predictions, return_counts=True)
     argmax = np.argmax(cnt)
     try:
@@ -168,4 +190,28 @@ def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20
         return 1 if val[argmax] == int(ground_truth) else 0
     except:
         return 0
-    
+
+class TruncateLogitsProcessor(LogitsProcessor):
+    def __init__(self,token_id: Union[int, List[int]],stop_word:Union[str, List[str]],eos_token_id: Union[int, List[int]],tokenizer):
+        if isinstance(token_id, int):
+            token_id = [token_id]
+        if isinstance(eos_token_id, int):
+            eos_token_id = [eos_token_id]
+        if not all(isinstance(i,int) for i in token_id) or any(i < 0 for i in token_id):
+            logger.warning(f"`token_id` has to be a list of positive integers, but is {token_id}")
+        self.token_id = token_id
+        self.stop_word = stop_word
+        self.eos_token_id = eos_token_id
+        self.tokenizer = tokenizer
+    def __call__(self,input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
+        cur_len = input_ids.shape[-1]
+        max_score_ids = torch.argmax(scores, dim=1)
+        for i in range(len(max_score_ids)):
+            if (max_score_ids[i] in self.tokenizer(self.stop_word).input_ids or self.tokenizer.decode(max_score_ids[i]).find(self.stop_word) != -1) :
+                scores[i][:] = -float('inf')
+                scores[i][self.eos_token_id[0]] = 0
+        scores.to(input_ids.device)
+        if torch.argmax(scores[:,]) in self.tokenizer(self.stop_word).input_ids:
+            print('yes')
+            scores = torch.zeros(scores.shape)
+            scores[:, self.eos_token_id] = 1

@@ -1,0 +1,74 @@
+{
+    "num_examples=100, num_samples=20, temperature=0.5, shots=8, top_k=40, top_p=1.0_subsample_5": {
+        "ngram_diversity": {
+            "arithmetic_sample": [
+                2.9677673523454935
+            ],
+            "ancestral_sample": [
+                2.9978348688699783
+            ],
+            "greedy_decoding": [
+                3.5065900244126857
+            ]
+        },
+        "accuracy": {
+            "arithmetic_sample": [
+                0.01
+            ],
+            "ancestral_sample": [
+                0.03
+            ],
+            "greedy_decoding": [
+                0.0
+            ]
+        }
+    },
+    "num_examples=100, num_samples=20, temperature=0.5, shots=8, top_k=40, top_p=1.0_subsample_10": {
+        "ngram_diversity": {
+            "arithmetic_sample": [
+                2.678537533476898
+            ],
+            "ancestral_sample": [
+                2.7149621942655
+            ],
+            "greedy_decoding": [
+                3.5065900244126857
+            ]
+        },
+        "accuracy": {
+            "arithmetic_sample": [
+                0.02
+            ],
+            "ancestral_sample": [
+                0.04
+            ],
+            "greedy_decoding": [
+                0.0
+            ]
+        }
+    },
+    "num_examples=100, num_samples=20, temperature=0.5, shots=8, top_k=40, top_p=1.0_subsample_20": {
+        "ngram_diversity": {
+            "arithmetic_sample": [
+                2.41489052630846
+            ],
+            "ancestral_sample": [
+                2.4200635723123054
+            ],
+            "greedy_decoding": [
+                3.5065900244126857
+            ]
+        },
+        "accuracy": {
+            "arithmetic_sample": [
+                0.01
+            ],
+            "ancestral_sample": [
+                0.03
+            ],
+            "greedy_decoding": [
+                0.0
+            ]
+        }
+    }
+}
