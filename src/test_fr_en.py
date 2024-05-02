@@ -285,8 +285,8 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                 output_dict[j]['greedy'] = [decode_greedy[j-(idx-batch+1)]]
                
                 output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
-                output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
-                output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
+                output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
+                output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
 
                 num_decodes+=N
         
