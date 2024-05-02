@@ -13,6 +13,8 @@ import os
 import pandas as pd
 import json
 import matplotlib.pyplot as plt
+from bleurt import score
+
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
@@ -120,29 +122,43 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
-                   avg_bleu_arith_toppk = []
-                   avg_bleu_temp_toppk = []
-                   avg_bleu_greedy = []
+                   avg_max_bleu_arith_toppk = []
+                   avg_max_bleu_temp_toppk = []
+                   avg_max_bleu_greedy = []
+                   avg_mbr_bleu_arith_toppk = []
+                   avg_mbr_bleu_temp_toppk = []
+                   avg_mbr_bleu_greedy = []
                    
                    avg_ngram_arith_toppk = []
                    avg_ngram_temp_toppk = []
                    avg_ngram_greedy = []
                    
                    for idx in range(len(data)):   
-                       avg_bleu_arith_toppk.append(output_dict[idx]['bleu_score_arith_toppk'])
+                       avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
+                       avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
+                       avg_max_bleu_greedy.append(output_dict[idx]['max_bleu_score_greedy'])
+                       
+                       avg_mbr_bleu_arith_toppk.append(output_dict[idx]['mbr_bleu_score_arith_toppk'])
+                       avg_mbr_bleu_temp_toppk.append(output_dict[idx]['mbr_bleu_score_temp_toppk'])
+                       avg_mbr_bleu_greedy.append(output_dict[idx]['mbr_bleu_score_greedy'])
+                       
                        avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
-                       avg_bleu_temp_toppk.append(output_dict[idx]['bleu_score_temp_toppk'])
                        avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
-                       avg_bleu_greedy.append(output_dict[idx]['bleu_score_greedy'])
+                       
                        avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
                        
-                   avg_bleu_arith_toppk = np.mean(avg_bleu_arith_toppk)
-                   avg_bleu_temp_toppk = np.mean(avg_bleu_temp_toppk)
+                   avg_max_bleu_arith_toppk = np.mean(avg_max_bleu_arith_toppk)
+                   avg_max_bleu_temp_toppk = np.mean(avg_max_bleu_temp_toppk)
+                   avg_max_bleu_greedy = np.mean(avg_max_bleu_greedy)
+                   
+                   avg_mbr_bleu_arith_toppk = np.mean(avg_mbr_bleu_arith_toppk)
+                   avg_mbr_bleu_temp_toppk = np.mean(avg_mbr_bleu_temp_toppk)
+                   avg_mbr_bleu_greedy = np.mean(avg_mbr_bleu_greedy)
+                   
+                   
                    avg_ngram_arith_toppk = np.mean(avg_ngram_arith_toppk)
                    avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
-                   
-                   avg_bleu_greedy = np.mean(avg_bleu_greedy)
-            
+
                    avg_ngram_greedy = np.mean(avg_ngram_greedy)
                    
                    
@@ -153,9 +169,13 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    results["Top p "] = p
                    results["Top k"] = k
                    
-                   results["BLEU Arithmetic"] = avg_bleu_arith_toppk
-                   results["BLEU Sampling"] = avg_bleu_temp_toppk
-                   results["BLEU Greedy"] = avg_bleu_greedy
+                   results["Max BLEU Arithmetic"] = avg_max_bleu_arith_toppk
+                   results["Max BLEU Sampling"] = avg_max_bleu_temp_toppk
+                   results["Max BLEU Greedy"] = avg_max_bleu_greedy
+                   
+                   results["MBR BLEU Arithmetic"] = avg_mbr_bleu_arith_toppk
+                   results["MBR BLEU Sampling"] = avg_mbr_bleu_temp_toppk
+                   results["MBR BLEU Greedy"] = avg_mbr_bleu_greedy
                    
                    results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
                    results["N gram diversity Sampling"] = avg_ngram_temp_toppk
@@ -264,9 +284,9 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                 output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
                 output_dict[j]['greedy'] = decode_greedy[j-(idx-batch+1)]
                
-                output_dict[j]['bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
-                output_dict[j]['bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
-                output_dict[j]['bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
+                output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
+                output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
+                output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
 
                 num_decodes+=N
         
@@ -276,9 +296,38 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
         
     return output_dict
 
+
+class ScoreBleurt():
+    def __init__(self):
+        super().__init__()
+        bleurt_checkpoint = "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/BLEURT-20-D12"
+        self.scorer = score.BleurtScorer(bleurt_checkpoint)
+        
+    def score(self, ref, output):
+        bleurt_score = self.scorer.score(references=[ref], candidates=[output])
+        return bleurt_score[0]
+    
+
+bleurt  = ScoreBleurt()
+                   
+
 def calculate_bleu_and_ngram_diversity(reference, translations):
     translations_split = [x.split() for x in translations]
-    bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
+    max_bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
+
+    translation_MBR = ""
+    max_utility = 0
+    for i in range(len(translations)):
+        utility_score = 0
+        for j in range(len(translations)):
+            utility_score += bleurt.score(translations[i], translations[j])
+        
+        if max_utility < utility_score:
+            max_utility = utility_score
+            translation_MBR = translations[i]
+                      
+    mbr_bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR.split(),  smoothing_function=SmoothingFunction().method4),3) 
+
 
     n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
@@ -295,7 +344,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
         # Update total counts
         total_unique_ngrams = len(unique_ngrams)
         ngram_diversity_score += total_unique_ngrams / (total_ngram_count + torch.finfo(torch.float32).eps)
-    return bleu_score, ngram_diversity_score
+    return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
     samplesize = 100
@@ -336,10 +385,16 @@ if __name__ == "__main__":
                     for k in [30, 50]: # top k '
                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
                       x = rows["Num decodes"]
-                      y_sample_bleu = rows["BLEU Sampling"] 
-                      y_arit_bleu = rows["BLEU Arithmetic"]
+                      y_max_sample_bleu = rows["Max BLEU Sampling"] 
+                      y_max_arit_bleu = rows["Max BLEU Arithmetic"]
+                      y_max_greedy_bleu = rows["Max BLEU Greedy"]
+                      y_mbr_sample_bleu = rows["MBR BLEU Sampling"] 
+                      y_mbr_arit_bleu = rows["MBR BLEU Arithmetic"]
+                      y_mbr_greedy_bleu = rows["MBR BLEU Greedy"]
+                      
                       y_sample_div = rows["N gram diversity Sampling"] 
                       y_arit_div = rows["N gram diversity Arithmetic"] 
+                      y_greedy_div = rows["N gram diversity Greedy"]
                       
                       
                       i = int(c/4)
@@ -347,13 +402,20 @@ if __name__ == "__main__":
                       
                       axs1[i][j].set_xlabel("Num of decodes")
                       axs1[i][j].set_ylabel("BLEU score")
-                      axs1[i][j].plot(x,y_sample_bleu, label="Ancestral sampling ")
-                      axs1[i][j].plot(x,y_arit_bleu, label = "Arithemetic sampling")
+                      axs1[i][j].plot(x,y_max_sample_bleu, label="Ancestral sampling (Max) ")
+                      axs1[i][j].plot(x,y_max_arit_bleu, label = "Arithemetic sampling (Max)")
+                      axs1[i][j].plot(x,y_max_greedy_bleu, label = "Greedy (Max)")
+                      
+                      axs1[i][j].plot(x,y_mbr_sample_bleu, label="Ancestral sampling (MBR) ")
+                      axs1[i][j].plot(x,y_mbr_arit_bleu, label = "Arithemetic sampling (MBR)")
+                      axs1[i][j].plot(x,y_mbr_greedy_bleu, label = "Greedy (MBR)")
+                      
                       
                       axs2[i][j].set_xlabel("Num of decodes")
                       axs2[i][j].set_ylabel("N gram diversity")
                       axs2[i][j].plot(x,y_sample_div, label="Ancestral sampling ")
                       axs2[i][j].plot(x,y_arit_div, label = "Arithemetic sampling")
+                      axs2[i][j].plot(x,y_greedy_div, label = "Greedy")
                       
                       c = c+1
                       
