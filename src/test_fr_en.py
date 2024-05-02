@@ -303,7 +303,9 @@ if __name__ == "__main__":
     output_dir = "outputs/WMT/V5"
     
     random.seed(41)
-    data =  random.sample(load_hf_data_set('validation','wmt14','fr-en')['translation'],samplesize)
+    # data =  random.sample(load_hf_data_set('validation','wmt14','fr-en')['translation'],samplesize)
+    data = list(load_hf_data_set('validation','wmt14','fr-en').take(samplesize))
+    data = [x["translation"] for x in data]
 
     
     # it versions and quantized
