@@ -317,13 +317,10 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
 
     translation_MBR = ""
     max_utility = 0
-    print(translations)
     for i in range(len(translations)):
         utility_score = 0
         for j in range(len(translations)):
-            utility_score += bleurt.score(translations[i], translations[j])
-            
-        print(utility_score)
+            utility_score += bleurt.score(translations[i], translations[j])    
         
         if max_utility < utility_score:
             max_utility = utility_score
