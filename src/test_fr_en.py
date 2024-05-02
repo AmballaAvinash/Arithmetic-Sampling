@@ -18,7 +18,7 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 def load_hf_data_set(split,dataset_name, dataset_subname):
         data = {}
-        data[split] = datasets.load_dataset(dataset_name,dataset_subname, split="validation",trust_remote_code=True)
+        data[split] = datasets.load_dataset(dataset_name,dataset_subname, split="validation[:1000]",trust_remote_code=True)
         return data[split]
 
 def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False):
