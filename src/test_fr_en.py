@@ -315,6 +315,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     translations_split = [x.split() for x in translations]
     max_bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
 
+    print(0)
     translation_MBR = ""
     max_utility = 0
     for i in range(len(translations)):
@@ -325,6 +326,8 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
         if max_utility < utility_score:
             max_utility = utility_score
             translation_MBR = translations[i]
+            
+    print(1)
                       
     mbr_bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR.split(),  smoothing_function=SmoothingFunction().method4),3) 
 
