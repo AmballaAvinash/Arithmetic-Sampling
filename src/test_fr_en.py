@@ -175,7 +175,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             input_batch =[]
             
         prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
-        prompt_arr.append(d['de'])
+        prompt_arr.append(d['fr'])
         prompt_arr.append(default_fwd_target_prefix)
         input_prompt = (' ').join(prompt_arr)  # join the sentences
         input_batch.append(input_prompt)
