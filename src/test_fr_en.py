@@ -320,8 +320,11 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     for i in range(len(translations)):
         utility_score = 0
         for j in range(len(translations)):
-            utility_score += bleurt.score(translations[i], translations[j])    
-        
+            # utility_score += bleurt.score(translations[i], translations[j])   
+            
+            utility_score += sentence_bleu([translations[i].split()], translations[j].split(), smoothing_function=SmoothingFunction().method4)
+            print(utility_score)
+            
         if max_utility < utility_score:
             max_utility = utility_score
             translation_MBR = translations[i]
@@ -359,7 +362,7 @@ if __name__ == "__main__":
     
     # it versions and quantized
     for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-        for shot in ["oneshot", "zeroshot"]:
+        for shot in ["zeroshot", "oneshot"]:
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
