@@ -235,7 +235,7 @@ def prompt_arr_2_text_mt(prompt_arr, prompt_sep, is_llama2, is_chat, output_pref
         prompt = prompt_sep.join(prompt_arr)
         return prompt
 def construct_args_from_example(d,task_name):
-    breakpoint()
+    # breakpoint()
     if 'strategy_qa' in task_name:
         question = d['input']
         answer = [k for k in d['target_scores'].keys() if d['target_scores'][k] == 1][0].lower()
@@ -281,7 +281,7 @@ def construct_args_from_example(d,task_name):
         return question,labels,options,answer
     elif 'wmt14' in task_name:
         inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
-        breakpoint()
+        # breakpoint()
         return inf_args,None
 def fix_posthoc(decoded,task_name):
     if 'strategy_qa' in task_name:
