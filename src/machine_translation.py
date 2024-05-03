@@ -51,7 +51,7 @@ class MachineTranslation(LLMWrapper):
             # demo_questions = [d['input'] for d in self.datasets['demo']]
             # strat_data = [i for i in strat_data if i['input'] not in demo_questions]
             self.datasets[args.eval_split]   = mt_data
-            breakpoint()
+            # breakpoint()
         elif 'commonsense_qa' in args.dataset_name:
             demo_file_path = '/work/pi_dhruveshpate_umass_edu/aparashar_umass_edu/Arithmetic-Sampling/data/demos/commonsense_qa_demos.json'
             with open(demo_file_path, 'r') as f:
@@ -107,7 +107,7 @@ class MachineTranslation(LLMWrapper):
             start_time = time.time()
             dataset = list(dataset)
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
-                breakpoint()
+                # breakpoint()
                 # try:
 
                 inf_args, ref = construct_args_from_example(d, task_name)
@@ -116,7 +116,7 @@ class MachineTranslation(LLMWrapper):
                 inf_args['instructions'] = inf_args['instructions'].format(source=source,target=target)
                 inf_args['input'] = d[src_lang]
                 ref = d[tgt_lang]
-                breakpoint()
+                # breakpoint()
                 _ex = d
                 logger.info(f"Sampling generations (strategy={_strat}):")
                 start_time = time.time()
