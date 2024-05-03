@@ -22,7 +22,9 @@ End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <
 default_commonsense_qa_instruction = """Like each of the previous examples,answer the following question by thinking logically, from the information provided. The answer should be in a similar format as the examples.
 The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability with an answer label(a,b,c,d,e,etc.) by logical deduction and elimination of incorrect answers.
 You should end your answer with : "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
-
+default_mt_fwd_instruction = "Translate the following {source} sentence to {target}:"
+default_mt_fwd_input_prefix = "{source}: "
+default_mt_fwd_target_prefix = "{target}: "
 default_input_prefix = "Input: "
 default_output_prefix = "Output: "
 default_answer_prefix = "Answer: "
@@ -268,6 +270,9 @@ def construct_args_from_example(d,task_name):
         options = d['choices']['text']
         answer = d['choices']['text'][d['choices']['label'].index(d['answerKey'])]
         return question,labels,options,answer
+    elif 'machinetranslation' in task_name:
+        inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
+        return inf_args,None
 def fix_posthoc(decoded,task_name):
     if 'strategy_qa' in task_name:
         labels = []
