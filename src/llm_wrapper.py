@@ -69,7 +69,7 @@ class LLMWrapper:
             torch_dtype = torch.float32  # because of a logsoftmax error with half precision; TODO: double-check
         if self.is_gemma:
             cls_model = AutoModelForCausalLM
-            cls_tokenizer = AutoTokenizer.from_pretrained('google'+self.model_name,cache_dir = '')
+            cls_tokenizer = AutoTokenizer.from_pretrained('google/'+self.model_name,cache_dir = '')
         elif self.is_mt0:
             cls_model = AutoModelForSeq2SeqLM
             cls_tokenizer = AutoTokenizer.from_pretrained("bigscience/mt0-large")
