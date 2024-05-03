@@ -225,7 +225,15 @@ def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
             prompt_arr.append(output_prefix)
     prompt = prompt_sep.join(prompt_arr)
     return prompt
-
+def prompt_arr_2_text_mt(prompt_arr, prompt_sep, is_llama2, is_chat, output_prefix):
+        # Output prefix (final prompt text)
+        if output_prefix is None:
+            output_prefix = copy.copy(default_output_prefix)
+        else:
+            if output_prefix != "":
+                prompt_arr.append(output_prefix)
+        prompt = prompt_sep.join(prompt_arr)
+        return prompt
 def construct_args_from_example(d,task_name):
     breakpoint()
     if 'strategy_qa' in task_name:

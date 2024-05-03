@@ -19,7 +19,7 @@ from nltk import word_tokenize
 from transformers import LlamaTokenizer,AutoModelForSeq2SeqLM, LlamaForCausalLM, AutoTokenizer, AutoModelForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,\
     T5ForConditionalGeneration
 from src.utils.generation import construct_prompt_from_args,construct_qa_prompt_from_args, default_metrics, default_decoding_args, \
-     default_input_prefix,task_logits_processors,\
+     default_input_prefix, prompt_arr_2_text_mt,task_logits_processors,\
     default_answer_prefix, default_output_prefix, \
     TruncateLogitsProcessor, prompt_arr_2_text \
 
@@ -179,7 +179,7 @@ class LLMWrapper:
         dec =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
         # breakpoint()
         return decoded, outputs, _prompt, decoding_args
-
+    
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
         # Construct prompt
         prompt = ""
@@ -191,7 +191,7 @@ class LLMWrapper:
             prompt_arr.append(instructions)
         prompt_arr += construct_prompt_from_args(input, input_prefix)
         # Get prompt text
-        prompt = prompt_arr_2_text(prompt_arr, prompt_sep, self.is_llama2, self.is_chat,
+        prompt = prompt_arr_2_text_mt(prompt_arr, prompt_sep, self.is_llama2, self.is_chat,
                                    self.default_output_prefix if output_prefix is None else output_prefix)
 
         return self._base_generator(prompt, **kwargs)
