@@ -161,7 +161,7 @@ class MachineTranslation(LLMWrapper):
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
                     utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
-                    prediction = dict(sorted(utilities.items(), key=lambda item: item[1]))
+                    prediction = sorted(utilities.items(), key=lambda item: item[1],reverse=True)
                     breakpoint()
                     # breakpoint()
                     # except:
@@ -175,8 +175,8 @@ class MachineTranslation(LLMWrapper):
                         "use_arithmetic": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                    breakpoint()
-                    prediction_cands = fix_posthoc(llm_decoded,task_name=task_name)
+                    utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
+                    prediction = sorted(utilities.items(), key=lambda item: item[1],reverse=True)
                     # breakpoint()
 
                 elif _strat=='epsilon':
@@ -204,6 +204,7 @@ class MachineTranslation(LLMWrapper):
                     "input": inf_args['question'],
                     "reference": references[-1] if len(references) > 0 else None,
                     "prediction": prediction,
+                    "utility_scores" : utilities,
                     "generation_candidates": llm_decoded,
                     "n_gram_diversity" : self.compute_ngram_diversity(llm_decoded)
                 })
