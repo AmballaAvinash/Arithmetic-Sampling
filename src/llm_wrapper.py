@@ -16,7 +16,7 @@ from sacrebleu.metrics import BLEU
 import nltk
 from nltk.translate import meteor
 from nltk import word_tokenize
-from transformers import LlamaTokenizer, LlamaForCausalLM, AutoTokenizer, AutoModelForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,\
+from transformers import LlamaTokenizer,AutoModelForSeq2SeqLM, LlamaForCausalLM, AutoTokenizer, AutoModelForCausalLM, LogitsProcessorList, GPT2Tokenizer,GPT2LMHeadModel,\
     T5ForConditionalGeneration
 from src.utils.generation import construct_prompt_from_args,construct_qa_prompt_from_args, default_metrics, default_decoding_args, \
      default_input_prefix,task_logits_processors,\
@@ -40,6 +40,7 @@ class LLMWrapper:
         self.is_t5 = is_t5
         self.is_gemma = is_gemma
         self.is_chat = is_chat
+        self.is_mt0  = None
         if model is not None:
              self.model_name = model.lower().split('/')[-1]   # then infer from name
         if self.is_llama2 is None:  
@@ -48,6 +49,8 @@ class LLMWrapper:
             self.is_t5 = 't5' in self.model_name
         if self.is_gemma is None:  
             self.is_gemma = 'gemma' in self.model_name
+        if self.is_mt0 is None:
+            self.is_mt0 = 'mt0' in self.model_name
         cls_tokenizer = AutoTokenizer
         tokenizer_args = {}
         cls_model = AutoModelForCausalLM
@@ -65,7 +68,11 @@ class LLMWrapper:
             torch_dtype = torch.float32  # because of a logsoftmax error with half precision; TODO: double-check
         if self.is_gemma:
             cls_model = AutoModelForCausalLM
-            cls_tokenizer = AutoTokenizer.from_pretrained('google/gemma-2b',cache_dir = '')
+            cls_tokenizer = AutoTokenizer.from_pretrained('google'+self.model_name,cache_dir = '')
+        elif self.is_mt0 == "mt0":
+            model = "bigscience/mt0-large"
+            cls_model = AutoModelForSeq2SeqLM
+            cls_tokenizer = AutoTokenizer("bigscience/mt0-large")
         if load_in_8bit:
             # breakpoint()
             bnb_config= BitsAndBytesConfig(
@@ -81,13 +88,14 @@ class LLMWrapper:
         
         
         else:
-            self.model = cls_model.from_pretrained(model,
-                                                torch_dtype=torch_dtype,
-                                                device_map=device_map,
-                                                # low_cpu_mem_usage=low_cpu_mem_usage,
-                                                cache_dir = '/work/pi_mccallum_umass_edu/aparashar_umass_edu/models/.cache',
-                                                trust_remote_code=True,
-                                                load_in_8bit=load_in_8bit)
+            if self.is_mt0 != True:
+                self.model = cls_model.from_pretrained(model,
+                                                    torch_dtype=torch_dtype,
+                                                    device_map=device_map,
+                                                    # low_cpu_mem_usage=low_cpu_mem_usage,
+                                                    cache_dir = '/work/pi_mccallum_umass_edu/aparashar_umass_edu/models/.cache',
+                                                    trust_remote_code=True,
+                                                    load_in_8bit=load_in_8bit)
         
         if self.is_llama2:
             # breakpoint()
