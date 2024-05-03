@@ -173,12 +173,14 @@ class LLMWrapper:
         #     prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
         # else:
         prompt_len = len(_prompt)
-        breakpoint()
-        decoded = [
-            self.tokenizer.decode(o, skip_special_tokens=True)[(prompt_len if return_output_after_prompt else 0):] for
-            o in outputs.sequences]
-        dec =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
-        breakpoint()
+        # breakpoint()
+        if 'mt0' not in self.model_name:
+            decoded = [
+                self.tokenizer.decode(o, skip_special_tokens=True)[(prompt_len if return_output_after_prompt else 0):] for
+                o in outputs.sequences]
+        else:
+            decoded =  [self.tokenizer.decode(o, skip_special_tokens=True)[:] for o in outputs.sequences]
+        # breakpoint()
         return decoded, outputs, _prompt, decoding_args
     
     def zero_shot(self, input=None, input_prefix=None, output_prefix=None, instructions=None, prompt_sep="\n",task=None, **kwargs):
