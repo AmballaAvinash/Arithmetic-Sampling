@@ -273,6 +273,7 @@ def construct_args_from_example(d,task_name):
         return question,labels,options,answer
     elif 'machinetranslation' in task_name:
         inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
+        breakpoint()
         return inf_args,None
 def fix_posthoc(decoded,task_name):
     if 'strategy_qa' in task_name:
