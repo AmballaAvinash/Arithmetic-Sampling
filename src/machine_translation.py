@@ -129,7 +129,6 @@ class MachineTranslation(LLMWrapper):
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
                     breakpoint()
-                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif _strat == 'greedy2':
                     inf_fn_kwargs.update({
                         "num_return_sequences" :  1,
@@ -161,7 +160,9 @@ class MachineTranslation(LLMWrapper):
                     # try:
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
-                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
+                    utilities = fix_posthoc(llm_decoded,task_name=task_name)
+                    prediction = dict(sorted(utilities.items(), key=lambda item: item[1]))[0]
+                    breakpoint()
                     # breakpoint()
                     # except:
                     #     continue

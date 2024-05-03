@@ -5,6 +5,7 @@ from typing import Union, List
 import logging
 import re
 import torch
+from bleurt import score
 from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
 # import openai
 
@@ -283,6 +284,17 @@ def construct_args_from_example(d,task_name):
         inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
         # breakpoint()
         return inf_args,None
+def fix_posthoc_mt(decoded,task_name):
+    if 'wmt14' in task_name:
+        checkpoint = "bleurt/test_checkpoint"
+        scorer = score.BleurtScorer(checkpoint)
+        utilities = {d:0 for d in decoded}
+        for d in decoded:
+            utilities[d] = sum([scorer.score(references=[d_ref], candidates=[d])[0] for d_ref in decoded])/len(decoded)
+        breakpoint()
+        return utilities
+
+
 def fix_posthoc(decoded,task_name):
     if 'strategy_qa' in task_name:
         labels = []
