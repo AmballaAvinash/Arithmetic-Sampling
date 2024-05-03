@@ -54,7 +54,7 @@ class LLMWrapper:
         cls_tokenizer = AutoTokenizer
         tokenizer_args = {}
         cls_model = AutoModelForCausalLM
-        breakpoint()
+        # br/eakpoint()
         if self.is_llama2:
             # breakpoint()
             cls_tokenizer = LlamaTokenizer
@@ -70,7 +70,7 @@ class LLMWrapper:
         if self.is_gemma:
             cls_model = AutoModelForCausalLM
             cls_tokenizer = AutoTokenizer.from_pretrained('google'+self.model_name,cache_dir = '')
-        elif self.is_mt0 == "mt0":
+        elif self.is_mt0:
             model = "bigscience/mt0-large"
             cls_model = AutoModelForSeq2SeqLM
             cls_tokenizer = AutoTokenizer("bigscience/mt0-large")
