@@ -1,5 +1,6 @@
 from collections import Counter
 import copy
+import numpy as np
 import random
 from typing import Union, List
 import logging
@@ -291,8 +292,15 @@ def fix_posthoc_mt(decoded,task_name):
         utilities = {d:0 for d in decoded}
         for d in decoded:
             utilities[d] = sum([scorer.score(references=[d_ref], candidates=[d])[0] for d_ref in decoded])/len(decoded)
-        # breakpoint()
-        return utilities
+    breakpoint()
+
+    # Calculate BLEURT scores for each decoded sentence against all references
+    bleurt_scores = np.array([scorer.score(references=decoded, candidates=[d])[0] for d in decoded])
+
+    # Compute utilities
+    utilities2 = np.mean(bleurt_scores)
+    breakpoint()
+    return utilities
 
 
 def fix_posthoc(decoded,task_name):
