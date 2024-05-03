@@ -54,6 +54,7 @@ class LLMWrapper:
         cls_tokenizer = AutoTokenizer
         tokenizer_args = {}
         cls_model = AutoModelForCausalLM
+        breakpoint()
         if self.is_llama2:
             # breakpoint()
             cls_tokenizer = LlamaTokenizer
