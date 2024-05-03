@@ -201,7 +201,7 @@ class MachineTranslation(LLMWrapper):
                     "idx": idx + 1,
                     # "id": d["concept_set_idx"],
                     "prompt": llm_prompt,
-                    "input": inf_args['question'],
+                    "input": inf_args['input'],
                     "reference": references[-1] if len(references) > 0 else None,
                     "prediction": prediction,
                     "utility_scores" : utilities,
