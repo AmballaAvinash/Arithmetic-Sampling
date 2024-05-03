@@ -185,7 +185,7 @@ class MachineTranslation(LLMWrapper):
                         "do_sample": True,
                         "num_return_sequences" : args.eval_n_samples,
                         "use_arithmetic": False,
-                        "epsilon": 0.02
+                        "epsilon_cutoff": 0.02
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
