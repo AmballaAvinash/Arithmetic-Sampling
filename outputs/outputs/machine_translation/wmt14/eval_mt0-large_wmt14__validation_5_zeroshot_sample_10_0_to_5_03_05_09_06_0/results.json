@@ -1,0 +1,202 @@
+{
+  "experiment": "eval_mt0-large_wmt14__validation_5_zeroshot_sample_10_0_to_5_03_05_09_06_0",
+  "n_total": 5,
+  "eval_args": {
+    "max_new_tokens": 200,
+    "do_sample": true,
+    "top_p": 1.0,
+    "temperature": 1.0,
+    "top_k": 40,
+    "min_length": null,
+    "num_beams": 1,
+    "num_return_sequences": 10,
+    "renormalize_logits": true,
+    "use_arithmetic": false
+  },
+  "scores": {
+    "bleu.bleu": 11.8134,
+    "ngram_diversity.ngram_diversity": 3.6607,
+    "n_gram_diversity": 2.7502108806497327,
+    "duplicity": 1.0
+  },
+  "time_taken": {
+    "sampling": 2.149226188659668
+  },
+  "examples": [
+    {
+      "fr": "Une strat\u00e9gie r\u00e9publicaine pour contrer la r\u00e9\u00e9lection d'Obama",
+      "en": "A Republican strategy to counter the re-election of Obama",
+      "idx": 1,
+      "prompt": "Translate the following French sentence to English:\nFrench: Une strat\u00e9gie r\u00e9publicaine pour contrer la r\u00e9\u00e9lection d'Obama\nEnglish: ",
+      "input": "Une strat\u00e9gie r\u00e9publicaine pour contrer la r\u00e9\u00e9lection d'Obama",
+      "reference": "a republican strategy to counter the re-election of obama",
+      "prediction": "A campaign for the opposition against Obama's re-election",
+      "utility_scores": {
+        "a public campaign against the approval of Barack Obama.": 0.023491108417510988,
+        "A campaign for the opposition against Obama's re-election": 0.16799886971712114,
+        "A campaign to tackle Obama's elections": 0.0041710734367370605,
+        "A Republican strategy is for the reelection of Obama.": 0.013375359028577805,
+        "A republican campaign to challenge Obama's elect.": -0.04843216836452484,
+        "The government is campaigning to reverse Obama's re-election.": -0.07499188482761383,
+        "Political campaign to block the Obama election": -0.13674596548080445,
+        "A Republican campaign to fight the re election of Barack Obama.": 0.10835890546441078,
+        "A popular campaign against the election of Barack Obama": 0.1455911859869957,
+        "A national strategy to block Obama's": -0.4395641162991524
+      },
+      "generation_candidates": [
+        "a public campaign against the approval of Barack Obama.",
+        "A campaign for the opposition against Obama's re-election",
+        "A campaign to tackle Obama's elections",
+        "A Republican strategy is for the reelection of Obama.",
+        "A republican campaign to challenge Obama's elect.",
+        "The government is campaigning to reverse Obama's re-election.",
+        "Political campaign to block the Obama election",
+        "A Republican campaign to fight the re election of Barack Obama.",
+        "A popular campaign against the election of Barack Obama",
+        "A national strategy to block Obama's"
+      ],
+      "n_gram_diversity": 3.226785707938149,
+      "duplicity": 1.0
+    },
+    {
+      "fr": "Les dirigeants r\u00e9publicains justifi\u00e8rent leur politique par la n\u00e9cessit\u00e9 de lutter contre la fraude \u00e9lectorale.",
+      "en": "Republican leaders justified their policy by the need to combat electoral fraud.",
+      "idx": 2,
+      "prompt": "Translate the following French sentence to English:\nFrench: Les dirigeants r\u00e9publicains justifi\u00e8rent leur politique par la n\u00e9cessit\u00e9 de lutter contre la fraude \u00e9lectorale.\nEnglish: ",
+      "input": "Les dirigeants r\u00e9publicains justifi\u00e8rent leur politique par la n\u00e9cessit\u00e9 de lutter contre la fraude \u00e9lectorale.",
+      "reference": "republican leaders justified their policy by the need to combat electoral fraud.",
+      "prediction": "Republican leaders justified their strategy by the need to fight against election fraud.",
+      "utility_scores": {
+        "The Republican leaders justified their policy they needed to combat graft.": -0.12865610271692277,
+        "The socialists justified their policy by promoting the need to combat election fraud.": 0.19952556639909744,
+        "The Liberal leaders justified their policy by the need to fight against fraud.": 0.3233904898166656,
+        "The Republican leaders justified their policy of fighting for fraud.": 0.10492115318775178,
+        "Roman Catholic leaders justified their policy by the need to beat voting fraud.": -0.06451299488544464,
+        "The ruling party justified their policy by concerned with electoral fraud.": 0.013975273817777634,
+        "The Republican government justified its policy by requiring their votes to be fraudulent.": 0.15635740160942077,
+        "The ruling people justified their policy on the need to fight against election fraud.": 0.37205912321805956,
+        "Republican leaders justified their strategy by the need to fight against election fraud.": 0.44586741775274275,
+        "The Republican leaders justified their policy in the need to fight fraud.": 0.3083196863532066
+      },
+      "generation_candidates": [
+        "The Republican leaders justified their policy they needed to combat graft.",
+        "The socialists justified their policy by promoting the need to combat election fraud.",
+        "The Liberal leaders justified their policy by the need to fight against fraud.",
+        "The Republican leaders justified their policy of fighting for fraud.",
+        "Roman Catholic leaders justified their policy by the need to beat voting fraud.",
+        "The ruling party justified their policy by concerned with electoral fraud.",
+        "The Republican government justified its policy by requiring their votes to be fraudulent.",
+        "The ruling people justified their policy on the need to fight against election fraud.",
+        "Republican leaders justified their strategy by the need to fight against election fraud.",
+        "The Republican leaders justified their policy in the need to fight fraud."
+      ],
+      "n_gram_diversity": 2.3022988489476024,
+      "duplicity": 1.0
+    },
+    {
+      "fr": "Or, le Centre Brennan consid\u00e8re cette derni\u00e8re comme un mythe, affirmant que la fraude \u00e9lectorale est plus rare aux \u00c9tats-Unis que le nombre de personnes tu\u00e9es par la foudre.",
+      "en": "However, the Brennan Centre considers this a myth, stating that electoral fraud is rarer in the United States than the number of people killed by lightning.",
+      "idx": 3,
+      "prompt": "Translate the following French sentence to English:\nFrench: Or, le Centre Brennan consid\u00e8re cette derni\u00e8re comme un mythe, affirmant que la fraude \u00e9lectorale est plus rare aux \u00c9tats-Unis que le nombre de personnes tu\u00e9es par la foudre.\nEnglish: ",
+      "input": "Or, le Centre Brennan consid\u00e8re cette derni\u00e8re comme un mythe, affirmant que la fraude \u00e9lectorale est plus rare aux \u00c9tats-Unis que le nombre de personnes tu\u00e9es par la foudre.",
+      "reference": "however, the brennan centre considers this a myth, stating that electoral fraud is rarer in the united states than the number of people killed by lightning.",
+      "prediction": "As a result, Brennan Centre calls this one a myth, believing voter fraud in the US is among the least rarely occurring in the United States since the number of people tortured by the crowd.",
+      "utility_scores": {
+        "However, the Brennan Centre claims these words as a myth, saying that vote fraud is unlikely in the U.S. as the number of people beaten by the crowd.": 0.0031088538467884063,
+        "However, Brennan Center believes that this myth is a myth, saying that American fraud is not as common in the United States as the amount of people killed by the mob.": 0.03821012154221535,
+        "But Brennan Centre believes that the fraud is less common in the United States than the number of people killed by the crowd.": -0.23104509562253953,
+        "In fact, the Center of Brennan calls this as a wry, saying that voter fraud is more common on the United States than the numbers of people killed by the crowd.": -0.11112095564603805,
+        "The Brennan Center sees that such theories as a dream and calls it a mythe.": -0.8346734642982483,
+        "\"But the Brennan Center looks at it as a myth, according to the estimate the number of people killed by the riots in the United States is much fewer than the unidentified human cases.": -0.0748629167675972,
+        "But the Brennan Center believes this is a myth telling the U.S. election fraud is far fewer than the execution rate of victims by the crowd.": -0.009666334092617034,
+        "As a result, Brennan Centre calls this one a myth, believing voter fraud in the US is among the least rarely occurring in the United States since the number of people tortured by the crowd.": 0.17128270864486694,
+        "But the Center for the Brennan estimates that the election fraud is more rare here than the number of people killed by the crowd.": -0.31790472492575644,
+        "But the Brennan Center suggests this as a myth, calling the voter fraud not far fewer in the United States than the number of people killed by crowds.": 0.15188919454813005
+      },
+      "generation_candidates": [
+        "However, the Brennan Centre claims these words as a myth, saying that vote fraud is unlikely in the U.S. as the number of people beaten by the crowd.",
+        "However, Brennan Center believes that this myth is a myth, saying that American fraud is not as common in the United States as the amount of people killed by the mob.",
+        "But Brennan Centre believes that the fraud is less common in the United States than the number of people killed by the crowd.",
+        "In fact, the Center of Brennan calls this as a wry, saying that voter fraud is more common on the United States than the numbers of people killed by the crowd.",
+        "The Brennan Center sees that such theories as a dream and calls it a mythe.",
+        "\"But the Brennan Center looks at it as a myth, according to the estimate the number of people killed by the riots in the United States is much fewer than the unidentified human cases.",
+        "But the Brennan Center believes this is a myth telling the U.S. election fraud is far fewer than the execution rate of victims by the crowd.",
+        "As a result, Brennan Centre calls this one a myth, believing voter fraud in the US is among the least rarely occurring in the United States since the number of people tortured by the crowd.",
+        "But the Center for the Brennan estimates that the election fraud is more rare here than the number of people killed by the crowd.",
+        "But the Brennan Center suggests this as a myth, calling the voter fraud not far fewer in the United States than the number of people killed by crowds."
+      ],
+      "n_gram_diversity": 2.5726858003959907,
+      "duplicity": 1.0
+    },
+    {
+      "fr": "D'ailleurs, les avocats r\u00e9publicains n'ont recens\u00e9 que 300 cas de fraude \u00e9lectorale aux \u00c9tats-Unis en dix ans.",
+      "en": "Indeed, Republican lawyers identified only 300 cases of electoral fraud in the United States in a decade.",
+      "idx": 4,
+      "prompt": "Translate the following French sentence to English:\nFrench: D'ailleurs, les avocats r\u00e9publicains n'ont recens\u00e9 que 300 cas de fraude \u00e9lectorale aux \u00c9tats-Unis en dix ans.\nEnglish: ",
+      "input": "D'ailleurs, les avocats r\u00e9publicains n'ont recens\u00e9 que 300 cas de fraude \u00e9lectorale aux \u00c9tats-Unis en dix ans.",
+      "reference": "indeed, republican lawyers identified only 300 cases of electoral fraud in the united states in a decade.",
+      "prediction": "But the Republicans barely recorded 307 election-fraud cases in the United States in ten years.",
+      "utility_scores": {
+        "But the Republicans barely recorded 307 election-fraud cases in the United States in ten years.": -0.020132632553577424,
+        "Since then, the Republicans could only say about 300 fraudulent elections in the United States in ten years.": -0.054477058351039886,
+        "All the more, just 300 fraud cases have been recorded in America during the last 10 years.": -0.3019972436130047,
+        "But Republicans managed to recount just 300 election fraud cases in ten years.": -0.07967376112937927,
+        "But Republicans do not have known about 300 election frauds in 10 years from 2009.": -0.324753400683403,
+        "For instance, Republicans barely report cases of election fraud in the US in 10 years.": -0.19821866899728774,
+        "The Republicans don't get enough information from the US government to record electoral frauds for the past 10 years.": -0.22132664024829865,
+        "The independent lawyers for the National Election Committee, however, uncovered that in 10 year period there were only 300 election frauds reported by the Republicans.": -0.048959717899560926,
+        "The president's lawyers had barely recorded 300 election frauds over ten years.": -0.408622020483017,
+        "In the end, the authorities took 300 felony cases in the United States in the past ten years.": -0.4138297766447067
+      },
+      "generation_candidates": [
+        "But the Republicans barely recorded 307 election-fraud cases in the United States in ten years.",
+        "Since then, the Republicans could only say about 300 fraudulent elections in the United States in ten years.",
+        "All the more, just 300 fraud cases have been recorded in America during the last 10 years.",
+        "But Republicans managed to recount just 300 election fraud cases in ten years.",
+        "But Republicans do not have known about 300 election frauds in 10 years from 2009.",
+        "For instance, Republicans barely report cases of election fraud in the US in 10 years.",
+        "The Republicans don't get enough information from the US government to record electoral frauds for the past 10 years.",
+        "The independent lawyers for the National Election Committee, however, uncovered that in 10 year period there were only 300 election frauds reported by the Republicans.",
+        "The president's lawyers had barely recorded 300 election frauds over ten years.",
+        "In the end, the authorities took 300 felony cases in the United States in the past ten years."
+      ],
+      "n_gram_diversity": 3.1102641774949045,
+      "duplicity": 1.0
+    },
+    {
+      "fr": "Une chose est certaine: ces nouvelles dispositions influenceront n\u00e9gativement le taux de participation.",
+      "en": "One thing is certain: these new provisions will have a negative impact on voter turn-out.",
+      "idx": 5,
+      "prompt": "Translate the following French sentence to English:\nFrench: Une chose est certaine: ces nouvelles dispositions influenceront n\u00e9gativement le taux de participation.\nEnglish: ",
+      "input": "Une chose est certaine: ces nouvelles dispositions influenceront n\u00e9gativement le taux de participation.",
+      "reference": "one thing is certain: these new provisions will have a negative impact on voter turn-out.",
+      "prediction": "A thing is clear: these new restrictions affect the participation rate.",
+      "utility_scores": {
+        "One thing is certain: the new rules negatively affect the participating rate.": 0.24384949505329132,
+        "It is sure that these changes will affect lacklustre participation.": 0.0753355547785759,
+        "The fact is: these new rules will harm the participation rates.": 0.24773793965578078,
+        "All facts are set: these new rules will affect the rate of participation.": 0.3207047589123249,
+        "A thing is clear: these new restrictions affect the participation rate.": 0.3888832926750183,
+        "We have clearly agreed: these changes will affect the participation rate.": 0.2975925415754318,
+        "A word's meaning is that the new rules will affect the participation rate.": 0.07698186188936233,
+        "They are certain they will affect the participation rate.": -0.030567923933267592,
+        "One thing is certain: these new dispositions affect the participation rate.": 0.23957860320806504,
+        "One thing is certain: these changes will affect the delta of participatory.": -0.07384795099496841
+      },
+      "generation_candidates": [
+        "One thing is certain: the new rules negatively affect the participating rate.",
+        "It is sure that these changes will affect lacklustre participation.",
+        "The fact is: these new rules will harm the participation rates.",
+        "All facts are set: these new rules will affect the rate of participation.",
+        "A thing is clear: these new restrictions affect the participation rate.",
+        "We have clearly agreed: these changes will affect the participation rate.",
+        "A word's meaning is that the new rules will affect the participation rate.",
+        "They are certain they will affect the participation rate.",
+        "One thing is certain: these new dispositions affect the participation rate.",
+        "One thing is certain: these changes will affect the delta of participatory."
+      ],
+      "n_gram_diversity": 2.5390198684720175,
+      "duplicity": 1.0
+    }
+  ]
+}
