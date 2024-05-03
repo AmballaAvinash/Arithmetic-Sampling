@@ -72,7 +72,7 @@ class LLMWrapper:
             cls_tokenizer = AutoTokenizer.from_pretrained('google'+self.model_name,cache_dir = '')
         elif self.is_mt0:
             cls_model = AutoModelForSeq2SeqLM
-            cls_tokenizer = AutoTokenizer("bigscience/mt0-large")
+            cls_tokenizer = AutoTokenizer.from_pretrained("bigscience/mt0-large")
         if load_in_8bit:
             # breakpoint()
             bnb_config= BitsAndBytesConfig(
