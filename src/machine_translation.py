@@ -128,7 +128,7 @@ class MachineTranslation(LLMWrapper):
                         "do_sample": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)  # the decoded list is sorted
-                    breakpoint()
+                    # breakpoint()
                 elif _strat == 'greedy2':
                     inf_fn_kwargs.update({
                         "num_return_sequences" :  1,
@@ -147,7 +147,7 @@ class MachineTranslation(LLMWrapper):
                     prediction_text = forward_options_sorted[0]['target']
                     prediction = inf_args["options"][inf_args["option_texts"].index(prediction_text)].lower()
 
-                    breakpoint()
+                    # breakpoint()
                     # forward_pred_option = forward_options_sorted[0]['target']
                     # prediction = fix_posthoc(llm_decoded,task_name=task_name)
                 elif 'arithmetic' in _strat:
@@ -159,10 +159,10 @@ class MachineTranslation(LLMWrapper):
                     })
                     # try:
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                    breakpoint()
+                    # breakpoint()
                     utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
                     prediction = sorted(utilities.items(), key=lambda item: item[1],reverse=True)[0][0]
-                    breakpoint()
+                    # breakpoint()
                     # breakpoint()
                     # except:
                     #     continue

@@ -246,7 +246,6 @@ class LLMWrapper:
 
     def  get_metric_scores(self, metric, predictions, references):
         scores = defaultdict()
-        breakpoint()
         print(metric, predictions, references)
         if metric["name"] == 'accuracy':
             # breakpoint()
@@ -254,7 +253,7 @@ class LLMWrapper:
         if metric["name"] == 'ngram_diversity':
             scores['ngram_diversity'] = self.compute_ngram_diversity(predictions)
         if metric["name"] == "bleu":
-            scores["sacrebleu"] = self.compute_sacrebleu(predictions,references)
+            scores["bleu"] = self.compute_sacrebleu(predictions,references)
         if metric["name"] == "meteor":
             scores["meteor"] = self.compute_meteor(predictions,references)
         
