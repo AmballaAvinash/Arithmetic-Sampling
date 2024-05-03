@@ -286,8 +286,8 @@ def construct_args_from_example(d,task_name):
         return inf_args,None
 def fix_posthoc_mt(decoded,task_name):
     if 'wmt14' in task_name:
-        checkpoint = "bleurt/test_checkpoint"
-        scorer = score.BleurtScorer(checkpoint)
+        # checkp/oint = "bleurt/test_checkpoint"
+        scorer = score.BleurtScorer()
         utilities = {d:0 for d in decoded}
         for d in decoded:
             utilities[d] = sum([scorer.score(references=[d_ref], candidates=[d])[0] for d_ref in decoded])/len(decoded)
