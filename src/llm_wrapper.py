@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 
 class LLMWrapper:
     def __init__(self, model=None, torch_dtype=torch.float16, low_cpu_mem_usage=True, device_map="auto",task_logits_processors=None,
-                 is_chat=None, is_llama2=None, is_t5=None, is_mpt=None,is_bloom=None,is_gpt2_mid= None,is_gemma =None, load_in_8bit=False):
+                 is_chat=None, is_llama2=None, is_t5=None, is_mpt=None,is_mt0  = None,is_bloom=None,is_gpt2_mid= None,is_gemma =None, load_in_8bit=False):
         self.model_name = None
         self.model = None
         self.tokenizer = None
@@ -40,7 +40,7 @@ class LLMWrapper:
         self.is_t5 = is_t5
         self.is_gemma = is_gemma
         self.is_chat = is_chat
-        self.is_mt0  = None
+        self.is_mt0  = is_mt0
         if model is not None:
              self.model_name = model.lower().split('/')[-1]   # then infer from name
         if self.is_llama2 is None:  
@@ -71,7 +71,6 @@ class LLMWrapper:
             cls_model = AutoModelForCausalLM
             cls_tokenizer = AutoTokenizer.from_pretrained('google'+self.model_name,cache_dir = '')
         elif self.is_mt0:
-            model = "bigscience/mt0-large"
             cls_model = AutoModelForSeq2SeqLM
             cls_tokenizer = AutoTokenizer("bigscience/mt0-large")
         if load_in_8bit:
