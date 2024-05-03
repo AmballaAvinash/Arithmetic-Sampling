@@ -161,7 +161,7 @@ class MachineTranslation(LLMWrapper):
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
                     utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
-                    prediction = dict(sorted(utilities.items(), key=lambda item: item[1]))[0]
+                    prediction = dict(sorted(utilities.items(), key=lambda item: item[1]))
                     breakpoint()
                     # breakpoint()
                     # except:
