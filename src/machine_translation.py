@@ -18,7 +18,7 @@ from transformers import T5Tokenizer, T5ForConditionalGeneration,T5EncoderModel,
 from llm_wrapper import LLMWrapper
 from src.utils.generation import TruncateLogitsProcessor, default_metrics, \
     default_answer_prefix, default_output_prefix,default_decoding_args,\
-        construct_args_from_example, fix_posthoc, get_logprob_score
+        construct_args_from_example, fix_posthoc, fix_posthoc_mt, get_logprob_score
 import torch
 from src.utils.helpers import setup_logger
 from src.utils.arguments import Arguments
@@ -160,7 +160,7 @@ class MachineTranslation(LLMWrapper):
                     # try:
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     breakpoint()
-                    utilities = fix_posthoc(llm_decoded,task_name=task_name)
+                    utilities = fix_posthoc_mt(llm_decoded,task_name=task_name)
                     prediction = dict(sorted(utilities.items(), key=lambda item: item[1]))[0]
                     breakpoint()
                     # breakpoint()
