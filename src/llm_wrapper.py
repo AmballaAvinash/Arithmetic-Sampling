@@ -88,8 +88,7 @@ class LLMWrapper:
         
         
         else:
-            if self.is_mt0 != True:
-                self.model = cls_model.from_pretrained(model,
+            self.model = cls_model.from_pretrained(model,
                                                     torch_dtype=torch_dtype,
                                                     device_map=device_map,
                                                     # low_cpu_mem_usage=low_cpu_mem_usage,
