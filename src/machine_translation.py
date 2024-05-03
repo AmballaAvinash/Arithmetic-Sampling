@@ -160,6 +160,7 @@ class MachineTranslation(LLMWrapper):
                     })
                     # try:
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    breakpoint()
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
                     # except:
@@ -173,7 +174,8 @@ class MachineTranslation(LLMWrapper):
                         "use_arithmetic": False,
                     })
                     llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                    prediction = fix_posthoc(llm_decoded,task_name=task_name)
+                    breakpoint()
+                    prediction_cands = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
 
                 elif _strat=='epsilon':
