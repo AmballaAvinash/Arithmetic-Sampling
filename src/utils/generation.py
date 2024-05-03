@@ -291,7 +291,7 @@ def fix_posthoc_mt(decoded,task_name):
         utilities = {d:0 for d in decoded}
         for d in decoded:
             utilities[d] = sum([scorer.score(references=[d_ref], candidates=[d])[0] for d_ref in decoded])/len(decoded)
-        breakpoint()
+        # breakpoint()
         return utilities
 
 
