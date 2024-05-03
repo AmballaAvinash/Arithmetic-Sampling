@@ -271,7 +271,7 @@ def construct_args_from_example(d,task_name):
         options = d['choices']['text']
         answer = d['choices']['text'][d['choices']['label'].index(d['answerKey'])]
         return question,labels,options,answer
-    elif 'machinetranslation' in task_name:
+    elif 'wmt14' in task_name:
         inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
         breakpoint()
         return inf_args,None
