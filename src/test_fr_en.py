@@ -117,7 +117,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [1, 5, 10]: # num_decodes
+    for N in [1, 5, 10, 20 , 40]: # num_decodes
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
@@ -349,9 +349,9 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 100
-    batch = 5
-    output_dir = "outputs/WMT/V5"
+    samplesize = 2000
+    batch = 10
+    output_dir = "outputs/WMT/V7"
     
     random.seed(41)
     # data =  random.sample(load_hf_data_set('validation','wmt14','fr-en')['translation'],samplesize)
@@ -360,7 +360,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5", "m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
