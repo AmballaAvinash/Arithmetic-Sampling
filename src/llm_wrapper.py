@@ -165,11 +165,11 @@ class LLMWrapper:
         # breakpoint()
         # Generate
         # breakpoint()
-        breakpoint()
+        # breakpoint()
         accelerator = Accelerator()
         if decoding_args['do_sample']:
             decoding_args['num_return_sequences'] = decoding_args['num_return_sequences'] // accelerator.num_processes
-            breakpoint()
+            # breakpoint()
             with accelerator.split_between_processes(range(accelerator.num_processes)) as idx:
                 with torch.no_grad():
 
@@ -183,17 +183,13 @@ class LLMWrapper:
                     #         max_new_tokens=100,
                     #         use_arithmetic = True
                     #     )
-                    breakpoint()
+        
         else:
             with torch.no_grad():
                 # breakpoint()
                 outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                             return_dict_in_generate=True, output_scores=True)
-<<<<<<< HEAD
             # if '-it' in self.model_name or '-chat' in self.model_name:
-=======
-        # if '-it' in self.model_name or '-chat' in self.model_name:
->>>>>>> 9e7a189103b70702bdaf8e97607df395f7ee458c
         #     prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
         # else:
         prompt_len = len(_prompt)
