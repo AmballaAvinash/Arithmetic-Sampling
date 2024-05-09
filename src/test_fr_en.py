@@ -349,7 +349,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 1000
+    samplesize = 500
     batch = 10
     output_dir = "outputs/WMT/V7"
     
