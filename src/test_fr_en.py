@@ -117,7 +117,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [1, 5, 10, 20 , 40]: # num_decodes
+    for N in [20 , 1, 5, 10]: # num_decodes (tp check ram issues)
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
@@ -349,7 +349,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 2000
+    samplesize = 1000
     batch = 10
     output_dir = "outputs/WMT/V7"
     
