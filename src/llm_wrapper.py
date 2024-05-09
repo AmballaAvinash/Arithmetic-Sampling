@@ -10,7 +10,7 @@ import datasets
 from nltk.util import ngrams
 from datasets import load_dataset
 from transformers import BitsAndBytesConfig
-
+from accelerate import Accelerator
 import torch
 from sacrebleu.metrics import BLEU
 import nltk
@@ -96,7 +96,7 @@ class LLMWrapper:
                                                     trust_remote_code=True,
                                                     load_in_8bit=load_in_8bit)
         
-        if self.is_llama2:
+        if self.is_llama2 and load_in_8bit != True:
             # breakpoint()
             self.model = self.model.bfloat16().cuda()
         self.tokenizer.pad_token =  self.tokenizer.eos_token
@@ -165,11 +165,31 @@ class LLMWrapper:
         # breakpoint()
         # Generate
         # breakpoint()
-        with torch.no_grad():
-            # breakpoint()
-            outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+        breakpoint()
+        accelerator = Accelerator()
+        if decoding_args['do_sample']:
+            decoding_args['num_return_sequences'] = decoding_args['num_return_sequences'] // accelerator.num_processes
+            breakpoint()
+            with accelerator.split_between_processes(range(accelerator.num_processes)) as idx:
+                with torch.no_grad():
+
+                    outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                         return_dict_in_generate=True, output_scores=True)
-        # if '-it' in self.model_name or '-chat' in self.model_name:
+                    # output = model.generate(
+                    #         input_ids=input_ids,
+                    #         num_return_sequences=num_return_sequences_per_gpu,
+                    #         do_sample=True,
+                    #         num_beams=1,
+                    #         max_new_tokens=100,
+                    #         use_arithmetic = True
+                    #     )
+                    breakpoint()
+        else:
+            with torch.no_grad():
+                # breakpoint()
+                outputs = self.model.generate(**prompt_tokenized, **decoding_args,
+                                            return_dict_in_generate=True, output_scores=True)
+            # if '-it' in self.model_name or '-chat' in self.model_name:
         #     prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
         # else:
         prompt_len = len(_prompt)
