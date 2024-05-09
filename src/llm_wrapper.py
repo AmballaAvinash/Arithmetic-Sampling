@@ -189,7 +189,11 @@ class LLMWrapper:
                 # breakpoint()
                 outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                             return_dict_in_generate=True, output_scores=True)
+<<<<<<< HEAD
             # if '-it' in self.model_name or '-chat' in self.model_name:
+=======
+        # if '-it' in self.model_name or '-chat' in self.model_name:
+>>>>>>> 9e7a189103b70702bdaf8e97607df395f7ee458c
         #     prompt_len = len(_prompt) - len('<start_of_turn>model<start_of_turn>user<end_of_turn>\n')
         # else:
         prompt_len = len(_prompt)
