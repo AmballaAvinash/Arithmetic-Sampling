@@ -117,7 +117,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [20 , 1, 5, 10]: # num_decodes (tp check ram issues)
+    for N in [20 , 10, 5, 1]: # num_decodes (tp check ram issues)
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
