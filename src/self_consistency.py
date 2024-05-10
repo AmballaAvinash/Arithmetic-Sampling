@@ -158,12 +158,21 @@ class SelfConsistency(LLMWrapper):
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
                     # breakpoint()
-                    inf_fn_kwargs.update({
-                        "do_sample": True,
-                        "num_return_sequences" : args.eval_n_samples,
-                        "use_arithmetic": False,
-                    })
-                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    if args.eval_n_samples%5 != 0:
+                        raise ValueError(f"No. of samples should be a multiple of five for ancestral sampling")
+                    num_seeds =  args.eval_n_samples//5
+                    random_seeds = [[random.randint(0, 9999), random.randint(0, 9999)] for _ in range(num_seeds)]
+                    llm_decoded = []
+                    for seed in random_seeds:
+                        inf_fn_kwargs.update({
+                            "do_sample": True,
+                            "num_return_sequences" : 5,
+                            "use_arithmetic": False,
+                            "seed" : seed
+                        })
+                        llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                        llm_decoded.append(llm_decoded_seed)
+                    llm_decoding_args["num_return_sequences"] = args.eval_n_samples
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
 
