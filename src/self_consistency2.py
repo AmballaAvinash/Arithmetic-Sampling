@@ -180,7 +180,7 @@ class SelfConsistency(LLMWrapper):
                         })
                     # try:
                         llm_decoded_chunk, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                        llm_decoded.append(llm_decoded_chunk)
+                        llm_decoded.extend(llm_decoded_chunk)
                     # breakpoint()
                     breakpoint()
                     llm_decoding_args["num_return_sequences"] = args.eval_n_samples
