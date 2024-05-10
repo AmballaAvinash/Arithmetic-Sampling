@@ -105,7 +105,7 @@ class SelfConsistency(LLMWrapper):
             if _strat == 'sample':
                 if args.eval_n_samples%5 != 0:
                         raise ValueError(f"No. of samples should be a multiple of five for ancestral sampling")
-                num_seeds =  args.eval_n_samples//5
+                num_seeds =  args.eval_n_samples//10
                 ancestral_random_seeds = [random.randint(0, 9999) for _ in range(num_seeds)]
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
                 # breakpoint()
@@ -169,7 +169,7 @@ class SelfConsistency(LLMWrapper):
                         random.seed(seed)
                         inf_fn_kwargs.update({
                             "do_sample": True,
-                            "num_return_sequences" : 5,
+                            "num_return_sequences" : 10,
                             "use_arithmetic": False
                         })
                         llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
