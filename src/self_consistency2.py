@@ -171,7 +171,7 @@ class SelfConsistency(LLMWrapper):
                     for c in range(num_chunks):
                         codes = torch.flatten(self._make_default_codes(1,chunk_size,0,c*(1/num_return_sequences)))
                         # code_chunk = codes[c*chunk_size:chunk_size*(c+1)]
-                        breakpoint()
+                        # breakpoint()
                         inf_fn_kwargs.update({
                             "do_sample": True,
                             "use_arithmetic": True,
@@ -181,6 +181,7 @@ class SelfConsistency(LLMWrapper):
                     # try:
                         llm_decoded_chunk, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                         llm_decoded.append(llm_decoded_chunk)
+                    # breakpoint()
                     breakpoint()
                     llm_decoding_args["num_return_sequences"] = args.eval_n_samples
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
