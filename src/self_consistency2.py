@@ -184,6 +184,7 @@ class SelfConsistency(LLMWrapper):
                     # breakpoint()
                     # breakpoint()
                     llm_decoding_args["num_return_sequences"] = args.eval_n_samples
+                    del llm_decoding_args['codes']
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
                     # except:
