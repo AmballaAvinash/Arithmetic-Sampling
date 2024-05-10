@@ -163,19 +163,19 @@ class SelfConsistency(LLMWrapper):
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
                     # breakpoint()
-                    llm_decoded = []
-                    for seed in ancestral_random_seeds:
-                        torch.manual_seed(seed)
-                        random.seed(seed)
-                        inf_fn_kwargs.update({
-                            "do_sample": True,
-                            "num_return_sequences" : 10,
-                            "use_arithmetic": False
-                        })
-                        llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                        llm_decoded.extend(llm_decoded_seed)
-                    llm_decoding_args["num_return_sequences"] = args.eval_n_samples
-                    llm_decoding_args["ancestral_seeds"] = ancestral_random_seeds
+                    # llm_decoded = []
+                    # for seed in ancestral_random_seeds:
+                    #     torch.manual_seed(seed)
+                    #     random.seed(seed)
+                    inf_fn_kwargs.update({
+                        "do_sample": True,
+                        "num_return_sequences" : args.eval_n_samples,
+                        "use_arithmetic": False
+                    })
+                    #     llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    #     llm_decoded.extend(llm_decoded_seed)
+                    # llm_decoding_args["num_return_sequences"] = args.eval_n_samples
+                    # llm_decoding_args["ancestral_seeds"] = ancestral_random_seeds
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
 
