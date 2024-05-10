@@ -159,7 +159,7 @@ class SelfConsistency(LLMWrapper):
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
                     # breakpoint()
                     # except:
-                    #     continue
+                    #     continues
                 elif _strat=='sample':
                     #prepare kwargs for the sampling strategy
                     # breakpoint()
@@ -173,7 +173,7 @@ class SelfConsistency(LLMWrapper):
                             "use_arithmetic": False
                         })
                         llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
-                        llm_decoded.append(llm_decoded_seed)
+                        llm_decoded.extend(llm_decoded_seed)
                     llm_decoding_args["num_return_sequences"] = args.eval_n_samples
                     llm_decoding_args["ancestral_seeds"] = ancestral_random_seeds
                     prediction = fix_posthoc(llm_decoded,task_name=task_name)
