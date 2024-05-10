@@ -172,7 +172,7 @@ class SelfConsistency(LLMWrapper):
                         "num_return_sequences" : args.eval_n_samples,
                         "use_arithmetic": False
                     })
-                    #     llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
+                    llm_decoded, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                     #     llm_decoded.extend(llm_decoded_seed)
                     # llm_decoding_args["num_return_sequences"] = args.eval_n_samples
                     # llm_decoding_args["ancestral_seeds"] = ancestral_random_seeds
