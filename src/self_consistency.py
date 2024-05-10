@@ -106,7 +106,7 @@ class SelfConsistency(LLMWrapper):
                 if args.eval_n_samples%5 != 0:
                         raise ValueError(f"No. of samples should be a multiple of five for ancestral sampling")
                 num_seeds =  args.eval_n_samples//5
-                ancestral_random_seeds = [[random.randint(0, 9999), random.randint(0, 9999)] for _ in range(num_seeds)]
+                ancestral_random_seeds = [random.randint(0, 9999) for _ in range(num_seeds)]
             for idx, d in enumerate(tqdm(dataset, desc="Forward predicting")):
                 # breakpoint()
                 # try:
@@ -165,11 +165,12 @@ class SelfConsistency(LLMWrapper):
                     # breakpoint()
                     llm_decoded = []
                     for seed in ancestral_random_seeds:
+                        torch.manual_seed(seed)
+                        random.seed(seed)
                         inf_fn_kwargs.update({
                             "do_sample": True,
                             "num_return_sequences" : 5,
-                            "use_arithmetic": False,
-                            "seed" : seed
+                            "use_arithmetic": False
                         })
                         llm_decoded_seed, llm_outputs, llm_prompt, llm_decoding_args = inf_fn(**inf_args, **inf_fn_kwargs)
                         llm_decoded.append(llm_decoded_seed)
