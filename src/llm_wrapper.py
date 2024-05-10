@@ -167,7 +167,7 @@ class LLMWrapper:
         # breakpoint()
         # breakpoint()
         accelerator = Accelerator()
-        if decoding_args['do_sample']:
+        if decoding_args['do_sample'] and decoding_args['num_return_sequences']>5:
             decoding_args['num_return_sequences'] = decoding_args['num_return_sequences'] // accelerator.num_processes
             # breakpoint()
             with accelerator.split_between_processes(range(accelerator.num_processes)) as idx:
@@ -175,14 +175,6 @@ class LLMWrapper:
 
                     outputs = self.model.generate(**prompt_tokenized, **decoding_args,
                                         return_dict_in_generate=True, output_scores=True)
-                    # output = model.generate(
-                    #         input_ids=input_ids,
-                    #         num_return_sequences=num_return_sequences_per_gpu,
-                    #         do_sample=True,
-                    #         num_beams=1,
-                    #         max_new_tokens=100,
-                    #         use_arithmetic = True
-                    #     )
         
         else:
             with torch.no_grad():
