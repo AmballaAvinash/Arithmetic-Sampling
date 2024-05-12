@@ -167,6 +167,7 @@ class LLMWrapper:
         # breakpoint()
         # breakpoint()
         accelerator = Accelerator()
+        accelerator.wait_for_everyone()    
         if decoding_args['do_sample'] and decoding_args['num_return_sequences']>5:
             decoding_args['num_return_sequences'] = decoding_args['num_return_sequences'] // accelerator.num_processes
             # breakpoint()
