@@ -4,19 +4,18 @@
 #SBATCH --mem=50G  # Requested Memory
 #SBATCH -p gpu  # Partition
 #SBATCH -G 1  # Number of GPUs
-#SBATCH -t 23:59:59
-#SBATCH --constraint=vram48
+#SBATCH -t 08:00:00
+#SBATCH --constraint=vram32
 #SBATCH -o slurm-%j.out  # %j = job ID
 
 module load miniconda/22.11.1-1
 conda activate project_5
 
 python3 src/reasoning/main.py \
-    --num-examples 900 \
-    --num-examples-offset 100 \
+    --num-examples 200 \
+    --num-examples-offset 0 \
     --num-shots 8 \
-    --num-samples 20 \
+    --num-samples 5 \
     --temperature 0.5 \
-    --top-k 40 \
     --model gemma-2b \
-    --output-path gemma-2b_gsm8k_samples_100-1000.json
+    --output-path gemma-2b_gsm8k_T_0.5_samples.json

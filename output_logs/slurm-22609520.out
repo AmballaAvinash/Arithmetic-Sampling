@@ -1,0 +1,34 @@
+Removing miniconda version 22.11.1-1
+Loading miniconda version 22.11.1-1
+Gemma's activation function should be approximate GeLU and not exact GeLU.
+Changing the activation function to `gelu_pytorch_tanh`.if you want to use the legacy `gelu`, edit the `model.config` to set `hidden_activation=gelu`   instead of `hidden_act`. See https://github.com/huggingface/transformers/pull/29402 for more details.
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.46s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.75s/it]
+Tokenizer max input length: 1000000000000000019884624838656
+Predicting:   0%|          | 0/100 [00:00<?, ?it/s]Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+--- Logging error ---
+Traceback (most recent call last):
+  File "/home/avsingh_umass_edu/.conda/envs/project_5/lib/python3.10/logging/__init__.py", line 1100, in emit
+    msg = self.format(record)
+  File "/home/avsingh_umass_edu/.conda/envs/project_5/lib/python3.10/logging/__init__.py", line 943, in format
+    return fmt.format(record)
+  File "/home/avsingh_umass_edu/.conda/envs/project_5/lib/python3.10/logging/__init__.py", line 678, in format
+    record.message = record.getMessage()
+  File "/home/avsingh_umass_edu/.conda/envs/project_5/lib/python3.10/logging/__init__.py", line 368, in getMessage
+    msg = msg % self.args
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "/work/pi_dhruveshpate_umass_edu/project_5/Arithmetic-Sampling/src/reasoning/main.py", line 233, in <module>
+    cot_reasoning(
+  File "/work/pi_dhruveshpate_umass_edu/project_5/Arithmetic-Sampling/src/reasoning/main.py", line 68, in cot_reasoning
+    arithmetic_sample_outputs = model.generate(
+  File "/home/avsingh_umass_edu/.conda/envs/project_5/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 115, in decorate_context
+    return func(*args, **kwargs)
+  File "/work/pi_dhruveshpate_umass_edu/project_5/transformers_local/src/transformers/generation/utils.py", line 1621, in generate
+    result = self.arithmetic_sample(
+  File "/work/pi_dhruveshpate_umass_edu/project_5/transformers_local/src/transformers/generation/utils.py", line 1998, in arithmetic_sample
+    logger.warning_once(
+  File "/work/pi_dhruveshpate_umass_edu/project_5/transformers_local/src/transformers/utils/logging.py", line 329, in warning_once
+    self.warning(*args, **kwargs)
+Message: '`eos_token_id` is deprecated in this function and will be removed in v4.41, use `stopping_criteria=StoppingCriteriaList([EosTokenCriteria(eos_token_id=eos_token_id)])` instead. Otherwise make sure to set `model.generation_config.eos_token_id`'
+Arguments: (<class 'FutureWarning'>,)
+slurmstepd-gpu012: error: *** JOB 22609520 ON gpu012 CANCELLED AT 2024-05-02T13:23:42 ***

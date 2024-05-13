@@ -4,8 +4,8 @@
 #SBATCH --mem=50G  # Requested Memory
 #SBATCH -p gpu  # Partition
 #SBATCH -G 1  # Number of GPUs
-#SBATCH -t 23:59:59
-#SBATCH --constraint=vram48
+#SBATCH -t 04:00:00
+#SBATCH --constraint=vram32
 #SBATCH -o slurm-%j.out  # %j = job ID
 
 module load miniconda/22.11.1-1

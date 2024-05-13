@@ -125,23 +125,29 @@ def generate_few_shot_exemplars(dataset_name: str, num_examples: int = -1) -> st
 
     return INSTRUCTION_PREFIX + prompt_prefix
 
-# def get_spaced_subsample(sequences: List[str], subsample: int = 20) -> List[str]:
-#     max_len = len(sequences)
-#     if max_len % subsample != 0:
-#         raise BaseException("Subsampling not possible with equal spacing")
-#     step_size = max_len // subsample
-#     indices = range(1, max_len, step_size)
-#     res = []
-#     for index in indices:
-#         res.append(sequences[index])
-#     return res
+def get_spaced_subsamples(sequences: List[str], subsample: int = 20) -> List[str]:
+    max_len = len(sequences)
+    if max_len % subsample != 0:
+        raise BaseException("Subsampling not possible with unequal spacing")
+    step_size = max_len // subsample
+    res = []
+    for offset in range(step_size):
+        indices = range(offset, max_len, step_size)
+        subsample_res = []
+        for index in indices:
+            subsample_res.append(sequences[index])
+        res.append(subsample_res)
+    return res
 
 
-def ngram_diversity(sequences: List[str], subsample: int = 20) -> float:
+def ngram_diversity(sequences: List[str], subsample: int = 20, post_process_step = False) -> float:
     n_values = [1, 2, 3, 4]
     total_unique_ngrams = 0
     ngram_diversity_score = 0
-    # sequences = get_spaced_subsample(sequences, subsample)
+    
+    if post_process_step:
+        sequences_list = get_spaced_subsamples(sequences, subsample)
+        return np.mean([ngram_diversity(sequences) for sequences in sequences_list])
     sequences = sequences[:subsample]
     for n in n_values:
         unique_ngrams = set()
@@ -157,9 +163,11 @@ def ngram_diversity(sequences: List[str], subsample: int = 20) -> float:
     return ngram_diversity_score
 
 
-def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
+def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20, post_process_step = False) -> float:
     num_correct = 0
-    # sequences = get_spaced_subsample(sequences, subsample)
+    if post_process_step:
+        sequences_list = get_spaced_subsamples(sequences, subsample)
+        return np.mean([numerical_accuracy(sequences, ground_truth) for sequences in sequences_list])
     sequences = sequences[:subsample]
     for sequence in sequences:
         numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
@@ -168,11 +176,13 @@ def numerical_accuracy(sequences: List[str], ground_truth: str, subsample: int =
             pred = pred[:-1]
         if pred == ground_truth:
             num_correct += 1
-    return num_correct / len(sequences)
+    return num_correct / (len(sequences) + np.finfo(float).eps)
 
-def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20) -> float:
+def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20, post_process_step = False) -> float:
     predictions = np.zeros(len(sequences[:subsample]), dtype=np.int64)
-    # sequences = get_spaced_subsample(sequences, subsample)
+    if post_process_step:
+        sequences_list = get_spaced_subsamples(sequences, subsample)
+        return np.mean([voting_accuracy(sequences, ground_truth) for sequences in sequences_list])
     sequences = sequences[:subsample]
     for idx, sequence in enumerate(sequences):
         numeric_tokens = re.findall(r'-?\d+\.?\d*', sequence)
@@ -190,28 +200,3 @@ def voting_accuracy(sequences: List[str], ground_truth: str, subsample: int = 20
         return 1 if val[argmax] == int(ground_truth) else 0
     except:
         return 0
-
-class TruncateLogitsProcessor(LogitsProcessor):
-    def __init__(self,token_id: Union[int, List[int]],stop_word:Union[str, List[str]],eos_token_id: Union[int, List[int]],tokenizer):
-        if isinstance(token_id, int):
-            token_id = [token_id]
-        if isinstance(eos_token_id, int):
-            eos_token_id = [eos_token_id]
-        if not all(isinstance(i,int) for i in token_id) or any(i < 0 for i in token_id):
-            logger.warning(f"`token_id` has to be a list of positive integers, but is {token_id}")
-        self.token_id = token_id
-        self.stop_word = stop_word
-        self.eos_token_id = eos_token_id
-        self.tokenizer = tokenizer
-    def __call__(self,input_ids: torch.LongTensor, scores: torch.FloatTensor) -> torch.FloatTensor:
-        cur_len = input_ids.shape[-1]
-        max_score_ids = torch.argmax(scores, dim=1)
-        for i in range(len(max_score_ids)):
-            if (max_score_ids[i] in self.tokenizer(self.stop_word).input_ids or self.tokenizer.decode(max_score_ids[i]).find(self.stop_word) != -1) :
-                scores[i][:] = -float('inf')
-                scores[i][self.eos_token_id[0]] = 0
-        scores.to(input_ids.device)
-        if torch.argmax(scores[:,]) in self.tokenizer(self.stop_word).input_ids:
-            print('yes')
-            scores = torch.zeros(scores.shape)
-            scores[:, self.eos_token_id] = 1

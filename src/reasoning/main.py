@@ -5,6 +5,7 @@ import torch
 import time
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM, BitsAndBytesConfig, set_seed
+from accelerate import Accelerator
 from tqdm import tqdm
 from utils import *
 
@@ -13,9 +14,9 @@ from utils import *
 os.environ["KMP_DUPLICATE_LIB_OK"] = "True"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-hard_prefix = """As an expert problem solver solve step by step the following mathematical questions.
-
-Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?
+intermediate_fix = "\n\nNow, answer the following question:"
+COT_TRIGGER = "\nA: Let's think step by step."
+hard_prefix = """Q: There are 15 trees in the grove. Grove workers will plant trees in the grove today. After they are done, there will be 21 trees. How many trees did the grove workers plant today?
 A: We start with 15 trees. Later we have 21 trees. The difference must be the number of trees they planted. So, they must have planted 21 - 15 = 6 trees. The answer is 6.
 
 Q: If there are 3 cars in the parking lot and 2 more cars arrive, how many cars are in the parking lot?
@@ -51,7 +52,7 @@ def cot_reasoning(
     for example in tqdm(data, desc="Predicting"):
         question, answer = example["question"], example["answer"]
         answer = answer.split("####")[-1].strip()
-        input_prompt = hard_prefix + f"\n\n\Q: {question} \nA:"
+        input_prompt = hard_prefix + intermediate_fix + f"\n\nQ: {question}{COT_TRIGGER}"
         # # Uncomment as needful
         # input_prompt = f"Question: {question} \nAnswer: {COT_TRIGGER}"
         # if len(prompt_prefix):
@@ -61,82 +62,99 @@ def cot_reasoning(
         #         {"role": "user", "content": input_prompt}
         #     ]
         #     input_prompt = tokenizer.apply_chat_template(chat, tokenize = False, add_generation_prompt=True)
-        input_ids = tokenizer(
-            input_prompt, truncation=True, return_tensors="pt"
-        ).input_ids.to(DEVICE)
+        prompt_tokenized = tokenizer(
+            input_prompt, return_tensors="pt", return_token_type_ids=False
+        ).to(DEVICE)
+        accelerator = Accelerator()
+        accelerator.wait_for_everyone()
         if "arithmetic" in sampling_strategies:
-            arithmetic_sample_outputs = model.generate(
-                input_ids=input_ids,
-                num_return_sequences=num_samples,
-                do_sample=True,
-                max_new_tokens=512,
-                temperature=temperature,
-                num_beams=1,
-                top_k=50 if top_k is None else top_k,
-                top_p=1 if top_p is None else top_p, 
-                use_arithmetic=True,
-            )
+            if num_samples > 5:
+                new_num_samples = num_samples // accelerator.num_processes
+                with accelerator.split_between_processes(range(accelerator.num_processes)) as idx:
+                    with torch.no_grad():
+                        arithmetic_sample_outputs = model.generate(
+                            **prompt_tokenized,
+                            num_return_sequences=new_num_samples,
+                            do_sample=True,
+                            max_new_tokens=256,
+                            temperature=temperature,
+                            num_beams=1,
+                            top_k=50 if top_k is None else top_k,
+                            top_p=1 if top_p is None else top_p, 
+                            use_arithmetic=True,
+                        )
+            else:
+                with torch.no_grad():
+                    arithmetic_sample_outputs = model.generate(
+                    **prompt_tokenized,
+                    num_return_sequences=num_samples,
+                    do_sample=True,
+                    max_new_tokens=256,
+                    temperature=temperature,
+                    num_beams=1,
+                    top_k=50 if top_k is None else top_k,
+                    top_p=1 if top_p is None else top_p, 
+                    use_arithmetic=True,
+                )
         if "ancestral" in sampling_strategies:
-            ancestral_sample_outputs = model.generate(
-                input_ids=input_ids,
-                num_return_sequences=num_samples,
-                do_sample=True,
-                max_new_tokens=512,
-                temperature=temperature,
-                num_beams=1,
-                top_k=top_k,
-                top_p=top_p,
-                use_arithmetic=False,
-            )
+            if num_samples > 5:
+                new_num_samples = num_samples // accelerator.num_processes
+                with accelerator.split_between_processes(range(accelerator.num_processes)) as idx:
+                    with torch.no_grad():
+                        ancestral_sample_outputs = model.generate(
+                            **prompt_tokenized,
+                            num_return_sequences=new_num_samples,
+                            do_sample=True,
+                            max_new_tokens=256,
+                            temperature=temperature,
+                            num_beams=1,
+                            top_k=50 if top_k is None else top_k,
+                            top_p=1 if top_p is None else top_p, 
+                            use_arithmetic=False,
+                        )
+            else:
+                with torch.no_grad():
+                    ancestral_sample_outputs = model.generate(
+                        **prompt_tokenized,
+                        num_return_sequences=num_samples,
+                        do_sample=True,
+                        max_new_tokens=256,
+                        temperature=temperature,
+                        num_beams=1,
+                        top_k=50 if top_k is None else top_k,
+                        top_p=1 if top_p is None else top_p, 
+                        use_arithmetic=False,
+                    )
         if "greedy" in sampling_strategies:
             greedy_decoding_output = model.generate(
-                input_ids=input_ids,
-                max_new_tokens=512
+                **prompt_tokenized,
+                max_new_tokens=256
             )
         outputs[arg_key].append({})
         outputs[arg_key][-1]["gt"] = answer
         outputs[arg_key][-1]["question"] = question
         outputs[arg_key][-1]["input_prompt"] = input_prompt
-        outputs[arg_key][-1]["metrics"] = {}
         if "arithmetic" in sampling_strategies:
             outputs[arg_key][-1]["arithmetic_sampling"] = [
-                sequence.split(COT_TRIGGER)[-1].strip("\n").split("\nQ")[0].strip()
+                sequence.split(COT_TRIGGER)[-1].split("\n\nQ")[0].strip()
                 for sequence in tokenizer.batch_decode(
                     arithmetic_sample_outputs, skip_special_tokens=True
                 )
             ]
-            outputs[arg_key][-1]["metrics"]["arithmetic_ngram_diversity"] = ngram_diversity(
-                outputs[arg_key][-1]["arithmetic_sampling"]
-            )
-            outputs[arg_key][-1]["metrics"]["arithmetic_accuracy"] = numerical_accuracy(
-                outputs[arg_key][-1]["arithmetic_sampling"], answer
-            )
         if "ancestral" in sampling_strategies:
             outputs[arg_key][-1]["ancestral_sampling"] = [
-                equence.split(COT_TRIGGER)[-1].strip("\n").split("\nQ")[0].strip()
+                sequence.split(COT_TRIGGER)[-1].split("\n\nQ")[0].strip()
                 for sequence in tokenizer.batch_decode(
                     ancestral_sample_outputs, skip_special_tokens=True
                 )
             ]
-            outputs[arg_key][-1]["metrics"]["ancestral_ngram_diversity"] = ngram_diversity(
-                outputs[arg_key][-1]["ancestral_sampling"]
-            )
-            outputs[arg_key][-1]["metrics"]["ancestral_accuracy"] = numerical_accuracy(
-                outputs[arg_key][-1]["ancestral_sampling"], answer
-            )
         if "greedy" in sampling_strategies:
             outputs[arg_key][-1]["greedy_decoding"] = [
-                sequence.split(COT_TRIGGER)[-1].strip("\n").split("\nQ")[0].strip()
+                sequence.split(COT_TRIGGER)[-1].split("\n\nQ")[0].strip()
                 for sequence in tokenizer.batch_decode(
                     greedy_decoding_output, skip_special_tokens=True
                 )
             ]
-            outputs[arg_key][-1]["metrics"]["greedy_ngram_diversity"] = ngram_diversity(
-                outputs[arg_key][-1]["greedy_decoding"]
-            )
-            outputs[arg_key][-1]["metrics"]["greedy_accuracy"] = numerical_accuracy(
-                outputs[arg_key][-1]["greedy_decoding"], answer
-            )
         with open(output_filename+"_temp.txt", "a") as output_file:
             json.dump(outputs[arg_key][-1], output_file)    
     with open(output_filename, "w") as output_file:
@@ -205,6 +223,7 @@ if __name__ == "__main__":
             "/".join(MODEL)
         ).to(DEVICE)
     tokenizer = AutoTokenizer.from_pretrained("/".join(MODEL), use_fast=True)
+    print("Tokenizer max input length:", tokenizer.model_max_length)
 
     model.config.pad_token_id = model.config.eos_token_id
     model.generation_config.pad_token_id = model.config.eos_token_id
@@ -224,7 +243,7 @@ if __name__ == "__main__":
         set_seed(seed)
         output_filename = args.output_path if len(args.output_path) != 0 else f"{args.model}__{args.dataset}__{seed}_output.json"
         for num_shot in args.num_shots:
-            prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=num_shot)
+            # prompt_prefix = generate_few_shot_exemplars(DATASET[0], num_examples=num_shot)
             for N in args.num_samples:
                 for T in args.temperature:
                     for k in args.top_k:
@@ -235,7 +254,7 @@ if __name__ == "__main__":
                                 "-it" in MODEL[1],
                                 tokenizer,
                                 dataset,
-                                prompt_prefix,
+                                prompt_prefix = None,
                                 sampling_strategies=args.sampling_strategies,
                                 num_samples=N,
                                 temperature=T,
