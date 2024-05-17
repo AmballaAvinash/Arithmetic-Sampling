@@ -361,7 +361,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5", "m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
@@ -425,9 +425,12 @@ if __name__ == "__main__":
                       axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
                       axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
                       
-                      if c==1:
-                          fig1.legend()
-                          fig2.legend()
+                      axs1[i][j].grid(True)
+                      axs2[i][j].grid(True)
+
+                      if c==8:
+                          axs1[i][j].legend(loc =4, fontsize=6)
+                          axs2[i][j].legend(loc =4, fontsize=8)
                     
             fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {samplesize}")
             fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {samplesize}")
