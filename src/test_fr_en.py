@@ -14,6 +14,7 @@ import pandas as pd
 import json
 import matplotlib.pyplot as plt
 from bleurt import score
+import time
 
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -133,6 +134,10 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    avg_ngram_temp_toppk = []
                    avg_ngram_greedy = []
                    
+                   avg_time_arith_toppk = []
+                   avg_time_temp_toppk = []
+                   avg_time_greedy = []
+                   
                    for idx in range(len(data)):   
                        avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
                        avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
@@ -147,6 +152,13 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                        
                        avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
                        
+                       
+                       avg_time_arith_toppk.append(output_dict[idx]['time_arith_toppk'])
+                       avg_time_temp_toppk.append(output_dict[idx]['time_temp_toppk'])
+                       
+                       avg_time_greedy.append(output_dict[idx]['time_greedy'])
+                       
+                       
                    avg_max_bleu_arith_toppk = np.mean(avg_max_bleu_arith_toppk)
                    avg_max_bleu_temp_toppk = np.mean(avg_max_bleu_temp_toppk)
                    avg_max_bleu_greedy = np.mean(avg_max_bleu_greedy)
@@ -160,6 +172,11 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
 
                    avg_ngram_greedy = np.mean(avg_ngram_greedy)
+                   
+                   
+                   avg_time_arith_toppk = np.mean(avg_time_arith_toppk)
+                   avg_time_temp_toppk = np.mean(avg_time_temp_toppk)
+                   avg_time_greedy = np.mean(avg_time_greedy)
                    
                    
                    results = {}
@@ -180,6 +197,10 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
                    results["N gram diversity Sampling"] = avg_ngram_temp_toppk
                    results["N gram diversity Greedy"] = avg_ngram_greedy
+                   
+                   results["Time Arithmetic"] = avg_time_arith_toppk
+                   results["Time Sampling"] = avg_time_temp_toppk
+                   results["Time Greedy"] = avg_time_greedy
                    
                    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
                        json.dump(results,f)
@@ -208,6 +229,8 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             
             if model_name == "m2m":
                 
+                
+                start_arith_toppk = time.time()
                 outputs_arith_toppk = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = N,
@@ -221,6 +244,11 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
                 
+                end_arith_toppk  = time.time()
+                # print(end_arith_toppk - start_arith_toppk)
+                
+                
+                start_temp_toppk = time.time()
                 outputs_temp_toppk = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = N,
@@ -234,14 +262,21 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
                 
+                end_temp_toppk = time.time()
+                # print(end_temp_toppk - start_temp_toppk)
+                
+                
+                start_greedy = time.time()
                 outputs_greedy = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = 1,
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
+                end_greedy = time.time()
+                
                 
             else:     
-                
+                start_arith_toppk = time.time()
                 outputs_arith_toppk = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = N,
@@ -253,7 +288,9 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     max_new_tokens = 100,
                     use_arithmetic = True
                     )
+                end_arith_toppk = time.time()
                 
+                start_temp_toppk = time.time()
                 outputs_temp_toppk = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = N,
@@ -265,12 +302,15 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     max_new_tokens = 100,
                     use_arithmetic = False
                     )
+                end_temp_toppk = time.time()
                 
+                start_greedy = time.time()
                 outputs_greedy = model.generate(
                     input_ids = input_ids,
                     num_return_sequences = 1
                     )
-            
+                end_greedy = time.time()
+                  
             
             
             decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
@@ -288,6 +328,12 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                 output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
                 output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
 
+
+                output_dict[j]['time_arith_toppk'] = (end_arith_toppk- start_arith_toppk)/batch
+                output_dict[j]['time_temp_toppk'] = (end_temp_toppk - start_temp_toppk)/batch
+                output_dict[j]['time_greedy'] = (end_greedy - start_greedy)/batch
+                
+                
                 num_decodes+=N
         
      
@@ -349,9 +395,9 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 500
+    samplesize = 10
     batch = 10
-    output_dir = "outputs/WMT/V7"
+    output_dir = "outputs/WMT/V9"
     
     random.seed(41)
     # data =  random.sample(load_hf_data_set('validation','wmt14','fr-en')['translation'],samplesize)
@@ -360,7 +406,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5", "m2m", "mt0" ]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
@@ -380,6 +426,8 @@ if __name__ == "__main__":
             # graphs
             fig1, axs1 = plt.subplots(2, 4, figsize=(12, 6))
             fig2, axs2 = plt.subplots(2, 4, figsize=(12, 6))
+            fig3, axs3 = plt.subplots(2, 4, figsize=(12, 6))
+            
             c = 0
             for temp in [0.1, 1]: # temperature
                 for p in [0.8, 1.0]: # top p 
@@ -396,6 +444,10 @@ if __name__ == "__main__":
                       y_sample_div = rows["N gram diversity Sampling"] 
                       y_arit_div = rows["N gram diversity Arithmetic"] 
                       y_greedy_div = rows["N gram diversity Greedy"]
+                      
+                      y_sample_time = rows["Time Sampling"] 
+                      y_arit_time = rows["Time Arithmetic"] 
+                      y_greedy_time = rows["Time Greedy"]
                       
                       
                       i = int(c/4)
@@ -418,25 +470,38 @@ if __name__ == "__main__":
                       axs2[i][j].plot(x,y_arit_div, label = "Arithemetic sampling")
                       axs2[i][j].plot(x,y_greedy_div, label = "Greedy")
                       
+                      
+                      axs3[i][j].set_xlabel("Num of decodes")
+                      axs3[i][j].set_ylabel("Wall clock Time")
+                      axs3[i][j].plot(x,y_sample_time, label="Ancestral sampling ")
+                      axs3[i][j].plot(x,y_arit_time, label = "Arithemetic sampling")
+                      axs3[i][j].plot(x,y_greedy_time, label = "Greedy")
+                      
                       c = c+1
                       
                       axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
                       axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                      axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
                       
                       axs1[i][j].grid(True)
                       axs2[i][j].grid(True)
+                      axs3[i][j].grid(True)
 
                       if c==8:
                           axs1[i][j].legend(loc =4, fontsize=6)
                           axs2[i][j].legend(loc =4, fontsize=8)
+                          axs3[i][j].legend(loc =4, fontsize=8)
                           
                     
             fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {samplesize}")
             fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {samplesize}")
+            fig3.suptitle(f"Time Model {model_name}, shot {shot}, Samples {samplesize}")
             fig1.tight_layout()
             fig2.tight_layout()
+            fig3.tight_layout()
             fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.jpg")
-            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
+            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg") 
+            fig3.savefig(f"{output_dir}/Figure_Time_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
             plt.show()
             
             
