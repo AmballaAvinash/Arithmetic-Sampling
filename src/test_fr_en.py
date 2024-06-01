@@ -122,7 +122,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
-                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k )
+                  for eps in [0.02, 0.05]: # epsilon
+                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
                    avg_max_bleu_arith_toppk = []
                    avg_max_bleu_temp_toppk = []
                    avg_max_bleu_greedy = []
@@ -185,6 +186,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    results["temperature"] = temp
                    results["Top p "] = p
                    results["Top k"] = k
+                   results["Epsilon"] = eps
                    
                    results["Max BLEU Arithmetic"] = avg_max_bleu_arith_toppk
                    results["Max BLEU Sampling"] = avg_max_bleu_temp_toppk
@@ -202,13 +204,13 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    results["Time Sampling"] = avg_time_temp_toppk
                    results["Time Greedy"] = avg_time_greedy
                    
-                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_results.json','w') as f:
+                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps_{eps}_results.json','w') as f:
                        json.dump(results,f)
                    
                    
                    
 
-def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, output_dir, shot, N = 1, temp = 1, p=1, k = 50):
+def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, output_dir, shot, N = 1, temp = 1, p=1, k = 50, eps = 0.02):
     output_dict = {}
     
     for idx, d in enumerate(tqdm(data, desc="Predicting")):
@@ -241,6 +243,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     num_beams = 1,
                     max_new_tokens = 100,
                     use_arithmetic = True, 
+                    epsilon_cutoff = eps,
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
                 
@@ -259,6 +262,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     num_beams = 1,
                     max_new_tokens = 100,
                     use_arithmetic = False, 
+                    epsilon_cutoff = eps,
                     forced_bos_token_id=tokenizer.get_lang_id("en")
                     )
                 
@@ -286,7 +290,8 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     top_k=k,
                     num_beams = 1,
                     max_new_tokens = 100,
-                    use_arithmetic = True
+                    use_arithmetic = True,
+                    epsilon_cutoff = eps
                     )
                 end_arith_toppk = time.time()
                 
@@ -300,7 +305,8 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                     top_k=k,
                     num_beams = 1,
                     max_new_tokens = 100,
-                    use_arithmetic = False
+                    use_arithmetic = False,
+                    epsilon_cutoff = eps
                     )
                 end_temp_toppk = time.time()
                 
@@ -337,7 +343,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                 num_decodes+=N
         
      
-    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}_output.json','w') as f:
+    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json','w') as f:
         json.dump(output_dict,f, default=str)
         
     return output_dict
@@ -424,15 +430,16 @@ if __name__ == "__main__":
     
     
             # graphs
-            fig1, axs1 = plt.subplots(2, 4, figsize=(12, 6))
-            fig2, axs2 = plt.subplots(2, 4, figsize=(12, 6))
-            fig3, axs3 = plt.subplots(2, 4, figsize=(12, 6))
+            fig1, axs1 = plt.subplots(4, 4, figsize=(12, 6))
+            fig2, axs2 = plt.subplots(4, 4, figsize=(12, 6))
+            fig3, axs3 = plt.subplots(4, 4, figsize=(12, 6))
             
             c = 0
             for temp in [0.1, 1]: # temperature
                 for p in [0.8, 1.0]: # top p 
-                    for k in [30, 50]: # top k '
-                      rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k)].sort_values("Num decodes")
+                   for k in [30, 50]: # top k 
+                     for eps in [0.02, 0.05]: # epsilon
+                      rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k) & (df["Epsilon"]==eps)].sort_values("Num decodes")
                       x = rows["Num decodes"]
                       y_max_sample_bleu = rows["Max BLEU Sampling"] 
                       y_max_arit_bleu = rows["Max BLEU Arithmetic"]
@@ -455,47 +462,49 @@ if __name__ == "__main__":
                       
                       axs1[i][j].set_xlabel("Num of decodes")
                       axs1[i][j].set_ylabel("BLEU score")
-                      axs1[i][j].plot(x,y_max_sample_bleu, label="Ancestral sampling (Max) ")
-                      axs1[i][j].plot(x,y_max_arit_bleu, label = "Arithemetic sampling (Max)")
-                      axs1[i][j].plot(x,y_max_greedy_bleu, label = "Greedy (Max)")
+                      axs1[i][j].plot(x,y_max_sample_bleu, marker='o',label="Ancestral sampling (Max) ", color='darkblue')
+                      axs1[i][j].plot(x,y_max_arit_bleu, marker='o',label = "Arithemetic sampling (Max)", color='darkgreen')
                       
-                      axs1[i][j].plot(x,y_mbr_sample_bleu, label="Ancestral sampling (MBR) ")
-                      axs1[i][j].plot(x,y_mbr_arit_bleu, label = "Arithemetic sampling (MBR)")
-                      axs1[i][j].plot(x,y_mbr_greedy_bleu, label = "Greedy (MBR)")
+                      
+                      axs1[i][j].plot(x,y_mbr_sample_bleu,marker='o', label="Ancestral sampling (MBR) ", color='blue')
+                      axs1[i][j].plot(x,y_mbr_arit_bleu,marker='o', label = "Arithemetic sampling (MBR)", color='lightgreen')
+                      # axs1[i][j].plot(x,y_mbr_greedy_bleu, marker='o',label = "Greedy (MBR)")
+                      
+                      axs1[i][j].plot(x,y_max_greedy_bleu,marker='o', label = "Greedy" ,color='red')
                       
                       
                       axs2[i][j].set_xlabel("Num of decodes")
                       axs2[i][j].set_ylabel("N gram diversity")
-                      axs2[i][j].plot(x,y_sample_div, label="Ancestral sampling ")
-                      axs2[i][j].plot(x,y_arit_div, label = "Arithemetic sampling")
-                      axs2[i][j].plot(x,y_greedy_div, label = "Greedy")
+                      axs2[i][j].plot(x,y_sample_div, marker='o',label="Ancestral sampling ", color='blue')
+                      axs2[i][j].plot(x,y_arit_div, marker='o',label = "Arithemetic sampling", color='green')
+                      axs2[i][j].plot(x,y_greedy_div,marker='o', label = "Greedy", color='red')
                       
                       
                       axs3[i][j].set_xlabel("Num of decodes")
                       axs3[i][j].set_ylabel("Wall clock Time")
-                      axs3[i][j].plot(x,y_sample_time, label="Ancestral sampling ")
-                      axs3[i][j].plot(x,y_arit_time, label = "Arithemetic sampling")
-                      axs3[i][j].plot(x,y_greedy_time, label = "Greedy")
+                      axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
+                      axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')
+                      axs3[i][j].plot(x,y_greedy_time, marker='o',label = "Greedy", color='red')
                       
                       c = c+1
                       
-                      axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
-                      axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
-                      axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}")
+                      axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                      axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                      axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
                       axs1[i][j].grid(True)
                       axs2[i][j].grid(True)
                       axs3[i][j].grid(True)
 
-                      if c==8:
+                      if c==16:
                           axs1[i][j].legend(loc =4, fontsize=6)
                           axs2[i][j].legend(loc =4, fontsize=8)
                           axs3[i][j].legend(loc =4, fontsize=8)
                           
                     
-            fig1.suptitle(f"BLEU Model {model_name}, shot {shot}, Samples {samplesize}")
-            fig2.suptitle(f"Div Model {model_name}, shot {shot}, Samples {samplesize}")
-            fig3.suptitle(f"Time Model {model_name}, shot {shot}, Samples {samplesize}")
+            fig1.suptitle(f"BLEU: Model {model_name}, shot {shot}, Samples {samplesize}")
+            fig2.suptitle(f"Div: Model {model_name}, shot {shot}, Samples {samplesize}")
+            fig3.suptitle(f"Time: Model {model_name}, shot {shot}, Samples {samplesize}")
             fig1.tight_layout()
             fig2.tight_layout()
             fig3.tight_layout()
