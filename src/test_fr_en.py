@@ -15,6 +15,7 @@ import json
 import matplotlib.pyplot as plt
 from bleurt import score
 import time
+from typing import List
 
 
 os.environ['KMP_DUPLICATE_LIB_OK']='True'
@@ -23,6 +24,23 @@ def load_hf_data_set(split,dataset_name, dataset_subname):
         data = {}
         data[split] = datasets.load_dataset(dataset_name,dataset_subname, split="validation",trust_remote_code=True, streaming=True)
         return data[split]
+
+
+def get_spaced_subsamples(sequences: List[str], subsample: int = 20) -> List[str]:
+    max_len = len(sequences)
+    if max_len % subsample != 0:
+        raise BaseException("Subsampling not possible with unequal spacing")
+    step_size = max_len // subsample
+    res = []
+    for offset in range(step_size):
+        indices = range(offset, max_len, step_size)
+        subsample_res = []
+        for index in indices:
+            subsample_res.append(sequences[index])
+        res.append(subsample_res)
+    return res
+
+
 
 def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False):
     
@@ -118,7 +136,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [20 , 10, 5, 1]: # num_decodes (tp check ram issues)
+    for N in [40, 20 , 10, 5, 1]: # num_decodes (tp check ram issues)
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
@@ -401,7 +419,7 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
     return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 10
+    samplesize = 1000
     batch = 10
     output_dir = "outputs/WMT/V9"
     
@@ -412,7 +430,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5", "m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
@@ -430,9 +448,9 @@ if __name__ == "__main__":
     
     
             # graphs
-            fig1, axs1 = plt.subplots(4, 4, figsize=(12, 6))
-            fig2, axs2 = plt.subplots(4, 4, figsize=(12, 6))
-            fig3, axs3 = plt.subplots(4, 4, figsize=(12, 6))
+            fig1, axs1 = plt.subplots(4, 4, figsize=(12, 12))
+            fig2, axs2 = plt.subplots(4, 4, figsize=(12, 12))
+            fig3, axs3 = plt.subplots(4, 4, figsize=(12, 12))
             
             c = 0
             for temp in [0.1, 1]: # temperature
@@ -466,7 +484,7 @@ if __name__ == "__main__":
                       axs1[i][j].plot(x,y_max_arit_bleu, marker='o',label = "Arithemetic sampling (Max)", color='darkgreen')
                       
                       
-                      axs1[i][j].plot(x,y_mbr_sample_bleu,marker='o', label="Ancestral sampling (MBR) ", color='blue')
+                      axs1[i][j].plot(x,y_mbr_sample_bleu,marker='o', label="Ancestral sampling (MBR) ", color='cornflowerblue')
                       axs1[i][j].plot(x,y_mbr_arit_bleu,marker='o', label = "Arithemetic sampling (MBR)", color='lightgreen')
                       # axs1[i][j].plot(x,y_mbr_greedy_bleu, marker='o',label = "Greedy (MBR)")
                       
