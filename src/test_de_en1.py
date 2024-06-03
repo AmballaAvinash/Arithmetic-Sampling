@@ -455,7 +455,7 @@ if __name__ == "__main__":
                       i = int(c/4)
                       j = c%4
                       
-                      axs1[i][j].set_xlabel("Num of decodes")
+                      axs1[i][j].set_xlabel("Num of sampled sequences")
                       axs1[i][j].set_ylabel("BLEU score")
                       axs1[i][j].plot(x,y_max_sample_bleu, marker='o',label="Ancestral sampling (Max) ", color='darkblue')
                       axs1[i][j].plot(x,y_max_arit_bleu, marker='o',label = "Arithemetic sampling (Max)", color='darkgreen')
@@ -468,14 +468,14 @@ if __name__ == "__main__":
                       axs1[i][j].plot(x,y_max_greedy_bleu,marker='o', label = "Greedy" ,color='red')
                       
                       
-                      axs2[i][j].set_xlabel("Num of decodes")
+                      axs2[i][j].set_xlabel("Num of sampled sequences")
                       axs2[i][j].set_ylabel("N gram diversity")
                       axs2[i][j].plot(x,y_sample_div, marker='o',label="Ancestral sampling ", color='blue')
                       axs2[i][j].plot(x,y_arit_div, marker='o',label = "Arithemetic sampling", color='green')
                       axs2[i][j].plot(x,y_greedy_div,marker='o', label = "Greedy", color='red')
                       
                       
-                      axs3[i][j].set_xlabel("Num of decodes")
+                      axs3[i][j].set_xlabel("Num of sampled sequences")
                       axs3[i][j].set_ylabel("Wall clock Time")
                       axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
                       axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')

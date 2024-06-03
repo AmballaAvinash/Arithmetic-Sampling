@@ -26,19 +26,8 @@ def load_hf_data_set(split,dataset_name, dataset_subname):
         return data[split]
 
 
-def get_spaced_subsamples(sequences: List[str], subsample: int = 20) -> List[str]:
-    max_len = len(sequences)
-    if max_len % subsample != 0:
-        raise BaseException("Subsampling not possible with unequal spacing")
-    step_size = max_len // subsample
-    res = []
-    for offset in range(step_size):
-        indices = range(offset, max_len, step_size)
-        subsample_res = []
-        for index in indices:
-            subsample_res.append(sequences[index])
-        res.append(subsample_res)
-    return res
+def ele_dist_k_from_idx(lst, start_index, k):
+    return lst[start_index::k]
 
 
 
@@ -136,66 +125,69 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [40, 20 , 10, 5, 1]: # num_decodes (tp check ram issues)
+    for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                   for eps in [0.02, 0.05]: # epsilon
+                  
+                   print(f"N {N}, Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
-                   avg_max_bleu_arith_toppk = []
-                   avg_max_bleu_temp_toppk = []
-                   avg_max_bleu_greedy = []
-                   avg_mbr_bleu_arith_toppk = []
-                   avg_mbr_bleu_temp_toppk = []
-                   avg_mbr_bleu_greedy = []
+                  
+                   # avg_max_bleu_arith_toppk = []
+                   # avg_max_bleu_temp_toppk = []
+                   # avg_max_bleu_greedy = []
+                   # avg_mbr_bleu_arith_toppk = []
+                   # avg_mbr_bleu_temp_toppk = []
+                   # avg_mbr_bleu_greedy = []
                    
-                   avg_ngram_arith_toppk = []
-                   avg_ngram_temp_toppk = []
-                   avg_ngram_greedy = []
+                   # avg_ngram_arith_toppk = []
+                   # avg_ngram_temp_toppk = []
+                   # avg_ngram_greedy = []
                    
-                   avg_time_arith_toppk = []
-                   avg_time_temp_toppk = []
-                   avg_time_greedy = []
+                   # avg_time_arith_toppk = []
+                   # avg_time_temp_toppk = []
+                   # avg_time_greedy = []
                    
-                   for idx in range(len(data)):   
-                       avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
-                       avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
-                       avg_max_bleu_greedy.append(output_dict[idx]['max_bleu_score_greedy'])
+                   # for idx in range(len(data)):   
+                   #     avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
+                   #     avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
+                   #     avg_max_bleu_greedy.append(output_dict[idx]['max_bleu_score_greedy'])
                        
-                       avg_mbr_bleu_arith_toppk.append(output_dict[idx]['mbr_bleu_score_arith_toppk'])
-                       avg_mbr_bleu_temp_toppk.append(output_dict[idx]['mbr_bleu_score_temp_toppk'])
-                       avg_mbr_bleu_greedy.append(output_dict[idx]['mbr_bleu_score_greedy'])
+                   #     avg_mbr_bleu_arith_toppk.append(output_dict[idx]['mbr_bleu_score_arith_toppk'])
+                   #     avg_mbr_bleu_temp_toppk.append(output_dict[idx]['mbr_bleu_score_temp_toppk'])
+                   #     avg_mbr_bleu_greedy.append(output_dict[idx]['mbr_bleu_score_greedy'])
                        
-                       avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
-                       avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
+                   #     avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
+                   #     avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
                        
-                       avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
-                       
-                       
-                       avg_time_arith_toppk.append(output_dict[idx]['time_arith_toppk'])
-                       avg_time_temp_toppk.append(output_dict[idx]['time_temp_toppk'])
-                       
-                       avg_time_greedy.append(output_dict[idx]['time_greedy'])
+                   #     avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
                        
                        
-                   avg_max_bleu_arith_toppk = np.mean(avg_max_bleu_arith_toppk)
-                   avg_max_bleu_temp_toppk = np.mean(avg_max_bleu_temp_toppk)
-                   avg_max_bleu_greedy = np.mean(avg_max_bleu_greedy)
+                   #     avg_time_arith_toppk.append(output_dict[idx]['time_arith_toppk'])
+                   #     avg_time_temp_toppk.append(output_dict[idx]['time_temp_toppk'])
+                       
+                   #     avg_time_greedy.append(output_dict[idx]['time_greedy'])
+                       
+                       
+                   avg_max_bleu_arith_toppk = np.mean([item["max_bleu_score_arith_toppk"] for item in output_dict.values() ])
+                   avg_max_bleu_temp_toppk = np.mean([item["max_bleu_score_temp_toppk"] for item in output_dict.values() ])
+                   avg_max_bleu_greedy = np.mean([item["max_bleu_score_greedy"] for item in output_dict.values() ])
                    
-                   avg_mbr_bleu_arith_toppk = np.mean(avg_mbr_bleu_arith_toppk)
-                   avg_mbr_bleu_temp_toppk = np.mean(avg_mbr_bleu_temp_toppk)
-                   avg_mbr_bleu_greedy = np.mean(avg_mbr_bleu_greedy)
+                   avg_mbr_bleu_arith_toppk = np.mean([item["mbr_bleu_score_arith_toppk"] for item in output_dict.values() ])
+                   avg_mbr_bleu_temp_toppk = np.mean([item["mbr_bleu_score_temp_toppk"] for item in output_dict.values() ])
+                   avg_mbr_bleu_greedy = np.mean([item["mbr_bleu_score_greedy"] for item in output_dict.values() ])
                    
                    
-                   avg_ngram_arith_toppk = np.mean(avg_ngram_arith_toppk)
-                   avg_ngram_temp_toppk = np.mean(avg_ngram_temp_toppk)
+                   avg_ngram_arith_toppk = np.mean([item["n_gram_div_arith_toppk"] for item in output_dict.values() ])
+                   avg_ngram_temp_toppk = np.mean([item["n_gram_div_temp_toppk"] for item in output_dict.values() ])
 
-                   avg_ngram_greedy = np.mean(avg_ngram_greedy)
+                   avg_ngram_greedy = np.mean([item["n_gram_div_greedy"] for item in output_dict.values() ])
                    
                    
-                   avg_time_arith_toppk = np.mean(avg_time_arith_toppk)
-                   avg_time_temp_toppk = np.mean(avg_time_temp_toppk)
-                   avg_time_greedy = np.mean(avg_time_greedy)
+                   avg_time_arith_toppk = np.mean([item["time_arith_toppk"] for item in output_dict.values() ])
+                   avg_time_temp_toppk = np.mean([item["time_temp_toppk"] for item in output_dict.values() ])
+                   avg_time_greedy = np.mean([item["time_greedy"] for item in output_dict.values() ])
                    
                    
                    results = {}
@@ -229,142 +221,176 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                    
 
 def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix,  model_name, model, tokenizer, data, batch, output_dir, shot, N = 1, temp = 1, p=1, k = 50, eps = 0.02):
-    output_dict = {}
     
-    for idx, d in enumerate(tqdm(data, desc="Predicting")):
-        if idx%batch==0:
-            input_batch =[]
+    num_return_sequences = 40
+    
+    if N==num_return_sequences:
+            output_dict = {}
             
-        prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
-        prompt_arr.append(d['fr'])
-        prompt_arr.append(default_fwd_target_prefix)
-        input_prompt = (' ').join(prompt_arr)  # join the sentences
-        input_batch.append(input_prompt)
+            for idx, d in enumerate(tqdm(data, desc="Predicting")):
+                if idx%batch==0:
+                    input_batch =[]
+                    
+                prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
+                prompt_arr.append(d['fr'])
+                prompt_arr.append(default_fwd_target_prefix)
+                input_prompt = (' ').join(prompt_arr)  # join the sentences
+                input_batch.append(input_prompt)
+                
+                output_dict[idx] = {}
+                output_dict[idx]['gt'] = d['en']
+                
+                if (idx+1)%batch==0:
+                    input_ids = tokenizer(input_batch, truncation=True, padding = True, return_tensors="pt").input_ids.to('cuda')
+                    
+                    if model_name == "m2m":
+                        
+                        
+                        start_arith_toppk = time.time()
+                        outputs_arith_toppk = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = N,
+                            do_sample = True,
+                            temperature = temp,
+                            top_p=p,
+                            top_k=k,
+                            num_beams = 1,
+                            max_new_tokens = 100,
+                            use_arithmetic = True, 
+                            epsilon_cutoff = eps,
+                            forced_bos_token_id=tokenizer.get_lang_id("en")
+                            )
+                        
+                        end_arith_toppk  = time.time()
+                        # print(end_arith_toppk - start_arith_toppk)
+                        
+                        
+                        start_temp_toppk = time.time()
+                        outputs_temp_toppk = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = N,
+                            do_sample = True,
+                            temperature = temp,
+                            top_p=p,
+                            top_k=k,
+                            num_beams = 1,
+                            max_new_tokens = 100,
+                            use_arithmetic = False, 
+                            epsilon_cutoff = eps,
+                            forced_bos_token_id=tokenizer.get_lang_id("en")
+                            )
+                        
+                        end_temp_toppk = time.time()
+                        # print(end_temp_toppk - start_temp_toppk)
+                        
+                        
+                        start_greedy = time.time()
+                        outputs_greedy = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = 1,
+                            forced_bos_token_id=tokenizer.get_lang_id("en")
+                            )
+                        end_greedy = time.time()
+                        
+                        
+                    else:     
+                        start_arith_toppk = time.time()
+                        outputs_arith_toppk = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = N,
+                            do_sample = True,
+                            temperature = temp,
+                            top_p=p,
+                            top_k=k,
+                            num_beams = 1,
+                            max_new_tokens = 100,
+                            use_arithmetic = True,
+                            epsilon_cutoff = eps
+                            )
+                        end_arith_toppk = time.time()
+                        
+                        start_temp_toppk = time.time()
+                        outputs_temp_toppk = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = N,
+                            do_sample = True,
+                            temperature = temp,
+                            top_p=p,
+                            top_k=k,
+                            num_beams = 1,
+                            max_new_tokens = 100,
+                            use_arithmetic = False,
+                            epsilon_cutoff = eps
+                            )
+                        end_temp_toppk = time.time()
+                        
+                        start_greedy = time.time()
+                        outputs_greedy = model.generate(
+                            input_ids = input_ids,
+                            num_return_sequences = 1
+                            )
+                        end_greedy = time.time()
+                          
+                    
+                    
+                    decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
+                    decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
+                    decode_greedy = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_greedy, skip_special_tokens=True)]   
         
-        output_dict[idx] = {}
-        output_dict[idx]['gt'] = d['en']
         
-        if (idx+1)%batch==0:
-            input_ids = tokenizer(input_batch, truncation=True, padding = True, return_tensors="pt").input_ids.to('cuda')
+                    num_decodes = 0
+                    for j in range(idx-batch+1,idx+1):
+                        output_dict[j]['arith_toppk'] = decode_arith_toppk[num_decodes:num_decodes+N]
+                        output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
+                        output_dict[j]['greedy'] = [decode_greedy[j-(idx-batch+1)]]
+                       
+                        output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
+                        output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
+                        output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
+        
+        
+                        output_dict[j]['time_arith_toppk'] = (end_arith_toppk- start_arith_toppk)/batch
+                        output_dict[j]['time_temp_toppk'] = (end_temp_toppk - start_temp_toppk)/batch
+                        output_dict[j]['time_greedy'] = (end_greedy - start_greedy)/batch
+                        
+                        
+                        num_decodes+=N
+                
+             
+            with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json','w') as f:
+                json.dump(output_dict,f, default=str)
+                
+            return output_dict
+        
+        
+    else:
+        
+        
+        with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{num_return_sequences}__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
+            output_dict = json.load(f)
             
-            if model_name == "m2m":
-                
-                
-                start_arith_toppk = time.time()
-                outputs_arith_toppk = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = N,
-                    do_sample = True,
-                    temperature = temp,
-                    top_p=p,
-                    top_k=k,
-                    num_beams = 1,
-                    max_new_tokens = 100,
-                    use_arithmetic = True, 
-                    epsilon_cutoff = eps,
-                    forced_bos_token_id=tokenizer.get_lang_id("en")
-                    )
-                
-                end_arith_toppk  = time.time()
-                # print(end_arith_toppk - start_arith_toppk)
-                
-                
-                start_temp_toppk = time.time()
-                outputs_temp_toppk = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = N,
-                    do_sample = True,
-                    temperature = temp,
-                    top_p=p,
-                    top_k=k,
-                    num_beams = 1,
-                    max_new_tokens = 100,
-                    use_arithmetic = False, 
-                    epsilon_cutoff = eps,
-                    forced_bos_token_id=tokenizer.get_lang_id("en")
-                    )
-                
-                end_temp_toppk = time.time()
-                # print(end_temp_toppk - start_temp_toppk)
-                
-                
-                start_greedy = time.time()
-                outputs_greedy = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = 1,
-                    forced_bos_token_id=tokenizer.get_lang_id("en")
-                    )
-                end_greedy = time.time()
-                
-                
-            else:     
-                start_arith_toppk = time.time()
-                outputs_arith_toppk = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = N,
-                    do_sample = True,
-                    temperature = temp,
-                    top_p=p,
-                    top_k=k,
-                    num_beams = 1,
-                    max_new_tokens = 100,
-                    use_arithmetic = True,
-                    epsilon_cutoff = eps
-                    )
-                end_arith_toppk = time.time()
-                
-                start_temp_toppk = time.time()
-                outputs_temp_toppk = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = N,
-                    do_sample = True,
-                    temperature = temp,
-                    top_p=p,
-                    top_k=k,
-                    num_beams = 1,
-                    max_new_tokens = 100,
-                    use_arithmetic = False,
-                    epsilon_cutoff = eps
-                    )
-                end_temp_toppk = time.time()
-                
-                start_greedy = time.time()
-                outputs_greedy = model.generate(
-                    input_ids = input_ids,
-                    num_return_sequences = 1
-                    )
-                end_greedy = time.time()
-                  
+        
+        for idx, d in enumerate(tqdm(data, desc="Predicting")):
+            offset = random.choice(range(num_return_sequences // N))
+            output_dict[idx]['arith_toppk'] = ele_dist_k_from_idx(output_dict[idx]['arith_toppk'] , offset, num_return_sequences // N) 
+    
             
-            
-            decode_arith_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_arith_toppk, skip_special_tokens=True)]  
-            decode_temp_toppk = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_temp_toppk, skip_special_tokens=True)]   
-            decode_greedy = [i.split('English sentence: ')[-1].strip('\n').replace("<pad>", "") for i in tokenizer.batch_decode(outputs_greedy, skip_special_tokens=True)]   
+            output_dict[idx]['temp_toppk'] = random.sample(output_dict[idx]['temp_toppk'], N) 
+            output_dict[idx]['greedy'] = output_dict[idx]['greedy']
+           
+            output_dict[idx]['max_bleu_score_arith_toppk'], output_dict[idx]['mbr_bleu_score_arith_toppk'], output_dict[idx]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['arith_toppk'])
+            output_dict[idx]['max_bleu_score_temp_toppk'], output_dict[idx]['mbr_bleu_score_temp_toppk'], output_dict[idx]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['temp_toppk'])
+            output_dict[idx]['max_bleu_score_greedy'], output_dict[idx]['mbr_bleu_score_greedy'], output_dict[idx]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['greedy'])
 
 
-            num_decodes = 0
-            for j in range(idx-batch+1,idx+1):
-                output_dict[j]['arith_toppk'] = decode_arith_toppk[num_decodes:num_decodes+N]
-                output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
-                output_dict[j]['greedy'] = [decode_greedy[j-(idx-batch+1)]]
-               
-                output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
-                output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
-                output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
-
-
-                output_dict[j]['time_arith_toppk'] = (end_arith_toppk- start_arith_toppk)/batch
-                output_dict[j]['time_temp_toppk'] = (end_temp_toppk - start_temp_toppk)/batch
-                output_dict[j]['time_greedy'] = (end_greedy - start_greedy)/batch
-                
-                
-                num_decodes+=N
+            output_dict[idx]['time_arith_toppk'] = 0
+            output_dict[idx]['time_temp_toppk'] = 0
+            output_dict[idx]['time_greedy'] = 0
+            
+            
+        return output_dict
+            
         
-     
-    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json','w') as f:
-        json.dump(output_dict,f, default=str)
-        
-    return output_dict
 
 
 class ScoreBleurt():
@@ -478,7 +504,7 @@ if __name__ == "__main__":
                       i = int(c/4)
                       j = c%4
                       
-                      axs1[i][j].set_xlabel("Num of decodes")
+                      axs1[i][j].set_xlabel("Num of sampled sequences")
                       axs1[i][j].set_ylabel("BLEU score")
                       axs1[i][j].plot(x,y_max_sample_bleu, marker='o',label="Ancestral sampling (Max) ", color='darkblue')
                       axs1[i][j].plot(x,y_max_arit_bleu, marker='o',label = "Arithemetic sampling (Max)", color='darkgreen')
@@ -491,14 +517,14 @@ if __name__ == "__main__":
                       axs1[i][j].plot(x,y_max_greedy_bleu,marker='o', label = "Greedy" ,color='red')
                       
                       
-                      axs2[i][j].set_xlabel("Num of decodes")
+                      axs2[i][j].set_xlabel("Num of sampled sequences")
                       axs2[i][j].set_ylabel("N gram diversity")
                       axs2[i][j].plot(x,y_sample_div, marker='o',label="Ancestral sampling ", color='blue')
                       axs2[i][j].plot(x,y_arit_div, marker='o',label = "Arithemetic sampling", color='green')
                       axs2[i][j].plot(x,y_greedy_div,marker='o', label = "Greedy", color='red')
                       
                       
-                      axs3[i][j].set_xlabel("Num of decodes")
+                      axs3[i][j].set_xlabel("Num of sampled sequences")
                       axs3[i][j].set_ylabel("Wall clock Time")
                       axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
                       axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')
