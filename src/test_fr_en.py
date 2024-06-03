@@ -371,6 +371,7 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             
         
         for idx, d in enumerate(tqdm(data, desc="Predicting")):
+            idx = str(idx)
             offset = random.choice(range(num_return_sequences // N))
             output_dict[idx]['arith_toppk'] = ele_dist_k_from_idx(output_dict[idx]['arith_toppk'] , offset, num_return_sequences // N) 
     
