@@ -1,0 +1,82 @@
+Loading miniconda version 22.11.1-1
+2024-06-03 20:20:58.038950: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-06-03 20:20:59.499068: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-06-03 20:21:03.242477: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+2024-06-03 20:21:08.411036: W tensorflow/core/common_runtime/gpu/gpu_device.cc:2251] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+Using the latest cached version of the module from /home/aamballa_umass_edu/.cache/huggingface/modules/datasets_modules/datasets/wmt14/d5cfc45c32d826941d8678bf74c810c2aaa057cdc5544f1e23a5dab8c0407a9f (last modified on Fri Mar 22 01:48:42 2024) since it couldn't be found locally at wmt14, or remotely on the Hugging Face Hub.
+WARNING:datasets.load:Using the latest cached version of the module from /home/aamballa_umass_edu/.cache/huggingface/modules/datasets_modules/datasets/wmt14/d5cfc45c32d826941d8678bf74c810c2aaa057cdc5544f1e23a5dab8c0407a9f (last modified on Fri Mar 22 01:48:42 2024) since it couldn't be found locally at wmt14, or remotely on the Hugging Face Hub.
+Traceback (most recent call last):
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/utils/_errors.py", line 304, in hf_raise_for_status
+    response.raise_for_status()
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/api/datasets/wmt/wmt19/revision/main-zip
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_file_system.py", line 126, in _repo_and_revision_exist
+    self._api.repo_info(repo_id, revision=revision, repo_type=repo_type)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 119, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_api.py", line 2423, in repo_info
+    return method(
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/utils/_validators.py", line 119, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_api.py", line 2296, in dataset_info
+    hf_raise_for_status(r)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/utils/_errors.py", line 352, in hf_raise_for_status
+    raise RepositoryNotFoundError(message, response) from e
+huggingface_hub.utils._errors.RepositoryNotFoundError: 401 Client Error. (Request ID: Root=1-665e25b6-01f825a16a62ec8327b4cc8d;1046be7b-991e-4914-a5b6-e352631a3a72)
+
+Repository Not Found for url: https://huggingface.co/api/datasets/wmt/wmt19/revision/main-zip.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated.
+User Access Token "Gated Models" is expired
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/Arithmetic-Sampling/src/test_fr_en.py", line 455, in <module>
+    data = list(load_hf_data_set('validation','wmt14','fr-en').take(samplesize))
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/datasets/iterable_dataset.py", line 1388, in __iter__
+    for key, example in ex_iterable:
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/datasets/iterable_dataset.py", line 1044, in __iter__
+    yield from islice(self.ex_iterable, self.n)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/datasets/iterable_dataset.py", line 234, in __iter__
+    yield from self.generate_examples_fn(**self.kwargs)
+  File "/home/aamballa_umass_edu/.cache/huggingface/modules/datasets_modules/datasets/wmt14/d5cfc45c32d826941d8678bf74c810c2aaa057cdc5544f1e23a5dab8c0407a9f/wmt_utils.py", line 844, in _generate_examples
+    for sub_key, ex in sub_generator(*sub_generator_args):
+  File "/home/aamballa_umass_edu/.cache/huggingface/modules/datasets_modules/datasets/wmt14/d5cfc45c32d826941d8678bf74c810c2aaa057cdc5544f1e23a5dab8c0407a9f/wmt_utils.py", line 907, in _parse_parallel_sentences
+    f1_files = sorted(glob.glob(f1))
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/datasets/streaming.py", line 75, in wrapper
+    return function(*args, download_config=download_config, **kwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/datasets/download/streaming_download_manager.py", line 576, in xglob
+    fs, *_ = fsspec.get_fs_token_paths(urlpath, storage_options=storage_options)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/core.py", line 635, in get_fs_token_paths
+    fs = filesystem(protocol, **inkwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/registry.py", line 291, in filesystem
+    return cls(**storage_options)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/spec.py", line 80, in __call__
+    obj = super().__call__(*args, **kwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/implementations/zip.py", line 60, in __init__
+    self.fo = fo.__enter__()  # the whole instance is a context
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/core.py", line 103, in __enter__
+    f = self.fs.open(self.path, mode=mode)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/fsspec/spec.py", line 1293, in open
+    f = self._open(
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_file_system.py", line 237, in _open
+    return HfFileSystemFile(self, path, mode=mode, revision=revision, block_size=block_size, **kwargs)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_file_system.py", line 676, in __init__
+    self.resolved_path = fs.resolve_path(path, revision=revision)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_file_system.py", line 180, in resolve_path
+    _raise_file_not_found(path, err)
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/huggingface_hub/hf_file_system.py", line 863, in _raise_file_not_found
+    raise FileNotFoundError(msg) from err
+FileNotFoundError: wmt/wmt19@main-zip/translation-task/dev.zip (repository not found)
+Exception ignored in: <function AtomicFunction.__del__ at 0x7f834ebe2a60>
+Traceback (most recent call last):
+  File "/home/aamballa_umass_edu/.conda/envs/696_ds/lib/python3.9/site-packages/tensorflow/python/eager/polymorphic_function/atomic_function.py", line 291, in __del__
+TypeError: 'NoneType' object is not subscriptable
