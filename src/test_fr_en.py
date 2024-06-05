@@ -200,6 +200,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                                
                            #     avg_time_greedy.append(output_dict[idx]['time_greedy'])
                                
+                           print(list(output_dict.values()))
                            avg_max_bleu_arith_toppk.append(np.mean([item["max_bleu_score_arith_toppk"] for item in list(output_dict.values()) ]) )
                            avg_max_bleu_temp_toppk.append(np.mean([item["max_bleu_score_temp_toppk"] for item in list(output_dict.values()) ]))
                            avg_max_bleu_greedy.append(np.mean([item["max_bleu_score_greedy"] for item in list(output_dict.values()) ]))
