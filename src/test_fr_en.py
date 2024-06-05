@@ -496,7 +496,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5", "m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
@@ -575,37 +575,37 @@ if __name__ == "__main__":
                       axs2[i][j].errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='o', label = "Greedy", color='red', linestyle = ":")
                       
                       
-                      axs3[i][j].set_xlabel("Num of sampled sequences")
-                      axs3[i][j].set_ylabel("Wall clock Time")
-                      axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
-                      axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')
-                      axs3[i][j].plot(x,y_greedy_time, marker='o',label = "Greedy", color='red')
+                      # axs3[i][j].set_xlabel("Num of sampled sequences")
+                      # axs3[i][j].set_ylabel("Wall clock Time")
+                      # axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
+                      # axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')
+                      # axs3[i][j].plot(x,y_greedy_time, marker='o',label = "Greedy", color='red')
                       
                       c = c+1
                       
                       axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                      axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                      # axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
                       axs1[i][j].grid(True)
                       axs2[i][j].grid(True)
-                      axs3[i][j].grid(True)
+                      # axs3[i][j].grid(True)
 
                       if c==16:
                           axs1[i][j].legend(loc =4, fontsize=6)
                           axs2[i][j].legend(loc =4, fontsize=8)
-                          axs3[i][j].legend(loc =4, fontsize=8)
+                          # axs3[i][j].legend(loc =4, fontsize=8)
                           
                     
             fig1.suptitle(f"BLEU: Model {model_name}, shot {shot}, Samples {samplesize}")
             fig2.suptitle(f"Div: Model {model_name}, shot {shot}, Samples {samplesize}")
-            fig3.suptitle(f"Time: Model {model_name}, shot {shot}, Samples {samplesize}")
+            # fig3.suptitle(f"Time: Model {model_name}, shot {shot}, Samples {samplesize}")
             fig1.tight_layout()
             fig2.tight_layout()
             fig3.tight_layout()
             fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.jpg")
             fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg") 
-            fig3.savefig(f"{output_dir}/Figure_Time_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
+            # fig3.savefig(f"{output_dir}/Figure_Time_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
             plt.show()
             
             
