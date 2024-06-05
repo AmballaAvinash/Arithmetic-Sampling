@@ -162,7 +162,6 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
                                       output_dict = json.load(f)
                                      
-                                      print(output_dict)
                            else:
                                output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
                           
@@ -201,7 +200,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                                
                            #     avg_time_greedy.append(output_dict[idx]['time_greedy'])
                                
-                               
+                           print(output_dict.values())
                            avg_max_bleu_arith_toppk.append(np.mean([item["max_bleu_score_arith_toppk"] for item in output_dict.values() ]) )
                            avg_max_bleu_temp_toppk.append(np.mean([item["max_bleu_score_temp_toppk"] for item in output_dict.values() ]))
                            avg_max_bleu_greedy.append(np.mean([item["max_bleu_score_greedy"] for item in output_dict.values() ]))
