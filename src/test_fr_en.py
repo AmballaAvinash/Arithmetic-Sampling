@@ -161,7 +161,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                            if N==40:
                                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
                                       output_dict = json.load(f)
-                                      
+                                     
+                                      print(output_dict)
                            else:
                                output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
                           
