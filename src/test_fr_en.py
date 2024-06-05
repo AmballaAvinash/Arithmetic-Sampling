@@ -126,97 +126,137 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
     results = {}
     for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
+        
+        if N==40:
+            trails = 1
+        else:
+            trails = 5
+            
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
                 for k in [30, 50]: # top k 
                   for eps in [0.02, 0.05]: # epsilon
+          
+                    avg_max_bleu_arith_toppk = []
+                    avg_max_bleu_temp_toppk = []
+                    avg_max_bleu_greedy = []
+                    avg_mbr_bleu_arith_toppk = []
+                    avg_mbr_bleu_temp_toppk = []
+                    avg_mbr_bleu_greedy = []
+                    
+                    avg_ngram_arith_toppk = []
+                    avg_ngram_temp_toppk = []
+                    avg_ngram_greedy = []
+                    
+                    avg_time_arith_toppk = []
+                    avg_time_temp_toppk = []
+                    avg_time_greedy = []
+                    
+                    
+                    for i in range(trails):
                   
-                   print(f"N {N}, Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                   output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
-                  
-                   # avg_max_bleu_arith_toppk = []
-                   # avg_max_bleu_temp_toppk = []
-                   # avg_max_bleu_greedy = []
-                   # avg_mbr_bleu_arith_toppk = []
-                   # avg_mbr_bleu_temp_toppk = []
-                   # avg_mbr_bleu_greedy = []
+                         
+                               
+                           print(f"N {N}, Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                           if N==40:
+                                  with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
+                                      output_dict = json.load(f)
+                                      
+                           else:
+                               output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
+                          
+                           # avg_max_bleu_arith_toppk = []
+                           # avg_max_bleu_temp_toppk = []
+                           # avg_max_bleu_greedy = []
+                           # avg_mbr_bleu_arith_toppk = []
+                           # avg_mbr_bleu_temp_toppk = []
+                           # avg_mbr_bleu_greedy = []
+                           
+                           # avg_ngram_arith_toppk = []
+                           # avg_ngram_temp_toppk = []
+                           # avg_ngram_greedy = []
+                           
+                           # avg_time_arith_toppk = []
+                           # avg_time_temp_toppk = []
+                           # avg_time_greedy = []
+                           
+                           # for idx in range(len(data)):   
+                           #     avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
+                           #     avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
+                           #     avg_max_bleu_greedy.append(output_dict[idx]['max_bleu_score_greedy'])
+                               
+                           #     avg_mbr_bleu_arith_toppk.append(output_dict[idx]['mbr_bleu_score_arith_toppk'])
+                           #     avg_mbr_bleu_temp_toppk.append(output_dict[idx]['mbr_bleu_score_temp_toppk'])
+                           #     avg_mbr_bleu_greedy.append(output_dict[idx]['mbr_bleu_score_greedy'])
+                               
+                           #     avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
+                           #     avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
+                               
+                           #     avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
+                               
+                               
+                           #     avg_time_arith_toppk.append(output_dict[idx]['time_arith_toppk'])
+                           #     avg_time_temp_toppk.append(output_dict[idx]['time_temp_toppk'])
+                               
+                           #     avg_time_greedy.append(output_dict[idx]['time_greedy'])
+                               
+                               
+                           avg_max_bleu_arith_toppk.append(np.mean([item["max_bleu_score_arith_toppk"] for item in output_dict.values() ]) )
+                           avg_max_bleu_temp_toppk.append(np.mean([item["max_bleu_score_temp_toppk"] for item in output_dict.values() ]))
+                           avg_max_bleu_greedy.append(np.mean([item["max_bleu_score_greedy"] for item in output_dict.values() ]))
+                           
+                           avg_mbr_bleu_arith_toppk.append(np.mean([item["mbr_bleu_score_arith_toppk"] for item in output_dict.values() ]) )
+                           avg_mbr_bleu_temp_toppk.append(np.mean([item["mbr_bleu_score_temp_toppk"] for item in output_dict.values() ]) )
+                           avg_mbr_bleu_greedy.append(np.mean([item["mbr_bleu_score_greedy"] for item in output_dict.values() ]) )
+                           
+                           
+                           avg_ngram_arith_toppk.append(np.mean([item["n_gram_div_arith_toppk"] for item in output_dict.values() ]) )
+                           avg_ngram_temp_toppk.append(np.mean([item["n_gram_div_temp_toppk"] for item in output_dict.values() ]) )
+        
+                           avg_ngram_greedy.append(np.mean([item["n_gram_div_greedy"] for item in output_dict.values() ]) )
+                           
+                           
+                           avg_time_arith_toppk.append(np.mean([item["time_arith_toppk"] for item in output_dict.values() ]) )
+                           avg_time_temp_toppk.append(np.mean([item["time_temp_toppk"] for item in output_dict.values() ]))
+                           avg_time_greedy.append(np.mean([item["time_greedy"] for item in output_dict.values() ]))
+                           
                    
-                   # avg_ngram_arith_toppk = []
-                   # avg_ngram_temp_toppk = []
-                   # avg_ngram_greedy = []
-                   
-                   # avg_time_arith_toppk = []
-                   # avg_time_temp_toppk = []
-                   # avg_time_greedy = []
-                   
-                   # for idx in range(len(data)):   
-                   #     avg_max_bleu_arith_toppk.append(output_dict[idx]['max_bleu_score_arith_toppk'])
-                   #     avg_max_bleu_temp_toppk.append(output_dict[idx]['max_bleu_score_temp_toppk'])
-                   #     avg_max_bleu_greedy.append(output_dict[idx]['max_bleu_score_greedy'])
-                       
-                   #     avg_mbr_bleu_arith_toppk.append(output_dict[idx]['mbr_bleu_score_arith_toppk'])
-                   #     avg_mbr_bleu_temp_toppk.append(output_dict[idx]['mbr_bleu_score_temp_toppk'])
-                   #     avg_mbr_bleu_greedy.append(output_dict[idx]['mbr_bleu_score_greedy'])
-                       
-                   #     avg_ngram_arith_toppk.append(output_dict[idx]['n_gram_div_arith_toppk'])
-                   #     avg_ngram_temp_toppk.append(output_dict[idx]['n_gram_div_temp_toppk'])
-                       
-                   #     avg_ngram_greedy.append(output_dict[idx]['n_gram_div_greedy'])
-                       
-                       
-                   #     avg_time_arith_toppk.append(output_dict[idx]['time_arith_toppk'])
-                   #     avg_time_temp_toppk.append(output_dict[idx]['time_temp_toppk'])
-                       
-                   #     avg_time_greedy.append(output_dict[idx]['time_greedy'])
-                       
-                       
-                   avg_max_bleu_arith_toppk = np.mean([item["max_bleu_score_arith_toppk"] for item in output_dict.values() ])
-                   avg_max_bleu_temp_toppk = np.mean([item["max_bleu_score_temp_toppk"] for item in output_dict.values() ])
-                   avg_max_bleu_greedy = np.mean([item["max_bleu_score_greedy"] for item in output_dict.values() ])
-                   
-                   avg_mbr_bleu_arith_toppk = np.mean([item["mbr_bleu_score_arith_toppk"] for item in output_dict.values() ])
-                   avg_mbr_bleu_temp_toppk = np.mean([item["mbr_bleu_score_temp_toppk"] for item in output_dict.values() ])
-                   avg_mbr_bleu_greedy = np.mean([item["mbr_bleu_score_greedy"] for item in output_dict.values() ])
-                   
-                   
-                   avg_ngram_arith_toppk = np.mean([item["n_gram_div_arith_toppk"] for item in output_dict.values() ])
-                   avg_ngram_temp_toppk = np.mean([item["n_gram_div_temp_toppk"] for item in output_dict.values() ])
-
-                   avg_ngram_greedy = np.mean([item["n_gram_div_greedy"] for item in output_dict.values() ])
-                   
-                   
-                   avg_time_arith_toppk = np.mean([item["time_arith_toppk"] for item in output_dict.values() ])
-                   avg_time_temp_toppk = np.mean([item["time_temp_toppk"] for item in output_dict.values() ])
-                   avg_time_greedy = np.mean([item["time_greedy"] for item in output_dict.values() ])
-                   
-                   
-                   results = {}
-                   results["Num Samples"] = len(data)
-                   results["Num decodes"] = N
-                   results["temperature"] = temp
-                   results["Top p "] = p
-                   results["Top k"] = k
-                   results["Epsilon"] = eps
-                   
-                   results["Max BLEU Arithmetic"] = avg_max_bleu_arith_toppk
-                   results["Max BLEU Sampling"] = avg_max_bleu_temp_toppk
-                   results["Max BLEU Greedy"] = avg_max_bleu_greedy
-                   
-                   results["MBR BLEU Arithmetic"] = avg_mbr_bleu_arith_toppk
-                   results["MBR BLEU Sampling"] = avg_mbr_bleu_temp_toppk
-                   results["MBR BLEU Greedy"] = avg_mbr_bleu_greedy
-                   
-                   results["N gram diversity Arithmetic"] = avg_ngram_arith_toppk
-                   results["N gram diversity Sampling"] = avg_ngram_temp_toppk
-                   results["N gram diversity Greedy"] = avg_ngram_greedy
-                   
-                   results["Time Arithmetic"] = avg_time_arith_toppk
-                   results["Time Sampling"] = avg_time_temp_toppk
-                   results["Time Greedy"] = avg_time_greedy
-                   
-                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps_{eps}_results.json','w') as f:
-                       json.dump(results,f)
-                   
+                    results = {}
+                    results["Num Samples"] = len(data)
+                    results["Num decodes"] = N
+                    results["temperature"] = temp
+                    results["Top p "] = p
+                    results["Top k"] = k
+                    results["Epsilon"] = eps
+                    
+                    results["Max BLEU Arithmetic Mean"] = np.mean(avg_max_bleu_arith_toppk)
+                    results["Max BLEU Arithmetic Std"] = np.std(avg_max_bleu_arith_toppk)
+                    results["Max BLEU Sampling Mean"] = np.mean(avg_max_bleu_temp_toppk)
+                    results["Max BLEU Sampling Std"] = np.std(avg_max_bleu_temp_toppk)
+                    results["Max BLEU Greedy Mean"] = np.mean(avg_max_bleu_greedy)
+                    results["Max BLEU Greedy Std"] = np.std(avg_max_bleu_greedy)
+                    
+                    results["MBR BLEU Arithmetic Mean"] = np.mean(avg_mbr_bleu_arith_toppk)
+                    results["MBR BLEU Arithmetic Std"] = np.std(avg_mbr_bleu_arith_toppk)
+                    results["MBR BLEU Sampling Mean"] = np.mean(avg_mbr_bleu_temp_toppk)
+                    results["MBR BLEU Sampling Std"] = np.std(avg_mbr_bleu_temp_toppk)
+                    results["MBR BLEU Greedy Mean"] = np.mean(avg_mbr_bleu_greedy)
+                    results["MBR BLEU Greedy Std"] = np.std(avg_mbr_bleu_greedy)
+                    
+                    results["N gram diversity Arithmetic Mean"] = np.mean(avg_ngram_arith_toppk)
+                    results["N gram diversity Arithmetic Std"] = np.std(avg_ngram_arith_toppk)
+                    results["N gram diversity Sampling Mean"] = np.mean(avg_ngram_temp_toppk)
+                    results["N gram diversity Sampling Std"] = np.std(avg_ngram_temp_toppk)
+                    results["N gram diversity Greedy Mean"] = np.mean(avg_ngram_greedy)
+                    results["N gram diversity Greedy Std"] = np.std(avg_ngram_greedy)
+                    
+                    results["Time Arithmetic"] = avg_time_arith_toppk
+                    results["Time Sampling"] = avg_time_temp_toppk
+                    results["Time Greedy"] = avg_time_greedy
+                    
+                    with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_{N}__temp_{temp}__p_{p}__k_{k}__eps_{eps}_results.json','w') as f:
+                        json.dump(results,f)
+                    
                    
                    
 
@@ -457,7 +497,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5", "m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5", "m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
@@ -486,16 +526,26 @@ if __name__ == "__main__":
                      for eps in [0.02, 0.05]: # epsilon
                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k) & (df["Epsilon"]==eps)].sort_values("Num decodes")
                       x = rows["Num decodes"]
-                      y_max_sample_bleu = rows["Max BLEU Sampling"] 
-                      y_max_arit_bleu = rows["Max BLEU Arithmetic"]
-                      y_max_greedy_bleu = rows["Max BLEU Greedy"]
-                      y_mbr_sample_bleu = rows["MBR BLEU Sampling"] 
-                      y_mbr_arit_bleu = rows["MBR BLEU Arithmetic"]
-                      y_mbr_greedy_bleu = rows["MBR BLEU Greedy"]
+                      y_max_sample_bleu_mean = rows["Max BLEU Sampling Mean"] 
+                      y_max_sample_bleu_std = rows["Max BLEU Sampling Std"] 
+                      y_max_arit_bleu_mean = rows["Max BLEU Arithmetic Mean"]
+                      y_max_arit_bleu_std = rows["Max BLEU Arithmetic Std"]
+                      y_max_greedy_bleu_mean = rows["Max BLEU Greedy Mean"]
+                      y_max_greedy_bleu_std = rows["Max BLEU Greedy Std"]
                       
-                      y_sample_div = rows["N gram diversity Sampling"] 
-                      y_arit_div = rows["N gram diversity Arithmetic"] 
-                      y_greedy_div = rows["N gram diversity Greedy"]
+                      y_mbr_sample_bleu_mean = rows["MBR BLEU Sampling Mean"] 
+                      y_mbr_sample_bleu_std = rows["MBR BLEU Sampling Std"] 
+                      y_mbr_arit_bleu_mean = rows["MBR BLEU Arithmetic Mean"]
+                      y_mbr_arit_bleu_std = rows["MBR BLEU Arithmetic Std"]
+                      y_mbr_greedy_bleu_mean = rows["MBR BLEU Greedy Mean"]
+                      y_mbr_greedy_bleu_std = rows["MBR BLEU Greedy Std"]
+                      
+                      y_sample_div_mean = rows["N gram diversity Sampling Mean"] 
+                      y_sample_div_std = rows["N gram diversity Sampling Std"] 
+                      y_arit_div_mean = rows["N gram diversity Arithmetic Mean"] 
+                      y_arit_div_std = rows["N gram diversity Arithmetic Std"] 
+                      y_greedy_div_mean = rows["N gram diversity Greedy Mean"]
+                      y_greedy_div_std = rows["N gram diversity Greedy Std"]
                       
                       y_sample_time = rows["Time Sampling"] 
                       y_arit_time = rows["Time Arithmetic"] 
@@ -507,22 +557,23 @@ if __name__ == "__main__":
                       
                       axs1[i][j].set_xlabel("Num of sampled sequences")
                       axs1[i][j].set_ylabel("BLEU score")
-                      axs1[i][j].plot(x,y_max_sample_bleu, marker='o',label="Ancestral sampling (Max) ", color='darkblue')
-                      axs1[i][j].plot(x,y_max_arit_bleu, marker='o',label = "Arithemetic sampling (Max)", color='darkgreen')
+
+                      axs1[i][j].errorbar(x,y_max_sample_bleu_mean, yerr=y_max_sample_bleu_std, fmt='o',label="Ancestral sampling (Max) ", color='darkblue', linestyle = "--")
+                      axs1[i][j].errorbar(x,y_max_arit_bleu_mean, yerr=y_max_arit_bleu_std, fmt='o',label = "Arithemetic sampling (Max)", color='darkgreen',  linestyle = "-")
                       
                       
-                      axs1[i][j].plot(x,y_mbr_sample_bleu,marker='o', label="Ancestral sampling (MBR) ", color='cornflowerblue')
-                      axs1[i][j].plot(x,y_mbr_arit_bleu,marker='o', label = "Arithemetic sampling (MBR)", color='lightgreen')
+                      axs1[i][j].errorbar(x,y_mbr_sample_bleu_mean, yerr=y_mbr_sample_bleu_std, fmt='o', label="Ancestral sampling (MBR) ", color='cornflowerblue', linestyle = "--")
+                      axs1[i][j].errorbar(x,y_mbr_arit_bleu_mean,yerr=y_mbr_arit_bleu_std, fmt='o', label = "Arithemetic sampling (MBR)", color='lightgreen',  linestyle = "-")
                       # axs1[i][j].plot(x,y_mbr_greedy_bleu, marker='o',label = "Greedy (MBR)")
                       
-                      axs1[i][j].plot(x,y_max_greedy_bleu,marker='o', label = "Greedy" ,color='red')
+                      axs1[i][j].errorbar(x,y_max_greedy_bleu_mean,yerr=y_max_greedy_bleu_std,  fmt='o', label = "Greedy" ,color='red',  linestyle = ":")
                       
                       
                       axs2[i][j].set_xlabel("Num of sampled sequences")
                       axs2[i][j].set_ylabel("N gram diversity")
-                      axs2[i][j].plot(x,y_sample_div, marker='o',label="Ancestral sampling ", color='blue')
-                      axs2[i][j].plot(x,y_arit_div, marker='o',label = "Arithemetic sampling", color='green')
-                      axs2[i][j].plot(x,y_greedy_div,marker='o', label = "Greedy", color='red')
+                      axs2[i][j].errorbar(x,y_sample_div_mean, yerr=y_sample_div_std,  fmt='o',label="Ancestral sampling ", color='blue', linestyle = "--")
+                      axs2[i][j].errorbar(x,y_arit_div_mean, yerr= y_arit_div_std, fmt='o',label = "Arithemetic sampling", color='green', linestyle = "-")
+                      axs2[i][j].errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='o', label = "Greedy", color='red', linestyle = ":")
                       
                       
                       axs3[i][j].set_xlabel("Num of sampled sequences")
