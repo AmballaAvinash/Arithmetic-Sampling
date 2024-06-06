@@ -2,6 +2,7 @@ from collections import Counter
 import os
 import json
 import random
+import re
 import numpy as np
 import pathlib
 from nltk.util import ngrams
@@ -64,6 +65,18 @@ def fix_posthoc(decoded,task_name='strategy_qa'):
         if len([x for x in labels if x != 'nan']) > 0:
             labels = [x for x in labels if x != 'nan']
         majority_label = max( Counter(labels), key=Counter(labels).get)
+    elif 'gsm8k' in task_name:
+        answers = []
+        for d in decoded:
+            numeric_pattern = r'-?\d+\.?\d*'
+            numeric_tokens = re.findall(numeric_pattern, d)
+            pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
+            if pred != "" and pred[-1] == ".":
+                pred = pred[:-1]
+            answers.append(pred)
+        if len([x for x in answers if len(x) != 0]) > 0:
+            answers = [x for x in answers if len(x) != 0]
+        majority_label = max(Counter(labels), key=Counter(labels).get)
     return majority_label
 def compute_ngram_diversity(translations):
     ngram_diversity_score = 0

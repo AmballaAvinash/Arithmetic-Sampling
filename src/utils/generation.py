@@ -2,28 +2,25 @@ from collections import Counter
 import copy
 import numpy as np
 import random
-from typing import Union, List
+from typing import Union, List, Dict
 import logging
 import re
 import torch
-# from bleurt import score
 from transformers import StoppingCriteria, LogitsProcessor, LogitsProcessorList
-# import openai
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message)s', datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# default_strat_qa_instruction = "Like each of the previous examples, answer the following question with Yes or No, and provide the reasoning as demonstrated earlier. The reasoning should end with the sentence(with <your_answer> substituted by your final answer):  So the answer is <your_answer>. The answer should be either Yes or No."
 default_strat_qa_instruction = """Like each of the previous examples, answer the question with a reasoning and a final answer: either "Yes" or "No".
 Think step by step and provide a reasoning first, which leads to the final answer. Do not start with the final answer. The reasoning should not be too long and should end with the final answer (Yes/No) like the examples.The question has enough information to answer it strategically. Use logical reasoning and available knowledge to respond with either 'Yes' or 'No.'
 End your reasoning with the sentence: "So the answer is <your_answer>. Answer: <your_answer>". Replace "<your_answer>" with your final answer, which should be either "Yes" or "No"."""
-# default_commonsense_qa_instruction = """Like each of the previous examples,answer the question by thinking step by step, from the information provided. The answer should be in a similar format as the examples.
-# Reasoning should be a step by step logical deduction, which leads to the final answer. The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability.
-# Reasoning should be followed by: "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
 default_commonsense_qa_instruction = """Like each of the previous examples,answer the following question by thinking logically, from the information provided. The answer should be in a similar format as the examples.
 The question has enough information for you to answer, use commonsense reasoning to answer the question to the best of your ability with an answer label(a,b,c,d,e,etc.) by logical deduction and elimination of incorrect answers.
 You should end your answer with : "So the answer is <your_answer_choice>". Replace "<your_answer_choice>" with your final answer, which should be one of the answer choice label letters (a,b,c,d,e,etc.)."""
+default_gsm8k_instruction = """Like each of the previous examples, answer the following question by thinking logically, from the information provided. The answer should be in a similar format as the examples.
+The question has enough information for you to answer, use arithmetic reasoning to answer the question to the best of your ability with a numerical answer by logical deduction and chain-of-thought reasoning.
+You should end your answer with : "So the answer is <your_answer>". Replace "<your_answer>" with your final answer, which should be a numerical value."""
 default_mt_fwd_instruction = "Translate the following {source} sentence to {target}:"
 default_mt_fwd_input_prefix = "{source}: "
 default_mt_fwd_target_prefix = "{target}: "
@@ -55,6 +52,7 @@ default_metrics = [
     {"name": "accuracy", 'score_keys': ['accuracy'], 'args': {}},
 ]
 task_logits_processors = {}
+
 class TruncateLogitsProcessor(LogitsProcessor):
     def __init__(self,token_id: Union[int, List[int]],stop_word:Union[str, List[str]],eos_token_id: Union[int, List[int]],tokenizer):
         if isinstance(token_id, int):
@@ -79,28 +77,9 @@ class TruncateLogitsProcessor(LogitsProcessor):
             print('yes')
             scores = torch.zeros(scores.shape)
             scores[:, self.eos_token_id] = 1
-                
         return scores
+
 def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
-    # if type(model) is dict and model['org'] == 'openai':
-    #     openai.api_key = model['key']
-    #     # Computing logprobs of a specified sequence of text is only supported by the following until 2024-01-04:
-    #     # text-davinci-003, text-davinci-002, text-davinci-001 ($0.0200 / 1K tokens)
-    #     # text-curie-001 ($0.0020 / 1K tokens)
-    #     # text-babbage-001 (0.0005 / 1K tokens)
-    #     response = openai.Completion.create(model=model['name'],
-    #                                         prompt=list(map(lambda x: ''.join(x), zip(prefix, target))),
-    #                                         max_tokens=0, logprobs=1, echo=True)
-    #     scores = []
-    #     for i, res in enumerate(response['choices']):
-    #         prefix_len = len(tokenizer.encode(prefix[i]))
-    #         target_len = len(tokenizer.encode(target[i]))
-    #         tkn_logprobs = res['logprobs']['token_logprobs']
-    #         assert len(tkn_logprobs) == prefix_len + target_len
-    #         target_logprob_score = sum(tkn_logprobs[prefix_len:]) / (target_len if len_norm else 1.)
-    #         scores.append(target_logprob_score)
-    #     model['session_tokens'] += response['usage']['total_tokens']
-    # else:
     bos_added = eos_added = False
     try:
         bos_added = tokenizer.add_bos_token
@@ -111,23 +90,19 @@ def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
     except:
         pass
     scores = []
-    # breakpoint()
 
     if 't5' in tokenizer.name_or_path:
         prefix_tkn = tokenizer(prefix, return_tensors="pt", padding=True)
         prefix_input_ids = prefix_tkn.input_ids
-        # prefix_lens = prefix_tkn.attention_mask.sum(dim=1)
         target_tkn = tokenizer(target, return_tensors="pt", padding=True)
         target_input_ids = target_tkn.input_ids
         target_lens = target_tkn.attention_mask.sum(dim=1)
 
         for batch_i in range(0, len(prefix_input_ids), bsz):
             batch_prefix_input_ids = prefix_input_ids[batch_i:batch_i + bsz]
-            # batch_prefix_lens = prefix_lens[batch_i:batch_i + bsz]
             batch_prefix_att_mask = prefix_tkn.attention_mask[batch_i:batch_i + bsz]
             batch_target_input_ids = target_input_ids[batch_i:batch_i + bsz]
             batch_target_lens = target_lens[batch_i:batch_i + bsz]
-            # batch_target_att_mask = target_tkn.attention_mask[batch_i:batch_i + bsz]
             with torch.no_grad():
                 forward = model(input_ids=batch_prefix_input_ids.cuda(),
                                 attention_mask=batch_prefix_att_mask.cuda(),
@@ -143,7 +118,6 @@ def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
         pad_id = tokenizer.pad_token_id if tokenizer.pad_token_id is not None else tokenizer.eos_token_id
         prefix_input_ids = tokenizer(prefix).input_ids
         target_input_ids = tokenizer(target).input_ids
-        # breakpoint()
         if eos_added:
             # Remove EOS from prefix and suffix
             prefix_input_ids = list(map(lambda x: x[:-1], prefix_input_ids))
@@ -154,17 +128,14 @@ def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
         full_input_ids = list(map(lambda x: x[0] + x[1], zip(prefix_input_ids, target_input_ids)))
         # Add padding
         max_len = max(map(len, full_input_ids))
-        # attention_mask = list(map(lambda x: [1] * len(x) + [0] * (max_len - len(x)), full_input_ids))
         full_input_ids = list(map(lambda x: x + [pad_id] * (max_len - len(x)), full_input_ids))
 
         for batch_i in range(0, len(full_input_ids), bsz):
             batch_input_ids = full_input_ids[batch_i:batch_i + bsz]
-            # batch_attention_mask = attention_mask[batch_i:batch_i + bsz]
             with torch.no_grad():
                 forward = model(
                     torch.tensor(
                         batch_input_ids).cuda())  # , attention_mask=torch.tensor(batch_attention_mask).cuda()
-            # breakpoint()
             for i, logits in enumerate(forward.logits):
                 cur_i = batch_i + i
                 target_logits = logits[
@@ -176,11 +147,9 @@ def get_logprob_score(target, prefix, model, tokenizer, len_norm=True, bsz=10):
                 print(len)
                 target_logprob_score = target_logprobs_seq.mean() if len_norm else target_logprobs_seq.sum()
                 scores.append(target_logprob_score.item())
-    # breakpoint()
     return scores
-def construct_qa_prompt_from_args( question, question_prefix,task_name,
-                                    reasoning=None, reasoning_prefix=None,
-                                     answer=None, answer_prefix=None):
+
+def construct_qa_prompt_from_args(question: str, question_prefix: str, task_name: str, reasoning: str = None, reasoning_prefix: str = None, answer: str = None, answer_prefix: str = None):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
     # The test or demonstration question
     if 'commonsense_qa' not in task_name:
@@ -201,24 +170,21 @@ def construct_qa_prompt_from_args( question, question_prefix,task_name,
             question_prefix = copy.copy(default_question_prefix)
         question_text = f"{question_prefix}{question}"
         prompt_arr.append(question_text)
-        # if reasoning is not None and reasoning_prefix is not None:
-        #     reasoning_text = f"{reasoning_prefix}{reasoning}"
-        #     if reasoning_text != "":
-        #         prompt_arr.append(reasoning_text)
         if answer is not None and answer_prefix is not None:
             answer_text = f"{answer_prefix}{reasoning}"
             if answer_text != "":
                 prompt_arr.append(answer_text)
     return prompt_arr
-def construct_prompt_from_args(input, input_prefix):
+
+def construct_prompt_from_args(input: str, input_prefix: str):
     prompt_arr = []  # this is later converted into a string using "{sep}".join(), where `sep` may be "\n\n"
-    
     if input_prefix is None:
         input_prefix = copy.copy(default_input_prefix)
     input_text = f"{input_prefix}{input}"
     prompt_arr.append(input_text)
     return prompt_arr
-def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
+
+def prompt_arr_2_text(prompt_arr: List[str], prompt_sep: str, output_prefix: str):
     # Output prefix (final prompt text)
     if output_prefix is None:
         output_prefix = copy.copy(default_output_prefix)
@@ -227,16 +193,18 @@ def prompt_arr_2_text(prompt_arr, prompt_sep, output_prefix):
             prompt_arr.append(output_prefix)
     prompt = prompt_sep.join(prompt_arr)
     return prompt
+
 def prompt_arr_2_text_mt(prompt_arr, prompt_sep, is_llama2, is_chat, output_prefix):
-        # Output prefix (final prompt text)
-        if output_prefix is None:
-            output_prefix = copy.copy(default_output_prefix)
-        else:
-            if output_prefix != "":
-                prompt_arr.append(output_prefix)
-        prompt = prompt_sep.join(prompt_arr)
-        return prompt
-def construct_args_from_example(d,task_name):
+    # Output prefix (final prompt text)
+    if output_prefix is None:
+        output_prefix = copy.copy(default_output_prefix)
+    else:
+        if output_prefix != "":
+            prompt_arr.append(output_prefix)
+    prompt = prompt_sep.join(prompt_arr)
+    return prompt
+
+def construct_args_from_example(d: Dict, task_name):
     # breakpoint()
     if 'strategy_qa' in task_name:
         question = d['input']
@@ -256,7 +224,6 @@ def construct_args_from_example(d,task_name):
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
     elif 'commonsense_qa' in task_name:
-        # breakpoint()
         options = ['('+ l.lower() + ') ' + t  for l,t in zip(d['choices']['label'],d['choices']['text'])]
         options_text = ' Answer choices: ' +' '.join(options)
         question = d['question'] + options_text
@@ -275,6 +242,23 @@ def construct_args_from_example(d,task_name):
                 "demos_split":'demo',
                 "task_name" : task_name,
                 'construct_args_fn' : construct_args_from_example}, answer
+    elif 'gsm8k' in task_name:
+        question = d['question']
+        answer = d['answer']
+        reasoning = d['reasoning'] if 'reasoning' in d.keys() else ''
+        return {'question':question,
+                "answer" : answer,
+                'instructions': default_gsm8k_instruction,
+                "question_prefix" : default_question_prefix,
+                "answer_prefix": default_answer_prefix,
+                "reasoning_prefix":default_reasoning_prefix,
+                "n_shots" : 8,
+                "options" : None,
+                "option_texts" : None,
+                "reasoning" : reasoning,
+                "demos_split":'demo',
+                "task_name" : task_name,
+                'construct_args_fn' : construct_args_from_example}, answer
     elif 'arc' in task_name:
         question = d['question']
         labels = d['choices']['label']
@@ -285,6 +269,7 @@ def construct_args_from_example(d,task_name):
         inf_args = {'input':None,'input_prefix':default_mt_fwd_input_prefix,'output_prefix':default_mt_fwd_target_prefix,'instructions':default_mt_fwd_instruction,'task':task_name}
         # breakpoint()
         return inf_args,None
+
 # def fix_posthoc_mt(decoded,task_name):
 #     if 'wmt14' in task_name:
 #         # checkp/oint = "bleurt/test_checkpoint"
@@ -362,4 +347,16 @@ def fix_posthoc(decoded,task_name):
             labels = [x for x in labels if x != 'nan']
         majority_label = max( Counter(labels), key=Counter(labels).get)
         # breakpoint()
+    elif 'gsm8k' in task_name:
+        answers = []
+        for d in decoded:
+            numeric_pattern = r'-?\d+\.?\d*'
+            numeric_tokens = re.findall(numeric_pattern, d)
+            pred = numeric_tokens[-1] if len(numeric_tokens) != 0 else ""
+            if pred != "" and pred[-1] == ".":
+                pred = pred[:-1]
+            answers.append(pred)
+        if len([x for x in answers if len(x) != 0]) > 0:
+            answers = [x for x in answers if len(x) != 0]
+        majority_label = max(Counter(labels), key=Counter(labels).get)
     return majority_label
