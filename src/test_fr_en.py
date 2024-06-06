@@ -125,7 +125,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [5, 4, 2, 1]: # num_decodes (tp check ram issues)
+    for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
         
         if N==40:
             trails = 1
@@ -158,12 +158,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
                          
                                
                            print(f"N {N}, Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                           if N==40:
-                                  with open(f'{output_dir}/{model_name}__{shot}__Samples_{len(data)}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
-                                      output_dict = json.load(f)
-                                     
-                           else:
-                               output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
+                           
+                           output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k , eps)
                           
                            # avg_max_bleu_arith_toppk = []
                            # avg_max_bleu_temp_toppk = []
@@ -496,7 +492,7 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["m2m"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
