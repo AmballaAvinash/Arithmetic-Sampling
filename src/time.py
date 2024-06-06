@@ -126,6 +126,8 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
             for p in [1.0]: # top p 
                 for k in [50]: # top k 
                   for eps in [0.05]: # epsilon
+                  
+                   print(f"N {N}, Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                    output_dict = test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_prefix, model_name, model, tokenizer, data, batch, output_dir, shot, N, temp, p, k, eps )
                    avg_max_bleu_arith_toppk = []
                    avg_max_bleu_temp_toppk = []
