@@ -97,8 +97,9 @@ class LLMWrapper:
                                                     load_in_8bit=load_in_8bit)
         
         if self.is_llama2 and load_in_8bit != True:
+            device = self.model.device
             # breakpoint()
-            self.model = self.model.bfloat16().cuda()
+            self.model = self.model.bfloat16()
         self.tokenizer.pad_token =  self.tokenizer.eos_token
         self.model.config.pad_token_id = self.model.config.eos_token_id
         self.model.eval()
