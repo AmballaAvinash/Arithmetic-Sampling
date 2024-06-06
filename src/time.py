@@ -430,7 +430,7 @@ if __name__ == "__main__":
             # graphs
             # fig1, axs1 = plt.subplots(4, 4, figsize=(12, 12))
             # fig2, axs2 = plt.subplots(4, 4, figsize=(12, 12))
-            fig3, axs3 = plt.subplots(1, 1, figsize=(12, 12))
+            fig3, axs3 = plt.subplots()
             
             c = 0
             for temp in [1]: # temperature
@@ -454,8 +454,8 @@ if __name__ == "__main__":
                       y_arit_time = rows["Time Arithmetic"] 
                       y_greedy_time = rows["Time Greedy"]
                       
-                      i = int(c/4)
-                      j = c%4
+                      i = int(c/1)
+                      j = c%1
                       
                       # axs1[i][j].set_xlabel("Num of sampled sequences")
                       # axs1[i][j].set_ylabel("BLEU score")
@@ -477,26 +477,26 @@ if __name__ == "__main__":
                       # axs2[i][j].plot(x,y_greedy_div,marker='o', label = "Greedy", color='red')
                       
                       
-                      axs3[i][j].set_xlabel("Num of sampled sequences")
-                      axs3[i][j].set_ylabel("Wall clock Time")
-                      axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue', linestyle = "--")
-                      axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green',linestyle = "-")
-                      axs3[i][j].plot(x,y_greedy_time, marker='o',label = "Greedy", color='red',linestyle = ":")
+                      axs3.set_xlabel("Num of sampled sequences")
+                      axs3.set_ylabel("Wall clock Time")
+                      axs3.plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue', linestyle = "--")
+                      axs3.plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green',linestyle = "-")
+                      axs3.plot(x,y_greedy_time, marker='o',label = "Greedy", color='red',linestyle = ":")
                       
                       c = c+1
                       
                       # axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       # axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                      axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                      axs3.set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
                       # axs1[i][j].grid(True)
                       # axs2[i][j].grid(True)
-                      axs3[i][j].grid(True)
+                      axs3.grid(True)
 
-                      if c==16:
+                      if c==1:
                           # axs1[i][j].legend(loc =4, fontsize=6)
                           # axs2[i][j].legend(loc =4, fontsize=8)
-                          axs3[i][j].legend(loc =4, fontsize=8)
+                          axs3.legend(loc =4, fontsize=8)
                     
             # fig1.suptitle(f"BLEU: Model {model_name}, shot {shot}, Samples {samplesize}")
             # fig2.suptitle(f"Div: Model {model_name}, shot {shot}, Samples {samplesize}")

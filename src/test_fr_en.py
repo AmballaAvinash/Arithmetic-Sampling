@@ -126,7 +126,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     default_fwd_target_prefix = "English sentence: "
     
     results = {}
-    for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
+    for N in [8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
         
         if N==40:
             trails = 1
