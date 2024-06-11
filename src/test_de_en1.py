@@ -16,6 +16,7 @@ import matplotlib.pyplot as plt
 from bleurt import score
 import time
 from typing import List
+import scipy.stats as stats 
 
 
 
@@ -496,22 +497,22 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5", "m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
-            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+            # run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
             
-            # tabular output resuls from json
-            json_data = []
-            for file in os.listdir(output_dir):
-                if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
-                    with open(os.path.join(output_dir,file),"r") as f:
-                        jsondata = json.load(f)
-                        json_data.append(jsondata)
-            df = pd.DataFrame(json_data)
-            df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
-    
+            # # tabular output resuls from json
+            # json_data = []
+            # for file in os.listdir(output_dir):
+            #     if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
+            #         with open(os.path.join(output_dir,file),"r") as f:
+            #             jsondata = json.load(f)
+            #             json_data.append(jsondata)
+            # df = pd.DataFrame(json_data)
+            # df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
+            df = pd.read_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
     
     
             # graphs
@@ -584,8 +585,8 @@ if __name__ == "__main__":
                       
                       c = c+1
                       
-                      axs1[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                      axs2[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
+                      axs1[i][j].set_title(f"T={temp}, p={p}, k={k}, eps={eps}")
+                      axs2[i][j].set_title(f"T={temp}, p={p}, k={k}, eps={eps}")
                       # axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
                       axs1[i][j].grid(True)
@@ -606,11 +607,46 @@ if __name__ == "__main__":
             fig3.tight_layout()
             fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.jpg")
             fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg") 
+            fig1.savefig(f"{output_dir}/Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.svg")
+            fig2.savefig(f"{output_dir}/Figure_Div_{model_name}__{shot}__Samples_{samplesize}.svg")
             # fig3.savefig(f"{output_dir}/Figure_Time_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
             plt.show()
             
             
-            
+    for model_name in ["flan-t5","m2m","mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+           for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
+               print(f"{model_name}, {shot}")
+               
+               for temp in [0.1, 1]: # temperature
+                   for p in [0.8, 1.0]: # top p 
+                      for k in [30, 50]: # top k 
+                        for eps in [0.02, 0.05]: # epsilon
+                        
+                        
+                             # p test 
+                             
+                             with open(f'{output_dir}/{model_name}__{shot}__Samples_{samplesize}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
+                                 output_dict = json.load(f)
+                                 
+                             ptest_max_bleu_arith_toppk = []
+                             ptest_max_bleu_temp_toppk = []
+                             ptest_mbr_bleu_arith_toppk = []
+                             ptest_mbr_bleu_temp_toppk = []                    
+                            
+                             for idx in range(samplesize):   
+                                idx = str(idx)
+                                ptest_max_bleu_arith_toppk.append(float(output_dict[idx]['max_bleu_score_arith_toppk']))
+                                ptest_max_bleu_temp_toppk.append(float(output_dict[idx]['max_bleu_score_temp_toppk']))
+                                
+                                ptest_mbr_bleu_arith_toppk.append(float(output_dict[idx]['mbr_bleu_score_arith_toppk']))
+                                ptest_mbr_bleu_temp_toppk.append(float(output_dict[idx]['mbr_bleu_score_temp_toppk']))
+                                
+                             p_test_max_bleu = stats.ttest_rel(ptest_max_bleu_arith_toppk, ptest_max_bleu_temp_toppk)
+                             p_test_mbr_bleu = stats.ttest_rel(ptest_mbr_bleu_arith_toppk, ptest_mbr_bleu_temp_toppk)
+                            
+                             print(f"Model: {model_name}, p-test Max BLEU {p_test_max_bleu}, p-test MBR BLEU {p_test_mbr_bleu} \n")
+                             
+                                   
                             
         
             
