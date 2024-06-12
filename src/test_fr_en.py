@@ -612,7 +612,7 @@ if __name__ == "__main__":
                       
                       c = c+1
                       
-                      axs1[i][j].set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}, \n p-value Max {np.round(p_test_max_bleu.pvalue,2)}, p-value MBR {np.round(p_test_mbr_bleu.pvalue,2)}", fontsize=8)
+                      axs1[i][j].set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}, \n p-values: Max = {np.round(p_test_max_bleu.pvalue,5)}, MBR = {np.round(p_test_mbr_bleu.pvalue,5)}", fontsize=8)
                       axs2[i][j].set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}", fontsize=8)
                       # axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
