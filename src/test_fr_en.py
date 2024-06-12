@@ -524,6 +524,34 @@ if __name__ == "__main__":
                 for p in [0.8, 1.0]: # top p 
                    for k in [30, 50]: # top k 
                      for eps in [0.02, 0.05]: # epsilon
+                     
+                     
+                      # p test 
+                      
+                      with open(f'{output_dir}/{model_name}__{shot}__Samples_{samplesize}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
+                          output_dict = json.load(f)
+                          
+                      ptest_max_bleu_arith_toppk = []
+                      ptest_max_bleu_temp_toppk = []
+                      ptest_mbr_bleu_arith_toppk = []
+                      ptest_mbr_bleu_temp_toppk = []                    
+                     
+                      for idx in range(samplesize):   
+                         idx = str(idx)
+                         ptest_max_bleu_arith_toppk.append(float(output_dict[idx]['max_bleu_score_arith_toppk']))
+                         ptest_max_bleu_temp_toppk.append(float(output_dict[idx]['max_bleu_score_temp_toppk']))
+                         
+                         ptest_mbr_bleu_arith_toppk.append(float(output_dict[idx]['mbr_bleu_score_arith_toppk']))
+                         ptest_mbr_bleu_temp_toppk.append(float(output_dict[idx]['mbr_bleu_score_temp_toppk']))
+                         
+                      p_test_max_bleu = stats.ttest_rel(ptest_max_bleu_arith_toppk, ptest_max_bleu_temp_toppk)
+                      p_test_mbr_bleu = stats.ttest_rel(ptest_mbr_bleu_arith_toppk, ptest_mbr_bleu_temp_toppk)
+                     
+                      # print(f"Model: {model_name}, p-test Max BLEU {p_test_max_bleu.pvalue}, p-test MBR BLEU {p_test_mbr_bleu.pvalue} \n")
+                      
+                  
+                    
+                  
                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k) & (df["Epsilon"]==eps)].sort_values("Num decodes")
                       x = rows["Num decodes"]
                       y_max_sample_bleu_mean = rows["Max BLEU Sampling Mean"] 
@@ -584,8 +612,8 @@ if __name__ == "__main__":
                       
                       c = c+1
                       
-                      axs1[i][j].set_title(f"T={temp}, p={p}, k={k}, eps={eps}")
-                      axs2[i][j].set_title(f"T={temp}, p={p}, k={k}, eps={eps}")
+                      axs1[i][j].set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}, \n p-value Max {np.round(p_test_max_bleu.pvalue,2)}, p-value MBR {np.round(p_test_mbr_bleu.pvalue,2)}", fontsize=8)
+                      axs2[i][j].set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}", fontsize=8)
                       # axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
                       
                       axs1[i][j].grid(True)
@@ -612,41 +640,7 @@ if __name__ == "__main__":
             plt.show()
             
             
-                            
-    for model_name in ["flan-t5","m2m","mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-           for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
-               print(f"{model_name}, {shot}")
-               
-               for temp in [0.1, 1]: # temperature
-                   for p in [0.8, 1.0]: # top p 
-                      for k in [30, 50]: # top k 
-                        for eps in [0.02, 0.05]: # epsilon
-                        
-                        
-                             # p test 
                              
-                             with open(f'{output_dir}/{model_name}__{shot}__Samples_{samplesize}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
-                                 output_dict = json.load(f)
-                                 
-                             ptest_max_bleu_arith_toppk = []
-                             ptest_max_bleu_temp_toppk = []
-                             ptest_mbr_bleu_arith_toppk = []
-                             ptest_mbr_bleu_temp_toppk = []                    
-                            
-                             for idx in range(samplesize):   
-                                idx = str(idx)
-                                ptest_max_bleu_arith_toppk.append(float(output_dict[idx]['max_bleu_score_arith_toppk']))
-                                ptest_max_bleu_temp_toppk.append(float(output_dict[idx]['max_bleu_score_temp_toppk']))
-                                
-                                ptest_mbr_bleu_arith_toppk.append(float(output_dict[idx]['mbr_bleu_score_arith_toppk']))
-                                ptest_mbr_bleu_temp_toppk.append(float(output_dict[idx]['mbr_bleu_score_temp_toppk']))
-                                
-                             p_test_max_bleu = stats.ttest_rel(ptest_max_bleu_arith_toppk, ptest_max_bleu_temp_toppk)
-                             p_test_mbr_bleu = stats.ttest_rel(ptest_mbr_bleu_arith_toppk, ptest_mbr_bleu_temp_toppk)
-                            
-                             print(f"Model: {model_name}, p-test Max BLEU {p_test_max_bleu}, p-test MBR BLEU {p_test_mbr_bleu} \n")
-                             
-                         
     
     
     
