@@ -133,7 +133,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         if N==40:
             trails = 1
         else:
-            trails = 5
+            trails = 5   # 20
             
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
@@ -586,22 +586,22 @@ if __name__ == "__main__":
                       axs1[i][j].set_xlabel("Num of sampled sequences")
                       axs1[i][j].set_ylabel("BLEU score")
 
-                      axs1[i][j].errorbar(x,y_max_sample_bleu_mean, yerr=y_max_sample_bleu_std, fmt='o',label="Ancestral sampling (Max) ", color='darkblue', linestyle = "--")
-                      axs1[i][j].errorbar(x,y_max_arit_bleu_mean, yerr=y_max_arit_bleu_std, fmt='o',label = "Arithemetic sampling (Max)", color='darkgreen',  linestyle = "-")
+                      axs1[i][j].errorbar(x,y_max_sample_bleu_mean, yerr=y_max_sample_bleu_std, fmt='o',label="Ancestral sampling (Max) ", color='darkorange', linestyle = "--")
+                      axs1[i][j].errorbar(x,y_max_arit_bleu_mean, yerr=y_max_arit_bleu_std, fmt='^',label = "Arithemetic sampling (Max)", color='purple',  linestyle = "--")
                       
                       
-                      axs1[i][j].errorbar(x,y_mbr_sample_bleu_mean, yerr=y_mbr_sample_bleu_std, fmt='o', label="Ancestral sampling (MBR) ", color='cornflowerblue', linestyle = "--")
-                      axs1[i][j].errorbar(x,y_mbr_arit_bleu_mean,yerr=y_mbr_arit_bleu_std, fmt='o', label = "Arithemetic sampling (MBR)", color='lightgreen',  linestyle = "-")
+                      axs1[i][j].errorbar(x,y_mbr_sample_bleu_mean, yerr=y_mbr_sample_bleu_std, fmt='o', label="Ancestral sampling (MBR) ", color='darkorange', linestyle = "-")
+                      axs1[i][j].errorbar(x,y_mbr_arit_bleu_mean,yerr=y_mbr_arit_bleu_std, fmt='^', label = "Arithemetic sampling (MBR)", color='purple',  linestyle = "-")
                       # axs1[i][j].plot(x,y_mbr_greedy_bleu, marker='o',label = "Greedy (MBR)")
                       
-                      axs1[i][j].errorbar(x,y_max_greedy_bleu_mean,yerr=y_max_greedy_bleu_std,  fmt='o', label = "Greedy" ,color='red',  linestyle = ":")
+                      axs1[i][j].errorbar(x,y_max_greedy_bleu_mean,yerr=y_max_greedy_bleu_std,  fmt='.', label = "Greedy" ,color='green',  linestyle = "-")
                       
                       
                       axs2[i][j].set_xlabel("Num of sampled sequences")
                       axs2[i][j].set_ylabel("N gram diversity")
-                      axs2[i][j].errorbar(x,y_sample_div_mean, yerr=y_sample_div_std,  fmt='o',label="Ancestral sampling ", color='blue', linestyle = "--")
-                      axs2[i][j].errorbar(x,y_arit_div_mean, yerr= y_arit_div_std, fmt='o',label = "Arithemetic sampling", color='green', linestyle = "-")
-                      axs2[i][j].errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='o', label = "Greedy", color='red', linestyle = ":")
+                      axs2[i][j].errorbar(x,y_sample_div_mean, yerr=y_sample_div_std,  fmt='o',label="Ancestral sampling ", color='darkorange', linestyle = "-")
+                      axs2[i][j].errorbar(x,y_arit_div_mean, yerr= y_arit_div_std, fmt='^',label = "Arithemetic sampling", color='purple', linestyle = "-")
+                      axs2[i][j].errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='.', label = "Greedy", color='green', linestyle = "-")
                       
                       
                       # axs3[i][j].set_xlabel("Num of sampled sequences")
@@ -620,9 +620,9 @@ if __name__ == "__main__":
                       axs2[i][j].grid(True)
                       # axs3[i][j].grid(True)
 
-                      if c==16:
-                          axs1[i][j].legend(loc =4, fontsize=6)
-                          axs2[i][j].legend(loc =4, fontsize=8)
+                      # if c==16:
+                      #     axs1[i][j].legend(loc =4, fontsize=6)
+                      #     axs2[i][j].legend(loc =4, fontsize=8)
                           # axs3[i][j].legend(loc =4, fontsize=8)
                           
                     
@@ -641,7 +641,10 @@ if __name__ == "__main__":
             
             
                              
-    
+    # c1 = 1.96 * y_max_sample_bleu_std/np.sqrt(8)
+    # c2 = 1.96 * y_max_arit_bleu_std/np.sqrt(8)
+    # plt.fill_between(x,(y_max_sample_bleu_mean-c1), (y_max_sample_bleu_mean+c1), label="Ancestral sampling (Max) ", color='darkblue', linestyle = "--")
+    # plt.fill_between(x,(y_max_arit_bleu_mean-c2), (y_max_arit_bleu_mean+c2),label = "Arithemetic sampling (Max)", color='darkgreen',  linestyle = "-")
     
     
  
