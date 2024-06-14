@@ -127,12 +127,12 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
 
     results = {}
-    for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
+    for N in [20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
         
         if N==40:
             trails = 1
         else:
-            trails = 5 # 20
+            trails = 20 # 20
             
         for temp in [0.1, 1]: # temperature
             for p in [0.8, 1.0]: # top p 
@@ -497,22 +497,22 @@ if __name__ == "__main__":
 
     
     # it versions and quantized
-    for model_name in ["flan-t5", "m2m", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5", "mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
-            # run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+            run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
             
             
             # # tabular output resuls from json
-            # json_data = []
-            # for file in os.listdir(output_dir):
-            #     if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
-            #         with open(os.path.join(output_dir,file),"r") as f:
-            #             jsondata = json.load(f)
-            #             json_data.append(jsondata)
-            # df = pd.DataFrame(json_data)
-            # df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
-            df = pd.read_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
+            json_data = []
+            for file in os.listdir(output_dir):
+                if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
+                    with open(os.path.join(output_dir,file),"r") as f:
+                        jsondata = json.load(f)
+                        json_data.append(jsondata)
+            df = pd.DataFrame(json_data)
+            df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
+            # df = pd.read_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
     
     
             # graphs
@@ -640,150 +640,137 @@ if __name__ == "__main__":
             
             
     
-    # it versions and quantized
-    for model_name in ["flan-t5","m2m","mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
-         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
-             print(f"{model_name}, {shot}")
-             # run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
-             
-             
-             # # tabular output resuls from json
-             # json_data = []
-             # for file in os.listdir(output_dir):
-             #     if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
-             #         with open(os.path.join(output_dir,file),"r") as f:
-             #             jsondata = json.load(f)
-             #             json_data.append(jsondata)
-             # df = pd.DataFrame(json_data)
-             # df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
-             
-             df = pd.read_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
-     
-     
-             # graphs
-             fig1, axs1 = plt.subplots(figsize=(12, 12))
-             fig2, axs2 = plt.subplots(figsize=(12, 12))
-             fig3, axs3 = plt.subplots(4, 4, figsize=(12, 12))
-             
-             c = 0
-             for temp in [1]: # temperature
-                 for p in [0.8]: # top p 
-                    for k in [50]: # top k 
-                      for eps in [0.02]: # epsilon
-                      
-                      
-                       # p test 
-                       
-                       with open(f'{output_dir}/{model_name}__{shot}__Samples_{samplesize}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
-                           output_dict = json.load(f)
-                           
-                       ptest_max_bleu_arith_toppk = []
-                       ptest_max_bleu_temp_toppk = []
-                       ptest_mbr_bleu_arith_toppk = []
-                       ptest_mbr_bleu_temp_toppk = []                    
-                      
-                       for idx in range(samplesize):   
-                          idx = str(idx)
-                          ptest_max_bleu_arith_toppk.append(float(output_dict[idx]['max_bleu_score_arith_toppk']))
-                          ptest_max_bleu_temp_toppk.append(float(output_dict[idx]['max_bleu_score_temp_toppk']))
-                          
-                          ptest_mbr_bleu_arith_toppk.append(float(output_dict[idx]['mbr_bleu_score_arith_toppk']))
-                          ptest_mbr_bleu_temp_toppk.append(float(output_dict[idx]['mbr_bleu_score_temp_toppk']))
-                          
-                       p_test_max_bleu = stats.ttest_rel(ptest_max_bleu_arith_toppk, ptest_max_bleu_temp_toppk)
-                       p_test_mbr_bleu = stats.ttest_rel(ptest_mbr_bleu_arith_toppk, ptest_mbr_bleu_temp_toppk)
-                      
-                       # print(f"Model: {model_name}, p-test Max BLEU {p_test_max_bleu.pvalue}, p-test MBR BLEU {p_test_mbr_bleu.pvalue} \n")
-                       
-                   
+    # # it versions and quantized
+    # for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    # # for model_name in ["flan-t5","m2m","mt0"]:
+    #    for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
+    #         print(f"{model_name}, {shot}")
+    #         # run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
+            
+            
+    #         # # tabular output resuls from json
+    #         # json_data = []
+    #         # for file in os.listdir(output_dir):
+    #         #     if model_name in file and shot in file and "results" in file and str(samplesize)+"_" in file:
+    #         #         with open(os.path.join(output_dir,file),"r") as f:
+    #         #             jsondata = json.load(f)
+    #         #             json_data.append(jsondata)
+    #         # df = pd.DataFrame(json_data)
+    #         # df.to_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
+            
+    #         df = pd.read_csv(f"{output_dir}/Table_{model_name}__{shot}__Samples_{samplesize}.csv")
+    
+    
+           
+            
+    #         # for temp,p,k,eps in [[1,0.8,50,0.02]]: # temperature
+
+    #         for temp,p,k,eps in [[0.1,1.0,30,0.02],[0.1,1.0,50,0.02],[1,0.8,30,0.02],[1,1.0,50,0.05]]: # temperature
                      
-                   
-                       rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k) & (df["Epsilon"]==eps)].sort_values("Num decodes")
-                       x = rows["Num decodes"]
-                       y_max_sample_bleu_mean = rows["Max BLEU Sampling Mean"] 
-                       y_max_sample_bleu_std = rows["Max BLEU Sampling Std"] 
-                       y_max_arit_bleu_mean = rows["Max BLEU Arithmetic Mean"]
-                       y_max_arit_bleu_std = rows["Max BLEU Arithmetic Std"]
-                       y_max_greedy_bleu_mean = rows["Max BLEU Greedy Mean"]
-                       y_max_greedy_bleu_std = rows["Max BLEU Greedy Std"]
-                       
-                       y_mbr_sample_bleu_mean = rows["MBR BLEU Sampling Mean"] 
-                       y_mbr_sample_bleu_std = rows["MBR BLEU Sampling Std"] 
-                       y_mbr_arit_bleu_mean = rows["MBR BLEU Arithmetic Mean"]
-                       y_mbr_arit_bleu_std = rows["MBR BLEU Arithmetic Std"]
-                       y_mbr_greedy_bleu_mean = rows["MBR BLEU Greedy Mean"]
-                       y_mbr_greedy_bleu_std = rows["MBR BLEU Greedy Std"]
-                       
-                       y_sample_div_mean = rows["N gram diversity Sampling Mean"] 
-                       y_sample_div_std = rows["N gram diversity Sampling Std"] 
-                       y_arit_div_mean = rows["N gram diversity Arithmetic Mean"] 
-                       y_arit_div_std = rows["N gram diversity Arithmetic Std"] 
-                       y_greedy_div_mean = rows["N gram diversity Greedy Mean"]
-                       y_greedy_div_std = rows["N gram diversity Greedy Std"]
-                       
-                       y_sample_time = rows["Time Sampling"] 
-                       y_arit_time = rows["Time Arithmetic"] 
-                       y_greedy_time = rows["Time Greedy"]
-                       
-                       
-                       i = int(c/4)
-                       j = c%4
-                       
-                       axs1.set_xlabel("Num of sampled sequences")
-                       axs1.set_ylabel("BLEU score")
-     
-                       axs1.errorbar(x,y_max_sample_bleu_mean, yerr=y_max_sample_bleu_std, fmt='o',label="Ancestral sampling (Max) ", color='darkorange', linestyle = "--")
-                       axs1.errorbar(x,y_max_arit_bleu_mean, yerr=y_max_arit_bleu_std, fmt='^',label = "Arithemetic sampling (Max)", color='purple',  linestyle = "--")
-                       
-                       
-                       axs1.errorbar(x,y_mbr_sample_bleu_mean, yerr=y_mbr_sample_bleu_std, fmt='o', label="Ancestral sampling (MBR) ", color='darkorange', linestyle = "-")
-                       axs1.errorbar(x,y_mbr_arit_bleu_mean,yerr=y_mbr_arit_bleu_std, fmt='^', label = "Arithemetic sampling (MBR)", color='purple',  linestyle = "-")
-                       # axs1[i][j].plot(x,y_mbr_greedy_bleu, marker='o',label = "Greedy (MBR)")
-                       
-                       axs1.errorbar(x,y_max_greedy_bleu_mean,yerr=y_max_greedy_bleu_std,  fmt='.', label = "Greedy" ,color='green',  linestyle = "-")
-                       
-                       
-                       axs2.set_xlabel("Num of sampled sequences")
-                       axs2.set_ylabel("N gram diversity")
-                       axs2.errorbar(x,y_sample_div_mean, yerr=y_sample_div_std,  fmt='o',label="Ancestral sampling ", color='darkorange', linestyle = "-")
-                       axs2.errorbar(x,y_arit_div_mean, yerr= y_arit_div_std, fmt='^',label = "Arithemetic sampling", color='purple', linestyle = "-")
-                       axs2.errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='.', label = "Greedy", color='green', linestyle = "-")
-                       
-                       
-                       # axs3[i][j].set_xlabel("Num of sampled sequences")
-                       # axs3[i][j].set_ylabel("Wall clock Time")
-                       # axs3[i][j].plot(x,y_sample_time, marker='o',label="Ancestral sampling ", color='blue')
-                       # axs3[i][j].plot(x,y_arit_time, marker='o', label = "Arithemetic sampling", color='green')
-                       # axs3[i][j].plot(x,y_greedy_time, marker='o',label = "Greedy", color='red')
-                       
-                       c = c+1
-                       
-                       axs1.set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}, \n p-values: Max = {np.round(p_test_max_bleu.pvalue,5)}, MBR = {np.round(p_test_mbr_bleu.pvalue,5)}", fontsize=14)
-                       axs2.set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}", fontsize=14)
-                       # axs3[i][j].set_title(f"Temp {temp}, Top p {p}, Top k {k}, Eps {eps}")
-                       
-                       axs1.grid(True)
-                       axs2.grid(True)
-                       # axs3[i][j].grid(True)
-     
-                       # if c==16:
-                       #     axs1[i][j].legend(loc =4, fontsize=6)
-                       #     axs2[i][j].legend(loc =4, fontsize=8)
-                           # axs3[i][j].legend(loc =4, fontsize=8)
-                           
+    #                  # graphs
+    #                   fig1, axs1 = plt.subplots(figsize=(12, 12))
+    #                   fig2, axs2 = plt.subplots(figsize=(12, 12))
+                    
+    #                   # p test 
+                      
+    #                   with open(f'{output_dir}/{model_name}__{shot}__Samples_{samplesize}__N_40__temp_{temp}__p_{p}__k_{k}__eps{eps}_output.json') as f:
+    #                       output_dict = json.load(f)
+                          
+    #                   ptest_max_bleu_arith_toppk = []
+    #                   ptest_max_bleu_temp_toppk = []
+    #                   ptest_mbr_bleu_arith_toppk = []
+    #                   ptest_mbr_bleu_temp_toppk = []                    
                      
-             fig1.suptitle(f"BLEU: Model {model_name}, shot {shot}, Samples {samplesize}")
-             fig2.suptitle(f"Div: Model {model_name}, shot {shot}, Samples {samplesize}")
-             # fig3.suptitle(f"Time: Model {model_name}, shot {shot}, Samples {samplesize}")
-             fig1.tight_layout()
-             fig2.tight_layout()
-             fig3.tight_layout()
-             fig1.savefig(f"outputs/WMT/V11/De-En_Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.jpg")
-             fig2.savefig(f"outputs/WMT/V11/De-En_Figure_Div_{model_name}__{shot}__Samples_{samplesize}.jpg") 
-             fig1.savefig(f"outputs/WMT/V11/De-En_Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}.svg")
-             fig2.savefig(f"outputs/WMT/V11/De-En_Figure_Div_{model_name}__{shot}__Samples_{samplesize}.svg") 
-             # fig3.savefig(f"{output_dir}/Figure_Time_{model_name}__{shot}__Samples_{samplesize}.jpg")                   
-             plt.show()
+    #                   for idx in range(samplesize):   
+    #                      idx = str(idx)
+    #                      ptest_max_bleu_arith_toppk.append(float(output_dict[idx]['max_bleu_score_arith_toppk']))
+    #                      ptest_max_bleu_temp_toppk.append(float(output_dict[idx]['max_bleu_score_temp_toppk']))
+                         
+    #                      ptest_mbr_bleu_arith_toppk.append(float(output_dict[idx]['mbr_bleu_score_arith_toppk']))
+    #                      ptest_mbr_bleu_temp_toppk.append(float(output_dict[idx]['mbr_bleu_score_temp_toppk']))
+                         
+    #                   p_test_max_bleu = stats.ttest_rel(ptest_max_bleu_arith_toppk, ptest_max_bleu_temp_toppk)
+    #                   p_test_mbr_bleu = stats.ttest_rel(ptest_mbr_bleu_arith_toppk, ptest_mbr_bleu_temp_toppk)
+                     
+    #                   # print(f"Model: {model_name}, p-test Max BLEU {p_test_max_bleu.pvalue}, p-test MBR BLEU {p_test_mbr_bleu.pvalue} \n")
+                      
+                  
+                    
+                  
+    #                   rows = df[(df["temperature"]==temp) & (df["Top p "]==p) & (df["Top k"]==k) & (df["Epsilon"]==eps)].sort_values("Num decodes")
+    #                   x = rows["Num decodes"]
+    #                   y_max_sample_bleu_mean = rows["Max BLEU Sampling Mean"] 
+    #                   y_max_sample_bleu_std = rows["Max BLEU Sampling Std"] 
+    #                   y_max_arit_bleu_mean = rows["Max BLEU Arithmetic Mean"]
+    #                   y_max_arit_bleu_std = rows["Max BLEU Arithmetic Std"]
+    #                   y_max_greedy_bleu_mean = rows["Max BLEU Greedy Mean"]
+    #                   y_max_greedy_bleu_std = rows["Max BLEU Greedy Std"]
+                      
+    #                   y_mbr_sample_bleu_mean = rows["MBR BLEU Sampling Mean"] 
+    #                   y_mbr_sample_bleu_std = rows["MBR BLEU Sampling Std"] 
+    #                   y_mbr_arit_bleu_mean = rows["MBR BLEU Arithmetic Mean"]
+    #                   y_mbr_arit_bleu_std = rows["MBR BLEU Arithmetic Std"]
+    #                   y_mbr_greedy_bleu_mean = rows["MBR BLEU Greedy Mean"]
+    #                   y_mbr_greedy_bleu_std = rows["MBR BLEU Greedy Std"]
+                      
+    #                   y_sample_div_mean = rows["N gram diversity Sampling Mean"] 
+    #                   y_sample_div_std = rows["N gram diversity Sampling Std"] 
+    #                   y_arit_div_mean = rows["N gram diversity Arithmetic Mean"] 
+    #                   y_arit_div_std = rows["N gram diversity Arithmetic Std"] 
+    #                   y_greedy_div_mean = rows["N gram diversity Greedy Mean"]
+    #                   y_greedy_div_std = rows["N gram diversity Greedy Std"]
+                      
+    #                   y_sample_time = rows["Time Sampling"] 
+    #                   y_arit_time = rows["Time Arithmetic"] 
+    #                   y_greedy_time = rows["Time Greedy"]
+                      
+                      
+            
+                      
+    #                   axs1.set_xlabel("Num of sampled sequences")
+    #                   axs1.set_ylabel("BLEU score")
+    
+    #                   axs1.errorbar(x,y_max_sample_bleu_mean, yerr=y_max_sample_bleu_std, fmt='o',label="Ancestral sampling (Max) ", color='darkorange', linestyle = "--")
+    #                   axs1.errorbar(x,y_max_arit_bleu_mean, yerr=y_max_arit_bleu_std, fmt='^',label = "Arithemetic sampling (Max)", color='purple',  linestyle = "--")
+                      
+                      
+    #                   axs1.errorbar(x,y_mbr_sample_bleu_mean, yerr=y_mbr_sample_bleu_std, fmt='o', label="Ancestral sampling (MBR) ", color='darkorange', linestyle = "-")
+    #                   axs1.errorbar(x,y_mbr_arit_bleu_mean,yerr=y_mbr_arit_bleu_std, fmt='^', label = "Arithemetic sampling (MBR)", color='purple',  linestyle = "-")
+                      
+    #                   axs1.errorbar(x,y_max_greedy_bleu_mean,yerr=y_max_greedy_bleu_std,  fmt='.', label = "Greedy" ,color='green',  linestyle = "-")
+                      
+                      
+    #                   axs2.set_xlabel("Num of sampled sequences")
+    #                   axs2.set_ylabel("N gram diversity")
+    #                   axs2.errorbar(x,y_sample_div_mean, yerr=y_sample_div_std,  fmt='o',label="Ancestral sampling ", color='darkorange', linestyle = "-")
+    #                   axs2.errorbar(x,y_arit_div_mean, yerr= y_arit_div_std, fmt='^',label = "Arithemetic sampling", color='purple', linestyle = "-")
+    #                   axs2.errorbar(x,y_greedy_div_mean,yerr= y_greedy_div_std, fmt='.', label = "Greedy", color='green', linestyle = "-")
+                      
+                      
+                                      
+    #                   axs1.set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}, \n p-values: Max = {np.round(p_test_max_bleu.pvalue,5)}, MBR = {np.round(p_test_mbr_bleu.pvalue,5)}", fontsize=14)
+    #                   axs2.set_title(f"T={temp}, top-p={p}, top-k={k}, eps={eps}", fontsize=14)
+                      
+    #                   axs1.grid(True)
+    #                   axs2.grid(True)
+                     
+                    
+    #                   fig1.suptitle(f"BLEU: Model {model_name}, shot {shot}, Samples {samplesize}")
+    #                   fig2.suptitle(f"Div: Model {model_name}, shot {shot}, Samples {samplesize}")
+    #                   fig1.tight_layout()
+    #                   fig2.tight_layout()
+    #                   fig3.tight_layout()
+    #                   fig1.savefig(f"outputs/WMT/V11/De-En_Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}_temp_{temp}__p_{p}__k_{k}__eps{eps}.jpg")
+    #                   fig2.savefig(f"outputs/WMT/V11/De-En_Figure_Div_{model_name}__{shot}__Samples_{samplesize}_temp_{temp}__p_{p}__k_{k}__eps{eps}.jpg") 
+    #                   fig1.savefig(f"outputs/WMT/V11/De-En_Figure_BLEU_{model_name}__{shot}__Samples_{samplesize}_temp_{temp}__p_{p}__k_{k}__eps{eps}.svg")
+    #                   fig2.savefig(f"outputs/WMT/V11/De-En_Figure_Div_{model_name}__{shot}__Samples_{samplesize}_temp_{temp}__p_{p}__k_{k}__eps{eps}.svg") 
+    #                   plt.show()
+                                     
+    # c1 = 1.96 * y_max_sample_bleu_std/np.sqrt(8)
+    # c2 = 1.96 * y_max_arit_bleu_std/np.sqrt(8)
+    # plt.fill_between(x,(y_max_sample_bleu_mean-c1), (y_max_sample_bleu_mean+c1), label="Ancestral sampling (Max) ", color='darkblue', linestyle = "--")
+    # plt.fill_between(x,(y_max_arit_bleu_mean-c2), (y_max_arit_bleu_mean+c2),label = "Arithemetic sampling (Max)", color='darkgreen',  linestyle = "-")
+    
                                      
             
     
