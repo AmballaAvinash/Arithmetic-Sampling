@@ -134,10 +134,11 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         else:
             trails = 20 # 20
             
-        for temp in [0.1, 1]: # temperature
-            for p in [0.8, 1.0]: # top p 
-                for k in [30, 50]: # top k 
-                  for eps in [0.02, 0.05]: # epsilon
+        for temp,p,k,eps in [[1,0.8,50,0.02]]: 
+        # for temp in [0.1, 1]: # temperature
+        #     for p in [0.8, 1.0]: # top p 
+        #         for k in [30, 50]: # top k 
+        #           for eps in [0.02, 0.05]: # epsilon
           
                     avg_max_bleu_arith_toppk = []
                     avg_max_bleu_temp_toppk = []
