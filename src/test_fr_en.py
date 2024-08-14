@@ -500,7 +500,7 @@ if __name__ == "__main__":
     
     random.seed(41)
     # data =  random.sample(load_hf_data_set('validation','wmt14','fr-en')['translation'],samplesize)
-    data = list(load_hf_data_set('validation','wmt21','fr-en').take(samplesize))
+    data = list(load_hf_data_set('validation','wmt19','fr-en').take(samplesize))
     data = [x["translation"] for x in data]
 
     
