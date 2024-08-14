@@ -456,17 +456,20 @@ bleurt  = ScoreBleurt()
 def calculate_bleu_and_ngram_diversity(reference, translations):
     # translations_split = [x.split() for x in translations]
     # max_bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
-    max_bleu_score = np.max([ np.round(100*bleurt.score(reference, x),3) for x in translations])
+    
+    reference_batch = [reference for k in range(len(translations))]
+    max_bleu_score = np.max([ np.round(100*bleurt.score(reference_batch, translations),3)])
 
     translation_MBR = ""
     max_utility = 0
     for i in range(len(translations)):
-        utility_score = 0
-        for j in range(len(translations)):
-            utility_score += bleurt.score(translations[i], translations[j])   
-            
-            # utility_score += sentence_bleu([translations[i].split()], translations[j].split(), smoothing_function=SmoothingFunction().method4)
-            
+        
+        translation_i_batch = [translations[i] for k in range(len(translations))]
+        translation_j_batch = [translations[j] for j in range(len(translations))]
+        
+        utility_score = np.sum(bleurt.score(translation_i_batch, translation_j_batch)) 
+        
+
         if max_utility < utility_score:
             max_utility = utility_score
             translation_MBR = translations[i]
