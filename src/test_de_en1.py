@@ -19,6 +19,16 @@ from typing import List
 import scipy.stats as stats 
 import matplotlib 
 
+import warnings
+
+warnings.filterwarnings("ignore")
+import logging
+logging.getLogger("lightning.pytorch.utilities.rank_zero").setLevel(logging.WARNING) 
+logging.getLogger("lightning.pytorch.accelerators.cuda").setLevel(logging.WARNING) 
+
+logging.getLogger("pytorch_lightning").setLevel(logging.ERROR)
+logging.getLogger('lightning').setLevel(0)
+
 font = {'family' : 'normal',
 
         'weight' : 'bold',
@@ -134,18 +144,18 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
 
     results = {}
-    for N in [40, 20 , 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues)
+    for N in [40, 20 , 10,8 , 5, 4,  2, 1]: # num_decodes (tp check ram issues). Approx 60 to 65 hours
         
         if N==40:
             trails = 1
         else:
-            trails = 20 # 20
+            trails = 1 # 20
             
-        # for temp,p,k,eps in [[1,0.8,50,0.02]]: 
-        for temp in [0.1, 1]: # temperature
-            for p in [0.8, 1.0]: # top p 
-                for k in [30, 50]: # top k 
-                  for eps in [0.02, 0.05]: # epsilon
+        for temp,p,k,eps in [[1,0.8,50,0.02]]: 
+        # for temp in [0.1, 1]: # temperature
+        #     for p in [0.8, 1.0]: # top p 
+        #         for k in [30, 50]: # top k 
+        #           for eps in [0.02, 0.05]: # epsilon
           
                     avg_max_bleu_arith_toppk = []
                     avg_max_bleu_temp_toppk = []
@@ -390,9 +400,9 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
                         output_dict[j]['temp_toppk'] = decode_temp_toppk[num_decodes:num_decodes+N]
                         output_dict[j]['greedy'] = [decode_greedy[j-(idx-batch+1)]]
                        
-                        output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'])
-                        output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'])
-                        output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'])
+                        output_dict[j]['max_bleu_score_arith_toppk'], output_dict[j]['mbr_bleu_score_arith_toppk'], output_dict[j]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['arith_toppk'], input_batch[int(j%batch)])
+                        output_dict[j]['max_bleu_score_temp_toppk'], output_dict[j]['mbr_bleu_score_temp_toppk'], output_dict[j]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['temp_toppk'], input_batch[int(j%batch)])
+                        output_dict[j]['max_bleu_score_greedy'], output_dict[j]['mbr_bleu_score_greedy'], output_dict[j]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[j]['gt'], output_dict[j]['greedy'], input_batch[int(j%batch)])
         
         
                         output_dict[j]['time_arith_toppk'] = (end_arith_toppk- start_arith_toppk)/batch
@@ -417,6 +427,13 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             
         
         for idx, d in enumerate(tqdm(data, desc="Predicting")):
+
+            prompt_arr = [default_fwd_instruction,default_fwd_input_prefix]
+            prompt_arr.append(d['de'])
+            prompt_arr.append(default_fwd_target_prefix)
+            input_prompt = (' ').join(prompt_arr)  # join the sentences
+
+            
             idx = str(idx)
             offset = random.choice(range(num_return_sequences // N))
             output_dict[idx]['arith_toppk'] = ele_dist_k_from_idx(output_dict[idx]['arith_toppk'] , offset, num_return_sequences // N) 
@@ -425,9 +442,9 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             output_dict[idx]['temp_toppk'] = random.sample(output_dict[idx]['temp_toppk'], N) 
             output_dict[idx]['greedy'] = output_dict[idx]['greedy']
            
-            output_dict[idx]['max_bleu_score_arith_toppk'], output_dict[idx]['mbr_bleu_score_arith_toppk'], output_dict[idx]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['arith_toppk'])
-            output_dict[idx]['max_bleu_score_temp_toppk'], output_dict[idx]['mbr_bleu_score_temp_toppk'], output_dict[idx]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['temp_toppk'])
-            output_dict[idx]['max_bleu_score_greedy'], output_dict[idx]['mbr_bleu_score_greedy'], output_dict[idx]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['greedy'])
+            output_dict[idx]['max_bleu_score_arith_toppk'], output_dict[idx]['mbr_bleu_score_arith_toppk'], output_dict[idx]['n_gram_div_arith_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['arith_toppk'], input_prompt)
+            output_dict[idx]['max_bleu_score_temp_toppk'], output_dict[idx]['mbr_bleu_score_temp_toppk'], output_dict[idx]['n_gram_div_temp_toppk'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['temp_toppk'], input_prompt)
+            output_dict[idx]['max_bleu_score_greedy'], output_dict[idx]['mbr_bleu_score_greedy'], output_dict[idx]['n_gram_div_greedy'] = calculate_bleu_and_ngram_diversity(output_dict[idx]['gt'], output_dict[idx]['greedy'], input_prompt)
 
 
             output_dict[idx]['time_arith_toppk'] = 0
@@ -439,44 +456,84 @@ def test(default_fwd_instruction, default_fwd_input_prefix, default_fwd_target_p
             
 
 
+# download comet and load
+from comet import download_model, load_from_checkpoint
+comet_path = download_model("Unbabel/wmt22-comet-da", "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/")
+comet_model = load_from_checkpoint(comet_path)
+
+
+def cometscore(srcs, hyps, refs):
+    comet_input = [
+        {"src": src, "mt": mt, "ref": ref} for src, mt, ref in zip(srcs, hyps, refs)
+    ]
+    # sentence-level and corpus-level COMET
+    score = comet_model.predict(
+        comet_input,
+        batch_size=400,
+        progress_bar=False,
+        gpus = 1, 
+        accelerator = "cuda"
+    )
+    return np.array(score.scores)
+
+
 class ScoreBleurt():
     def __init__(self):
         super().__init__()
-        bleurt_checkpoint = "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/BLEURT-20-D12"
-        self.scorer = score.BleurtScorer(bleurt_checkpoint)
+        bleurt_checkpoint = "/work/pi_dhruveshpate_umass_edu/aamballa_umass_edu/BLEURT-20-D3"  # D3 : 41:32 for 10 samples; tiny: 03:47 but negatives
+        self.scorer = score.BleurtScorer(bleurt_checkpoint)  # LengthBatchingBleurtScorer
         
     def score(self, ref, output):
-        bleurt_score = self.scorer.score(references=[ref], candidates=[output])
-        return bleurt_score[0]
+        bleurt_score = self.scorer.score(references=ref, candidates=output, batch_size = 500)
+        return bleurt_score
     
 
-bleurt  = ScoreBleurt()
+# bleurt  = ScoreBleurt()
                    
 
-def calculate_bleu_and_ngram_diversity(reference, translations):
+def calculate_bleu_and_ngram_diversity(reference, translations, prompt):  # translations candiadates
     # translations_split = [x.split() for x in translations]
     # max_bleu_score = np.max([ np.round(100*sentence_bleu([reference.split()], x,  smoothing_function=SmoothingFunction().method4),3) for x in translations_split])
-    
+
     reference_batch = [reference for k in range(len(translations))]
-    max_bleu_score = np.max([ np.round(100*bleurt.score(reference_batch, translations),3)])
+    # max_bleu_score =  np.max([ np.round(100*bleurt.score(reference_batch, translations),3)]) 
+    # print(max_bleu_score)
 
-    translation_MBR = ""
-    max_utility = 0
-    for i in range(len(translations)):
-        
-        translation_i_batch = [translations[i] for k in range(len(translations))]
-        translation_j_batch = [translations[j] for j in range(len(translations))]
-        
-        utility_score = np.sum(bleurt.score(translation_i_batch, translation_j_batch)) 
-        
+    prompt_batch = [prompt for k in range(len(translations))]
 
-        if max_utility < utility_score:
-            max_utility = utility_score
-            translation_MBR = translations[i]
+    max_comet_score = np.max([ np.round(100*cometscore(prompt_batch, translations, reference_batch) ,3)]) 
+    # print(max_comet_score)
+    
+    pseudo_references_batch = np.tile(translations, len(translations))
+    candidates_batch = np.repeat(translations, len(translations))
+    prompt_batch_new = np.tile(prompt_batch, len(translations))
+
+    # bluert_score = bleurt.score(pseudo_references_batch, candidates_batch)
+
+    # reshaped_bluert_score = np.array(bluert_score).reshape(-1, len(translations))
+
+    # utility = reshaped_bluert_score.sum(axis=1)
+
+
+    comet_score = cometscore(prompt_batch_new, candidates_batch, pseudo_references_batch) 
+
+    reshaped_comet_score = np.array(comet_score).reshape(-1, len(translations))
+
+    utility = reshaped_comet_score.sum(axis=1)
+
+
+    max_utility = np.argmax(utility)
+
+    translation_MBR = translations[max_utility]
                                   
-    # mbr_bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR.split(),  smoothing_function=SmoothingFunction().method4),3) 
-    mbr_bleu_score = np.round(100*bleurt.score(reference, translation_MBR),3) 
 
+    # For evaluation we can use BLEU, BLEURT, COMET
+    # mbr_bleu_score = np.round(100*bleurt.score([reference], [translation_MBR]),3) 
+    # mbr_bleu_score = np.round(100*sentence_bleu([reference.split()], translation_MBR.split(),  smoothing_function=SmoothingFunction().method4),3) 
+
+    mbr_comet_score = np.round(100*cometscore([prompt],[translation_MBR],[reference]),3)[0]
+
+    print(mbr_comet_score)
 
     n_values = [1, 2, 3, 4]  # BLUE-4 and ngram-4
     total_unique_ngrams = 0
@@ -493,10 +550,10 @@ def calculate_bleu_and_ngram_diversity(reference, translations):
         # Update total counts
         total_unique_ngrams = len(unique_ngrams)
         ngram_diversity_score += total_unique_ngrams / (total_ngram_count + torch.finfo(torch.float32).eps)
-    return max_bleu_score, mbr_bleu_score,  ngram_diversity_score
+    return max_comet_score, mbr_comet_score,  ngram_diversity_score
 
 if __name__ == "__main__":
-    samplesize = 50
+    samplesize = 1000
     batch = 10
     output_dir = "outputs/WMT/V12"
     
@@ -505,7 +562,7 @@ if __name__ == "__main__":
     data = list(load_hf_data_set('validation','wmt19','de-en').take(samplesize))
     data = [x["translation"] for x in data]
 
-    
+    print(len(data))
     # it versions and quantized
     for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
