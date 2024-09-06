@@ -144,14 +144,14 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
     
 
     results = {}
-    for N in [40, 20, 10, 8, 5, 4, 2, 1]: # num_decodes (tp check ram issues). Approx 60 to 65 hours
+    for N in [2, 1]: # num_decodes (tp check ram issues). Approx 60 to 65 hours
         
         if N==40:
             trails = 1
         else:
             trails = 1 # 20
             
-        for temp,p,k,eps in [[1,0.8,50,0.02]]: 
+        for temp,p,k,eps in [[1,1,50,0.02]]: 
         # for temp in [0.1, 1]: # temperature
         #     for p in [0.8, 1.0]: # top p 
         #         for k in [30, 50]: # top k 
