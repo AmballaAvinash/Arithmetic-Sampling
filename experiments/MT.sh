@@ -2,9 +2,9 @@
 #SBATCH --mail-type=BEGIN
 #SBATCH -c 2  # Number of Cores per Task
 #SBATCH --mem=40G  # Requested Memory
-#SBATCH -p gpu-preempt  # Partition
+#SBATCH -p gpu  # Partition
 #SBATCH -G 1  # Number of GPUs
-#SBATCH -t 20:00:00  # Job time limit
+#SBATCH -t 15:00:00  # Job time limit
 #SBATCH -o slurm-%j.out  # %j = job ID
 #SBATCH --constraint=[a100]
 export PYTHONPATH="${PYTHONPATH}=$(pwd):$PYTHONPATH"

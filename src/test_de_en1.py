@@ -152,7 +152,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         else:
             trails = 20
             
-        for temp,p,k,eps in [[1,0.8,30,0.02]]: 
+        for temp,p,k,eps in [[0.1,0.8,30,0.02]]: 
         # for temp in [0.1, 1]: # temperature
         #     for p in [0.8, 1.0]: # top p 
         #         for k in [30, 50]: # top k 
@@ -603,7 +603,7 @@ if __name__ == "__main__":
 
     print(len(data))
     # it versions and quantized
-    for model_name in ["mt0"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
+    for model_name in ["flan-t5"]:  #["llama-2", "flan-t5", "gemma", "mt5", "m2m", "mt0"]
         for shot in ["zeroshot"]:  # ["zeroshot", "oneshot"]
             print(f"{model_name}, {shot}")
             run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=False)
