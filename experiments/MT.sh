@@ -14,4 +14,4 @@ module load miniconda/22.11.1-1
 
 conda activate 696_ds
 
-python src/test_de_en1.py
+python src/test_de_en1_perfdiv.py

@@ -152,7 +152,7 @@ def run_experiments(model_name, data, batch, output_dir, shot, load_in_8bit=Fals
         else:
             trails = 20
             
-        for temp,p,k,eps in [[0.1,0.8,30,0.05]]: 
+        for temp,p,k,eps in [[1,1,30,0.05]]: 
         # for temp in [0.1, 1]: # temperature
         #     for p in [0.8, 1.0]: # top p 
         #         for k in [30, 50]: # top k 
